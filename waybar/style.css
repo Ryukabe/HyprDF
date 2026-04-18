@@ -1,0 +1,131 @@
+@import "colors/colors.css";
+
+* {
+    all: unset;
+    border: none;
+
+    font-family: "JetBrainsMono Nerd Font Propo";
+    font-weight: bold;
+    font-size: 12px;
+    min-height: 0px;
+    padding: 0px;
+    margin: 0px;
+
+}
+
+window#waybar {
+ background: transparent;
+
+}
+
+tooltip {
+   background-color: @bg0;
+   margin: 10px;
+   padding: 10px;
+   border-radius: 99px;
+}
+
+tooltip label {
+    color:  @fg;
+    padding: 6px;
+}
+
+
+#workspaces {
+    background-color: @bg0;
+    padding: 5px 3px;
+    margin: 5px 0 0 12px;
+    border-radius: 99px;
+    border: 0px solid @bg1;
+    color:@fg;
+
+}
+
+#workspaces button {
+    padding: 1px 6px;
+    margin: 0px 5px;
+    border-radius: 99px;
+    transition: all 300ms ease-in-out;
+}
+
+#workspaces button.empty {
+    color: @gray0;
+}
+
+#workspaces button.active {
+    color: @bg0;
+    background-color: @blue;
+    min-width: 20px;
+    transition: all 300ms ease-in-out;
+    font-weight: 700;
+}
+
+#workspaces button.hover {
+    color: @bg0;
+    background-color: @purple;
+    border-radius: 16px;
+    min-width: 20px;
+    background-size: 400% 400%;
+}
+
+#workspaces button.urgent {
+    color: @bg0;
+    background-color: @red;
+    border-radius: 16px;
+    min-width: 50px;
+    background-size: 400% 400%;
+    transition: all 0.3s ease-in-out;
+}
+
+#custom-media,
+#pulseaudio,
+#network,
+#clock ,
+#custom-notification {
+    background-color: @bg0;
+    padding: 0px 15px 0px 15px;
+    margin: 5px 0 0 12px;
+    border-radius: 50px;
+    border: 1px solid @bg1;
+}
+
+#battery {
+    background-color: @green;
+    padding: 0px 15px 0px 15px;
+    margin: 5px 0 0 12px;
+    border-radius: 99px;
+    color: @bg1;
+    letter-spacing: -1px;
+}
+
+#battery.warning {
+    background-color: @orange;
+}
+
+#battery.critical {
+    background-color: @red;
+}
+
+#media {
+    background-color: @green;
+}
+
+#clock {
+    color: @blue;
+}
+
+#custom-notification {
+    color: @fg;
+    margin: 0 12px 0 12px;
+}
+
+#pulseaudio {
+    color: @yellow;
+}
+
+#network {
+    color: @purple;
+    margin: 5px 12px 0 12px;
+}
+
+

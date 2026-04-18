@@ -1,0 +1,152 @@
+{
+  "layer": "top",
+  "position": "top",
+
+  "modules-left": [
+    "custom/media",
+    "custom/phone"
+  ],
+
+  "modules-center": [
+    "clock",
+    "hyprland/workspaces"
+  ],
+
+  "modules-right": [
+    "pulseaudio",
+    "network",
+    "battery",
+    "custom-notification"
+  ],
+  
+ // Clock module configuration
+  "clock": {
+    "timezone": [
+      "ETC/UTC",
+      "Asia/Dhaka"
+    ],
+    "interval": 60,
+    "format": "{:%I:%M %p}",
+    "max-length": 25,
+    "tooltip": true,
+    "tooltip-format": "{:%d-%m-%Y}"
+  },
+
+  //Workspaces module configuration
+  "hyprland/workspaces": {
+    "format": "{name}",
+    "format-icons": {
+      "1": "",
+      "2": "",
+      "3": "",
+      "4": "",
+      "5": ""
+    },
+    "persistent-workspaces": {
+      "eDP-1": [1,2,3,4,5]
+    }
+  },
+
+  //Audio module configuration
+  "pulseaudio": {
+    "format": "{icon} {volume}%",
+    "format-bluetooth": "{volume}% {icon} ",
+    "format-muted": "Muted 󰝟",
+    "format-icons": {
+      "headphone": "",
+      "hands-free": "",
+      "headset": "",
+      "phone": "",
+      "phone-muted": "",
+      "portable": "",
+      "car": "",
+      "default": [
+        "",   // 0-20
+        "",  // 21-50
+        "󰕾",  // 51-70
+        ""  // 71-100
+      ]
+    },
+    "scroll-step": 1,
+    "on-click": "pavucontrol",
+    "ignored-sinks": [
+      "Easy Effects Sink"
+    ]
+  },
+
+  //Network module configuration
+  "network": {
+    "interface": "wlan0",
+    "format": "{ifname}",
+    "format-wifi": "{icon} {essid}",
+    "format-icons": [
+      "󰤯", //0
+      "󰤟", //25
+      "󰤢", //50
+      "󰤥", //75
+      "󰤨"  //100
+    ],
+    "format-ethernet": "{ipaddr}/{cidr} 󰊗",
+    "format-disconnected": "󰤮", //An empty format will hide the module.
+    "tooltip-format": "{ifname} via {gwaddr} 󰊗",
+    "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
+    "tooltip-format-ethernet": "{ifname} ",
+    "tooltip-format-disconnected": "Disconnected",
+    "max-length": 50
+  },
+
+  //Battery module configuration
+  "battery": {
+    "interval": 60,
+    "states": {
+      "warning": 40,
+      "critical": 20
+    },
+    "format": "{capacity}",
+    "format-charging": "󰂄 {capacity}%",
+    "format-icons": [
+      "󰁺", //10
+      "󰁻", //20
+      "󰁼", //30
+      "󰁽", //40
+      "󰁾", //50
+      "󰁿", //60
+      "󰂀", //70
+      "󰂁", //80
+      "󰂂", //90
+      "󰁹" //100
+    ],
+    "max-length": 25
+  },
+
+  //Custom media player module 
+  "custom/media": {
+    "format": "{icon} {}",
+    "escape": true,
+    "return-type": "json",
+    "max-length": 40,
+    "on-click": "playerctl play-pause",
+    "on-click-right": "playerctl stop",
+    "smooth-scrolling-threshold": 10, // This value was tested using a trackpad, it should be lowered if using a mouse.
+    "on-scroll-up": "playerctl next",
+    "on-scroll-down": "playerctl previous",
+    "exec": "$HOME/.config/waybar/scripts/mediaplayer.py 2> /dev/null", // Script in resources/custom_modules folder
+    "format-icons": {
+      "spotify": "",
+      "zen-browesr": "",
+      "mpv": "",
+      "vlc": "󰕼",
+      "default": ""
+    }
+  },
+
+  //Custom phone status module
+  "custom/phone": {
+    "format": " {}",
+    "return-type": "json",
+    "exec": "~/.config/waybar/scripts/phone_status.py",
+    "on-click": "kdeconnect-settings",
+    "interval": 60,
+    "tooltip": false
+  }
+}
