@@ -3,8 +3,8 @@
   "position": "top",
 
   "modules-left": [
-    "custom/media",
-    "custom/phone"
+    "custom/phone",
+    "custom/media"
   ],
 
   "modules-center": [
@@ -15,8 +15,7 @@
   "modules-right": [
     "pulseaudio",
     "network",
-    "battery",
-    "custom-notification"
+    "custom/notification"
   ],
   
  // Clock module configuration
@@ -121,16 +120,16 @@
 
   //Custom media player module 
   "custom/media": {
-    "format": "{icon} {}",
+    "format": "{icon} {text}",
     "escape": true,
     "return-type": "json",
-    "max-length": 40,
+    "max-length": 20,
     "on-click": "playerctl play-pause",
     "on-click-right": "playerctl stop",
     "smooth-scrolling-threshold": 10, // This value was tested using a trackpad, it should be lowered if using a mouse.
     "on-scroll-up": "playerctl next",
     "on-scroll-down": "playerctl previous",
-    "exec": "$HOME/.config/waybar/scripts/mediaplayer.py 2> /dev/null", // Script in resources/custom_modules folder
+    "exec": "~/.config/waybar/scripts/mediaplayer.py", // Script in resources/custom_modules folder
     "format-icons": {
       "spotify": "",
       "zen-browesr": "",
@@ -140,13 +139,40 @@
     }
   },
 
-  //Custom phone status module
-  "custom/phone": {
-    "format": " {}",
+  // SwayNC notification module
+  "custom/notification": {
+    "tooltip": true,
+    "format": "{0} {icon}",
+    //"format": "<span size='16pt'>{icon}</span>",
+    "format-icons": {
+      "notification": "󱅫",
+      "none": "󰂜",
+      "dnd-notification": "󰂠",
+      "dnd-none": "󰪓",
+      "inhibited-notification": "󰂛",
+      "inhibited-none": "󰪑",
+      "dnd-inhibited-notification": "󰂛",
+      "dnd-inhibited-none": "󰪑"
+    },
     "return-type": "json",
-    "exec": "~/.config/waybar/scripts/phone_status.py",
-    "on-click": "kdeconnect-settings",
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "escape": true
+  },
+
+  //Custom phone status module
+ "custom/phone": {
+    "format": "{icon} {text}",
+    "format-icons": {
+      "connected": "",
+      "disconnected": "" 
+    },
+    "return-type": "json",
+    "exec": "/home/shiham/.config/waybar/scripts/phone_status.py", 
+    "on-click": "kdeconnect",
     "interval": 60,
     "tooltip": false
-  }
+ }
 }

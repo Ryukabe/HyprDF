@@ -57,29 +57,19 @@ touch "$WALLPAPER_STATE"
 # Get saved wallpaper for this theme
 SAVED_WALLPAPER=$(grep "^$THEME:" "$WALLPAPER_STATE" | cut -d':' -f2-)
 
-WALLPAPER=""
-if [ -d "$WALLPAPER_DIR" ]; then
-    mapfile -t WALLPAPER_FILES < <(find "$WALLPAPER_DIR" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" \) | sort)
-    if [ "${#WALLPAPER_FILES[@]}" -gt 0 ]; then
-        if [ -n "$SAVED_WALLPAPER" ] && [ -f "$SAVED_WALLPAPER" ]; then
-            for i in "${!WALLPAPER_FILES[@]}"; do
-                if [ "${WALLPAPER_FILES[$i]}" = "$SAVED_WALLPAPER" ]; then
-                    next_index=$(( (i + 1) % ${#WALLPAPER_FILES[@]} ))
-                    WALLPAPER="${WALLPAPER_FILES[$next_index]}"
-                    break
-                fi
-            done
-        fi
+if [ -n "$SAVED_WALLPAPER" ] && [ -f "$SAVED_WALLPAPER" ]; then
+    # Use saved wallpaper
+    WALLPAPER="$SAVED_WALLPAPER"
+    echo -e "${CYAN}   Using saved wallpaper${NC}"
+elif [ -d "$WALLPAPER_DIR" ]; then
+    # Get first wallpaper from directory (sorted alphabetically)
+    WALLPAPER=$(find "$WALLPAPER_DIR" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" \) | sort | head -n1)
 
-        if [ -z "$WALLPAPER" ]; then
-            WALLPAPER="${WALLPAPER_FILES[0]}"
-            echo -e "${CYAN}   Using first wallpaper (default)${NC}"
-        else
-            echo -e "${CYAN}   Cycling wallpaper${NC}"
-        fi
-
+    if [ -n "$WALLPAPER" ]; then
+        # Save this as the default for this theme
         sed -i "/^$THEME:/d" "$WALLPAPER_STATE"
         echo "$THEME:$WALLPAPER" >> "$WALLPAPER_STATE"
+        echo -e "${CYAN}   Using first wallpaper (default)${NC}"
     else
         echo -e "${YELLOW}   No wallpapers found in $WALLPAPER_DIR${NC}"
     fi
@@ -149,7 +139,6 @@ echo ""
 # SwayNC theme
 echo -e "${CYAN}→ Applying SwayNC theme...${NC}"
 cp "$THEME_DIR/swaync/colors.css" "$HOME/.config/swaync/colors/colors.css" > /dev/null 2>&1
-pkill swaync > /dev/null 2>&1 && swaync > /dev/null 2>&1 & disown
 echo ""
 
 # wlogout theme
