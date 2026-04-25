@@ -1,7 +1,7 @@
 @define-color text            @fg;
 @define-color background-alt  bg1;
 @define-color background      bg0;
-@define-color selected        @blue;
+@define-color selected        @green;
 @define-color hover           alpha(@blue, .4);
 @define-color urgent          @red;
 
@@ -10,7 +10,7 @@
 
   all: unset;
   font-size: 12px;
-  font-family: "JetBrains Mono Nerd Font Propo 10";
+  font-family: "SF Pro Text 10";
   transition: 200ms;
 
 }

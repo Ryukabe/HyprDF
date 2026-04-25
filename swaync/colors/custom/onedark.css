@@ -4,6 +4,8 @@
 @define-color bg3 #3e4451;
 @define-color bg4 #4b5263;
 
+@define-color fg #abb2bf;
+
 @define-color red    #e06c75;
 @define-color orange #d19a66;
 @define-color yellow #e5c07b;
@@ -12,7 +14,6 @@
 @define-color blue   #61afef;
 @define-color purple #c678dd;
 
-@define-color fg #abb2bf;
 
 @define-color grey0 #5c6370;
 @define-color grey1 #828997;
