@@ -1,30 +1,41 @@
 {
-    "label" : "lock",
-    "action" : "~/.config/hypr/scripts/power.sh lock",
-    "text" : "Lock",
-    "keybind" : "l"
+    "label" : "shutdown",
+    "action" : "systemctl poweroff",
+    "text" : "Shutdown",
+    "keybind" : "p"
 }
-{
-    "label" : "logout",
-    "action" : "~/.config/hypr/scripts/power.sh exit",
-    "text" : "Log Out",
-    "keybind" : "e"
-}
+
 {
     "label" : "suspend",
-    "action" : "~/.config/hypr/scripts/power.sh suspend",
+    "action" : "systemctl suspend ; bash ~/.config/wlogout/scripts/random_wall_on_lockscr.sh",
     "text" : "Suspend",
-    "keybind" : "u"
+    "keybind" : "s"
 }
+
 {
     "label" : "reboot",
-    "action" : "~/.config/hypr/scripts/power.sh reboot",
-    "text" : "Restart",
+    "action" : "systemctl reboot",
+    "text" : "Reboot",
     "keybind" : "r"
 }
+
 {
-    "label" : "shutdown",
-    "action" : "~/.config/hypr/scripts/power.sh shutdown",
-    "text" : "Power Off",
-    "keybind" : "s"
+    "label" : "hibernate",
+    "action" : "systemctl hibernate",
+    "text" : "Hibernate",
+    "keybind" : "h"
+}
+
+{
+    "label" : "logout",
+    "action" : "loginctl terminate-user $USER",
+    "text" : "Logout",
+    "keybind" : "e"
+}
+
+{
+    "label" : "lock",
+    "action" : "bash ~/.config/wlogout/scripts/random_wall_on_lockscr.sh",
+    "text" : "Lock",
+    "keybind" : "l"
 }
