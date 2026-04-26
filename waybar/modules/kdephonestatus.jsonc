@@ -1,0 +1,14 @@
+{
+   "custom/phone": {
+    "format": "{icon} {text}",
+    "format-icons": {
+      "connected": "",
+      "disconnected": "" 
+    },
+    "return-type": "json",
+    "exec": "~/.config/waybar/scripts/phone_status.py", 
+    "on-click": "kdeconnect",
+    "interval": 60,
+    "tooltip": false
+ }
+} 

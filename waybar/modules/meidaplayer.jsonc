@@ -1,0 +1,21 @@
+{
+    "custom/media": {
+    "format": "{icon} {text}",
+    "escape": true,
+    "return-type": "json",
+    "max-length": 20,
+    "on-click": "playerctl play-pause",
+    "on-click-right": "playerctl stop",
+    "smooth-scrolling-threshold": 10, // This value was tested using a trackpad, it should be lowered if using a mouse.
+    "on-scroll-up": "playerctl next",
+    "on-scroll-down": "playerctl previous",
+    "exec": "~/.config/waybar/scripts/mediaplayer.py", // Script in resources/custom_modules folder
+    "format-icons": {
+      "spotify": "",
+      "zen-browesr": "",
+      "mpv": "",
+      "vlc": "󰕼"
+      //S"default": ""
+    }
+  }
+}

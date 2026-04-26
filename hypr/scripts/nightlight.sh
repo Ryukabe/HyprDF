@@ -7,6 +7,7 @@ if pgrep -x "hyprsunset" > /dev/null; then
     notify-send "Night Light" "Off" -u "low"
 else
     # Start hyprsunset for night mode
-    hyprsunset --temperature 2500 &
+    hyprsunset --temperature 3500 &
+    hyprsunset --gamma 0.8 &
     notify-send "Night Light" "On" -u "low"
 fi
