@@ -151,3 +151,9 @@ echo -e "${CYAN}→ Applying Rofi theme...${NC}"
 cp "$THEME_DIR/rofi/colors.rasi" "$HOME/.config/rofi/colors/colors.rasi" > /dev/null 2>&1
 echo ""
 
+# Switch complited
+CURRENT_THEME_FILE="$HOME/.config/colorschemes/.current-theme"
+echo "$THEME" > "$CURRENT_THEME_FILE"
+
+echo -e "${GREEN} Theme Applyed: $THEME${NC}\n"
+notify-send "Theme apply" "Successfully switched to $THEME" -t 4500
