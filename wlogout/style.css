@@ -1,18 +1,21 @@
+@import "colors/colors.css";
+
 * {
     background-image: none;
     box-shadow: none;
     font-family: Google Sans Flex;
     font-size: 20px;
     transition: all 0.2s ease-in-out;
+    border: none;
 }
 
 window {
-    background-color: alpha(#000000, 0.4);
+    background-color: alpha(@bg2, 0.5);
 }
 
 button {
     color: #ffffff;
-    background-color: alpha(#ffffff, 0.10);
+    background-color: alpha(@fg, 0.10);
     border: none;
     margin: 2px;
     background-repeat: no-repeat;
@@ -21,36 +24,36 @@ button {
 }
 
 button:active, /*button:focus,*/ button:hover {
-    background-color: alpha(#ffffff, 0.20);
+    background-color: alpha(@blue, 0.20);
     color: #ffffff;
 }
 
 #lock {
-       border-radius: 0px 0px 100px 0px;
-       background-image: image(url("$HOME/.config/wlogout/icons/lock.png"));
+
+       background-image: image(url("/home/shiham/.config/wlogout/icons/lock.png"));
 }
 
 #logout {
-         border-radius: 0px 100px 0px 0px ;
-         background-image: image(url("$HOME/.config/wlogout/icons/logout.png"));
+
+         background-image: image(url("/home/shiham/.config/wlogout/icons/logout.png"));
 }
 
 #suspend {
-          border-radius: 0px 0px 0px 100px ;
-          background-image: image(url("~$HOME.config/wlogout/icons/sleep.png"));
+
+          background-image: image(url("/home/shiham/.config/wlogout/icons/sleep.png"));
 }
 
 #hibernate {
-            border-radius: 0px 0px 0px 0px;
-            background-image: image(url("$HOME/.config/wlogout/icons/hibernate.png"));
+
+            background-image: image(url("/home/shiham/.config/wlogout/icons/hibernate.png"));
 }
 
 #shutdown {
-           border-radius: 100px 0px 0px 0px;
-           background-image: image(url("$HOME/.config/wlogout/icons/power.png"));
+
+           background-image: image(url("/home/shiham/.config/wlogout/icons/power.png"));
 }
 
 #reboot {
-         border-radius: 0px 0px 0px 0px;
-         background-image: image(url("$HOME/.config/wlogout/icons/restart.png"));
+
+         background-image: image(url("/home/shiham/.config/wlogout/icons/restart.png"));
 }

@@ -80,7 +80,7 @@ fi
 if [ -n "$WALLPAPER" ] && [ -f "$WALLPAPER" ]; then
     awww img "$WALLPAPER" --transition-type center --transition-fps 60 --transition-step 255 > /dev/null 2>&1
     # Also update hyprlock symlink
-    ln -sf "$WALLPAPER" ~/.config/hypr/hyprlock/wallpaper > /dev/null 2>&1
+    ln -sf "$WALLPAPER" ~/.config/hypr/hyprlock/wallpaper 
 else
     echo -e "${YELLOW}   Could not set wallpaper${NC}"
 fi
@@ -114,7 +114,7 @@ echo ""
 # Terminal theme (Kitty)
 echo -e "${CYAN}→ Applying Kitty terminal theme...${NC}"
 case "$THEME" in
-    everforest|gruvbox|catppuccin|tokyo-night|kanagawa|nord|noir|e-ink|nightfox|rose-pine|vira-palenight|horizon|material-you|anime)
+    everforest|gruvbox|catppuccin|tokyo-night|monochrom|kanagawa|nord|noir|nightfox|rose-pine|vira-palenight|horizon|material-you|anime)
         cp "$THEME_DIR/kitty/colors.conf" "$HOME/.config/kitty/colors/colors.conf" > /dev/null 2>&1
         ;;
     *)
