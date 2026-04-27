@@ -6,6 +6,6 @@ if pgrep -f 'rofi.*clipboard' >/dev/null; then
 fi
 
 cliphist list | rofi -dmenu -display-columns 2 -p "Clipboard" \
-  -window-title "clipboard" -theme "$HOME/.config/rofi/style-1.rasi" \
+  -window-title "clipboard" -theme "$HOME/.config/rofi/applauncher.rasi" \
   | cliphist decode | wl-copy
   

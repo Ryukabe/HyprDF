@@ -1,36 +1,36 @@
-@import "~/.config/rofi/colors/colors.rasi
+/*--------Global Properties Theming--------*/
+@import "~/.config/rofi/colors/colors.rasi"
+@import "~/.config/rofi/font/fonts.rasi"
 
 * {
-font: "Google Sans Flex 12";
-
-      background-color: transparent;
-      text-color:       @fg0;
-padding:          0px;
-margin:           0px;
+  background-color: transparent;
+  text-color:       @foreground;
+  padding:          0px;
+  margin:           0px;
 }
 
 window {
-fullscreen: true;
-padding: 10px;
-         background-color: @background;
+  fullscreen: true;
+  padding: 10px;
+  background-color: @background;
 }
 
 mainbox {
-padding:  8px;
+  padding:  8px;
 }
 
 inputbar {
   background-color: @background-alt;
 
-margin:   48px calc( 50% - 200px );
-padding:  10px 20px;
-spacing:  10px;
+  margin:   48px calc( 50% - 200px );
+  padding:  10px 20px;
+  spacing:  10px;
 
-border:         1px;
-                border-radius:  24px;
-                border-color:   @background;
+  border:         1px;
+  border-radius:  24px;
+  border-color:   @background-alt;
 
-children: [icon-search,entry];
+  children: [icon-search,entry];
 }
 
 prompt {
@@ -38,21 +38,21 @@ enabled:  false;
 }
 
 icon-search {
-expand:   false;
-filename: "search";
-          vertical-align: 0.5;
+  expand:   false;
+  filename: "search";
+  vertical-align: 0.5;
 }
 
 entry {
-placeholder:        "Search";
-                    placeholder-color:  @foreground;
+  placeholder:        "Search";
+  placeholder-color:  @foreground;
 }
 
 listview {
-margin: 32px calc( 50% - 800px );
-spacing:  28px;
-columns:  3;
-          fixed-columns: false;
+  margin: 64px calc( 50% - 800px );
+  spacing:  48px;
+  columns:  8;
+  fixed-columns: false;
 }
 
 element, element-text, element-icon {
@@ -60,21 +60,21 @@ cursor: pointer;
 }
 
 element {
-padding:      8px;
-spacing:      4px;
+  padding:      8px;
+  spacing:      4px;
 
-orientation:    vertical;
-                border-radius:  32px;
+  orientation:    vertical;
+  border-radius:  32px;
 children: [ element-icon ,element-text ];
 }
 
 element selected {
-  background-color: @bg2;
+  background-color: @background-alt;
 }
 
 element-icon {
-size: 50px;
-      horizontal-align: 0.5;
+  size: 90px;
+  horizontal-align: 0.5;
 }
 
 element-text {

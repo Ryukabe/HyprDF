@@ -1,13 +1,8 @@
-/**
- *
- * Author : Aditya Shakya (adi1090x)
- * Github : @adi1090x
- * 
- * Rofi Theme File
- * Rofi Version: 1.7.3
- **/
+/*--------Global Properties Theming--------*/
+@import "~/.config/rofi/colors/colors.rasi"
+@import "~/.config/rofi/font/fonts.rasi"
 
- /* This stops the "every-other-row" color change */
+/* This stops the "every-other-row" color change */
 element alternate.normal {
     background-color:            transparent;
     text-color:                  inherit;
