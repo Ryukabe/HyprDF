@@ -114,7 +114,7 @@ echo ""
 # Terminal theme (Kitty)
 echo -e "${CYAN}→ Applying Kitty terminal theme...${NC}"
 case "$THEME" in
-    everforest|gruvbox|catppuccin|tokyo-night|monochrom|kanagawa|nord|noir|nightfox|rose-pine|vira-palenight|horizon|material-you|anime)
+    everforest|gruvbox|catppuccin|tokyonight|monochrom|kanagawa|nord|noir|nightfox|rose-pine|vira-palenight|horizon|material-you|anime)
         cp "$THEME_DIR/kitty/colors.conf" "$HOME/.config/kitty/colors/colors.conf" > /dev/null 2>&1
         ;;
     *)
@@ -127,7 +127,7 @@ echo ""
 # Terminal theme (Foot)
 #echo -e "${CYAN}→ Applying Foot terminal theme...${NC}"
 #case "$THEME" in
-#    everforest|gruvbox|catppuccin|tokyo-night|kanagawa|nord|noir|e-ink|nightfox|rose-pine|vira-palenight|horizon|material-you|anime)
+#    everforest|gruvbox|catppuccin|tokyonight|kanagawa|nord|noir|e-ink|nightfox|rose-pine|vira-palenight|horizon|material-you|anime)
 #        cp "$THEME_DIR/foot/colors" "$HOME/.config/foot/colors" > /dev/null 2>&1
 #        ;;
 #    *)
