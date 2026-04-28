@@ -2,40 +2,29 @@
     "label" : "shutdown",
     "action" : "systemctl poweroff",
     "text" : "Shutdown",
-    "keybind" : "p"
-}
-
-{
-    "label" : "suspend",
-    "action" : "systemctl suspend ; bash ~/.config/wlogout/scripts/random_wall_on_lockscr.sh",
-    "text" : "Suspend",
     "keybind" : "s"
 }
-
 {
     "label" : "reboot",
     "action" : "systemctl reboot",
     "text" : "Reboot",
     "keybind" : "r"
 }
-
-{
-    "label" : "hibernate",
-    "action" : "systemctl hibernate",
-    "text" : "Hibernate",
-    "keybind" : "h"
-}
-
 {
     "label" : "logout",
-    "action" : "loginctl terminate-user $USER",
+    "action" : "loginctl kill-session $XDG_SESSION_ID",
     "text" : "Logout",
     "keybind" : "e"
 }
-
+{
+    "label" : "hibernate",
+    "action" : "swaylock -f && systemctl hibernate",
+    "text" : "Hibernate",
+    "keybind" : "h"
+}
 {
     "label" : "lock",
-    "action" : "bash ~/.config/wlogout/scripts/random_wall_on_lockscr.sh",
+    "action" : "hyprlock",
     "text" : "Lock",
     "keybind" : "l"
 }
