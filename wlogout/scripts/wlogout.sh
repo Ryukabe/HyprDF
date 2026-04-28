@@ -11,4 +11,4 @@ fi
 # Detect monitor resolution and scaling factor
 resolution=$(hyprctl -j monitors | jq -r '.[] | select(.focused==true) | .height / .scale' | awk -F'.' '{print $1}')
 hypr_scale=$(hyprctl -j monitors | jq -r '.[] | select(.focused==true) | .scale')
-wlogout -C $HOME/.config/wlogout/nova.css -l $HOME/.config/wlogout/layout --protocol layer-shell -b 5 -T $(awk "BEGIN {printf \"%.0f\", $A_768 * 768 * $hypr_scale / $resolution}") -B $(awk "BEGIN {printf \"%.0f\", $B_768 * 768 * $hypr_scale / $resolution}") &
+wlogout -C $HOME/.config/wlogout/style.css -l $HOME/.config/wlogout/layout --protocol layer-shell -b 5 -T $(awk "BEGIN {printf \"%.0f\", $A_768 * 768 * $hypr_scale / $resolution}") -B $(awk "BEGIN {printf \"%.0f\", $B_768 * 768 * $hypr_scale / $resolution}") &
