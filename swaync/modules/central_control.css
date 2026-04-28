@@ -137,7 +137,7 @@ progressbar {
 
 .widget-title button {
   background: @background-alt;
-  border-radius: 6px;
+  border-radius: 10px;
   padding: 4px 16px;
 }
 
@@ -158,7 +158,7 @@ progressbar {
 .widget-dnd > switch {
   background: @background-alt;
   font-size: initial;
-  border-radius: 8px;
+  border-radius: 10px;
   box-shadow: none;
   padding: 2px;
 }
@@ -177,7 +177,7 @@ progressbar {
 
 .widget-dnd > switch slider {
   background: @text;
-  border-radius: 6px;
+  border-radius: 10px;
 }
 
   /* Buttons menu */
@@ -249,10 +249,76 @@ picture.mpris-background {
 }
 
 /* Volume */
+
 .widget-volume {
-  background: @background-sec;
-  color: @background;
-  padding: 4px;
-  margin: 6px;
-  border-radius: 6px;
+    background: transparent;
+    padding: 10px;
+    margin: 5px 0px 10px 5px; /* Added 20px bottom margin to separate from apps */
+}
+
+.widget-volume > box > label {
+    margin-right: 10px ;
+}
+/* Targets the toggle button (up/down arrow) in the volume widget */
+.widget-volume > box > button {
+    margin-left: 10px; /* Moves it away from the slider */
+    padding: 4px; /* Increases the clickable area */
+}
+
+/* Optional: Make the icon inside the button smaller or larger */
+.widget-volume > box > button image {
+    -gtk-icon-transform: scale(0.8); /* Shrinks the arrow slightly */
+}
+/* 3. Per-App List Item Container */
+.widget-volume-list-item {
+    margin-top: 80px ;
+    margin-bottom: 80px; 
+}
+
+/* 4. Per-App Icon Spacing */
+/* This pushes the app slider away from the app icon (like Zen) */
+.widget-volume-list-item image {
+    margin-right: 30px;
+}
+
+/* 5. Space between app name and its slider */
+.widget-volume-list-item label {
+    margin-right: -20px;
+}
+
+.widget-volume scale trough {
+    background-color: @background;
+    border-radius: 9px;
+    min-height: 8px;
+}
+
+.widget-volume scale highlight {
+    background-color: @blue; 
+    border-radius: 10px;
+}
+
+.widget-volume scale slider {
+    background-color: @text;
+    border-radius: 100%;
+    min-height: 15px;
+    min-width: 15px;
+    margin: -6px 0;
+}
+
+.widget-volume scale slider:hover {
+    background-color: @background-alt;
+    min-height: 20px;          
+    min-width: 20px;
+    margin: -6px 0;         
+    transition: all 0.2s ease; 
+}
+
+/* Space after icons in the per-app volume list */
+.widget-volume-list-item image {
+    margin-right: 10px;
+}
+
+/* Optional: Space after the app name label before its slider */
+.widget-volume-list-item label {
+    margin-right: 10px;
 }

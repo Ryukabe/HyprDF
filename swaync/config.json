@@ -4,17 +4,17 @@
   "positionY": "top",
 	"cssPriority": "user",
 
-  "control-center-width": 380,
-  "control-center-height": 860, 
+  "control-center-width": 250,
+  "control-center-height": 700, 
   "control-center-margin-top": 2,
   "control-center-margin-bottom": 2,
   "control-center-margin-right": 1,
   "control-center-margin-left": 0,
 
-  "notification-window-width": 400,
-  "notification-icon-size": 48,
-  "notification-body-image-height": 160,
-  "notification-body-image-width": 200,
+  "notification-window-width": 300,
+  "notification-icon-size": 24,
+  "notification-body-image-height": 180,
+  "notification-body-image-width": 180,
 
   "timeout": 4,
   "timeout-low": 2,
@@ -41,9 +41,7 @@
     }
   },
   "widgets": [
-    "label",
-    "buttons-grid",
-    "mpris",
+    "volume",
     "title",
     "dnd",
     "notifications"
@@ -52,7 +50,7 @@
     "title": {
       "text": "Notifications",
       "clear-all-button": true,
-      "button-text": " 󰎟 "
+      "button-text": " Clear all"
     },
     "dnd": {
       "text": "Do not disturb"
@@ -67,7 +65,9 @@
     },
     "volume": {
       "label": "󰕾",
-        "show-per-app": true
+        "show-per-app": true,
+        "show-per-app-icon": true,
+        "show-per-app-label":true
     },
     "buttons-grid": {
       "actions": [

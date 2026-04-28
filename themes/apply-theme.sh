@@ -139,6 +139,7 @@ echo ""
 # SwayNC theme
 echo -e "${CYAN}→ Applying SwayNC theme...${NC}"
 cp "$THEME_DIR/swaync/colors.css" "$HOME/.config/swaync/colors/colors.css" > /dev/null 2>&1
+pkill swaync > /dev/null 2>&1 && ~/.config/swaync/scripts/reload_nc.sh > /dev/null 2>&1 & disown
 echo ""
 
 # wlogout theme
