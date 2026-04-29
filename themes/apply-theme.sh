@@ -114,7 +114,7 @@ echo ""
 # Terminal theme (Kitty)
 echo -e "${CYAN}→ Applying Kitty terminal theme...${NC}"
 case "$THEME" in
-    everforest|gruvbox|catppuccin|tokyonight|monochrom|kanagawa|nord|noir|nightfox|rose-pine|vira-palenight|horizon|material-you|anime)
+    ayu|everforest|gruvbox|catppuccin|tokyonight|monochrom|kanagawa|dragon|nord|noir|nightfox|carbonfox|rosepine|vira-palenight|horizon|material-you|anime)
         cp "$THEME_DIR/kitty/colors.conf" "$HOME/.config/kitty/colors/colors.conf" > /dev/null 2>&1
         ;;
     *)
