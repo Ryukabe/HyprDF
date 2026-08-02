@@ -1,0 +1,119 @@
+/*****----- Configuration -----*****/
+configuration {
+    show-icons:                 true;
+    dmenu-display-format:       "{name}";
+}
+
+/*****----- Global Properties -----*****/
+@import "~/.config/rofi/colors/colors.rasi"
+@import "~/.config/rofi/font/fonts.rasi"
+
+* {
+    background-color:           transparent;
+    text-color:                 @foreground;
+}
+
+/*****----- Main Window -----*****/
+window {
+    transparency:                "real";
+    location:                    center;
+    anchor:                      center;
+    width:                       900px;
+    height:                      400px;
+    border:                      2px solid;
+    border-radius:               20px;
+    border-color:                @background-alt; /* */
+    background-color:            @background;     /* */
+    cursor:                      "default";
+}
+
+/*****----- Main Box -----*****/
+mainbox {
+    enabled:                     true;
+    spacing:                     15px;
+    padding:                     25px;
+    background-color:            transparent;
+    children:                    [ "inputbar", "listview" ];
+}
+
+/*****----- Inputbar -----*****/
+inputbar {
+    enabled:                     true;
+    spacing:                     10px;
+    padding:                     12px 16px;
+    border:                      2px solid;
+    border-radius:               15px;
+    border-color:                @background-alt; /*[cite: 4] */
+    background-color:            @background;     /*[cite: 4] */
+    text-color:                  @foreground;     /*[cite: 4] */
+    children:                    [ "prompt", "entry" ];
+}
+
+prompt {
+    enabled:                     true;
+    text-color:                  @selected;       /*[cite: 4] */
+}
+
+entry {
+    enabled:                     true;
+    text-color:                  @foreground;     /*[cite: 4] */
+    cursor:                      text;
+    placeholder:                 "Search wallpapers...";
+    placeholder-color:           @background-alt; /*[cite: 4] */
+}
+
+/*****----- Listview -----*****/
+listview {
+    enabled:                     true;
+    columns:                     4;
+    lines:                       1;
+    cycle:                       true;
+    dynamic:                     true;
+    scrollbar:                   false;
+    layout:                      vertical;
+    fixed-columns:               true;
+    fixed-height:                true;    
+
+    spacing:                     20px;
+    margin:                      10px 0px 0px 0px; 
+    border:                      0px solid;        
+    background-color:            transparent;
+}
+
+/*****----- Elements -----*****/
+element {
+    enabled:                     true;
+    padding:                     15px;        
+    border-radius:               15px;
+    background-color:            transparent;
+    text-color:                  @foreground;
+    orientation:                 vertical;   
+    spacing:                     0px;         
+}
+
+element selected.normal {
+    background-color:            @background; 
+    text-color:                  @selected;       
+    border:                      2px solid;
+    border-color:                @selected;
+}
+
+
+element-icon {
+    size:                        150px;       
+    horizontal-align:            0.5;
+    vertical-align:              0.5;
+    expand:                      true;       
+    cursor:                      inherit;
+    background-color:            transparent;
+}
+
+element-text {
+    text-color:                  inherit;
+    horizontal-align:            0.5;
+    vertical-align:              0.5;         
+    expand:                      false;      
+    margin:                      0px;         
+    cursor:                      inherit;
+    background-color:            transparent;
+}

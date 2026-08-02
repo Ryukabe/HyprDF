@@ -1,0 +1,11 @@
+2026-06-11 19:19:10.788 [info] StorageMainService: creating application shared storage
+2026-06-11 19:19:10.788 [info] [shared storage] Creating shared storage database at '/home/shiham/.vscode-shared/sharedStorage/state.vscdb' (wasCreated: false)
+2026-06-11 19:19:10.788 [info] [shared storage] Initializing fallback application storage (path: /home/shiham/.config/Code/User/globalStorage/state.vscdb)
+2026-06-11 19:19:17.686 [info] [shared storage] Fallback application storage initialized with 159 items
+2026-06-11 19:19:17.984 [info] update#setState idle
+2026-06-11 19:19:48.026 [info] update#setState checking for updates
+2026-06-11 19:19:48.642 [info] update#setState available for download
+2026-06-11 20:06:06.437 [info] Extension host with pid 5469 exited with code: 0, signal: unknown.
+2026-06-11 20:06:07.531 [error] Extension host with pid 5469 still exists, forcefully killing it...
+2026-06-11 20:44:24.536 [info] Extension host with pid 41595 exited with code: 0, signal: unknown.
+2026-06-11 20:44:27.398 [warning] [storage main] detected slow close() operation: Time: 2024ms, DB size: 1945600b, Large Keys: iconThemeData:222177, colorThemeData:23792, chat.ChatSessionStore.index:15103, extensionsEnablement/malicious:9056, chat.cachedLanguageModels.v2:7921

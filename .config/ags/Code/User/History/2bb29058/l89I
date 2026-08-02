@@ -1,0 +1,142 @@
+{
+ "layer": "top",
+ "position": "top",
+  // clock wise
+ "reload_style_on_change": true,
+ "modules-center": ["tary", "clock", "custom/media", "custom/separator", "hyprland/workspaces", "custom/separator",
+                      "pulseaudio", "network" ,"custom/notification"],
+
+
+    "tray": {
+        "icon-size": 14,
+        "spacing": 10
+    },
+
+    "clock": {
+      "timezone": ["ETC/UTC", "Asia/Dhaka"],
+      "interval": 60,
+      "format": "{:%I:%M}",
+      "max-length": 25,
+      "tooltip": true,
+      "tooltip-format":"<tt><small>{calendar}</small></tt>",
+    "calendar": {
+        "format": {
+            "today":      "<span color='#ff6699'><b><u>{}</u></b></span>"
+        }
+    },
+      "on-click": "swaync-client -t -sw"
+    },
+
+    "custom/media": {
+        "format": "{icon} {text}",
+        "escape": true,
+        "return-type": "json",
+        "max-length": 20,
+        "on-click": "playerctl play-pause",
+        "on-click-right": "playerctl stop",
+        "smooth-scrolling-threshold": 10, // This value was tested using a trackpad, it should be lowered if using a mouse.
+        "on-scroll-up": "playerctl next",
+        "on-scroll-down": "playerctl previous",
+        "exec": "~/.config/waybar/scripts/mediaplayer.py", // Script in resources/custom_modules folder
+        "format-icons": {
+          "spotify": "",
+          "zen-browesr": "",
+          "mpv": "",
+          "vlc": "󰕼"
+          //S"default": ""
+        }
+    },
+
+    "hyprland/workspaces": {
+      "format": "{name}",
+      "format-icons": {
+        "1": "",
+        "2": "",
+        "3": "",
+        "4": "",
+        "5": ""
+      },
+      "persistent-workspaces": {
+        "eDP-1": [1,2,3,4,5]
+      }
+    },
+
+    "network": {
+       "interface": "wlan0",
+       "format": "{ifname}",
+       //"format-wifi": "{icon} {essid}",
+       "format-wifi": "{icon}",
+        "format-icons": [
+          "󰤯", //0
+          "󰤟", //25
+          "󰤢", //50
+          "󰤥", //75
+          "󰤨"  //100
+        ],
+       "format-ethernet": "{ipaddr}/{cidr} 󰊗",
+       "format-disconnected": "󰤮", //An empty format will hide the module.
+       "tooltip-format": "{ifname} via {gwaddr} 󰊗",
+       "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
+       "tooltip-format-ethernet": "{ifname} ",
+       "tooltip-format-disconnected": "Disconnected",
+       "max-length": 50
+    },
+
+    "pulseaudio": {
+        "format": "{icon}",
+        "format-bluetooth": "{volume}% ",
+        "format-muted": "󰝟",
+        "tooltip": true,
+        "tooltip-format": "{volume}%",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "phone-muted": "",
+            "portable": "",
+            "car": "",
+            "default": [
+                "",   // 0-20
+                "",  // 21-50
+                "󰕾",  // 51-70
+                ""  // 71-100
+            ]
+        },
+        "scroll-step": 1,
+        //"on-click-right": "pavucontrol",
+        "ignored-sinks": [
+          "Easy Effects Sink"
+        ]
+    },
+
+
+    "battery": {
+        "interval": 60,
+        "states": {
+          "warning": 40,
+          "critical": 20
+        },
+        "format": "{capacity}",
+        "format-charging": "   {capacity}%",
+        "format-icons": [
+          "󰁺", //10
+          "󰁻", //20
+          "󰁼", //30
+          "󰁽", //40
+          "󰁾", //50
+          "󰁿", //60
+          "󰂀", //70
+          "󰂁", //80
+          "󰂂", //90
+          "󰁹" //100
+        ],
+        "max-length": 25
+    },
+
+    "custom/separator": {
+      "formate": "",
+      "tooltip": false,
+    }
+}   
+

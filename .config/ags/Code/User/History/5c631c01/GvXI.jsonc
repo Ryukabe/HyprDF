@@ -1,0 +1,40 @@
+{
+  "layer": "top",
+  "position": "top",
+  
+  "font-0": "SF Pro Display:style=Bold:size=13",
+  "font-1": "JetBrainsMono Nerd Font Propo:size=13",
+
+  "include": ["~/.config/waybar/modules/*.jsonc"],
+
+  "modules-left": [
+    "custom/appdrawer", 
+    "custom/powermenu",
+    "custom/phone",
+    "custom/media"
+  ],
+
+  "modules-center": [
+    "clock",
+    "hyprland/workspaces"
+  ],
+
+  "modules-right": [
+    "pulseaudio",
+    "network",
+    "custom/notification"
+  ],
+
+"group/menu": {
+    "orientation": "inherit",
+    "drawer": {
+      "transition-duration": 300,
+      "children-class": "not-memory",
+      "transition-left-to-right": true
+    },
+    "modules": [
+      "custom/appdrawer", 
+      "custom/powermenu"
+    ]
+  }
+}

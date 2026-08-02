@@ -1,0 +1,156 @@
+@import "colors/colors.css";
+
+* {
+    all: unset;
+    border: none;
+    font-family: "Rubik","SF Pro Display", "JetBrainsMono Nerd Font Propo";
+    font-weight: bold;
+    font-size: 15px;
+    min-height: 0px;
+    padding: 0px;
+    margin: 0px;
+}
+
+window#waybar {
+    background-color: transparent;
+}
+
+tooltip {
+    background: @bg1;
+    color: @fg;
+    margin-top: 15px;
+    border-radius: 99px;
+}
+
+.modules-center {
+    padding: 4px;
+    margin: 10px 0px 0px 0px;
+    border-radius: 99px;
+    background-color: @bg1;
+}
+
+#workspaces {
+    padding: 0px 5px;
+}
+
+#workspaces button {
+    padding: 0px 5px;
+    color: @accent;
+    background-color : @bg3;
+    min-width: 10px;
+    border-radius: 99px;
+    transition: all 0.3s ease-in-out;
+}
+
+#workspaces button:hover {
+    color: @purple;
+    transition: all 0.3s ease-in-out;
+}
+
+#workspaces button.active {
+    color: @bg1;
+    background-color : @accent;
+    min-width: 35px;
+    border-radius: 99px;
+    transition: all 0.3s ease-in-out;
+}
+
+#workspaces button.empty {
+    color: @bg3;
+    background-color: @bg3;
+    border-radius:99px;
+    min-width: 10px;
+}
+
+#workspaces button.empty:hover {
+    color: @bg2;
+    background-color: @purple;
+    border-radius:99px;
+    transition: all 0.3s ease-in-out;
+}
+
+#workspaces button.empty.active {
+    color: @red;
+    background-color: @bg4;
+    border-radius: 99px;
+    min-width: 35px;
+}
+
+#workspaces button.urgent {
+    color: @bg0;
+    background-color: @red;
+    border-radius: 16px;
+    min-width: 50px;
+    background-size: 400% 400%;
+    transition: all 0.3s ease-in-out;
+}
+
+
+#clock {
+    padding: 0px 5px 0px 7px;
+    color: @accent;
+    font-size: 14px;
+}
+
+#custom-media{
+    padding: 0px  5px;
+    color: @green;
+    font-size: 14px;
+}
+
+#network {
+    padding: 0px 5px;
+    color: @purple;
+    font-size: 15px;
+}
+
+
+#pulseaudio {
+    padding: 0px 5px;
+    color: @yellow;
+    font-size: 14px;
+}
+
+
+#battery {
+    padding: 0px 5px 0px 7px;
+    color: @green;
+}
+
+#battery.charging {
+    color: @green;
+}
+
+#battery.warning:not(.charging) {
+    color: @yellow;
+}
+
+#battery.critical:not(.charging) {
+    color: @red;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#custom-notification {
+    color: @green;
+    padding: 0px 7px 0px 5px;
+    font-size: 15px;
+}
+
+#tray {
+    padding: 0px 5px;
+    transition: all .3s ease;
+}
+
+#tray menu * {
+    padding: 0px 5px;
+    transition: all .3s ease;
+}
+
+#custom-separator {
+    color: @red;
+    padding: 0px 5px;
+}

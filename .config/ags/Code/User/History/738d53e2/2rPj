@@ -1,0 +1,202 @@
+{
+ "layer": "top",
+ "position": "top",
+// clock wise
+ "reload_style_on_change": true,
+ "modules-left": ["group/startmenu","group/phonei","group/tary"],
+ "modules-center": ["hyprland/workspaces"],
+ "modules-right": ["group/volume","network","clock"],
+
+   "hyprland/workspaces": {
+    "format": "{icon}",
+    "format-icons": {
+        "active": "",
+        "default": "",
+        "empty": ""
+    },
+    "persistent-workspaces": { "*": 5 }
+    },
+
+    "clock": {
+      "timezone": ["ETC/UTC", "Asia/Dhaka"],
+      "interval": 60,
+      "format": "{:%I:%M}",
+      "max-length": 25,
+      "tooltip": true,
+      "tooltip-format":"<tt><small>{calendar}</small></tt>",
+    "calendar": {
+        "format": {
+            "today":      "<span color='#ff6699'><b><u>{}</u></b></span>"
+        }
+    },
+      "on-click": "swaync-client -t -sw"
+    },
+
+    "network": {
+       "interface": "wlan0",
+       "format": "{ifname}",
+       //"format-wifi": "{icon} {essid}",
+       "format-wifi": "{icon}",
+        "format-icons": [
+          "󰤯", //0
+          "󰤟", //25
+          "󰤢", //50
+          "󰤥", //75
+          "󰤨"  //100
+        ],
+       "format-ethernet": "{ipaddr}/{cidr} 󰊗",
+       "format-disconnected": "󰤮", //An empty format will hide the module.
+       "tooltip-format": "{ifname} via {gwaddr} 󰊗",
+       "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
+       "tooltip-format-ethernet": "{ifname} ",
+       "tooltip-format-disconnected": "Disconnected",
+       "max-length": 50
+    },
+
+    "pulseaudio": {
+        "format": "{icon}",
+        "format-bluetooth": "{volume}% ",
+        "format-muted": "󰝟",
+        "tooltip": true,
+        "tooltip-format": "{volume}%",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "phone-muted": "",
+            "portable": "",
+            "car": "",
+            "default": [
+                "",   // 0-20
+                "",  // 21-50
+                "󰕾",  // 51-70
+                ""  // 71-100
+            ]
+        },
+        "scroll-step": 1,
+        //"on-click-right": "pavucontrol",
+        "ignored-sinks": [
+          "Easy Effects Sink"
+        ]
+    },
+
+     "custom/volume": {
+        "format": "{Volume}",
+        "format-bluetooth": "{volume}% ",
+        "format-muted": "󰝟",
+        "tooltip": true,
+        "tooltip-format": "{volume}%",
+    },
+
+    "pulseaudio/slider": {
+        "min": 0,
+        "max": 100,
+        "orientation": "horizontal"
+    },
+
+    "group/volume": {
+        "orientation": "horizontal",
+        "drawer": {
+            "transition-duration": 600,
+            "transition-left-to-right": false,
+            "children-class": "not-pulesaudio",
+            "click-to-reveal": true
+        },
+        "modules": ["pulseaudio","pulseaudio/slider","custom/volume"]
+    },
+
+    "custom/appdrawer": {
+        "format" : "󰣇",
+        "tooltip": false,
+        "tooltip-format": "App Drawer",
+        "on-click": "pkill rofi || rofi -show drun -theme /home/shiham/.config/rofi/launchpad.rasi -name appdrawer"
+    },
+
+    "custom/powermenu": {
+        "format": "",
+        "tooltip": false,
+        "on-click": "~/.config/wlogout/scripts/wlogout.sh",
+        "tooltip-format": "Open Power Menu"
+    },
+
+    "group/startmenu": {
+    "orientation": "horizontal",
+    "drawer": {
+        "transition-duration": 600,
+        "transition-to-right": true
+    //    "click-to-reveal": true
+    },
+    "modules": ["custom/appdrawer","custom/powermenu"]
+    },
+
+    "custom/phone": {
+        "format": "{icon} {text}",
+        //"format-icons": {
+         //"connected": "",
+         //"disconnected": "" 
+        //},
+        "return-type": "json",
+        "exec": "~/.config/waybar/scripts/phone_status.py", 
+        "on-click": "kdeconnectd",
+        "interval": 60,
+        "tooltip": false
+    },
+
+    "custom/phonei": {
+        "format": "",
+        "tooltip": false
+    },
+
+    "group/phonei": {
+    "orientation": "horizontal",
+    "drawer": {
+        "transition-duration": 600,
+        "transition-to-right": true,
+        "click-to-reveal": false
+    },
+    "modules": ["custom/phonei","custom/phone"]
+    },
+
+    "tray": {
+        "icon-size": 14,
+        "spacing": 10
+    },
+    "custom/tray":{
+        "format": "",
+        "tooltip": false
+    },
+    "group/tary": {
+        "orientation": "horizontal",
+        "drawer": {
+            "transition-duration": 600,
+            "transition-to-right": true,
+            "click-to-reveal":true
+        },
+        "modules": ["custom/tray","tray"]
+    },
+
+    "battery": {
+        "interval": 60,
+        "states": {
+          "warning": 40,
+          "critical": 20
+        },
+        "format": "{capacity}",
+        "format-charging": "   {capacity}%",
+        "format-icons": [
+          "󰁺", //10
+          "󰁻", //20
+          "󰁼", //30
+          "󰁽", //40
+          "󰁾", //50
+          "󰁿", //60
+          "󰂀", //70
+          "󰂁", //80
+          "󰂂", //90
+          "󰁹" //100
+        ],
+        "max-length": 25
+    }
+}   
+

@@ -1,0 +1,21 @@
+# --- 1. POWERLEVEL10K INSTANT PROMPT ---
+# Must remain at the absolute top of the file to guarantee instant terminal load times
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+# --- 2. SYSTEM COMPLETION ENGINE SETUP ---
+autoload -Uz compinit
+compinit -d "$XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION"
+
+# --- 3. LOAD USER CONFIG BLOCKS ---
+source "$ZDOTDIR/options.zsh"
+source "$ZDOTDIR/plugins.zsh"
+source "$ZDOTDIR/aliases.zsh"
+
+# --- 4. YOUR NATIVE POWERLEVEL10K THEME ---
+# Loads the underlying theme files
+source "$HOME/powerlevel10k/powerlevel10k.zsh-theme"
+
+# Loads your custom user preferences, prompt layout, and styles
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

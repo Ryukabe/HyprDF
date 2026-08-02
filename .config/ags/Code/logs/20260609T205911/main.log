@@ -1,0 +1,8 @@
+2026-06-09 20:59:13.361 [info] StorageMainService: creating application shared storage
+2026-06-09 20:59:13.361 [info] [shared storage] Creating shared storage database at '/home/shiham/.vscode-shared/sharedStorage/state.vscdb' (wasCreated: false)
+2026-06-09 20:59:13.361 [info] [shared storage] Initializing fallback application storage (path: /home/shiham/.config/Code/User/globalStorage/state.vscdb)
+2026-06-09 20:59:14.429 [info] [shared storage] Fallback application storage initialized with 159 items
+2026-06-09 20:59:14.725 [info] update#setState idle
+2026-06-09 20:59:44.732 [info] update#setState checking for updates
+2026-06-09 20:59:45.043 [info] update#setState available for download
+2026-06-09 21:00:29.198 [info] Extension host with pid 69741 exited with code: 0, signal: unknown.

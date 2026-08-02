@@ -1,0 +1,36 @@
+{
+  "layer": "top",
+  "position": "top",
+  
+  "include": ["~/.config/waybar/modules/*.jsonc"],
+
+  "modules-left": [
+    "group/menu",
+    "custom/phone",
+    "custom/media"
+  ],
+
+  "modules-center": [
+    "clock",
+    "hyprland/workspaces"
+  ],
+
+  "modules-right": [
+    "pulseaudio",
+    "network",
+    "custom/notification"
+  ],
+
+"group/menu": {
+    "orientation": "vertical",
+    "drawer": {
+      "transition-duration": 300,
+      "children-class": "not-memory",
+      "transition-left-to-right": true
+    },
+    "modules": [
+      "custom/applauncher", 
+      "custom/exit"
+    ]
+  }
+}

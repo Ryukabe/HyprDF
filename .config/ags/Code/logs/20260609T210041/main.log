@@ -1,0 +1,13 @@
+2026-06-09 21:00:43.147 [info] StorageMainService: creating application shared storage
+2026-06-09 21:00:43.147 [info] [shared storage] Creating shared storage database at '/home/shiham/.vscode-shared/sharedStorage/state.vscdb' (wasCreated: false)
+2026-06-09 21:00:43.147 [info] [shared storage] Initializing fallback application storage (path: /home/shiham/.config/Code/User/globalStorage/state.vscdb)
+2026-06-09 21:00:43.533 [info] [shared storage] Fallback application storage initialized with 157 items
+2026-06-09 21:00:43.660 [info] update#setState idle
+2026-06-09 21:01:13.663 [info] update#setState checking for updates
+2026-06-09 21:01:13.710 [info] update#setState available for download
+2026-06-09 21:02:18.040 [info] Extension host with pid 71004 exited with code: 0, signal: unknown.
+2026-06-09 21:02:19.512 [error] Extension host with pid 71004 still exists, forcefully killing it...
+2026-06-09 21:02:24.692 [warning] [storage main] detected slow close() operation: Time: 2655ms, DB size: 24576b, Large Keys: __$__targetStorageMarker:1353, memento/interactive-session-view-copilot:1230, chat.untitledInputState:1001, workbench.view.debug.state:584, memento/workbench.editors.files.textFileEditor:475
+2026-06-09 21:02:24.882 [warning] [storage main] detected slow close() operation: Time: 2845ms, DB size: 12288b, Large Keys: __$__isNewStorageMarker:5
+2026-06-09 21:02:24.931 [warning] [storage main] detected slow close() operation: Time: 2893ms, DB size: 40960b, Large Keys: history.recentlyOpenedPathsList:9010, content.trust.model.key:3454, __$__targetStorageMarker:65, __$__migratedStorageMarker:61, __$__isNewStorageMarker:5
+2026-06-09 21:02:25.341 [warning] [storage main] detected slow close() operation: Time: 3305ms, DB size: 1945600b, Large Keys: iconThemeData:222177, colorThemeData:29604, chat.ChatSessionStore.index:15103, extensionsEnablement/malicious:9056, chat.cachedLanguageModels.v2:7921

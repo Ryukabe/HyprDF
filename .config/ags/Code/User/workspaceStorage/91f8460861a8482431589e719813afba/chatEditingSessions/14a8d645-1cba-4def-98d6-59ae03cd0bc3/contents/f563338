@@ -1,0 +1,13 @@
+[Unit]
+Description=Snappy Switcher Theme Sync
+After=graphical-session-pre.target
+PartOf=graphical-session.target
+
+[Service]
+Type=simple
+ExecStart=%h/.local/bin/snappy-theme-sync
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=graphical-session.target

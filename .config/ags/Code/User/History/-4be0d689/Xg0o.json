@@ -1,0 +1,550 @@
+[
+    {
+        "identifier": {
+            "id": "esbenp.prettier-vscode",
+            "uuid": "96fa4707-6983-4489-b7c5-d5ffdfdcce90"
+        },
+        "version": "12.4.0",
+        "location": {
+            "$mid": 1,
+            "path": "/home/shiham/.vscode/extensions/esbenp.prettier-vscode-12.4.0",
+            "scheme": "file"
+        },
+        "relativeLocation": "esbenp.prettier-vscode-12.4.0",
+        "metadata": {
+            "installedTimestamp": 1775476092683,
+            "pinned": false,
+            "source": "gallery",
+            "id": "96fa4707-6983-4489-b7c5-d5ffdfdcce90",
+            "publisherId": "d16f4e39-2ffb-44e3-9c0d-79d873570e3a",
+            "publisherDisplayName": "Prettier",
+            "targetPlatform": "undefined",
+            "updated": false,
+            "private": false,
+            "isPreReleaseVersion": false,
+            "hasPreReleaseVersion": false
+        }
+    },
+    {
+        "identifier": {
+            "id": "raunofreiberg.vesper",
+            "uuid": "46345d4d-e3aa-4a4f-9f60-725237757d72"
+        },
+        "version": "0.0.40",
+        "location": {
+            "$mid": 1,
+            "path": "/home/shiham/.vscode/extensions/raunofreiberg.vesper-0.0.40",
+            "scheme": "file"
+        },
+        "relativeLocation": "raunofreiberg.vesper-0.0.40",
+        "metadata": {
+            "installedTimestamp": 1775710684968,
+            "pinned": false,
+            "source": "gallery",
+            "id": "46345d4d-e3aa-4a4f-9f60-725237757d72",
+            "publisherId": "35332e16-db6a-491f-ba7c-8283981e20a1",
+            "publisherDisplayName": "Rauno Freiberg",
+            "targetPlatform": "undefined",
+            "updated": false,
+            "private": false,
+            "isPreReleaseVersion": false,
+            "hasPreReleaseVersion": false,
+            "preRelease": false
+        }
+    },
+    {
+        "identifier": {
+            "id": "usernamehw.errorlens",
+            "uuid": "9d8c32ab-354c-4daf-a9bf-20b633734435"
+        },
+        "version": "3.28.0",
+        "location": {
+            "$mid": 1,
+            "path": "/home/shiham/.vscode/extensions/usernamehw.errorlens-3.28.0",
+            "scheme": "file"
+        },
+        "relativeLocation": "usernamehw.errorlens-3.28.0",
+        "metadata": {
+            "installedTimestamp": 1775710684967,
+            "pinned": false,
+            "source": "gallery",
+            "id": "9d8c32ab-354c-4daf-a9bf-20b633734435",
+            "publisherId": "151820df-5dc5-4c97-8751-eb84643203fa",
+            "publisherDisplayName": "Alexander",
+            "targetPlatform": "undefined",
+            "updated": false,
+            "private": false,
+            "isPreReleaseVersion": false,
+            "hasPreReleaseVersion": false,
+            "preRelease": false
+        }
+    },
+    {
+        "identifier": {
+            "id": "zhuangtongfa.material-theme",
+            "uuid": "26a529c9-2654-4b95-a63f-02f6a52429e6"
+        },
+        "version": "3.19.0",
+        "location": {
+            "$mid": 1,
+            "path": "/home/shiham/.vscode/extensions/zhuangtongfa.material-theme-3.19.0",
+            "scheme": "file"
+        },
+        "relativeLocation": "zhuangtongfa.material-theme-3.19.0",
+        "metadata": {
+            "installedTimestamp": 1775710684965,
+            "pinned": false,
+            "source": "gallery",
+            "id": "26a529c9-2654-4b95-a63f-02f6a52429e6",
+            "publisherId": "8ae75bda-ec22-4a17-9340-abf1a20beca9",
+            "publisherDisplayName": "binaryify",
+            "targetPlatform": "undefined",
+            "updated": false,
+            "private": false,
+            "isPreReleaseVersion": false,
+            "hasPreReleaseVersion": false,
+            "preRelease": false
+        }
+    },
+    {
+        "identifier": {
+            "id": "miguelsolorio.symbols",
+            "uuid": "cb54c3b9-1c64-4c4a-8b5a-887270ffe4b6"
+        },
+        "version": "0.0.25",
+        "location": {
+            "$mid": 1,
+            "path": "/home/shiham/.vscode/extensions/miguelsolorio.symbols-0.0.25",
+            "scheme": "file"
+        },
+        "relativeLocation": "miguelsolorio.symbols-0.0.25",
+        "metadata": {
+            "installedTimestamp": 1775710684969,
+            "pinned": false,
+            "source": "gallery",
+            "id": "cb54c3b9-1c64-4c4a-8b5a-887270ffe4b6",
+            "publisherId": "f1903af7-ceb4-410f-b269-cd514b33bea2",
+            "publisherDisplayName": "Miguel Solorio",
+            "targetPlatform": "undefined",
+            "updated": false,
+            "private": false,
+            "isPreReleaseVersion": false,
+            "hasPreReleaseVersion": false,
+            "preRelease": false
+        }
+    },
+    {
+        "identifier": {
+            "id": "ritwickdey.liveserver",
+            "uuid": "46cc5bbd-b098-4568-9b87-f91e07d26f2d"
+        },
+        "version": "5.7.10",
+        "location": {
+            "$mid": 1,
+            "path": "/home/shiham/.vscode/extensions/ritwickdey.liveserver-5.7.10",
+            "scheme": "file"
+        },
+        "relativeLocation": "ritwickdey.liveserver-5.7.10",
+        "metadata": {
+            "installedTimestamp": 1775710684968,
+            "pinned": false,
+            "source": "gallery",
+            "id": "46cc5bbd-b098-4568-9b87-f91e07d26f2d",
+            "publisherId": "17fd9a78-e430-4a78-add2-ade4a8830352",
+            "publisherDisplayName": "Ritwick Dey",
+            "targetPlatform": "undefined",
+            "updated": false,
+            "private": false,
+            "isPreReleaseVersion": false,
+            "hasPreReleaseVersion": false,
+            "preRelease": false
+        }
+    },
+    {
+        "identifier": {
+            "id": "ms-python.python",
+            "uuid": "f1f59ae4-9318-4f3c-a9b5-81b2eaa5f8a5"
+        },
+        "version": "2026.4.0",
+        "location": {
+            "$mid": 1,
+            "path": "/home/shiham/.vscode/extensions/ms-python.python-2026.4.0-linux-x64",
+            "scheme": "file"
+        },
+        "relativeLocation": "ms-python.python-2026.4.0-linux-x64",
+        "metadata": {
+            "installedTimestamp": 1775710684971,
+            "pinned": false,
+            "source": "gallery",
+            "id": "f1f59ae4-9318-4f3c-a9b5-81b2eaa5f8a5",
+            "publisherId": "998b010b-e2af-44a5-a6cd-0b5fd3b9b6f8",
+            "publisherDisplayName": "Microsoft",
+            "targetPlatform": "linux-x64",
+            "updated": false,
+            "private": false,
+            "isPreReleaseVersion": false,
+            "hasPreReleaseVersion": false,
+            "preRelease": false
+        }
+    },
+    {
+        "identifier": {
+            "id": "ms-python.vscode-pylance",
+            "uuid": "364d2426-116a-433a-a5d8-a5098dc3afbd"
+        },
+        "version": "2026.2.1",
+        "location": {
+            "$mid": 1,
+            "path": "/home/shiham/.vscode/extensions/ms-python.vscode-pylance-2026.2.1",
+            "scheme": "file"
+        },
+        "relativeLocation": "ms-python.vscode-pylance-2026.2.1",
+        "metadata": {
+            "installedTimestamp": 1775710684970,
+            "pinned": false,
+            "source": "gallery",
+            "id": "364d2426-116a-433a-a5d8-a5098dc3afbd",
+            "publisherId": "998b010b-e2af-44a5-a6cd-0b5fd3b9b6f8",
+            "publisherDisplayName": "Microsoft",
+            "targetPlatform": "undefined",
+            "updated": false,
+            "private": false,
+            "isPreReleaseVersion": false,
+            "hasPreReleaseVersion": false,
+            "preRelease": false
+        }
+    },
+    {
+        "identifier": {
+            "id": "pkief.material-product-icons",
+            "uuid": "f797dacd-4e80-4f33-8b63-d665c0956013"
+        },
+        "version": "1.7.1",
+        "location": {
+            "$mid": 1,
+            "path": "/home/shiham/.vscode/extensions/pkief.material-product-icons-1.7.1",
+            "scheme": "file"
+        },
+        "relativeLocation": "pkief.material-product-icons-1.7.1",
+        "metadata": {
+            "installedTimestamp": 1775714435082,
+            "pinned": false,
+            "source": "gallery",
+            "id": "f797dacd-4e80-4f33-8b63-d665c0956013",
+            "publisherId": "f9e5bc2f-fea1-4075-917f-d83e01e69f56",
+            "publisherDisplayName": "Philipp Kief",
+            "targetPlatform": "undefined",
+            "updated": false,
+            "private": false,
+            "isPreReleaseVersion": false,
+            "hasPreReleaseVersion": false
+        }
+    },
+    {
+        "identifier": {
+            "id": "anotherglitchinthematrix.monochrome",
+            "uuid": "b8e7e23f-63ca-4617-9cc5-bab6e1116f8b"
+        },
+        "version": "2.4.3",
+        "location": {
+            "$mid": 1,
+            "path": "/home/shiham/.vscode/extensions/anotherglitchinthematrix.monochrome-2.4.3",
+            "scheme": "file"
+        },
+        "relativeLocation": "anotherglitchinthematrix.monochrome-2.4.3",
+        "metadata": {
+            "installedTimestamp": 1775714739411,
+            "pinned": false,
+            "source": "gallery",
+            "id": "b8e7e23f-63ca-4617-9cc5-bab6e1116f8b",
+            "publisherId": "f22a4ed7-cead-40b9-b8b1-c5f68ab11133",
+            "publisherDisplayName": "glitch",
+            "targetPlatform": "undefined",
+            "updated": false,
+            "private": false,
+            "isPreReleaseVersion": false,
+            "hasPreReleaseVersion": false
+        }
+    },
+    {
+        "identifier": {
+            "id": "enkia.tokyo-night",
+            "uuid": "1cac7443-911e-48b9-8341-49f3880c288a"
+        },
+        "version": "1.1.2",
+        "location": {
+            "$mid": 1,
+            "path": "/home/shiham/.vscode/extensions/enkia.tokyo-night-1.1.2",
+            "scheme": "file"
+        },
+        "relativeLocation": "enkia.tokyo-night-1.1.2",
+        "metadata": {
+            "installedTimestamp": 1775715080342,
+            "pinned": false,
+            "source": "gallery",
+            "id": "1cac7443-911e-48b9-8341-49f3880c288a",
+            "publisherId": "745c7670-02e7-4a27-b662-e1b5719f2ba7",
+            "publisherDisplayName": "enkia",
+            "targetPlatform": "undefined",
+            "updated": false,
+            "private": false,
+            "isPreReleaseVersion": false,
+            "hasPreReleaseVersion": false
+        }
+    },
+    {
+        "identifier": {
+            "id": "jdinhlife.gruvbox",
+            "uuid": "c6d564c4-ca8c-45ba-abf6-c85f2d1468d8"
+        },
+        "version": "1.29.1",
+        "location": {
+            "$mid": 1,
+            "path": "/home/shiham/.vscode/extensions/jdinhlife.gruvbox-1.29.1",
+            "scheme": "file"
+        },
+        "relativeLocation": "jdinhlife.gruvbox-1.29.1",
+        "metadata": {
+            "isApplicationScoped": false,
+            "isMachineScoped": false,
+            "isBuiltin": false,
+            "installedTimestamp": 1776328738531,
+            "pinned": false,
+            "source": "gallery",
+            "id": "c6d564c4-ca8c-45ba-abf6-c85f2d1468d8",
+            "publisherId": "571210a8-f372-43c2-8b5a-018868d4ac96",
+            "publisherDisplayName": "jdinhlife",
+            "targetPlatform": "undefined",
+            "updated": true,
+            "private": false,
+            "isPreReleaseVersion": false,
+            "hasPreReleaseVersion": false,
+            "preRelease": false
+        }
+    },
+    {
+        "identifier": {
+            "id": "eamodio.gitlens",
+            "uuid": "4de763bd-505d-4978-9575-2b7696ecf94e"
+        },
+        "version": "17.12.2",
+        "location": {
+            "$mid": 1,
+            "path": "/home/shiham/.vscode/extensions/eamodio.gitlens-17.12.2",
+            "scheme": "file"
+        },
+        "relativeLocation": "eamodio.gitlens-17.12.2",
+        "metadata": {
+            "isApplicationScoped": false,
+            "isMachineScoped": false,
+            "isBuiltin": false,
+            "installedTimestamp": 1776919306358,
+            "pinned": false,
+            "source": "gallery",
+            "id": "4de763bd-505d-4978-9575-2b7696ecf94e",
+            "publisherId": "678d198b-9b2e-49d3-96ff-6d801c9575df",
+            "publisherDisplayName": "GitKraken",
+            "targetPlatform": "undefined",
+            "updated": true,
+            "private": false,
+            "isPreReleaseVersion": false,
+            "hasPreReleaseVersion": false,
+            "preRelease": false
+        }
+    },
+    {
+        "identifier": {
+            "id": "ms-python.debugpy",
+            "uuid": "4bd5d2c9-9d65-401a-b0b2-7498d9f17615"
+        },
+        "version": "2026.6.0",
+        "location": {
+            "$mid": 1,
+            "path": "/home/shiham/.vscode/extensions/ms-python.debugpy-2026.6.0-linux-x64",
+            "scheme": "file"
+        },
+        "relativeLocation": "ms-python.debugpy-2026.6.0-linux-x64",
+        "metadata": {
+            "isApplicationScoped": false,
+            "isMachineScoped": false,
+            "isBuiltin": false,
+            "installedTimestamp": 1777623194070,
+            "pinned": false,
+            "source": "gallery",
+            "id": "4bd5d2c9-9d65-401a-b0b2-7498d9f17615",
+            "publisherId": "998b010b-e2af-44a5-a6cd-0b5fd3b9b6f8",
+            "publisherDisplayName": "Microsoft",
+            "targetPlatform": "linux-x64",
+            "updated": true,
+            "private": false,
+            "isPreReleaseVersion": false,
+            "hasPreReleaseVersion": false,
+            "preRelease": false
+        }
+    },
+    {
+        "identifier": {
+            "id": "catppuccin.catppuccin-vsc",
+            "uuid": "69264e4d-cd3b-468a-8f2b-e69673c7d864"
+        },
+        "version": "3.19.0",
+        "location": {
+            "$mid": 1,
+            "path": "/home/shiham/.vscode/extensions/catppuccin.catppuccin-vsc-3.19.0",
+            "scheme": "file"
+        },
+        "relativeLocation": "catppuccin.catppuccin-vsc-3.19.0",
+        "metadata": {
+            "isApplicationScoped": false,
+            "isMachineScoped": false,
+            "isBuiltin": false,
+            "installedTimestamp": 1777720208786,
+            "pinned": false,
+            "source": "gallery",
+            "id": "69264e4d-cd3b-468a-8f2b-e69673c7d864",
+            "publisherId": "e7d2ed61-53e0-4dd4-afbe-f536c3bb4316",
+            "publisherDisplayName": "Catppuccin",
+            "targetPlatform": "undefined",
+            "updated": true,
+            "private": false,
+            "isPreReleaseVersion": false,
+            "hasPreReleaseVersion": false,
+            "preRelease": false
+        }
+    },
+    {
+        "identifier": {
+            "id": "ms-python.vscode-python-envs",
+            "uuid": "b41d8e8a-b6d4-4202-8f07-7189bdda81be"
+        },
+        "version": "1.30.0",
+        "location": {
+            "$mid": 1,
+            "path": "/home/shiham/.vscode/extensions/ms-python.vscode-python-envs-1.30.0-linux-x64",
+            "scheme": "file"
+        },
+        "relativeLocation": "ms-python.vscode-python-envs-1.30.0-linux-x64",
+        "metadata": {
+            "isApplicationScoped": false,
+            "isMachineScoped": false,
+            "isBuiltin": false,
+            "installedTimestamp": 1778152889177,
+            "pinned": false,
+            "source": "gallery",
+            "id": "b41d8e8a-b6d4-4202-8f07-7189bdda81be",
+            "publisherId": "998b010b-e2af-44a5-a6cd-0b5fd3b9b6f8",
+            "publisherDisplayName": "Microsoft",
+            "targetPlatform": "linux-x64",
+            "updated": true,
+            "private": false,
+            "isPreReleaseVersion": false,
+            "hasPreReleaseVersion": false,
+            "preRelease": false
+        }
+    },
+    {
+        "identifier": {
+            "id": "keifererikson.nightfox",
+            "uuid": "04a193e8-4bc8-4f5b-af42-b3fe9352abcc"
+        },
+        "version": "0.0.14",
+        "location": {
+            "$mid": 1,
+            "path": "/home/shiham/.vscode/extensions/keifererikson.nightfox-0.0.14",
+            "scheme": "file"
+        },
+        "relativeLocation": "keifererikson.nightfox-0.0.14",
+        "metadata": {
+            "installedTimestamp": 1778170893836,
+            "pinned": false,
+            "source": "gallery",
+            "id": "04a193e8-4bc8-4f5b-af42-b3fe9352abcc",
+            "publisherId": "fc39738f-f4a5-4d46-9f99-49b2d2672b68",
+            "publisherDisplayName": "Keifer Erikson",
+            "targetPlatform": "undefined",
+            "updated": false,
+            "private": false,
+            "isPreReleaseVersion": false,
+            "hasPreReleaseVersion": false
+        }
+    },
+    {
+        "identifier": {
+            "id": "aflo.kanagawa-glass",
+            "uuid": "0bbdbbb1-0ae4-4092-b2f1-d141f5e14760"
+        },
+        "version": "0.0.5",
+        "location": {
+            "$mid": 1,
+            "path": "/home/shiham/.vscode/extensions/aflo.kanagawa-glass-0.0.5",
+            "scheme": "file"
+        },
+        "relativeLocation": "aflo.kanagawa-glass-0.0.5",
+        "metadata": {
+            "installedTimestamp": 1778344934722,
+            "pinned": false,
+            "source": "gallery",
+            "id": "0bbdbbb1-0ae4-4092-b2f1-d141f5e14760",
+            "publisherId": "e22b9395-6111-428b-bbf3-9c643a62989f",
+            "publisherDisplayName": "AFLO",
+            "targetPlatform": "undefined",
+            "updated": false,
+            "private": false,
+            "isPreReleaseVersion": false,
+            "hasPreReleaseVersion": false
+        }
+    },
+    {
+        "identifier": {
+            "id": "metaphore.kanagawa-vscode-color-theme",
+            "uuid": "9bb8f61b-9d2b-4ba0-a655-6f73722b185d"
+        },
+        "version": "0.5.0",
+        "location": {
+            "$mid": 1,
+            "path": "/home/shiham/.vscode/extensions/metaphore.kanagawa-vscode-color-theme-0.5.0",
+            "scheme": "file"
+        },
+        "relativeLocation": "metaphore.kanagawa-vscode-color-theme-0.5.0",
+        "metadata": {
+            "installedTimestamp": 1778344949388,
+            "pinned": false,
+            "source": "gallery",
+            "id": "9bb8f61b-9d2b-4ba0-a655-6f73722b185d",
+            "publisherId": "3b4c0783-065a-461d-89e8-1e7413c492b7",
+            "publisherDisplayName": "metapho.re",
+            "targetPlatform": "undefined",
+            "updated": false,
+            "private": false,
+            "isPreReleaseVersion": false,
+            "hasPreReleaseVersion": false
+        }
+    },
+    {
+        "identifier": {
+            "id": "sumneko.lua"
+        },
+        "version": "3.18.2",
+        "location": {
+            "$mid": 1,
+            "fsPath": "/home/shiham/.vscode/extensions/sumneko.lua-3.18.2-linux-x64",
+            "external": "file:///home/shiham/.vscode/extensions/sumneko.lua-3.18.2-linux-x64",
+            "path": "/home/shiham/.vscode/extensions/sumneko.lua-3.18.2-linux-x64",
+            "scheme": "file"
+        },
+        "relativeLocation": "sumneko.lua-3.18.2-linux-x64",
+        "metadata": {
+            "installedTimestamp": 1778474369048,
+            "pinned": false,
+            "source": "gallery",
+            "id": "3a15b5a7-be12-47e3-8445-88ee3eabc8b2",
+            "publisherId": "fb626675-24cf-4881-8c13-b465f29bec2f",
+            "publisherDisplayName": "sumneko",
+            "targetPlatform": "linux-x64",
+            "updated": false,
+            "private": false,
+            "isPreReleaseVersion": false,
+            "hasPreReleaseVersion": false
+        }
+    }
+]

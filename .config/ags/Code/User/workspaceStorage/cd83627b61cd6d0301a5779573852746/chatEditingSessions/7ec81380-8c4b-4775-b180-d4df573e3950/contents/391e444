@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# Kill the previous process if it hung
+pkill -f "gjs.*ags-tweaks.js"
+
+# Start a new one
+gjs "$HOME/.local/bin/ags-tweaks.js"

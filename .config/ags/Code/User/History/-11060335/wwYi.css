@@ -1,0 +1,62 @@
+@import "colors/colors.css";
+
+* {
+    font-family: SF Pro Display;
+}
+
+
+window {
+    font-size: 14pt;
+    color:  @fg; /* text */
+    background-color: alpha(@bg, 0.5); /* background */
+
+} 
+
+button {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 25%; /* Increase the idle icon size */
+    background-color: transparent;
+    border-radius: 20px; /* Rounded corners for the square look */
+    margin: 20px;
+    border: none;
+    color: @fg; /* Ensure text is visible */
+    transition: all 0.3s ease-in-out;
+}
+
+button:hover {
+    background-size: 30%;
+    background-color: rgba(255, 255, 255, 0.1); /* The subtle box in the image */
+    color: @blue; /* Highlight the text color on hover */
+}
+button:focus {
+    box-shadow: none;
+    background-size : 20%;
+}
+
+
+
+#shutdown {
+    background-image: image(url("./icons/power.png"));
+}
+
+
+#logout {
+    background-image: image(url("./icons/logout.png"));
+}
+
+
+#reboot {
+    background-image: image(url("./icons/restart.png"));
+}
+
+
+#lock {
+    background-image: image(url("./icons/lock.png"));
+}
+
+
+#hibernate {
+    background-image: image(url("./icons/hibernate.png"));
+}
+

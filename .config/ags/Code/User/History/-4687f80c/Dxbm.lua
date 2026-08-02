@@ -1,0 +1,112 @@
+local p = require("modules.programs")
+local mainMod = "SUPER"
+
+-- Window management
+hl.bind(mainMod .. " + SHIFT + F",     hl.dsp.window.float({ action = "toggle" }))
+hl.bind(mainMod .. " + SHIFT + P",     hl.dsp.window.pseudo())
+
+-- Focus
+hl.bind(mainMod .. " + left",          hl.dsp.focus({ direction = "left" }))
+hl.bind(mainMod .. " + right",         hl.dsp.focus({ direction = "right" }))
+hl.bind(mainMod .. " + up",            hl.dsp.focus({ direction = "up" }))
+hl.bind(mainMod .. " + down",          hl.dsp.focus({ direction = "down" }))
+
+-- Workspaces
+for i = 1, 10 do
+    local key = i % 10
+    hl.bind(mainMod .. " + " .. key,          hl.dsp.focus({ workspace = i }))
+    hl.bind(mainMod .. " + SHIFT + " .. key,  hl.dsp.window.move({ workspace = i }))
+end
+
+-- Scroll through workspaces
+--hl.bind(mainMod .. " + mouse_down",    hl.dsp.focus({ workspace = "e+1" }))
+--hl.bind(mainMod .. " + mouse_up",      hl.dsp.focus({ workspace = "e-1" }))
+
+-- Move/resize with mouse
+hl.bind(mainMod .. " + mouse:272",     hl.dsp.window.drag(),   { mouse = true })
+hl.bind(mainMod .. " + mouse:273",     hl.dsp.window.resize(), { mouse = true })
+
+-- Laptop Brightness & Volume (With Fn keys)
+hl.bind("XF86MonBrightnessUp",    hl.dsp.exec_cmd("~/.config/hypr/scripts/brightness.sh --inc"), { locked = true, repeating = true })
+hl.bind("XF86MonBrightnessDown",  hl.dsp.exec_cmd("~/.config/hypr/scripts/brightness.sh --dec"), { locked = true, repeating = true })
+hl.bind("XF86AudioRaiseVolume",   hl.dsp.exec_cmd("~/.config/hypr/scripts/volume_wpctl.sh --inc"), { locked = true, repeating = true })
+hl.bind("XF86AudioLowerVolume",   hl.dsp.exec_cmd("~/.config/hypr/scripts/volume_wpctl.sh --dec"),      { locked = true, repeating = true })
+hl.bind("XF86AudioMute",          hl.dsp.exec_cmd("~/.config/hypr/scripts/volume_wpctl.sh --toggle"),     { locked = true, repeating = true })
+hl.bind("XF86AudioMicMute",       hl.dsp.exec_cmd("~/.config/hypr/scripts/volume_wpctl.sh --toggle"),   { locked = true, repeating = true })
+
+-- External Keyboard Brightness & Volume Control (With Fn keys)
+--hl.bind("F3",    hl.dsp.exec_cmd("~/.config/hypr/scripts/brightness.sh --inc"), { locked = true, repeating = true })
+--hl.bind("F2",    hl.dsp.exec_cmd("~/.config/hypr/scripts/brightness.sh --dec"), { locked = true, repeating = true })
+--hl.bind("F8",    hl.dsp.exec_cmd("~/.config/hypr/scripts/volume_wpctl.sh --inc"), { locked = true, repeating = true })
+--hl.bind("F7",    hl.dsp.exec_cmd("~/.config/hypr/scripts/volume_wpctl.sh --dec"),      { locked = true, repeating = true })
+--hl.bind("F6",    hl.dsp.exec_cmd("~/.config/hypr/scripts/volume_wpctl.sh --toggle"),     { locked = true, repeating = true })
+--hl.bind("F9",    hl.dsp.exec_cmd("~/.config/hypr/scripts/volume_wpctl.sh --toggle"),   { locked = true, repeating = true })
+
+-- Media
+hl.bind("XF86AudioNext",   hl.dsp.exec_cmd("playerctl next"),       { locked = true })
+hl.bind("XF86AudioPause",  hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
+hl.bind("XF86AudioPlay",   hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
+hl.bind("XF86AudioPrev",   hl.dsp.exec_cmd("playerctl previous"),   { locked = true })
+
+-- Kill & Close Apps
+hl.bind("CTRL + ALT + DELETE",        hl.dsp.exec_cmd("hyprctl kill"))
+hl.bind("ALT + F4",                    hl.dsp.window.close())
+
+-- Apps
+
+--Terminal
+hl.bind(mainMod .. " + RETURN",        hl.dsp.exec_cmd("kitty"))
+hl.bind(mainMod .. " + ALT + RETURN",  hl.dsp.exec_cmd("foot"))
+
+--File Manager
+hl.bind(mainMod .. " + F",             hl.dsp.exec_cmd("nautilus"))
+hl.bind(mainMod .. " + ALT + F",       hl.dsp.exec_cmd("thunar"))
+
+--Browser
+hl.bind(mainMod .. " + B",             hl.dsp.exec_cmd("zen-browser"))
+hl.bind(mainMod .. " + ALT + B",       hl.dsp.exec_cmd("helium-browser"))
+
+--Editor
+hl.bind(mainMod .. " + E",             hl.dsp.exec_cmd("code"))
+--hl.bind(mainMod .. " + ALT + E",       hl.dsp.exec_cmd(p.editor))
+
+--Note App
+hl.bind(mainMod .. " + O",             hl.dsp.exec_cmd("obsidian"))
+
+--Music Streaming
+hl.bind(mainMod .. " + S",             hl.dsp.exec_cmd("spotify"))
+
+-- Reload Apps Scripts
+hl.bind(mainMod .. " + SHIFT + R",     hl.dsp.exec_cmd(p.waybar))
+hl.bind(mainMod .. " + SHIFT + A",     hl.dsp.exec_cmd(p.swaync))
+
+-- Notification Center
+hl.bind(mainMod .. " + A",             hl.dsp.exec_cmd("swaync-client -t"))
+
+-- Rofi applaunch & meun
+hl.bind("ALT + SPACE",                 hl.dsp.exec_cmd(p.applauncher))
+hl.bind(mainMod .. " + ALT + SPACE",   hl.dsp.exec_cmd(p.menu))
+
+-- Theme Switcher
+hl.bind(mainMod .. " + SHIFT + T",     hl.dsp.exec_cmd(p.themeSwitcher))
+
+-- Look & Powermenu
+hl.bind(mainMod .. " + F4",            hl.dsp.exec_cmd(p.wlogout))
+hl.bind(mainMod .. " + L",             hl.dsp.exec_cmd(p.hyprlock))
+
+--Night Light
+hl.bind(mainMod .. " + F5",            hl.dsp.exec_cmd("~/.config/hypr/scripts/nightlight.sh"))
+
+-- Clipboard 
+hl.bind(mainMod .. " + V",             hl.dsp.exec_cmd(p.clipboard))
+hl.bind(mainMod .. " + SHIFT + V",     hl.dsp.exec_cmd("cliphist wipe")) --to clear clipboard
+
+-- Screenshots
+hl.bind(mainMod .. " + Print",         hl.dsp.exec_cmd("hyprshot -m output -m eDP-1 -o $HOME/Pictures/Screenshot"))
+hl.bind(mainMod .. " + SHIFT + Print", hl.dsp.exec_cmd("hyprshot -m region -o $HOME/Pictures/Screenshot"))
+
+-- Color Picker
+hl.bind(mainMod .. " + P",             hl.dsp.exec_cmd("hyprpicker -a -f hex"))
+
+-- Alt + Tab
+hl.bind("ALT + TAB",                   hl.dsp.exec_cmd("snappy-switcher next"))

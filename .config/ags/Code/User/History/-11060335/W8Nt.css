@@ -1,0 +1,61 @@
+@import "colors/colors.css";
+
+* {
+    font-family: SF Pro Display;
+}
+
+
+window {
+    font-size: 14pt;
+    color:  @fg; /* text */
+    background-color: alpha(@bg, 0.5); /* background */
+
+} 
+
+/* This targets the text inside the buttons */
+button {
+    text-shadow: none;
+    box-shadow: none;
+    /* Adjust text position if it overlaps the icon */
+    background-origin: content-box;
+    padding-bottom: 20px; 
+}
+
+button:focus {
+    box-shadow: none;
+    background-size : 20%;
+}
+
+button:hover {
+    background-size: 35%;
+    background-color: @blue;
+    color: transparent;
+    transition: all 0.3s cubic-bezier(.55, 0.0, .28, 1.682), box-shadow 0.5s ease-in;
+    margin: 5px;
+}
+
+
+#shutdown {
+    background-image: image(url("./icons/power.png"));
+}
+
+
+#logout {
+    background-image: image(url("./icons/logout.png"));
+}
+
+
+#reboot {
+    background-image: image(url("./icons/restart.png"));
+}
+
+
+#lock {
+    background-image: image(url("./icons/lock.png"));
+}
+
+
+#hibernate {
+    background-image: image(url("./icons/hibernate.png"));
+}
+

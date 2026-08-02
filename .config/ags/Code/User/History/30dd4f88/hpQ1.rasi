@@ -1,0 +1,135 @@
+/*****----- Configuration -----*****/
+configuration {
+    show-icons:                  true;
+    icon-theme:                  "hicolor";
+    display-drun:                "";
+    drun-display-format:         "{name}";
+    disable-history:             false;
+}
+
+/*****----- Global Properties -----*****/
+@import "~/.config/rofi/colors/colors.rasi"
+@import "~/.config/rofi/font/fonts.rasi"
+
+* {
+    background-color:            transparent;
+    text-color:                  @foreground;
+    margin:                      0px;
+    padding:                     0px;
+    spacing:                     0px;
+}
+
+/*****----- Main Window -----*****/
+window {
+    transparency:                "real";
+    location:                    center;
+    anchor:                      center;
+    width:                       820px;
+    border:                      1px solid;
+    border-radius:               16px;
+    border-color:                @background-alt;
+    background-color:            @background;
+    cursor:                      "default";
+}
+
+/*****----- Main Box -----*****/
+mainbox {
+    spacing:                     10px;
+    padding:                     14px;
+    background-color:            transparent;
+    children:                    [ "message", "inputbar", "listview" ];
+}
+
+/*****----- Title / Message -----*****/
+message {
+    padding:                     2px 0px 4px 0px;
+    background-color:            transparent;
+}
+
+textbox {
+    text-color:                  @background-alt;
+    background-color:            transparent;
+    horizontal-align:            0.5;
+    content:                     "Select Wallpaper";
+}
+
+/*****----- Inputbar -----*****/
+inputbar {
+    spacing:                     8px;
+    padding:                     8px 14px;
+    border:                      1px solid;
+    border-radius:               10px;
+    border-color:                @background-alt;
+    background-color:            @background;
+    children:                    [ "prompt", "entry" ];
+}
+
+prompt {
+    background-color:            transparent;
+    text-color:                  @selected;
+}
+
+entry {
+    background-color:            transparent;
+    text-color:                  @foreground;
+    cursor:                      text;
+    placeholder:                 "Search wallpapers...";
+    placeholder-color:           @background-alt;
+}
+
+/*****----- Listview -----*****/
+listview {
+    columns:                     4;
+    lines:                       1;
+    cycle:                       true;
+    dynamic:                     true;
+    scrollbar:                   false;
+    layout:                      vertical;
+    fixed-height:                false;
+    fixed-columns:               false;
+    spacing:                     10px;
+    padding:                     0px;
+    border:                      0px solid;
+    background-color:            transparent;
+}
+
+/*****----- Elements -----*****/
+element {
+    orientation:                 vertical;
+    padding:                     0px 0px 6px 0px;
+    border-radius:               10px;
+    background-color:            @background;
+    border:                      1px solid;
+    border-color:                @background-alt;
+    cursor:                      pointer;
+}
+
+element normal.normal,
+element alternate.normal {
+    background-color:            @background;
+    border-color:                @background-alt;
+}
+
+element selected.normal {
+    background-color:            @background;
+    border:                      2px solid;
+    border-color:                @selected;
+}
+
+element-icon {
+    size:                        10px 160px;
+    border-radius:               10px 10px 0px 0px;
+    background-color:            transparent;
+    cursor:                      inherit;
+}
+
+element-text {
+    padding:                     5px 4px 0px 4px;
+    horizontal-align:            0.5;
+    text-color:                  @background-alt;
+    background-color:            transparent;
+}
+
+element selected.normal element-text {
+    text-color:                  @foreground;
+}

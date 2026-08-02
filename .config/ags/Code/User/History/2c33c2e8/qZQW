@@ -1,0 +1,49 @@
+{
+  "layer": "top",
+  "position": "top",
+
+  "include": ["~/.config/waybar/modules/*.jsonc"],
+
+  "modules-left": [
+    "group/menu",
+    "custom/phone",
+    "custom/media"
+  ],
+
+  "modules-center": [
+    "clock",
+    "hyprland/workspaces"
+  ],
+
+  "modules-right": [
+   
+    "group/volume",
+    "network",
+    "custom/notification"
+  ],
+
+"group/menu": {
+    "orientation": "inherit",
+    "drawer": {
+      "transition-duration": 3000,
+      "transition-right-to-left": true
+    },
+    "modules": [
+      "custom/appdrawer", 
+      "custom/powermenu"
+    ]
+  },
+
+ "group/volume": {
+   "orientation": "horizontal",
+   "drawer": {
+       "transition-duration": 3000,
+       "transition-left-to-right": false,
+       "children-class": "not-pulesaudio",
+       "click-to-reveal": true
+   },
+   "modules" : [
+       "pulseaudio", "pulseaudio/slider"
+   ]
+  }
+}

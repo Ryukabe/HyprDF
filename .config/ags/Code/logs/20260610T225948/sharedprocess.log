@@ -1,0 +1,7 @@
+2026-06-10 23:00:14.686 [info] Getting Manifest... eamodio.gitlens
+2026-06-10 23:00:16.177 [info] Installing extension: eamodio.gitlens {"productVersion":{"version":"1.120.0","date":"2026-05-12T20:17:22Z"},"pinned":false,"operation":3,"isApplicationScoped":false,"profileLocation":{"$mid":1,"external":"vscode-userdata:/home/shiham/.vscode/extensions/extensions.json","path":"/home/shiham/.vscode/extensions/extensions.json","scheme":"vscode-userdata"},"isBuiltin":false}
+2026-06-10 23:00:28.694 [info] Extension signature verification result for eamodio.gitlens: Success. Internal Code: 0. Executed: true. Duration: 6341ms.
+2026-06-10 23:00:31.414 [info] Extracted extension to file:///home/shiham/.vscode/extensions/eamodio.gitlens-18.1.0: eamodio.gitlens
+2026-06-10 23:00:31.752 [info] Renamed to /home/shiham/.vscode/extensions/eamodio.gitlens-18.1.0
+2026-06-10 23:00:32.398 [info] Marked extension as removed eamodio.gitlens-18.0.0
+2026-06-10 23:00:32.679 [info] Extension installed successfully: eamodio.gitlens vscode-userdata:/home/shiham/.vscode/extensions/extensions.json

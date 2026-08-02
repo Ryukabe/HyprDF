@@ -1,0 +1,22 @@
+2026-06-11 20:47:13.947 [warning] Creation of workbench contribution 'workbench.contrib.configurationDefaultOverridesContribution' took 32ms.
+2026-06-11 20:47:17.740 [info] Started local extension host with pid 74521.
+2026-06-11 20:47:20.081 [info] [AccountPolicyGate] apply: state=inactive, reason=undefined, isRestricted=false
+2026-06-11 20:47:25.583 [info] [AccountPolicyGate] apply: state=inactive, reason=undefined, isRestricted=false
+2026-06-11 20:47:30.179 [info] Extension host (LocalProcess pid: 74521) is unresponsive.
+2026-06-11 20:47:30.450 [warning] Creation of workbench contribution 'terminal.chatAgentTools' took 102ms.
+2026-06-11 20:47:36.724 [info] [perf] Render performance baseline is 511ms
+2026-06-11 20:47:36.779 [error] [Extension Host] (node:74521) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `exe --trace-deprecation ...` to show where the warning was created)
+2026-06-11 20:47:36.782 [error] [Extension Host] (node:74521) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+2026-06-11 20:47:37.051 [info] Extension host (LocalProcess pid: 74521) is responsive.
+2026-06-11 20:47:38.094 [info] Settings Sync: Account status changed from uninitialized to available
+2026-06-11 20:47:45.805 [error] Canceled: Canceled
+    at ly (vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/workbench/workbench.desktop.main.js:383:1431)
+    at vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/workbench/workbench.desktop.main.js:4970:47396
+    at Array.forEach (<anonymous>)
+    at a.dispose (vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/workbench/workbench.desktop.main.js:4970:47304)
+    at W1.dispose (vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/workbench/workbench.desktop.main.js:4970:60603)
+    at Zqi.dispose (vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/workbench/workbench.desktop.main.js:4977:10470)
+    at Jqi.stopAllInReverse (vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/workbench/workbench.desktop.main.js:4977:9610)
+    at async agt._doStopExtensionHosts (vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/workbench/workbench.desktop.main.js:4976:22375)
+2026-06-11 20:47:46.549 [warning] [lifecycle] onWillShutdown is taking a long time, pending operations: join.chatSessionStore, join.chatEditingSession

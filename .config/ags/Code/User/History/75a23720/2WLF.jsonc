@@ -1,0 +1,13 @@
+{
+  "clock": {
+    "timezone": [
+      "ETC/UTC",
+      "Asia/Dhaka"
+    ],
+    "interval": 60,
+    "format": "{:%I:%M %p}",
+    "max-length": 25,
+    "tooltip": true,
+    "tooltip-format": "{:%d-%m-%Y}"
+  }
+}

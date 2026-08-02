@@ -1,0 +1,73 @@
+// OneDark Pro Night Color Palette
+
+// Red
+$red-light: #e06c75;
+$red-dark: #be5046;
+
+// Pink
+$pink-light: #DE8C92;
+$pink-dark: #ff75a0;
+
+// Purple
+$purple-light: #de98fd;
+$purple-dark: #c882e7;
+
+// Blue
+$blue-light: #81A1C1;
+$blue-dark: #61afef;
+
+// Teal
+$teal-light: #519ABA;
+$teal-dark: #45839E;
+
+// Green
+$green-light: #7eca9c;
+$green-dark: #98c379;
+
+// Yellow
+$yellow-light: #EBCB8B;
+$yellow-dark: #e7c787;
+
+// Orange
+$orange-light: #fca2aa;
+$orange-dark: #D68A90;
+
+// Grey (Indigo-slate tinted — interpolated from #F2F3F8 to #22242E)
+// Tinted toward OneDark's blue-indigo mix ($blue-dark: #61afef, $black: #1e222a)
+$grey-050: #F2F3F8;
+$grey-100: #E4E6F1;
+$grey-150: #D6D8EA;
+$grey-200: #C8CBE3;
+$grey-250: #BABDDB;
+$grey-300: #ACAFD4;
+$grey-350: #9FA2CD;
+$grey-400: #9195C5;
+$grey-450: #8388BE;
+$grey-500: #767BB5;
+$grey-550: #6A6FA6;
+$grey-600: #5E6397;
+$grey-650: #525787;
+$grey-700: #474B78;
+$grey-750: #3C4068;
+$grey-800: #313459;
+$grey-850: #272A49;
+$grey-900: #1C1F3A;
+$grey-950: #12142A; // near-black indigo-dark
+
+// White
+$white: #abb2bf;
+
+// Black
+$black: #1e222a;
+
+// Button
+$button-close: #e06c75;
+$button-max: #98c379;
+$button-min: #e7c787;
+
+// Link
+$links: #a3b8ef;
+
+// Theme
+$default-light: $blue-light;
+$default-dark: $blue-dark;

@@ -1,0 +1,42 @@
+2026-06-11 20:47:50.178 [info] [GitExtensionServiceImpl] Initializing Git extension service.
+2026-06-11 20:47:50.178 [info] Using the Electron fetcher.
+2026-06-11 20:47:50.178 [info] [GitExtensionServiceImpl] Successfully activated the vscode.git extension.
+2026-06-11 20:47:50.178 [info] [GitExtensionServiceImpl] Enablement state of the vscode.git extension: true.
+2026-06-11 20:47:50.178 [info] [GitExtensionServiceImpl] Successfully registered Git commit message provider.
+2026-06-11 20:47:50.749 [info] ConversationFeature: Waiting for copilot token to activate conversation feature
+2026-06-11 20:47:51.113 [error] [CopilotCLIAgents] Failed to fetch custom agents: Canceled: Canceled
+2026-06-11 20:47:51.113 [error] [DIFF] Failed to update hasActiveDiff context: Canceled: Canceled: [CopilotCLI]
+2026-06-11 20:47:51.113 [error] [DIFF] Failed to update hasActiveDiff context: Canceled: Canceled: [CopilotCLI]
+2026-06-11 20:47:51.128 [error] Canceled: Canceled
+	at Zs (file:///opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:383:1546)
+	at file:///opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:407:153285
+	at Array.forEach (<anonymous>)
+	at i.dispose (file:///opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:407:153193)
+	at mP.terminate (file:///opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:506:12328)
+	at i.terminate (file:///opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:508:1072)
+	at Gs (file:///opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:805:11700)
+	at lp.value (file:///opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:805:9847)
+	at E._deliver (file:///opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:403:3244)
+	at E.fire (file:///opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:403:3562)
+	at ss.fire (file:///opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:405:8437)
+	at MessagePortMain.<anonymous> (file:///opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:805:8082)
+	at MessagePortMain.emit (node:events:519:28)
+	at MessagePortMain._internalPort.emit (node:electron/js2c/utility_init:2:2959): Failed to get copilot token
+2026-06-11 20:47:51.128 [error] GitHub Copilot could not connect to server. Extension activation failed: "Canceled"
+2026-06-11 20:47:51.128 [info] [context keys] Setting context key: github.copilot.offline
+2026-06-11 20:47:51.128 [warning] [LanguageModelAccess] LanguageModel/Embeddings are not available without auth token
+2026-06-11 20:47:51.128 [error] Canceled: Canceled
+	at Zs (file:///opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:383:1546)
+	at file:///opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:407:153285
+	at Array.forEach (<anonymous>)
+	at i.dispose (file:///opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:407:153193)
+	at mP.terminate (file:///opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:506:12328)
+	at i.terminate (file:///opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:508:1072)
+	at Gs (file:///opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:805:11700)
+	at lp.value (file:///opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:805:9847)
+	at E._deliver (file:///opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:403:3244)
+	at E.fire (file:///opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:403:3562)
+	at ss.fire (file:///opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:405:8437)
+	at MessagePortMain.<anonymous> (file:///opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:805:8082)
+	at MessagePortMain.emit (node:events:519:28)
+	at MessagePortMain._internalPort.emit (node:electron/js2c/utility_init:2:2959)

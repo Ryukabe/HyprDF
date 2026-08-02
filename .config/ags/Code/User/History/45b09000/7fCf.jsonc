@@ -1,0 +1,21 @@
+{
+ "network": {
+    "interface": "wlan0",
+    "format": "{ifname}",
+    "format-wifi": "{icon} {essid}",
+    "format-icons": [
+      "󰤯", //0
+      "󰤟", //25
+      "󰤢", //50
+      "󰤥", //75
+      "󰤨"  //100
+    ],
+    "format-ethernet": "{ipaddr}/{cidr} 󰊗",
+    "format-disconnected": "󰤮", //An empty format will hide the module.
+    "tooltip-format": "{ifname} via {gwaddr} 󰊗",
+    "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
+    "tooltip-format-ethernet": "{ifname} ",
+    "tooltip-format-disconnected": "Disconnected",
+    "max-length": 50
+  }
+}

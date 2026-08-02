@@ -1,0 +1,7 @@
+2026-06-10 22:59:52.415 [info] StorageMainService: creating application shared storage
+2026-06-10 22:59:52.415 [info] [shared storage] Creating shared storage database at '/home/shiham/.vscode-shared/sharedStorage/state.vscdb' (wasCreated: false)
+2026-06-10 22:59:52.415 [info] [shared storage] Initializing fallback application storage (path: /home/shiham/.config/Code/User/globalStorage/state.vscdb)
+2026-06-10 22:59:53.250 [info] [shared storage] Fallback application storage initialized with 159 items
+2026-06-10 22:59:53.533 [info] update#setState idle
+2026-06-10 23:00:23.538 [info] update#setState checking for updates
+2026-06-10 23:00:23.817 [info] update#setState available for download

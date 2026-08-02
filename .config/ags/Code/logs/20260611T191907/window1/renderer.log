@@ -1,0 +1,54 @@
+2026-06-11 19:19:20.706 [warning] Creation of workbench contribution 'workbench.contrib.preferencesActions' took 29ms.
+2026-06-11 19:19:20.929 [warning] Creation of workbench contribution 'workbench.contrib.chatSetup' took 24ms.
+2026-06-11 19:19:20.963 [warning] Creation of workbench contribution 'chat.usagesTool' took 28ms.
+2026-06-11 19:19:21.089 [warning] Creation of workbench contribution 'workbench.contrib.configurationDefaultOverridesContribution' took 58ms.
+2026-06-11 19:19:22.460 [info] Started local extension host with pid 5469.
+2026-06-11 19:19:23.978 [info] [AccountPolicyGate] apply: state=inactive, reason=undefined, isRestricted=false
+2026-06-11 19:19:28.983 [info] [AccountPolicyGate] apply: state=inactive, reason=undefined, isRestricted=false
+2026-06-11 19:19:45.745 [info] Extension host (LocalProcess pid: 5469) is unresponsive.
+2026-06-11 19:19:50.447 [info] [perf] Render performance baseline is 254ms
+2026-06-11 19:19:57.252 [info] Extension host (LocalProcess pid: 5469) is responsive.
+2026-06-11 19:20:05.837 [error] [Extension Host] (node:5469) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `exe --trace-deprecation ...` to show where the warning was created)
+2026-06-11 19:20:05.839 [error] [Extension Host] (node:5469) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+2026-06-11 19:20:12.013 [info] Settings Sync: Account status changed from uninitialized to available
+2026-06-11 20:06:06.250 [warning] Attempted to report in-progress status for unknown chat session type 'copilot-cloud-agent'
+2026-06-11 20:06:06.287 [warning] Attempted to report in-progress status for unknown chat session type 'copilotcli'
+2026-06-11 20:06:06.289 [warning] Attempted to report in-progress status for unknown chat session type 'claude-code'
+2026-06-11 20:06:13.211 [warning] Creation of workbench contribution 'workbench.contrib.preferencesActions' took 35ms.
+2026-06-11 20:06:13.362 [warning] Creation of workbench contribution 'workbench.contrib.chatSetup' took 32ms.
+2026-06-11 20:06:13.446 [warning] Creation of workbench contribution 'workbench.contrib.userDataProfiles' took 28ms.
+2026-06-11 20:06:13.497 [warning] Creation of workbench contribution 'workbench.contrib.configurationDefaultOverridesContribution' took 42ms.
+2026-06-11 20:06:15.112 [info] Started local extension host with pid 41595.
+2026-06-11 20:06:19.054 [info] [AccountPolicyGate] apply: state=inactive, reason=undefined, isRestricted=false
+2026-06-11 20:06:24.308 [info] [AccountPolicyGate] apply: state=inactive, reason=undefined, isRestricted=false
+2026-06-11 20:06:33.390 [info] Extension host (LocalProcess pid: 41595) is unresponsive.
+2026-06-11 20:06:41.965 [error] [Extension Host] (node:41595) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `exe --trace-deprecation ...` to show where the warning was created)
+2026-06-11 20:06:41.979 [error] [Extension Host] (node:41595) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+2026-06-11 20:06:47.040 [warning] Creation of workbench contribution 'workbench.contrib.configurationMigration' took 104ms.
+2026-06-11 20:06:49.317 [info] [perf] Render performance baseline is 791ms
+2026-06-11 20:06:49.981 [info] Extension host (LocalProcess pid: 41595) is responsive.
+2026-06-11 20:06:50.686 [info] Settings Sync: Account status changed from uninitialized to available
+2026-06-11 20:07:07.507 [info] Extension host (LocalProcess pid: 41595) is unresponsive.
+2026-06-11 20:07:07.737 [info] Extension host (LocalProcess pid: 41595) is responsive.
+2026-06-11 20:07:07.749 [info] UNRESPONSIVE extension host: received responsive event and cancelling profiling session
+2026-06-11 20:07:14.053 [info] Extension host (LocalProcess pid: 41595) is unresponsive.
+2026-06-11 20:07:16.766 [info] UNRESPONSIVE extension host: starting to profile NOW
+2026-06-11 20:07:17.127 [info] Extension host (LocalProcess pid: 41595) is responsive.
+2026-06-11 20:07:23.508 [info] Extension host (LocalProcess pid: 41595) is unresponsive.
+2026-06-11 20:07:25.342 [info] UNRESPONSIVE extension host: starting to profile NOW
+2026-06-11 20:07:29.662 [info] Extension host (LocalProcess pid: 41595) is responsive.
+2026-06-11 20:07:29.667 [info] UNRESPONSIVE extension host: received responsive event and cancelling profiling session
+2026-06-11 20:07:35.629 [info] Extension host (LocalProcess pid: 41595) is unresponsive.
+2026-06-11 20:07:39.379 [info] UNRESPONSIVE extension host: starting to profile NOW
+2026-06-11 20:07:42.389 [info] Extension host (LocalProcess pid: 41595) is responsive.
+2026-06-11 20:07:42.392 [info] UNRESPONSIVE extension host: received responsive event and cancelling profiling session
+2026-06-11 20:07:50.230 [info] Extension host (LocalProcess pid: 41595) is unresponsive.
+2026-06-11 20:07:53.278 [info] UNRESPONSIVE extension host: starting to profile NOW
+2026-06-11 20:07:58.753 [info] Extension host (LocalProcess pid: 41595) is responsive.
+2026-06-11 20:07:58.757 [info] UNRESPONSIVE extension host: received responsive event and cancelling profiling session
+2026-06-11 20:44:23.129 [warning] Attempted to report in-progress status for unknown chat session type 'copilot-cloud-agent'
+2026-06-11 20:44:23.151 [warning] Attempted to report in-progress status for unknown chat session type 'copilotcli'
+2026-06-11 20:44:23.153 [warning] Attempted to report in-progress status for unknown chat session type 'claude-code'
+2026-06-11 20:44:24.056 [warning] [lifecycle] onWillShutdown is taking a long time, pending operations: join.closeStorage

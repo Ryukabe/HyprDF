@@ -1,0 +1,190 @@
+@import "colors/colors.css";
+
+* {
+    all: unset;
+    border: none;
+
+    font-family:  "SF Pro Display", "JetBrainsMono Nerd Font Propo";
+    font-weight: bold;
+    font-size: 12px;
+    min-height:0px;
+    padding: 0px;
+    margin: 0px;
+
+}
+
+window#waybar {
+ background: transparent;
+}
+
+tooltip {
+   background-color: @bg0;
+   margin: 10px;
+   padding: 10px;
+   border-radius: 99px;
+}
+
+tooltip label {
+    color:  @fg;
+    padding: 6px;
+}
+
+/* workspace */
+#workspaces {
+    background-color: @bg0;
+    padding: 5px 3px;
+    margin: 5px 0 0 6px;
+    border-radius: 99px;
+    border: 0px solid @bg1;
+    color:@fg;
+
+}
+
+#workspaces button {
+    padding: 1px 6px;
+    margin: 0px 5px;
+    border-radius: 99px;
+    transition: all 300ms ease-in-out;
+}
+
+#workspaces button.empty {
+    color: @gray0;
+}
+
+#workspaces button.active {
+    color: @bg0;
+    background-color: @accent;
+    min-width: 20px;
+    transition: all 300ms ease-in-out;
+    font-weight: 700;
+}
+
+#workspaces button.hover {
+    color: @bg0;
+    background-color: @purple;
+    border-radius: 16px;
+    min-width: 20px;
+    background-size: 400% 400%;
+}
+
+#workspaces button.urgent {
+    color: @bg0;
+    background-color: @red;
+    border-radius: 16px;
+    min-width: 50px;
+    background-size: 400% 400%;
+    transition: all 0.3s ease-in-out;
+}
+#custom-powermenu,
+#custom-appdrawer,
+#custom-media,
+#custom-phone, 
+#pulseaudio,
+#network,
+#clock,
+#custom-notification {
+    background-color: @bg0;
+    padding: 0px 15px 0px 15px;
+    margin: 5px 0 0 6px;
+    border-radius: 50px;
+    border: 0px solid @bg1;
+}
+
+#pulseaudio-slider {
+    border-radius: 50px;
+    margin:5px 0px 0px 6px;
+}
+#pulseaudio-slider slider {
+    background-color: @accent;
+    border-radius: 2px;
+    min-height: 23px;
+    min-width: 10px;
+    transition: all .2s ease;
+}
+/*#pulseaudio-slider slider:hover {
+    background-color: @accent;
+    border-radius: 50%;
+    min-height: 16px;
+    min-width: 16px;
+    margin: -6px 0;
+}*/
+#pulseaudio-slider trough {
+    min-height:23px;
+    min-width: 100px;
+    border-radius: 50px;
+    background: @bg3;
+}
+#pulseaudio-slider highlight {
+
+    background: @fg;
+}
+#battery {
+    background-color: @green;
+    padding: 0px 15px 0px 15px;
+    margin: 5px 0 0 6px;
+    border-radius: 99px;
+    color: @bg1;
+    letter-spacing: -1px;
+}
+
+#battery.warning {
+    background-color: @orange;
+}
+
+#battery.critical {
+    background-color: @red;
+}
+
+#custom-media {
+    color: @green;
+}
+
+#clock {
+    color: @blue;
+}
+
+#custom-notification {
+    color: @fg;
+    margin: 5px 5px 0 6px;
+}
+
+#pulseaudio {
+    color: @yellow;
+}
+
+#network {
+    color: @purple;
+}
+
+#custom-phone.connected {
+    color: @aqua; 
+}
+
+#custom-phone.disconnected {
+    color: @red; 
+}
+
+#custom-appdrawer {
+    color: @fg;
+}
+
+/* Sliders */
+
+#slider {
+    opacity: 0;
+    box-shadow: none;
+}
+
+#trough {
+    min-width: 50px;
+    min-height: 5px;
+    border-radius: 8px;
+    background: @inactive;
+}
+
+#trough highlight {
+    border-radius: 8px;
+    background-color: @fg;
+    background-image: none;
+}
+

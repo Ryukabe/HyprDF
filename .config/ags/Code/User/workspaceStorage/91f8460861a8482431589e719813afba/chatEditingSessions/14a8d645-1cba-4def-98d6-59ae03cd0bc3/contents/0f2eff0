@@ -1,0 +1,13 @@
+[colors]
+background = #282a36ff
+card_bg = #44475aff
+card_selected = #6272a4ff
+card_hover = #565c75ff
+text_color = #f8f8f2ff
+subtext_color = #f1fa8cff
+border_color = #50fa7bff
+bundle_bg = #565c75ff
+badge_bg = #50fa7bff
+badge_text_color = #282a36ff
+border_width = 2
+corner_radius = 15

@@ -1,0 +1,62 @@
+{
+  "layer": "top",
+  "position": "top",
+  "include": ["~/.config/waybar/modules/*.jsonc"],
+
+  "modules-left": [
+    "custom/applauncher", 
+    "custom/phone",
+    "custom/media"
+  ],
+
+  "modules-center": [
+    "clock",
+    "hyprland/workspaces"
+  ],
+
+  "modules-right": [
+    "pulseaudio",
+    "network",
+    "custom/notification"
+  ],
+
+  //Custom media player module 
+
+
+  // SwayNC notification module
+  "custom/notification": {
+    "tooltip": true,
+    "format": "{0} {icon}",
+    //"format": "<span size='16pt'>{icon}</span>",
+    "format-icons": {
+      "notification": "󱅫",
+      "none": "󰂜",
+      "dnd-notification": "󰂠",
+      "dnd-none": "󰪓",
+      "inhibited-notification": "󰂛",
+      "inhibited-none": "󰪑",
+      "dnd-inhibited-notification": "󰂛",
+      "dnd-inhibited-none": "󰪑"
+    },
+    "return-type": "json",
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "escape": true
+  },
+
+  //Custom phone status module
+ "custom/phone": {
+    "format": "{icon} {text}",
+    "format-icons": {
+      "connected": "",
+      "disconnected": "" 
+    },
+    "return-type": "json",
+    "exec": "~/.config/waybar/scripts/phone_status.py", 
+    "on-click": "kdeconnect",
+    "interval": 60,
+    "tooltip": false
+ }
+}

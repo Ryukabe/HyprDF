@@ -1,0 +1,72 @@
+// OneDark Pro Night Color Palette
+
+// Red
+$red-light: #e06c75; // Lua red
+$red-dark: #be5046;  // Lua base0F
+
+// Pink
+$pink-light: #DE8C92; // Lua baby_pink
+$pink-dark: #ff75a0;  // Lua pink
+
+// Purple
+$purple-light: #de98fd; // Lua purple
+$purple-dark: #c882e7;  // Lua dark_purple
+
+// Blue
+$blue-light: #81A1C1; // Lua nord_blue
+$blue-dark: #61afef;  // Lua blue
+
+// Teal
+$teal-light: #519ABA; // Lua teal
+$teal-dark: #45839E;
+
+// Green
+$green-light: #7eca9c; // Lua vibrant_green
+$green-dark: #98c379;  // Lua green
+
+// Yellow
+$yellow-light: #EBCB8B; // Lua sun
+$yellow-dark: #e7c787;  // Lua yellow
+
+// Orange
+$orange-light: #fca2aa; // Lua orange
+$orange-dark: #D68A90;
+
+// Grey (Interpolated from #FAFAFA down to #282C34)
+$grey-050: #FAFAFA;
+$grey-100: #EEEFEF;
+$grey-150: #E3E3E4;
+$grey-200: #D7D8D9;
+$grey-250: #CBCCCE;
+$grey-300: #C0C1C3;
+$grey-350: #B4B5B8;
+$grey-400: #A8AAAD;
+$grey-450: #9D9EA2;
+$grey-500: #919397;
+$grey-550: #85888C;
+$grey-600: #7A7C81;
+$grey-650: #6E7176;
+$grey-700: #62656B;
+$grey-750: #575A60;
+$grey-800: #4B4E55;
+$grey-850: #3F434A;
+$grey-900: #34373F;
+$grey-950: #282C34; // Set to OneDark real bg
+
+// White
+$white: #abb2bf; // Lua white
+
+// Black
+$black: #1e222a; // Lua black
+
+// Button
+$button-close: #e06c75;
+$button-max: #98c379;
+$button-min: #e7c787;
+
+// Link
+$links: #a3b8ef; // Lua cyan
+
+// Theme
+$default-light: $blue-light;
+$default-dark: $blue-dark;

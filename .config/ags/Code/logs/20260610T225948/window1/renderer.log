@@ -1,0 +1,14 @@
+2026-06-10 22:59:56.670 [warning] Creation of workbench contribution 'workbench.contrib.preferencesActions' took 32ms.
+2026-06-10 22:59:56.985 [warning] Creation of workbench contribution 'workbench.contrib.configurationDefaultOverridesContribution' took 29ms.
+2026-06-10 22:59:58.493 [info] Started local extension host with pid 309833.
+2026-06-10 22:59:59.831 [info] [AccountPolicyGate] apply: state=inactive, reason=undefined, isRestricted=false
+2026-06-10 23:00:05.556 [info] [AccountPolicyGate] apply: state=inactive, reason=undefined, isRestricted=false
+2026-06-10 23:00:10.045 [info] Extension host (LocalProcess pid: 309833) is unresponsive.
+2026-06-10 23:00:10.966 [warning] Creation of workbench contribution 'workbench.contrib.configurationMigration' took 121ms.
+2026-06-10 23:00:13.229 [info] [perf] Render performance baseline is 235ms
+2026-06-10 23:00:13.619 [info] Auto updating outdated extensions. eamodio.gitlens
+2026-06-10 23:00:16.380 [error] [Extension Host] (node:309833) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `exe --trace-deprecation ...` to show where the warning was created)
+2026-06-10 23:00:16.392 [error] [Extension Host] (node:309833) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+2026-06-10 23:00:16.409 [info] Extension host (LocalProcess pid: 309833) is responsive.
+2026-06-10 23:00:18.114 [info] Settings Sync: Account status changed from uninitialized to available

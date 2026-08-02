@@ -1,0 +1,74 @@
+@import "colors/colors.css";
+
+/* --- 1. Global/Window Setup --- */
+* {
+    font-family: "SF Pro Display", sans-serif;
+    /* Reset margins/padding for predictability */
+    margin: 0;
+    padding: 0;
+}
+
+window {
+    /* Set the base font size for all labels */
+    font-size: 14pt;
+    /* Base text color from your variable */
+    color: @fg;
+    /* Use the dark background color, fully opaque to match the photo */
+    background-color: @bg; 
+} 
+
+button {
+    color: @fg;
+    background-repeat: no-repeat;
+    background-position: center 30%;
+    background-size: 20%; /* Reduced size to prevent overlap */
+    background-color: transparent;
+    
+    border-radius: 20px;
+    border: 2px solid transparent; /* Prepare for the border look in your pic */
+    
+    transition: all 0.2s ease-in-out;
+    
+    /* These dimensions ensure 5 buttons fit on one row */
+    margin: 10px;
+    padding: 10px;
+    min-width: 150px; 
+    m
+
+button:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 2px solid @blue; /* Adds that thin border seen in your latest image */
+}
+
+button:active {
+    background-color: rgba(255, 255, 255, 0.1); /* The subtle gray-blue box from the picture */
+    /* Icon and text colors are preserved from the idle state */
+}
+
+/* --- 4. Focus State (Keyboard Navigation) --- */
+button:focus {
+    outline: none;
+    /* Add a subtle indicator for keyboard focus */
+    box-shadow: 0 0 0 2px @blue; 
+}
+
+/* --- 5. Icon Definitions (Unchanged IDs from your original) --- */
+#shutdown {
+    background-image: image(url("./icons/power.png"));
+}
+
+#logout {
+    background-image: image(url("./icons/logout.png"));
+}
+
+#reboot {
+    background-image: image(url("./icons/restart.png"));
+}
+
+#lock {
+    background-image: image(url("./icons/lock.png"));
+}
+
+#hibernate {
+    background-image: image(url("./icons/hibernate.png"));
+}

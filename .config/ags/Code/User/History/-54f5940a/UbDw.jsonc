@@ -1,0 +1,7 @@
+{
+    "custom/exit": {
+    "format": "",
+    "on-click": "qs ipc call power toggle",
+    "tooltip-format": "Open Power Menu"
+  }
+}  

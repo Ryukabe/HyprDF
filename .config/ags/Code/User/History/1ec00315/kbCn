@@ -1,0 +1,145 @@
+{
+ "layer": "top",
+ "position": "top",
+
+ "reload_style_on_change": true,
+ "modules-left": ["custom/appdrawer","group/phonei","tray"],
+ "modules-center": ["hyprland/workspaces"],
+ "modules-right": ["group/expand","network","clock","tray"],
+
+   "hyprland/workspaces": {
+    "format": "{icon}",
+    "format-icons": {
+        "active": "",
+        "default": "",
+        "empty": ""
+    },
+    "persistent-workspaces": { "*": 5 }
+    },
+
+    "clock": {
+      "timezone": ["ETC/UTC", "Asia/Dhaka"],
+      "interval": 60,
+      "format": "{:%I:%M %p}",
+      "max-length": 25,
+      "tooltip": true,
+      "on-click": "swaync-client -t -sw"
+    },
+
+    "custom/appdrawer": {
+        "format" : "󰣇",
+        "tooltip": false,
+        "tooltip-format": "App Drawer",
+        "on-click": "pkill rofi || rofi -show drun -theme /home/shiham/.config/rofi/launchpad.rasi -name appdrawer"
+    },
+
+    "custom/powermenu": {
+        "format": "",
+        "tooltip": false,
+        "on-click": "~/.config/wlogout/scripts/wlogout.sh",
+        "tooltip-format": "Open Power Menu"
+    },
+
+    "custom/phone": {
+     "format": "{icon} {text}",
+     "return-type": "json",
+     "exec": "~/.config/waybar/scripts/phone_status.py", 
+     "on-click": "kdeconnect",
+     "interval": 60,
+     "tooltip": false
+    },
+
+    "network": {
+       "interface": "wlan0",
+       "format": "{ifname}",
+       "format-wifi": "{icon}",
+        "format-icons": [
+          "󰤯",
+          "󰤟",
+          "󰤢",
+          "󰤥",
+          "󰤨"
+        ],
+       "format-ethernet": "{ipaddr}/{cidr} 󰊗",
+       "format-disconnected": "󰤮",
+       "tooltip-format": "{ifname} via {gwaddr} 󰊗",
+       "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
+       "tooltip-format-ethernet": "{ifname} ",
+       "tooltip-format-disconnected": "Disconnected",
+       "max-length": 50
+     },
+    
+   "pulseaudio": {
+    "format": "{volume} {icon}",
+    "format-bluetooth": "{volume}% {icon} ",
+    "format-muted": "󰝟",
+    "format-icons": {
+      "headphone": "",
+      "hands-free": "",
+      "headset": "",
+      "phone": "",
+      "phone-muted": "",
+      "portable": "",
+      "car": "",
+      "default": [
+        "",
+        "",
+        "󰕾",
+        ""
+      ]
+    },
+    "scroll-step": 1,
+    "on-click-right": "pavucontrol",
+    "ignored-sinks": [
+      "Easy Effects Sink"
+    ]
+    },
+
+    "pulseaudio/slider": {
+        "min": 0,
+        "max": 100,
+        "orientation": "horizontal"
+    },
+
+    "custom/phonei": {
+        "format": "",
+        "tooltip": false
+    },
+    "custom/expand": {
+        "format": "",
+        "tooltip": false
+    },
+    "custom/endpoint":{
+        "format": "|",
+        "tooltip": false
+    },
+
+   "group/expand": {
+    "orientation": "horizontal",
+    "drawer": {
+        "transition-duration": 500,
+        "children-class": "not-pulseaudio",
+        "transition-left-to-right": false,
+        "click-to-reveal": true
+    },
+    "modules": [
+        "pulseaudio/slider",
+        "pulseaudio"
+    ]
+    },
+
+    "group/phonei": {
+    "orientation": "horizontal",
+    "drawer": {
+        "transition-duration": 600,
+        "transition-left-to-right": true,
+        "click-to-reveal": true
+    },
+    "modules": ["custom/phonei","custom/phone"]
+    },
+
+    "tray": {
+        "icon-size": 14,
+        "spacing": 10
+    }
+}

@@ -1,0 +1,31 @@
+# Shell history & Bash profiles
+.bash_history
+.bash_logout
+.bash_profile
+.bashrc
+.zsh_history
+.zsh_hisotry
+
+# Large cache & system directories
+.cache/
+.local/
+Pictures/
+
+# Tool configurations & installed plugins
+.copilot/
+.gnupg/
+.oh-my-zsh/
+.vscode/
+.vscode-shared/
+powerlevel10k/
+zsh-syntax-highlighting/
+.gitconfig
+
+# Ignore folder that are not relevant to the setup
+.config/zen/
+.config/Code/
+.config/DIPS-wal
+.config/yay
+.config/mimeapps.list
+.config/gh/
+

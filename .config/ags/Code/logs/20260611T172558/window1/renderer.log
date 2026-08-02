@@ -1,0 +1,20 @@
+2026-06-11 17:26:10.881 [warning] Creation of workbench contribution 'workbench.contrib.preferencesActions' took 26ms.
+2026-06-11 17:26:11.052 [warning] Creation of workbench contribution 'workbench.contrib.remoteStatusIndicator' took 34ms.
+2026-06-11 17:26:11.152 [warning] Creation of workbench contribution 'workbench.contrib.exploreAgentDefaultModel' took 28ms.
+2026-06-11 17:26:11.202 [warning] Creation of workbench contribution 'workbench.contrib.chatSetup' took 25ms.
+2026-06-11 17:26:11.303 [warning] Creation of workbench contribution 'workbench.contrib.userDataProfiles' took 22ms.
+2026-06-11 17:26:11.382 [warning] Creation of workbench contribution 'workbench.contrib.configurationDefaultOverridesContribution' took 60ms.
+2026-06-11 17:26:13.553 [info] Started local extension host with pid 3358.
+2026-06-11 17:26:15.527 [info] [AccountPolicyGate] apply: state=inactive, reason=undefined, isRestricted=false
+2026-06-11 17:26:20.530 [info] [AccountPolicyGate] apply: state=inactive, reason=undefined, isRestricted=false
+2026-06-11 17:26:54.271 [info] Extension host (LocalProcess pid: 3358) is unresponsive.
+2026-06-11 17:26:59.633 [error] [Extension Host] (node:3358) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `exe --trace-deprecation ...` to show where the warning was created)
+2026-06-11 17:26:59.637 [error] [Extension Host] (node:3358) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+2026-06-11 17:27:00.719 [info] Extension host (LocalProcess pid: 3358) is responsive.
+2026-06-11 17:27:01.150 [info] Settings Sync: Account status changed from uninitialized to available
+2026-06-11 17:27:26.473 [warning] Creation of workbench contribution 'browserView.chatAgentTools' took 102ms.
+2026-06-11 17:28:08.043 [info] [perf] Render performance baseline is 143ms
+2026-06-11 18:07:35.745 [warning] Attempted to report in-progress status for unknown chat session type 'copilot-cloud-agent'
+2026-06-11 18:07:35.910 [warning] Attempted to report in-progress status for unknown chat session type 'copilotcli'
+2026-06-11 18:07:35.912 [warning] Attempted to report in-progress status for unknown chat session type 'claude-code'

@@ -1,0 +1,7 @@
+{
+    "custom/exit": {
+    "format": "",
+    "on-click": "exec=wlogout",
+    "tooltip-format": "Open Power Menu"
+  }
+}  

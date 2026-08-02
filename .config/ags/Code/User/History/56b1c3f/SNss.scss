@@ -1,0 +1,73 @@
+// Tokyo Night GTK Color Palette
+
+// Red
+$red-light: #ee6d85;
+$red-dark: #f3627a;
+
+// Pink
+$pink-light: #fd7c94;
+$pink-dark: #fe6D85;
+
+// Purple
+$purple-light: #a485dd;
+$purple-dark: #9071c9;
+
+// Blue
+$blue-light: #648ce1;
+$blue-dark: #7199ee;
+
+// Teal
+$teal-light: #519aba;
+$teal-dark: #45839E;
+
+// Green
+$green-light: #95c561;
+$green-dark: #98c379;
+
+// Yellow
+$yellow-light: #dfae67;
+$yellow-dark: #d7a65f;
+
+// Orange
+$orange-light: #f6955b;
+$orange-dark: #D17F4D;
+
+// Grey (Deep navy-purple tinted — interpolated from #F0F1F8 to #191A24)
+// Tinted toward Tokyo Night's navy-purple ($blue-dark: #7199ee, $black: #11121D)
+$grey-050: #F0F1F8;
+$grey-100: #E0E2F1;
+$grey-150: #D1D2EA;
+$grey-200: #C1C3E2;
+$grey-250: #B2B4DB;
+$grey-300: #A2A5D4;
+$grey-350: #9396CC;
+$grey-400: #8387C5;
+$grey-450: #7479BE;
+$grey-500: #656AB4;
+$grey-550: #585EA4;
+$grey-600: #4C5294;
+$grey-650: #414683;
+$grey-700: #363A73;
+$grey-750: #2B2F63;
+$grey-800: #212354;
+$grey-850: #1C1E45;
+$grey-900: #181A36;
+$grey-950: #131527; // near-black navy-indigo
+
+// White
+$white: #A0A8CD;
+
+// Black
+$black: #11121D;
+
+// Button
+$button-close: #ee6d85;
+$button-max: #98c379;
+$button-min: #d7a65f;
+
+// Link
+$links: #38a89d;
+
+// Theme
+$default-light: $blue-light;
+$default-dark: $blue-dark;

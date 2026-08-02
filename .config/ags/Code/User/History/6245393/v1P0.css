@@ -1,0 +1,210 @@
+@import "colors/colors.css";
+
+* {
+    border: none;
+    font-family:  "SF Pro Display","JetBrainsMono Nerd Font Propo";
+    font-weight: bold;
+    font-size: 15px;
+    min-height:0px;
+    padding: 0px;
+    margin: 0px;
+
+}
+
+window#waybar{
+    all:unset;
+}
+
+.modules-left {
+    padding:7px;
+    margin:10 0 4 10;
+    border-radius:10px;
+    background: alpha(@bg1,.6);
+}
+.modules-center {
+    padding:7px;
+    margin:10 0 4 0;
+    border-radius:10px;
+    background: alpha(@bg1,.6);
+}
+.modules-right {
+    padding:7px;
+    margin: 10 10 4 0;
+    border-radius:10px;
+    background: alpha(@bg1,.6);
+}
+
+tooltip {
+    background:@bg1;
+    color: @fg;
+}
+
+#clock:hover, #custom-pacman:hover, #custom-notification:hover, #network:hover,#pulesadio,#battery:hover {
+    transition: all .3s ease;
+    color:@accent;
+}
+
+#custom-notification {
+    padding: 0px 5px;
+    transition: all .3s ease;
+    color:@fg;
+}
+
+#clock{
+    padding: 0px 5px 0px 0px;
+    color:@fg;
+    transition: all .3s ease;
+}
+
+#workspaces {
+    padding: 0px 5px;
+}
+#workspaces button {
+    all:unset;
+    padding: 0px 5px;
+    color: alpha(@blue,.4);
+    transition: all .2s ease;
+}
+#workspaces button:hover {
+    color:alpha(@bg0, 0.2);
+    border: none;
+    text-shadow: 0px 0px 1.5px rgba(0, 0, 0, .5);
+    transition: all 1s ease;
+}
+#workspaces button.active {
+    color: @blue;
+    border: none;
+    text-shadow: 0px 0px 2px rgba(0, 0, 0, .5);
+}
+#workspaces button.empty {
+    color: alpha(@bg0, 0.1);
+    border: none;
+    text-shadow: 0px 0px 1.5px rgba(0, 0, 0, .2);
+}
+#workspaces button.empty:hover {
+    color: alpha(@bg0, 0.1);
+    border: none;
+    text-shadow: 0px 0px 1.5px rgba(0, 0, 0, .5);
+    transition: all 1s ease;
+}
+#workspaces button.empty.active {
+    color: @bg1;
+    border: none;
+    text-shadow: 0px 0px 2px rgba(0, 0, 0, .5);
+}
+
+#network{
+    padding: 0px 5px 0px 7px;
+    transition: all .3s ease;
+    color:@fg;
+}
+
+#pulseaudio-slider {
+    padding: 0px 5px 0px 7px;
+    margin: 0px 10px 0px 0px;
+}
+#pulseaudio-slider slider {
+  background-color: @text;
+    border-radius: 99%;
+    min-height: 4px;
+    min-width: 4px;
+    margin: -6px 0;
+}
+#pulseaudio-slider slider:hover {
+    background-color: @accent;
+    min-height: 8px;          
+    min-width: 8px;
+    margin: -6px 0;         
+    transition: all 0.2s ease; 
+}
+#pulseaudio-slider trough {
+    min-height: 5px;
+    min-width: 100px;
+    border-radius: 5px;
+    background: black;
+}
+#pulseaudio-slider highlight {
+    min-width: 12px;
+    
+    background: @fg;
+}
+
+#battery{
+    padding: 0px 5px;
+    transition: all .3s ease;
+    color:@fg;
+}
+#battery.charging {
+    color: @green;
+}
+
+#battery.warning:not(.charging) {
+    color: @yellow;
+}
+
+#battery.critical:not(.charging) {
+    color: @red;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#group-expand{
+    padding: 0px 7px 0px 5px;
+    transition: all .3s ease; 
+}
+#custom-expand{
+    padding: 0px 10px 0px 5px;
+    color:alpha(@fg,.2);
+    text-shadow: 0px 0px 2px rgba(0, 0, 0, .7);
+    transition: all .3s ease; 
+}
+#custom-expand:hover{
+    color:rgba(255,255,255,.2);
+    text-shadow: 0px 0px 2px rgba(255, 255, 255, .5);
+}
+
+#group-phonei{
+    padding: 0px 5px;
+    transition: all .3s ease; 
+}
+#custom-phonei{
+    padding: 0px 7px;
+    color:alpha(@fg,.5);
+    text-shadow: 0px 0px 2px rgba(0, 0, 0, .7);
+    transition: all .3s ease; 
+}
+
+#group-appdrawer{
+    padding: 0px 5px;
+    transition: all .3s ease; 
+}
+#custom-appdrawer{
+    padding: 0px 5px;
+    font-size: 15px;
+    color:@fg;
+    text-shadow: 0px 0px 2px rgba(0, 0, 0, .7);
+    transition: all .3s ease; 
+}
+
+#custom-endpoint{
+    color:transparent;
+    text-shadow: 0px 0px 1.5px rgba(0, 0, 0, 1);
+
+}
+#tray{
+    padding: 0px 5px;
+    transition: all .3s ease; 
+
+}
+#tray menu * {
+    padding: 0px 5px;
+    transition: all .3s ease; 
+}
+
+#tray menu separator {
+    padding: 0px 5px;
+    transition: all .3s ease; 
+}

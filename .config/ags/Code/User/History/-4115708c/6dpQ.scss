@@ -1,0 +1,72 @@
+// Default Theme Color Palette (Modified Monochrome)
+
+// Red
+$red-light: #ec8989; // Lua red
+$red-dark: #d87676; // Adjusted dark variant
+
+// Pink
+$pink-light: #eca8a8; // Lua baby_pink
+$pink-dark: #da838b; // Lua pink
+
+// Purple
+$purple-light: #e1bee9; // Lua purple
+$purple-dark: #db9fe9; // Lua dark_purple
+
+// Blue
+$blue-light: #a5c6e1; // Lua nord_blue
+$blue-dark: #8abae1; // Lua blue
+
+// Teal
+$teal-light: #7da0c2; // Adjusted light variant
+$teal-dark: #6484a4; // Lua teal
+
+// Green
+$green-light: #eff6ab; // Lua vibrant_green
+$green-dark: #c9d36a; // Lua green
+
+// Yellow
+$yellow-light: #eff6ab; // Lua sun
+$yellow-dark: #ffe6b5; // Lua yellow
+
+// Orange
+$orange-light: #f5c9b8; // Adjusted light variant
+$orange-dark: #efb6a0; // Lua orange
+
+// Grey (Interpolated from #FAFAFA down to #121212)
+$grey-050: #FAFAFA;
+$grey-100: #EDEDED;
+$grey-150: #E0E0E0;
+$grey-200: #D3D3D3;
+$grey-250: #C6C6C6;
+$grey-300: #BABABA;
+$grey-350: #ADADAD;
+$grey-400: #A0A0A0;
+$grey-450: #939393;
+$grey-500: #868686;
+$grey-550: #797979;
+$grey-600: #6C6C6C;
+$grey-650: #5F5F5F;
+$grey-700: #525252;
+$grey-750: #464646;
+$grey-800: #393939;
+$grey-850: #2C2C2C;
+$grey-900: #1F1F1F;
+$grey-950: #121212;
+
+// White
+$white: #D8DEE9; // Lua white
+
+// Black
+$black: #101010; // Lua black
+
+// Button
+$button-close: $red-light;
+$button-max: $green-dark;
+$button-min: $yellow-dark;
+
+// Link
+$links: #9aafe6; // Lua cyan
+
+// Theme
+$default-light: $blue-light;
+$default-dark: $blue-dark;

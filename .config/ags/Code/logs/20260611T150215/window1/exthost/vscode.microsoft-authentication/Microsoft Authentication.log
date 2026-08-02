@@ -1,0 +1,22 @@
+2026-06-11 15:03:15.175 [info] [aebc6443-996d-45c2-90f0-388ff96faa56] Native Broker enabled: false
+2026-06-11 15:03:18.074 [info] [getSessions] [all] starting
+2026-06-11 15:03:18.074 [info] [getSessions] [all] returned 0 session(s)
+2026-06-11 15:03:18.097 [info] [getSessions] [499b84ac-1321-427f-aa17-267ca6975798/.default offline_access] starting
+2026-06-11 15:03:18.097 [info] [aebc6443-996d-45c2-90f0-388ff96faa56] Native Broker enabled: false
+2026-06-11 15:03:18.178 [info] [getSessions] [499b84ac-1321-427f-aa17-267ca6975798/.default offline_access] returned 0 session(s)
+2026-06-11 15:03:19.071 [info] [getSessions] [499b84ac-1321-427f-aa17-267ca6975798/.default offline_access] starting
+2026-06-11 15:03:19.071 [info] [getSessions] [499b84ac-1321-427f-aa17-267ca6975798/.default offline_access] returned 0 session(s)
+2026-06-11 15:06:51.159 [info] [getSessions] [all] starting
+2026-06-11 15:06:51.173 [info] [getSessions] [all] returned 0 session(s)
+2026-06-11 15:20:06.805 [info] Microsoft Authentication is deactivating...
+2026-06-11 15:20:59.323 [info] [aebc6443-996d-45c2-90f0-388ff96faa56] Native Broker enabled: false
+2026-06-11 15:20:59.890 [info] [getSessions] [all] starting
+2026-06-11 15:20:59.891 [info] [getSessions] [all] returned 0 session(s)
+2026-06-11 15:20:59.891 [info] [getSessions] [all] starting
+2026-06-11 15:20:59.891 [info] [getSessions] [all] returned 0 session(s)
+2026-06-11 15:20:59.921 [info] [getSessions] [499b84ac-1321-427f-aa17-267ca6975798/.default offline_access] starting
+2026-06-11 15:20:59.921 [info] [aebc6443-996d-45c2-90f0-388ff96faa56] Native Broker enabled: false
+2026-06-11 15:21:00.044 [info] [getSessions] [499b84ac-1321-427f-aa17-267ca6975798/.default offline_access] returned 0 session(s)
+2026-06-11 15:21:02.615 [info] [getSessions] [499b84ac-1321-427f-aa17-267ca6975798/.default offline_access] starting
+2026-06-11 15:21:02.615 [info] [getSessions] [499b84ac-1321-427f-aa17-267ca6975798/.default offline_access] returned 0 session(s)
+2026-06-11 15:25:40.952 [info] Microsoft Authentication is deactivating...

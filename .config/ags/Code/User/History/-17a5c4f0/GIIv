@@ -1,0 +1,25 @@
+{
+    "label" : "shutdown",
+    "action" : "systemctl poweroff",
+    "text" : "Shutdown"
+}
+{
+    "label" : "reboot",
+    "action" : "systemctl reboot",
+    "text" : "Reboot"
+}
+{
+    "label" : "logout",
+    "action" : "loginctl kill-session $XDG_SESSION_ID",
+    "text" : "Logout"
+}
+{
+    "label" : "hibernate",
+    "action" : "swaylock -f && systemctl hibernate",
+    "text" : "Hibernate"
+}
+{
+    "label" : "lock",
+    "action" : "hyprlock",
+    "text" : "Lock"
+}

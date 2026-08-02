@@ -1,0 +1,15 @@
+{
+    "hyprland/workspaces": {
+    "format": "{name}",
+    "format-icons": {
+      "1": "",
+      "2": "",
+      "3": "",
+      "4": "",
+      "5": ""
+    },
+    "persistent-workspaces": {
+      "eDP-1": [1,2,3,4,5,6]
+    }
+  }
+}

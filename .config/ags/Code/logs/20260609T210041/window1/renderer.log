@@ -1,0 +1,9 @@
+2026-06-09 21:00:47.084 [warning] Creation of workbench contribution 'workbench.contrib.preferencesActions' took 24ms.
+2026-06-09 21:00:47.390 [warning] Creation of workbench contribution 'workbench.contrib.configurationDefaultOverridesContribution' took 34ms.
+2026-06-09 21:00:50.877 [info] Started local extension host with pid 71004.
+2026-06-09 21:00:51.896 [info] [AccountPolicyGate] apply: state=inactive, reason=undefined, isRestricted=false
+2026-06-09 21:00:53.418 [warning] Creation of workbench contribution 'terminal.chatAgentTools' took 112ms.
+2026-06-09 21:00:57.197 [info] [AccountPolicyGate] apply: state=inactive, reason=undefined, isRestricted=false
+2026-06-09 21:01:03.544 [info] Settings Sync: Account status changed from uninitialized to available
+2026-06-09 21:01:08.018 [info] [perf] Render performance baseline is 704ms
+2026-06-09 21:02:18.514 [warning] [lifecycle] onWillShutdown is taking a long time, pending operations: join.chatEditingSession

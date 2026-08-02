@@ -1,0 +1,37 @@
+/* make a grouped theme by gruoping wifi and sound*/ 
+
+{
+  "layer": "top",
+  "position": "top",
+  
+  "include": ["~/.config/waybar/modules/*.jsonc"],
+
+  "modules-left": [
+    "group/menu",
+  ],
+
+  "modules-center": [
+    "hyprland/workspaces"
+  ],
+
+  "modules-right": [
+    "pulseaudio",
+    "network",
+    "group/clock",
+    "custom/notification"
+  ],
+
+"group/menu": {
+    "orientation": "inherit",
+    "drawer": {
+      "transition-duration": 300,
+      "children-class": "not-memory",
+      "transition-left-to-right": true
+    },
+    "modules": [
+      "custom/appdrawer", 
+      "custom/powermenu"
+    ]
+  }
+}
+

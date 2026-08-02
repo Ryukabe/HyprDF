@@ -1,0 +1,8 @@
+{
+  "custom/appdrawer": {
+    "format" : "󰣇",
+    "tooltip": false,
+    "tooltip-format": "App Drawer",
+    "on-click": "pkill rofi || rofi -show drun -theme /home/shiham/.config/rofi/appdrawer.rasi -name appdrawer"
+  }
+}

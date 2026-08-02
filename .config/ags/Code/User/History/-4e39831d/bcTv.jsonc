@@ -1,0 +1,9 @@
+{
+  /*"custom/battery": {
+    "exec": "~/.config/waybar/battery-anime.sh",
+    "interval": 20,
+    "return-type": "json",
+    "format": "{}"
+},*/
+
+}

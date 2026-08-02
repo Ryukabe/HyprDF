@@ -1,0 +1,134 @@
+/*****----- Configuration -----*****/
+configuration {
+    show-icons:                  true;
+    icon-theme:                  "hicolor";
+    display-drun:                "";
+    drun-display-format:         "{name}";
+    disable-history:             false;
+}
+
+/*****----- Global Properties -----*****/
+@import "~/.config/rofi/colors/colors.rasi"
+@import "~/.config/rofi/font/fonts.rasi"
+
+* {
+    background-color:            transparent;
+    text-color:                  @foreground;
+    margin:                      0px;
+    padding:                     0px;
+    spacing:                     0px;
+}
+
+/*****----- Main Window -----*****/
+window {
+    transparency:                "real";
+    location:                    center;
+    anchor:                      center;
+    width:                       700px;
+    border:                      1px solid;
+    border-radius:               20px;
+    border-color:                @background-alt;
+    background-color:            @background;
+    cursor:                      "default";
+}
+
+/*****----- Main Box -----*****/
+mainbox {
+    spacing:                     12px;
+    padding:                     16px;
+    background-color:            transparent;
+    children:                    [ "inputbar", "listview" ];
+}
+
+/*****----- Inputbar -----*****/
+inputbar {
+    spacing:                     10px;
+    padding:                     10px 16px;
+    border:                      1px solid;
+    border-radius:               12px;
+    border-color:                @background-alt;
+    background-color:            @background;
+    children:                    [ "prompt", "entry" ];
+}
+
+prompt {
+    background-color:            transparent;
+    text-color:                  @selected;
+}
+
+entry {
+    background-color:            transparent;
+    text-color:                  @foreground;
+    cursor:                      text;
+    placeholder:                 "Search wallpapers...";
+    placeholder-color:           @background-alt;
+}
+
+/*****----- Listview -----*****/
+listview {
+    columns:                     4;
+    lines:                       1;
+    cycle:                       false;
+    dynamic:                     false;
+    scrollbar:                   false;
+    layout:                      vertical;
+    fixed-height:                false;
+    fixed-columns:               false;
+    spacing:                     10px;
+    padding:                     0px;
+    border:                      0px solid;
+    background-color:            transparent;
+}
+
+/*****----- Separator -----*****/
+separator {
+    height:                      0px;
+    border:                      0px;
+    background-color:            transparent;
+}
+
+/*****----- Elements -----*****/
+element {
+    orientation:                 vertical;
+    padding:                     0px;
+    border-radius:               12px;
+    background-color:            @background;
+    border:                      1px solid;
+    border-color:                @background-alt;
+    cursor:                      pointer;
+}
+
+element normal.normal,
+element alternate.normal {
+    background-color:            @background;
+    border-color:                @background-alt;
+}
+
+element selected.normal {
+    background-color:            @background;
+    border:                      2px solid;
+    border-color:                @selected;
+}
+
+element-icon {
+    size:                        150px;
+    border-radius:               12px 12px 0px 0px;
+    background-color:            @background-alt;
+    cursor:                      inherit;
+}
+
+element-text {
+    padding:                     7px 10px;
+    border-radius:               0px 0px 10px 10px;
+    background-color:            @background;
+    text-color:                  @foreground;
+    highlight:                   inherit;
+    cursor:                      inherit;
+    vertical-align:              0.5;
+    horizontal-align:            0.0;
+    font:                        "monospace 9";
+}
+
+element selected.normal element-text {
+    text-color:                  @selected;
+}

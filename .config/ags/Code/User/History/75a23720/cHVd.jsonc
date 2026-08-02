@@ -1,0 +1,31 @@
+{
+  "clock": {
+    "timezone": [
+      "ETC/UTC",
+      "Asia/Dhaka"
+    ],
+    "interval": 60,
+    "format": "{:%I:%M %p}",
+    "max-length": 25,
+    "tooltip": true,
+    "tooltip-format": "{:%d-%m-%Y}"
+  },
+
+  /* with icon*/
+  "clock_wi": {
+    "timezone": [
+      "ETC/UTC",
+      "Asia/Dhaka"
+    ],
+    "interval": 60,
+    "format": "{icon}   {:%I:%M %p}",
+    "format-icons": {
+      "day": "󱑍",
+      "night": "󱑓"
+    },
+    "max-length": 25,
+    "tooltip": true,
+    "tooltip-format": "{:%d-%m-%Y}"
+  }
+}
+

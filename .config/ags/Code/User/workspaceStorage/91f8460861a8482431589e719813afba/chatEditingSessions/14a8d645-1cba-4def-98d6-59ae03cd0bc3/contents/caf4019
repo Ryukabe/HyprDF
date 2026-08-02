@@ -1,0 +1,68 @@
+#!/bin/bash
+# ~/.local/bin/snappy-theme-sync
+# Syncs Snappy Switcher theme with Hyprland/system theme changes
+
+CONFIG_FILE="$HOME/.config/snappy-switcher/config.ini"
+THEME_DIR="$HOME/.config/snappy-switcher/themes"
+COLOR_CSS="$HOME/.config/colors.css"  # Adjust to your custom theme file
+WATCH_DIR="$HOME/.config"
+
+# Theme mapping: matches your color scheme file to Snappy theme
+declare -A THEME_MAP=(
+    ["catppuccin-mocha"]="catppuccin-mocha-dark.ini"
+    ["catppuccin-latte"]="catppuccin-latte-light.ini"
+    ["gruvbox"]="gruvbox-dark.ini"
+    ["nord"]="nord.ini"
+    ["dracula"]="dracula.ini"
+)
+
+# Function to extract theme name from color.css or config
+get_current_theme() {
+    # Option 1: Check a theme file/symlink
+    if [ -L "$COLOR_CSS" ]; then
+        local theme_name=$(basename "$(readlink "$COLOR_CSS")" .css)
+        echo "$theme_name"
+    # Option 2: Parse from waybar config or custom file
+    elif [ -f "$HOME/.config/waybar/config" ]; then
+        grep -o '"theme"[[:space:]]*:[[:space:]]*"[^"]*' "$HOME/.config/waybar/config" | cut -d'"' -f4
+    else
+        echo "catppuccin-mocha"  # fallback
+    fi
+}
+
+# Function to update Snappy Switcher theme
+update_snappy_theme() {
+    local current_theme=$(get_current_theme)
+    local snappy_theme="${THEME_MAP[$current_theme]:-catppuccin-mocha-dark.ini}"
+    
+    # Update config.ini
+    if grep -q "^name = " "$CONFIG_FILE"; then
+        sed -i "s/^name = .*/name = $snappy_theme/" "$CONFIG_FILE"
+        echo "✓ Updated Snappy Switcher to: $snappy_theme"
+        
+        # Restart snappy-switcher daemon
+        pkill -f snappy-switcher
+        sleep 0.5
+        snappy-switcher --daemon &
+    fi
+}
+
+# Watch for changes
+if command -v inotifywait &> /dev/null; then
+    echo "Watching for theme changes..."
+    inotifywait -m -e modify,create "$WATCH_DIR" |
+    while read -r directory action filename; do
+        # Trigger on color.css or relevant config files
+        if [[ "$filename" =~ (color\.css|waybar|theme) ]]; then
+            sleep 0.5  # debounce
+            update_snappy_theme
+        fi
+    done
+else
+    # Fallback: poll every 5 seconds
+    echo "inotify not available, using polling..."
+    while true; do
+        update_snappy_theme
+        sleep 5
+    done
+fi

@@ -1,0 +1,7 @@
+{
+    "custom/exit": {
+    "format": "",
+    "on-click": "~/.config/wlogout/scripts/wlogout.sh",
+    "tooltip-format": "Open Power Menu"
+  }
+}  

@@ -1,0 +1,64 @@
+@import "~/.config/rofi/colors/colors.rasi"
+@import "~/.config/rofi/font/fonts.rasi"
+
+configuration {
+    show-icons: true;
+    icon-theme: "Papirus";
+    dmenu-display-format: "{name}"; /* Hide path/metadata in the text */
+}
+
+window {
+    width: 900px;
+    height: 400px;
+    border: 2px;
+    border-color: @selected-bg; /* Use your theme's accent color */
+    border-radius: 12px;
+    background-color: @bg;
+}
+
+mainbox {
+    children: [ "inputbar", "listview" ];
+    spacing: 15px;
+    padding: 25px;
+}
+
+inputbar {
+    children: [ "prompt", "entry" ];
+    background-color: @bg-alt;
+    border-radius: 10px;
+    padding: 12px;
+}
+
+listview {
+    columns: 4;     /* 4 images across */
+    lines: 1;       /* 1 row high */
+    cycle: true;
+    dynamic: true;
+    layout: vertical;
+    fixed-columns: true;
+    spacing: 20px;
+}
+
+element {
+    orientation: vertical; /* Stacks image ON TOP of text */
+    padding: 15px;
+    border-radius: 10px;
+    spacing: 10px;
+}
+
+element-icon {
+    size: 160px; /* Large preview size */
+    horizontal-align: 0.5;
+}
+
+element-text {
+    horizontal-align: 0.5;
+    vertical-align: 0.5;
+    expand: true;
+}
+
+element selected {
+    background-color: @bg-alt;
+    border: 2px;
+    border-color: @selected-bg;
+}

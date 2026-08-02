@@ -1,0 +1,21 @@
+2026-06-11 20:44:53.982 [info] Extension host with pid 72341 started
+2026-06-11 20:44:54.220 [info] ExtensionService#_doActivateExtension vscode.github-authentication, startup: false, activationEvent: 'onAuthenticationRequest:github'
+2026-06-11 20:44:54.413 [info] ExtensionService#_doActivateExtension vscode.emmet, startup: false, activationEvent: 'onLanguage'
+2026-06-11 20:44:54.638 [info] ExtensionService#_doActivateExtension GitHub.copilot-chat, startup: false, activationEvent: 'onChatParticipant:github.copilot.editsAgent'
+2026-06-11 20:45:07.314 [info] ExtensionService#_doActivateExtension vscode.git-base, startup: false, activationEvent: 'onLanguage:git-commit'
+2026-06-11 20:45:12.539 [info] ExtensionService#_doActivateExtension vscode.git, startup: true, activationEvent: '*'
+2026-06-11 20:45:12.896 [info] ExtensionService#_doActivateExtension vscode.github, startup: true, activationEvent: '*'
+2026-06-11 20:45:12.996 [info] ExtensionService#_doActivateExtension vscode.microsoft-authentication, startup: false, activationEvent: 'onAuthenticationRequest:microsoft'
+2026-06-11 20:45:14.105 [info] ExtensionService#_doActivateExtension vscode.configuration-editing, startup: false, activationEvent: 'onLanguage:jsonc'
+2026-06-11 20:45:14.180 [info] ExtensionService#_doActivateExtension vscode.json-language-features, startup: false, activationEvent: 'onLanguage:jsonc'
+2026-06-11 20:45:14.507 [info] ExtensionService#_doActivateExtension vscode.typescript-language-features, startup: false, activationEvent: 'onLanguage:jsonc'
+2026-06-11 20:45:15.506 [info] Eager extensions activated
+2026-06-11 20:45:16.916 [info] ExtensionService#_doActivateExtension vscode.debug-auto-launch, startup: false, activationEvent: 'onStartupFinished'
+2026-06-11 20:45:17.157 [info] ExtensionService#_doActivateExtension vscode.merge-conflict, startup: false, activationEvent: 'onStartupFinished'
+2026-06-11 20:45:17.342 [info] ExtensionService#_doActivateExtension AndreiLucaci.everforest-pro, startup: false, activationEvent: 'onStartupFinished'
+2026-06-11 20:45:17.911 [info] ExtensionService#_doActivateExtension Catppuccin.catppuccin-vsc, startup: false, activationEvent: 'onStartupFinished'
+2026-06-11 20:45:18.069 [info] ExtensionService#_doActivateExtension esbenp.prettier-vscode, startup: false, activationEvent: 'onStartupFinished'
+2026-06-11 20:45:18.137 [info] ExtensionService#_doActivateExtension miguelsolorio.symbols, startup: false, activationEvent: 'onStartupFinished'
+2026-06-11 20:45:18.356 [info] ExtensionService#_doActivateExtension zhuangtongfa.material-theme, startup: false, activationEvent: 'onStartupFinished'
+2026-06-11 20:45:38.319 [info] Extension host terminating: received terminate message from renderer
+2026-06-11 20:45:38.640 [info] Extension host with pid 72341 exiting with code 0

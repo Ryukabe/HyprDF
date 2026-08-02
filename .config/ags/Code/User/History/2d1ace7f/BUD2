@@ -1,0 +1,5 @@
+[user]
+	name = Alvi 
+	email = fthen@gmaicom
+[core]
+	editor = code --wait

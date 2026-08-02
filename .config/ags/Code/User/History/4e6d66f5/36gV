@@ -1,0 +1,10 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+[advice]
+	defaultBranchName = false
+[remote "origin"]
+	url = https://github.com/Ryukabe/HyperDF.git
+	fetch = https://github.com/Ryukabe/HyperDF.git

@@ -1,0 +1,66 @@
+@import "colors/colors.css";
+
+* {
+    all: unset;
+    font-family: "JetBrainsMono Nerd Font Propo", monospace;
+}
+
+window#waybar {
+    background-color: @bg0;
+    color: @fg;
+    border-radius: 0 0 10px 10px;
+}
+
+tooltip {
+   background-color: @bg0;
+   margin: 10px;
+   padding: 10px;
+   border-radius: 18px;
+}
+
+#workspaces {
+    min-width: 0px;
+    font-size: 0.4rem;
+    padding: 2px 4px;
+    margin: 12px;
+    border-radius: 99px;
+    transition: all 0.3s ease-in-out;
+}
+
+#workspaces button {
+    background-color: @bg4;
+    color: transparent;
+    padding: 0px 5px;
+    border-radius: 99px;
+    margin: 0 2px;
+    min-width: 4px;
+    transition: all 0.3s ease-in-out;
+}
+
+#workspaces button.active {
+    background-color: @blue;
+    min-width: 1.2rem;
+    transition: all 0.3s ease-in-out;
+}
+
+#clock,
+#network,
+#battery,
+#pulesaudio,
+#custom-powermenu {
+    margin: 0px 5px 0px 5px;
+}
+
+#custom-appdrawer {
+    margin: 0px 5px 0px 7px;
+}
+
+#clock {
+    font-size: 0.8rem;
+}
+
+#cava {
+    color: @blue;
+    border-radius: 99px;
+    margin: 0px 7px 0px 5px;
+}

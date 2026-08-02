@@ -1,0 +1,77 @@
+@import "colors/colors.css";
+
+/* --- 1. Global/Window Setup --- */
+* {
+    font-family: "SF Pro Display", sans-serif;
+    /* Reset margins/padding for predictability */
+    margin: 0;
+    padding: 0;
+}
+
+window {
+    /* Set the base font size for all labels */
+    font-size: 14pt;
+    /* Base text color from your variable */
+    color: @fg;
+    /* Use the dark background color, fully opaque to match the photo */
+    background-color: @bg; 
+} 
+
+/* --- 2. Base Button Setup --- */
+button {
+    color: @fg; /* Ensure text is visible in idle state */
+    background-repeat: no-repeat;
+    background-position: center 35%; /* Positions the icon slightly above the center */
+    background-size: 25%; /* Fixed size, large enough to see, small enough not to overlap text */
+    background-color: transparent; /* No box in idle state */
+    
+    border-radius: 20px; /* Rounded corners for the box */
+    border: none;
+    
+    /* Smooth transition for hover effects */
+    transition: all 0.3s ease-in-out;
+    
+    /* Padding to ensure text has space below the icon */
+    padding-top: 120px;
+    
+    /* Spacing between the buttons */
+    margin: 15px;
+}
+
+button:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 2px solid @blue; /* Adds that thin border seen in your latest image */
+}
+ 
+button:active {
+    background-color: rgba(255, 255, 255, 0.1); /* The subtle gray-blue box from the picture */
+    /* Icon and text colors are preserved from the idle state */
+}
+
+/* --- 4. Focus State (Keyboard Navigation) --- */
+button:focus {
+    outline: none;
+    /* Add a subtle indicator for keyboard focus */
+    box-shadow: 0 0 0 2px @blue; 
+}
+
+/* --- 5. Icon Definitions (Unchanged IDs from your original) --- */
+#shutdown {
+    background-image: image(url("./icons/power.png"));
+}
+
+#logout {
+    background-image: image(url("./icons/logout.png"));
+}
+
+#reboot {
+    background-image: image(url("./icons/restart.png"));
+}
+
+#lock {
+    background-image: image(url("./icons/lock.png"));
+}
+
+#hibernate {
+    background-image: image(url("./icons/hibernate.png"));
+}

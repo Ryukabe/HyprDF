@@ -1,0 +1,73 @@
+// Default Theme Color Palette (Modified Horizon)
+
+// Red
+$red-light: #E95678; // Lua red
+$red-dark: #C64966;
+
+// Pink
+$pink-light: #FF007C; // Lua baby_pink
+$pink-dark: #F43E5C;  // Lua pink
+
+// Purple
+$purple-light: #B877DB; // Lua purple
+$purple-dark: #B180D7;  // Lua dark_purple
+
+// Blue
+$blue-light: #75BEFF; // Lua nord_blue
+$blue-dark: #25B2BC;  // Lua blue/cyan
+
+// Teal
+$teal-light: #21BFC2; // Lua teal
+$teal-dark: #1CA2A5;
+
+// Green
+$green-light: #27D796; // Lua green
+$green-dark: #21B780;
+
+// Yellow
+$yellow-light: #FAC29A; // Lua yellow
+$yellow-dark: #FAB795;  // Lua sun
+
+// Orange
+$orange-light: #F09383; // Lua orange
+$orange-dark: #CC7D6F;
+
+// Grey (Warm rose-tinted — interpolated from #FAF0F2 to #211820)
+// Tinted toward Horizon's signature red/pink ($red-light: #E95678)
+$grey-050: #FAF0F2;
+$grey-100: #EEDEDE;  // slight warm pink cast
+$grey-150: #E2D0D3;
+$grey-200: #D6C2C6;
+$grey-250: #C9B4B9;
+$grey-300: #BDA7AC;
+$grey-350: #B0999F;
+$grey-400: #A48B92;
+$grey-450: #977E85;
+$grey-500: #8B7078;
+$grey-550: #7E636C;
+$grey-600: #72565F;
+$grey-650: #654852;
+$grey-700: #583B46;
+$grey-750: #4C2E39;
+$grey-800: #3F212D;
+$grey-850: #331921;
+$grey-900: #281317;
+$grey-950: #1D0E0F; // near-black with warm undertone
+
+// White
+$white: #D5D8DA; // Lua white
+
+// Black
+$black: #16181E; // Lua black
+
+// Button
+$button-close: #E95678; // Red
+$button-max: #27D796;   // Green
+$button-min: #FAB795;   // Sun/Yellow
+
+// Link
+$links: #75BEFF; // Nord Blue
+
+// Theme
+$default-light: $blue-light;
+$default-dark: $blue-dark;

@@ -1,0 +1,25 @@
+<?xml version="1.1" encoding="UTF-8"?>
+
+<channel name="ristretto" version="1.0">
+  <property name="window" type="empty">
+    <property name="navigationbar" type="empty">
+      <property name="position" type="string" value="left"/>
+    </property>
+    <property name="toolbar" type="empty">
+      <property name="show" type="bool" value="false"/>
+    </property>
+    <property name="thumbnails" type="empty">
+      <property name="show" type="bool" value="false"/>
+      <property name="size" type="uint" value="2"/>
+    </property>
+    <property name="statusbar" type="empty">
+      <property name="show" type="bool" value="true"/>
+    </property>
+    <property name="bgcolor-override" type="bool" value="false"/>
+    <property name="file-manager-sort-sync" type="bool" value="true"/>
+    <property name="file-manager-sort-sync-once" type="bool" value="false"/>
+  </property>
+  <property name="desktop" type="empty">
+    <property name="type" type="string" value="none"/>
+  </property>
+</channel>

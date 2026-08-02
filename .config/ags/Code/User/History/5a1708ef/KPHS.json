@@ -1,0 +1,33 @@
+{
+    "editor.minimap.enabled": false,
+    "chat.editor.fontFamily": "'JetBrainMono Nerd F'",
+    "gitlens.ai.model": "vscode",
+    "gitlens.ai.vscode.model": "copilot:gpt-4.1",
+    "workbench.startupEditor": "none",
+    "workbench.colorTheme": "Kanagawa Dragon",
+    "workbench.iconTheme": "symbols",
+    "editor.fontFamily": "'JetBrainsMono Nerd Font Propo', 'Droid Sans Mono', monospace",
+    "breadcrumbs.enabled": false,
+    "window.titleBarStyle": "native",
+    "window.menuBarVisibility": "hidden",
+    "window.customMenuBarAltFocus": false,
+    "window.enableMenuBarMnemonics": false,
+    "editor.padding.bottom": 20,
+    "editor.padding.top": 20,
+    "editor.stickyScroll.enabled": false,
+    "editor.overtypeCursorStyle": "line",
+    "[jsonc]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "explorer.confirmDragAndDrop": false,
+    "workbench.secondarySideBar.defaultVisibility": "visible",
+    "explorer.confirmDelete": false,
+    "workbench.activityBar.compact": true,
+    "workbench.activityBar.location": "hidden",
+    "workbench.layoutControl.enabled": false,
+    "window.commandCenter": false,
+    "workbench.statusBar.visible": false,
+    "[css]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    }
+}

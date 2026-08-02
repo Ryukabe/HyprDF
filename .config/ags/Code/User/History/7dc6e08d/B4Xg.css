@@ -1,0 +1,117 @@
+@import "colors/colors.css";
+
+* {
+    border: none;
+    border-radius: 0px;
+    font-family: "SF Pro Display", "Rubik", "JetBrainsMono Nerd Font Propo", "Noto Sans CJK JP", "Noto Sans CJK KR";
+    font-size: 14px;
+    font-weight: bold;
+    min-height: 0;
+    padding: 0;
+    margin: 0;
+}
+
+.modules-center {
+    background: @bg0;
+    padding: 6px 12px;
+    margin: 6px 0px;
+    border-radius: 28px;
+    /*box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);*/
+}
+
+window#waybar {
+    background: transparent;
+}
+
+tooltip {
+    background: @bg2;
+    border: 1px solid @bg3;
+    border-radius: 12px;
+}
+
+tooltip label {
+    color: @fg;
+    padding: 6px;
+}
+
+#workspaces {
+    background: transparent;
+    padding: 0;
+    margin: 0 10px 0 10px;
+    border: none;
+    box-shadow: none;
+}
+
+#workspaces button {
+    padding: 0px 6px;
+    margin: 0px 2px;
+    border-radius: 16px;
+    color: @grey0;
+    background: transparent;
+    transition: all 0.3s ease-in-out;
+}
+
+#workspaces button.active {
+    background: linear-gradient(135deg, @blue 0%, @purple 50%, @red 100%);
+    color: @bg0;
+    min-width: 40px;
+    transition: all 0.3s ease-in-out;
+}
+
+#workspaces button:hover {
+    background-color: @bg3;
+    color: @fg;
+}
+
+#workspaces button.urgent {
+    background-color: @red;
+    color: @bg0;
+}
+
+#battery,
+#pulseaudio,
+#network,
+#clock,
+#custom-media,
+#custom-notification {
+    background-color: @bg0;
+    padding: 0 8px;
+    margin: 0 5px;
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+}
+
+#clock {
+    color: @fg;
+    margin: 0;
+}
+
+#custom-media {
+    color: @aqua;
+    margin: 0 0 0 10px;
+}
+
+#battery {
+    color: @green;
+    margin-right: 0;
+}
+
+ #pulseaudio { 
+    color: @yellow;
+    margin-left: 0;
+    font-size: 14px;
+} 
+
+#network {
+    color: @purple;
+    margin: 0;
+    font-size: 14px;
+}
+
+
+#custom-notification {
+    color: @green;
+    margin-right : 0px;
+    font-size: 14px;
+}

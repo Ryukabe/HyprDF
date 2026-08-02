@@ -1,0 +1,7 @@
+2026-06-09 20:59:17.966 [warning] Creation of workbench contribution 'workbench.contrib.preferencesActions' took 23ms.
+2026-06-09 20:59:18.298 [warning] Creation of workbench contribution 'workbench.contrib.configurationDefaultOverridesContribution' took 48ms.
+2026-06-09 20:59:21.941 [info] Started local extension host with pid 69741.
+2026-06-09 20:59:26.017 [info] [AccountPolicyGate] apply: state=inactive, reason=undefined, isRestricted=false
+2026-06-09 20:59:32.482 [info] [AccountPolicyGate] apply: state=inactive, reason=undefined, isRestricted=false
+2026-06-09 20:59:40.719 [info] Settings Sync: Account status changed from uninitialized to available
+2026-06-09 20:59:44.973 [info] [perf] Render performance baseline is 229ms

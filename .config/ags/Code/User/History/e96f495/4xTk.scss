@@ -1,0 +1,224 @@
+// Background shades
+$bg0: #{"@bg0"};
+$bg1: #{"@bg1"};
+$bg2: #{"@bg2"};
+$bg3: #{"@bg3"};
+$bg4: #{"@bg4"};
+
+// Accent colors
+$red: #{"@red"};
+$orange: #{"@orange"};
+$yellow: #{"@yellow"};
+$green: #{"@green"};
+$aqua: #{"@aqua"};
+$blue: #{"@blue"};
+$purple: #{"@purple"};
+
+// Foreground / text
+$fg: #{"@fg"};
+$grey0: #{"@grey0"};
+$grey1: #{"@grey1"};
+$grey2: #{"@grey2"};
+
+* {
+  font-family:
+    "SF Pro Display", "Rubik", "Noto Sans CJK JP", "Noto Sans CJK KR", "JetBrainsMono Nerd Font Propo", sans-serif;
+  --blue: #{$blue};
+  --grey0: #{$grey0};
+}
+
+window {
+  min-height: 0;
+  background-color: $bg1;
+}
+
+// Remove default padding/margins on the bar container
+centerbox {
+  min-height: 0;
+  padding: 0;
+}
+
+box {
+  min-height: 0;
+}
+
+button,
+menubutton {
+  outline: none;
+  border: none;
+  background: none;
+  min-height: 0;
+  min-width: 0;
+  padding: 0;
+}
+
+button:checked,
+menubutton:checked {
+  color: $fg;
+}
+
+label {
+  min-height: 0;
+}
+
+// — Workspaces ————————————————————————————————
+.workspaces {
+  margin: 10px;
+  margin-left: 7px;
+  font-size: 0.95rem;
+  background-color: $bg2;
+  border-radius: 99px;
+  padding: 2px 2px;
+
+  .workspace {
+    &.occupied {
+      color: $fg;
+    }
+  }
+}
+
+button {
+  // Bar uses the expressive curve for spatial movement
+  transition: 400ms cubic-bezier(0.05, 0.7, 0.1, 1);
+  min-width: 1rem;
+  min-height: 1rem;
+  margin: 0.2rem;
+  background-color: $bg3;
+  border-radius: 0.5rem;
+  color: $grey0;
+
+  &:hover {
+    background-color: $bg4;
+    color: $fg;
+  }
+
+  &:active {
+    opacity: 0.8;
+  }
+
+  .active {
+    min-width: 2rem;
+    min-height: 0.8rem;
+    background-color: $blue;
+    color: $bg2;
+
+    &:hover {
+      background-color: $purple;
+      color: $bg2;
+    }
+
+    &:active {
+      opacity: 0.85;
+    }
+  }
+}
+
+// — Bar module buttons ————————————————————————
+// Shared base for all clickable bar items
+.clock-button,
+.audio-button {
+  color: $fg;
+  margin: 0 2px;
+  padding: 2px 6px;
+  border-radius: 8px;
+  transition: all 200ms ease-in-out;
+
+  &:hover {
+    background: $bg2;
+  }
+
+  &:active {
+    background: $bg3;
+  }
+}
+
+// Wireless icon — padding only, parent handles interaction
+.wireless-icon {
+  color: $fg;
+  margin: 0 2px;
+  padding: 2px 6px;
+}
+
+// — Module containers ————————————————————————
+.modules-left {
+  padding: 2px 4px;
+  border-radius: 99px;
+  margin: 4px 15px;
+}
+
+// modules-right is now a button — clickable as a group
+.modules-right {
+  padding: 2px 4px;
+  border-radius: 99px;
+  margin: 4px 15px;
+  transition: all 200ms ease-in-out;
+
+  &:hover {
+    background-color: $bg3;
+  }
+
+  &:active {
+    background-color: $bg4;
+  }
+}
+
+// Active state when QS panel is open
+.modules-right-active {
+  background-color: $bg3;
+
+  &:hover {
+    background-color: $bg4;
+  }
+}
+
+// — Battery pill ————————————————————————————
+.battery-pill {
+  font-weight: 600;
+  padding: 0px 8px;
+  margin: 7px 4px;
+  border-radius: 99px;
+  min-width: 18px;
+
+  .battery-label {
+    &.dark {
+      color: $bg1;
+    }
+
+    &.light {
+      color: $fg;
+    }
+  }
+}
+
+// — Media ————————————————————————————————————
+.media {
+  margin: 10px;
+  margin-right: 7px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  background-color: $bg2;
+  border-radius: 99px;
+  padding: 2px 9px;
+  color: $fg;
+  transition: all 200ms ease-in-out;
+
+  &:hover {
+    background-color: $bg3;
+  }
+
+  &:active {
+    background-color: $bg4;
+  }
+}
+
+.media-pause {
+  color: $fg;
+}
+
+.clock-label {
+  color: $fg;
+}
+
+.separator {
+  color: $grey0;
+}

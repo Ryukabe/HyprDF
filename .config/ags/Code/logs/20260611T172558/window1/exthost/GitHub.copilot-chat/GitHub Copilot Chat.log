@@ -1,0 +1,32 @@
+2026-06-11 17:27:04.737 [info] [GitExtensionServiceImpl] Initializing Git extension service.
+2026-06-11 17:27:04.737 [info] [GitExtensionServiceImpl] Successfully activated the vscode.git extension.
+2026-06-11 17:27:04.737 [info] [GitExtensionServiceImpl] Enablement state of the vscode.git extension: true.
+2026-06-11 17:27:04.737 [info] [GitExtensionServiceImpl] Successfully registered Git commit message provider.
+2026-06-11 17:27:04.737 [info] Using the Electron fetcher.
+2026-06-11 17:27:05.317 [info] ConversationFeature: Waiting for copilot token to activate conversation feature
+2026-06-11 17:27:09.489 [info] [CopilotCLI] OpenTelemetry enabled: exporter=file, source=github.copilot
+2026-06-11 17:27:10.067 [info] [CopilotCLIChatSessionContentProvider] listSessions took 3945.8189730000013ms
+2026-06-11 17:27:10.067 [info] [CopilotCLIChatSessionContentProvider] listSessions took 2348.1687329999986ms
+2026-06-11 17:27:10.144 [info] [CopilotCLI] MCP server started. Lock file: /home/shiham/.copilot/ide/a9b3d2be-174c-4464-9d7b-358ca8110092.lock
+2026-06-11 17:27:10.144 [info] [CopilotCLI] Server URI: unix:/tmp/mcp-9hugJj/mcp.sock#%2Fmcp
+2026-06-11 17:27:10.175 [info] Logged in as AkihitoKayaba
+2026-06-11 17:27:11.386 [info] Got Copilot token for AkihitoKayaba
+2026-06-11 17:27:11.386 [info] Copilot Chat: 0.48.1, VS Code: 1.120.0
+2026-06-11 17:27:11.442 [info] [context keys] Setting context key: github.copilot-chat.activated
+2026-06-11 17:27:11.446 [info] activationBlocker from 'languageModelAccess' took for 6429ms
+2026-06-11 17:27:11.898 [info] AuthenticationService: firing onDidAuthenticationChange from handleAuthChangeEvent. Has token: true
+2026-06-11 17:27:11.898 [info] copilot token sku: free_limited_copilot
+2026-06-11 17:27:11.898 [info] ConversationFeature: Activating contributions
+2026-06-11 17:27:11.898 [info] GitHub.vscode-pull-request-github extension is not yet activated.
+2026-06-11 17:27:11.971 [info] Registering default platform agent...
+2026-06-11 17:27:11.974 [info] BYOK: fetching known models list
+2026-06-11 17:27:11.974 [info] ConversationFeature: onDidAuthenticationChange has token: true
+2026-06-11 17:27:11.978 [info] [code-referencing] Public code references are enabled.
+2026-06-11 17:27:11.987 [info] activationBlocker from 'conversationFeature' took for 7025ms
+2026-06-11 17:27:12.022 [info] GithubAvailableEmbeddingTypesManager: Got embeddings. Primary: metis-1024-I16-Binary. Deprecated: 
+2026-06-11 17:27:12.032 [info] WorkspaceChunkSearchService: using embedding type metis-1024-I16-Binary
+2026-06-11 17:27:12.663 [info] BYOK: Copilot Chat known models list fetched successfully.
+2026-06-11 17:27:12.677 [info] BYOK: registered 8 provider(s): ollama, anthropic, gemini, xai, openai, openrouter, azure, customoai
+2026-06-11 17:27:12.703 [info] Fetched model metadata in 7567ms d72efc52-a3d6-40d3-b5ec-3ad59123f871
+2026-06-11 17:27:12.933 [info] Latest entry: ccreq:latest.copilotmd
+2026-06-11 17:27:12.938 [info] ccreq:9dfd17ab.copilotmd | markdown

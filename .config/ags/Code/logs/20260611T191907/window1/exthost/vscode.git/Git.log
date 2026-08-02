@@ -1,0 +1,220 @@
+2026-06-11 19:19:42.358 [info] [main] Log level: Info
+2026-06-11 19:19:42.358 [info] [main] Validating found git in: "git"
+2026-06-11 19:19:42.358 [info] [main] Using git "2.54.0" from "git"
+2026-06-11 19:19:42.358 [info] [Model][doInitialScan] Initial repository scan started
+2026-06-11 19:19:57.237 [info] > git rev-parse --show-toplevel [14987ms]
+2026-06-11 19:20:20.317 [info] > git rev-parse --show-toplevel [4741ms]
+2026-06-11 19:20:22.877 [info] > git rev-parse --show-toplevel [1808ms]
+2026-06-11 19:20:30.722 [info] > git rev-parse --show-toplevel [6285ms]
+2026-06-11 19:20:31.419 [info] > git rev-parse --show-toplevel [124ms]
+2026-06-11 19:20:31.948 [info] > git rev-parse --show-toplevel [102ms]
+2026-06-11 19:20:32.227 [info] > git rev-parse --show-toplevel [18ms]
+2026-06-11 19:20:32.252 [info] > git rev-parse --show-toplevel [5ms]
+2026-06-11 19:20:32.284 [info] > git rev-parse --show-toplevel [6ms]
+2026-06-11 19:20:32.302 [info] [Model][doInitialScan] Initial repository scan completed - repositories (0), closed repositories (0), parent repositories (1), unsafe repositories (0)
+2026-06-11 19:20:32.384 [info] > git rev-parse --show-toplevel [30ms]
+2026-06-11 19:20:35.723 [info] > git rev-parse --show-toplevel [395ms]
+2026-06-11 20:06:50.974 [info] [main] Log level: Info
+2026-06-11 20:06:50.987 [info] [main] Validating found git in: "git"
+2026-06-11 20:06:50.987 [info] [main] Using git "2.54.0" from "git"
+2026-06-11 20:06:50.987 [info] [Model][doInitialScan] Initial repository scan started
+2026-06-11 20:06:50.987 [info] > git rev-parse --show-toplevel [20365ms]
+2026-06-11 20:06:58.209 [info] > git rev-parse --git-dir --git-common-dir --show-superproject-working-tree [4762ms]
+2026-06-11 20:06:59.396 [info] [Model][openRepository] Opened repository (path): /home/shiham/.config
+2026-06-11 20:06:59.396 [info] [Model][openRepository] Opened repository (real path): /home/shiham/.config
+2026-06-11 20:06:59.396 [info] [Model][openRepository] Opened repository (kind): repository
+2026-06-11 20:07:01.180 [info] > git config --get commit.template [1595ms]
+2026-06-11 20:07:01.182 [info] > git config --get --local core.virtualfilesystem [1746ms]
+2026-06-11 20:07:01.182 [warning] [Git][config] git config failed: Failed to execute git
+2026-06-11 20:07:07.602 [info] > git check-ignore -v -z --stdin [3540ms]
+2026-06-11 20:07:07.615 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/main refs/remotes/main [5971ms]
+2026-06-11 20:07:08.455 [info] > git rev-parse --show-toplevel [267ms]
+2026-06-11 20:07:08.456 [info] > git for-each-ref --sort -committerdate --format %(refname)%00%(objectname)%00%(*objectname) [373ms]
+2026-06-11 20:07:08.905 [info] > git rev-parse --show-toplevel [400ms]
+2026-06-11 20:07:09.210 [info] > git rev-parse --show-toplevel [265ms]
+2026-06-11 20:07:09.493 [info] > git rev-parse --show-toplevel [31ms]
+2026-06-11 20:07:09.539 [info] > git rev-parse --show-toplevel [11ms]
+2026-06-11 20:07:09.629 [info] > git rev-parse --show-toplevel [51ms]
+2026-06-11 20:07:09.917 [info] > git rev-parse --show-toplevel [186ms]
+2026-06-11 20:07:10.053 [info] > git rev-parse --show-toplevel [32ms]
+2026-06-11 20:07:11.028 [info] > git rev-parse --show-toplevel [54ms]
+2026-06-11 20:07:17.238 [info] > git rev-parse --show-toplevel [166ms]
+2026-06-11 20:07:19.564 [info] > git check-ignore -v -z --stdin [526ms]
+2026-06-11 20:07:19.567 [info] > git rev-parse --show-toplevel [1040ms]
+2026-06-11 20:07:19.698 [info] > git rev-parse --show-toplevel [37ms]
+2026-06-11 20:07:20.461 [info] > git status -z -uall [12436ms] (cancelled)
+2026-06-11 20:07:20.462 [info] > git rev-parse --show-toplevel [737ms]
+2026-06-11 20:07:28.388 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/main refs/remotes/main [7940ms]
+2026-06-11 20:07:28.759 [info] > git config --get --local branch.main.vscode-merge-base [282ms]
+2026-06-11 20:07:28.760 [warning] [Git][config] git config failed: Failed to execute git
+2026-06-11 20:07:28.875 [info] > git rev-parse --show-toplevel [592ms]
+2026-06-11 20:07:28.883 [info] > git config --get commit.template [644ms]
+2026-06-11 20:07:29.109 [info] > git rev-parse --show-toplevel [154ms]
+2026-06-11 20:07:29.160 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/main refs/remotes/main [129ms]
+2026-06-11 20:07:29.163 [info] > git reflog main --grep-reflog=branch: Created from *. [295ms]
+2026-06-11 20:07:29.222 [info] > git rev-parse --show-toplevel [68ms]
+2026-06-11 20:07:29.306 [info] > git symbolic-ref --short refs/remotes/origin/HEAD [91ms]
+2026-06-11 20:07:29.306 [info] fatal: ref refs/remotes/origin/HEAD is not a symbolic ref
+2026-06-11 20:07:29.307 [warning] [Repository][getDefaultBranch] Failed to get default branch details: Failed to execute git.
+2026-06-11 20:07:29.403 [info] > git rev-parse --show-toplevel [125ms]
+2026-06-11 20:07:29.570 [info] > git merge-base refs/heads/main refs/remotes/origin/main [183ms]
+2026-06-11 20:07:30.509 [info] > git diff --raw --numstat --diff-filter=ADMR -z --find-renames=50% d488ce4d9e6ed11884c5621b785bc542aa399052...refs/remotes/origin/main -- [871ms]
+2026-06-11 20:07:30.512 [info] > git rev-parse --show-toplevel [944ms]
+2026-06-11 20:07:30.513 [info] > git for-each-ref --sort -committerdate --format %(refname)%00%(objectname)%00%(*objectname) [978ms]
+2026-06-11 20:07:30.671 [info] > git rev-parse --show-toplevel [34ms]
+2026-06-11 20:07:31.131 [info] > git rev-parse --show-toplevel [52ms]
+2026-06-11 20:07:31.845 [info] > git status -z -uall [2370ms] (cancelled)
+2026-06-11 20:07:31.846 [info] > git rev-parse --show-toplevel [421ms]
+2026-06-11 20:07:42.736 [info] > git rev-parse --show-toplevel [860ms]
+2026-06-11 20:07:42.868 [info] > git check-ignore -v -z --stdin [72ms]
+2026-06-11 20:07:42.876 [info] > git rev-parse --show-toplevel [13ms]
+2026-06-11 20:07:43.332 [info] > git rev-parse --show-toplevel [412ms]
+2026-06-11 20:07:43.694 [info] > git check-ignore -v -z --stdin [111ms]
+2026-06-11 20:07:43.700 [info] > git rev-parse --show-toplevel [282ms]
+2026-06-11 20:07:43.763 [info] > git rev-parse --show-toplevel [15ms]
+2026-06-11 20:07:43.898 [info] > git rev-parse --show-toplevel [28ms]
+2026-06-11 20:07:43.942 [info] > git rev-parse --show-toplevel [10ms]
+2026-06-11 20:07:44.003 [info] > git rev-parse --show-toplevel [22ms]
+2026-06-11 20:07:44.060 [info] > git rev-parse --show-toplevel [18ms]
+2026-06-11 20:07:44.106 [info] > git rev-parse --show-toplevel [8ms]
+2026-06-11 20:07:44.162 [info] > git rev-parse --show-toplevel [15ms]
+2026-06-11 20:07:44.269 [info] > git rev-parse --show-toplevel [15ms]
+2026-06-11 20:07:44.322 [info] > git rev-parse --show-toplevel [7ms]
+2026-06-11 20:07:44.372 [info] > git rev-parse --show-toplevel [8ms]
+2026-06-11 20:07:44.420 [info] > git rev-parse --show-toplevel [11ms]
+2026-06-11 20:07:44.485 [info] > git rev-parse --show-toplevel [22ms]
+2026-06-11 20:07:44.546 [info] > git rev-parse --show-toplevel [14ms]
+2026-06-11 20:07:44.595 [info] > git rev-parse --show-toplevel [12ms]
+2026-06-11 20:07:44.653 [info] > git rev-parse --show-toplevel [5ms]
+2026-06-11 20:07:44.711 [info] > git rev-parse --show-toplevel [17ms]
+2026-06-11 20:07:44.779 [info] > git rev-parse --show-toplevel [22ms]
+2026-06-11 20:07:44.818 [info] > git rev-parse --show-toplevel [8ms]
+2026-06-11 20:07:44.863 [info] > git rev-parse --show-toplevel [7ms]
+2026-06-11 20:07:44.917 [info] > git rev-parse --show-toplevel [12ms]
+2026-06-11 20:07:44.960 [info] > git rev-parse --show-toplevel [8ms]
+2026-06-11 20:07:45.012 [info] > git rev-parse --show-toplevel [13ms]
+2026-06-11 20:07:45.063 [info] > git rev-parse --show-toplevel [18ms]
+2026-06-11 20:07:45.125 [info] > git rev-parse --show-toplevel [24ms]
+2026-06-11 20:07:45.200 [info] > git rev-parse --show-toplevel [13ms]
+2026-06-11 20:07:45.265 [info] > git rev-parse --show-toplevel [19ms]
+2026-06-11 20:07:45.313 [info] > git rev-parse --show-toplevel [9ms]
+2026-06-11 20:07:45.354 [info] > git rev-parse --show-toplevel [9ms]
+2026-06-11 20:07:45.405 [info] > git rev-parse --show-toplevel [16ms]
+2026-06-11 20:07:45.443 [info] > git rev-parse --show-toplevel [8ms]
+2026-06-11 20:07:45.486 [info] > git rev-parse --show-toplevel [9ms]
+2026-06-11 20:07:45.527 [info] > git rev-parse --show-toplevel [9ms]
+2026-06-11 20:07:45.586 [info] > git rev-parse --show-toplevel [13ms]
+2026-06-11 20:07:45.589 [info] [Model][doInitialScan] Initial repository scan completed - repositories (1), closed repositories (0), parent repositories (0), unsafe repositories (0)
+2026-06-11 20:07:45.746 [info] > git show --textconv :matugen/templates/config.toml [112ms]
+2026-06-11 20:07:45.747 [info] > git ls-files --stage -- matugen/templates/config.toml [77ms]
+2026-06-11 20:07:45.819 [info] > git hash-object -t tree /dev/null [10ms]
+2026-06-11 20:07:45.820 [warning] [GitFileSystemProvider][readFile] File not found - git:/home/shiham/.config/matugen/templates/config.toml.git?%7B%22path%22%3A%22%2Fhome%2Fshiham%2F.config%2Fmatugen%2Ftemplates%2Fconfig.toml%22%2C%22ref%22%3A%22%22%7D
+2026-06-11 20:07:45.823 [info] > git hash-object -t tree /dev/null [46ms]
+2026-06-11 20:07:45.823 [warning] [GitFileSystemProvider][stat] File not found - git:/home/shiham/.config/matugen/templates/config.toml.git?%7B%22path%22%3A%22%2Fhome%2Fshiham%2F.config%2Fmatugen%2Ftemplates%2Fconfig.toml%22%2C%22ref%22%3A%22%22%7D
+2026-06-11 20:07:45.827 [info] > git config --get commit.template [81ms]
+2026-06-11 20:07:45.894 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/main refs/remotes/main [28ms]
+2026-06-11 20:07:46.022 [info] > git check-ignore -v -z --stdin [16ms]
+2026-06-11 20:07:46.112 [info] > git for-each-ref --sort -committerdate --format %(refname)%00%(objectname)%00%(*objectname) [29ms]
+2026-06-11 20:07:58.177 [info] > git status -z -uall [12124ms] (cancelled)
+2026-06-11 20:11:35.706 [info] > git check-ignore -v -z --stdin [9ms]
+2026-06-11 20:11:35.990 [info] > git check-ignore -v -z --stdin [12ms]
+2026-06-11 20:11:36.069 [info] > git show --textconv :matugen/config.toml [35ms]
+2026-06-11 20:11:36.074 [warning] [GitFileSystemProvider][readFile] File not found - git:/home/shiham/.config/matugen/config.toml.git?%7B%22path%22%3A%22%2Fhome%2Fshiham%2F.config%2Fmatugen%2Fconfig.toml%22%2C%22ref%22%3A%22%22%7D
+2026-06-11 20:11:36.077 [info] > git ls-files --stage -- matugen/config.toml [10ms]
+2026-06-11 20:11:36.079 [warning] [GitFileSystemProvider][stat] File not found - git:/home/shiham/.config/matugen/config.toml.git?%7B%22path%22%3A%22%2Fhome%2Fshiham%2F.config%2Fmatugen%2Fconfig.toml%22%2C%22ref%22%3A%22%22%7D
+2026-06-11 20:11:48.632 [info] > git check-ignore -v -z --stdin [295ms]
+2026-06-11 20:11:48.740 [info] > git check-ignore -v -z --stdin [11ms]
+2026-06-11 20:11:48.792 [info] > git show --textconv :matugen/templates/color.css [25ms]
+2026-06-11 20:11:48.795 [warning] [GitFileSystemProvider][readFile] File not found - git:/home/shiham/.config/matugen/templates/color.css.git?%7B%22path%22%3A%22%2Fhome%2Fshiham%2F.config%2Fmatugen%2Ftemplates%2Fcolor.css%22%2C%22ref%22%3A%22%22%7D
+2026-06-11 20:11:48.799 [info] > git ls-files --stage -- matugen/templates/color.css [9ms]
+2026-06-11 20:11:48.801 [warning] [GitFileSystemProvider][stat] File not found - git:/home/shiham/.config/matugen/templates/color.css.git?%7B%22path%22%3A%22%2Fhome%2Fshiham%2F.config%2Fmatugen%2Ftemplates%2Fcolor.css%22%2C%22ref%22%3A%22%22%7D
+2026-06-11 20:11:59.759 [info] > git check-ignore -v -z --stdin [165ms]
+2026-06-11 20:11:59.846 [info] > git check-ignore -v -z --stdin [94ms]
+2026-06-11 20:11:59.901 [info] > git show --textconv :matugen/templates/color.lua [25ms]
+2026-06-11 20:11:59.903 [warning] [GitFileSystemProvider][readFile] File not found - git:/home/shiham/.config/matugen/templates/color.lua.git?%7B%22path%22%3A%22%2Fhome%2Fshiham%2F.config%2Fmatugen%2Ftemplates%2Fcolor.lua%22%2C%22ref%22%3A%22%22%7D
+2026-06-11 20:11:59.909 [info] > git ls-files --stage -- matugen/templates/color.lua [9ms]
+2026-06-11 20:11:59.911 [warning] [GitFileSystemProvider][stat] File not found - git:/home/shiham/.config/matugen/templates/color.lua.git?%7B%22path%22%3A%22%2Fhome%2Fshiham%2F.config%2Fmatugen%2Ftemplates%2Fcolor.lua%22%2C%22ref%22%3A%22%22%7D
+2026-06-11 20:12:24.526 [info] > git check-ignore -v -z --stdin [26ms]
+2026-06-11 20:12:24.898 [info] > git check-ignore -v -z --stdin [8ms]
+2026-06-11 20:12:24.972 [info] > git show --textconv :matugen/templates/color.conf [39ms]
+2026-06-11 20:12:24.975 [warning] [GitFileSystemProvider][readFile] File not found - git:/home/shiham/.config/matugen/templates/color.conf.git?%7B%22path%22%3A%22%2Fhome%2Fshiham%2F.config%2Fmatugen%2Ftemplates%2Fcolor.conf%22%2C%22ref%22%3A%22%22%7D
+2026-06-11 20:12:24.982 [info] > git ls-files --stage -- matugen/templates/color.conf [13ms]
+2026-06-11 20:12:24.983 [warning] [GitFileSystemProvider][stat] File not found - git:/home/shiham/.config/matugen/templates/color.conf.git?%7B%22path%22%3A%22%2Fhome%2Fshiham%2F.config%2Fmatugen%2Ftemplates%2Fcolor.conf%22%2C%22ref%22%3A%22%22%7D
+2026-06-11 20:12:33.302 [info] > git check-ignore -v -z --stdin [17ms]
+2026-06-11 20:12:33.386 [info] > git check-ignore -v -z --stdin [13ms]
+2026-06-11 20:12:33.578 [info] > git show --textconv :matugen/templates/color [89ms]
+2026-06-11 20:12:33.579 [info] > git ls-files --stage -- matugen/templates/color [26ms]
+2026-06-11 20:12:33.582 [warning] [GitFileSystemProvider][stat] File not found - git:/home/shiham/.config/matugen/templates/color.git?%7B%22path%22%3A%22%2Fhome%2Fshiham%2F.config%2Fmatugen%2Ftemplates%2Fcolor%22%2C%22ref%22%3A%22%22%7D
+2026-06-11 20:12:33.587 [warning] [GitFileSystemProvider][readFile] File not found - git:/home/shiham/.config/matugen/templates/color.git?%7B%22path%22%3A%22%2Fhome%2Fshiham%2F.config%2Fmatugen%2Ftemplates%2Fcolor%22%2C%22ref%22%3A%22%22%7D
+2026-06-11 20:12:43.086 [info] > git check-ignore -v -z --stdin [29ms]
+2026-06-11 20:12:43.183 [info] > git check-ignore -v -z --stdin [6ms]
+2026-06-11 20:12:43.233 [info] > git show --textconv :matugen/templates/colors.rasi [26ms]
+2026-06-11 20:12:43.235 [warning] [GitFileSystemProvider][readFile] File not found - git:/home/shiham/.config/matugen/templates/colors.rasi.git?%7B%22path%22%3A%22%2Fhome%2Fshiham%2F.config%2Fmatugen%2Ftemplates%2Fcolors.rasi%22%2C%22ref%22%3A%22%22%7D
+2026-06-11 20:12:43.238 [info] > git ls-files --stage -- matugen/templates/colors.rasi [8ms]
+2026-06-11 20:12:43.240 [warning] [GitFileSystemProvider][stat] File not found - git:/home/shiham/.config/matugen/templates/colors.rasi.git?%7B%22path%22%3A%22%2Fhome%2Fshiham%2F.config%2Fmatugen%2Ftemplates%2Fcolors.rasi%22%2C%22ref%22%3A%22%22%7D
+2026-06-11 20:12:46.609 [info] > git check-ignore -v -z --stdin [5ms]
+2026-06-11 20:12:49.696 [info] > git check-ignore -v -z --stdin [6ms]
+2026-06-11 20:12:52.055 [info] > git check-ignore -v -z --stdin [6ms]
+2026-06-11 20:12:58.105 [info] > git check-ignore -v -z --stdin [9ms]
+2026-06-11 20:12:58.166 [info] > git show --textconv :matugen/templates/colors.conf [30ms]
+2026-06-11 20:12:58.168 [warning] [GitFileSystemProvider][readFile] File not found - git:/home/shiham/.config/matugen/templates/colors.conf.git?%7B%22path%22%3A%22%2Fhome%2Fshiham%2F.config%2Fmatugen%2Ftemplates%2Fcolors.conf%22%2C%22ref%22%3A%22%22%7D
+2026-06-11 20:12:58.172 [info] > git ls-files --stage -- matugen/templates/colors.conf [8ms]
+2026-06-11 20:12:58.173 [warning] [GitFileSystemProvider][stat] File not found - git:/home/shiham/.config/matugen/templates/colors.conf.git?%7B%22path%22%3A%22%2Fhome%2Fshiham%2F.config%2Fmatugen%2Ftemplates%2Fcolors.conf%22%2C%22ref%22%3A%22%22%7D
+2026-06-11 20:13:03.246 [info] > git check-ignore -v -z --stdin [8ms]
+2026-06-11 20:13:03.296 [info] > git show --textconv :matugen/templates/colors.css [26ms]
+2026-06-11 20:13:03.298 [warning] [GitFileSystemProvider][readFile] File not found - git:/home/shiham/.config/matugen/templates/colors.css.git?%7B%22path%22%3A%22%2Fhome%2Fshiham%2F.config%2Fmatugen%2Ftemplates%2Fcolors.css%22%2C%22ref%22%3A%22%22%7D
+2026-06-11 20:13:03.300 [info] > git ls-files --stage -- matugen/templates/colors.css [8ms]
+2026-06-11 20:13:03.301 [warning] [GitFileSystemProvider][stat] File not found - git:/home/shiham/.config/matugen/templates/colors.css.git?%7B%22path%22%3A%22%2Fhome%2Fshiham%2F.config%2Fmatugen%2Ftemplates%2Fcolors.css%22%2C%22ref%22%3A%22%22%7D
+2026-06-11 20:13:12.905 [info] > git check-ignore -v -z --stdin [125ms]
+2026-06-11 20:13:13.339 [info] > git blame --root --incremental d488ce4d9e6ed11884c5621b785bc542aa399052 -- matugen/templates/colors.css [78ms]
+2026-06-11 20:13:13.340 [info] fatal: no such path matugen/templates/colors.css in d488ce4d9e6ed11884c5621b785bc542aa399052
+2026-06-11 20:13:21.555 [info] > git check-ignore -v -z --stdin [9ms]
+2026-06-11 20:13:21.616 [info] > git show --textconv :matugen/templates/colors.rasi [27ms]
+2026-06-11 20:13:21.619 [warning] [GitFileSystemProvider][readFile] File not found - git:/home/shiham/.config/matugen/templates/colors.rasi.git?%7B%22path%22%3A%22%2Fhome%2Fshiham%2F.config%2Fmatugen%2Ftemplates%2Fcolors.rasi%22%2C%22ref%22%3A%22%22%7D
+2026-06-11 20:13:21.622 [info] > git ls-files --stage -- matugen/templates/colors.rasi [9ms]
+2026-06-11 20:13:21.623 [warning] [GitFileSystemProvider][stat] File not found - git:/home/shiham/.config/matugen/templates/colors.rasi.git?%7B%22path%22%3A%22%2Fhome%2Fshiham%2F.config%2Fmatugen%2Ftemplates%2Fcolors.rasi%22%2C%22ref%22%3A%22%22%7D
+2026-06-11 20:13:25.257 [info] > git check-ignore -v -z --stdin [13ms]
+2026-06-11 20:13:25.312 [info] > git blame --root --incremental d488ce4d9e6ed11884c5621b785bc542aa399052 -- matugen/templates/colors.rasi [14ms]
+2026-06-11 20:13:25.312 [info] fatal: no such path matugen/templates/colors.rasi in d488ce4d9e6ed11884c5621b785bc542aa399052
+2026-06-11 20:13:35.257 [info] > git check-ignore -v -z --stdin [7ms]
+2026-06-11 20:13:35.305 [info] > git show --textconv :matugen/templates/colors.lua [23ms]
+2026-06-11 20:13:35.309 [warning] [GitFileSystemProvider][readFile] File not found - git:/home/shiham/.config/matugen/templates/colors.lua.git?%7B%22path%22%3A%22%2Fhome%2Fshiham%2F.config%2Fmatugen%2Ftemplates%2Fcolors.lua%22%2C%22ref%22%3A%22%22%7D
+2026-06-11 20:13:35.313 [info] > git ls-files --stage -- matugen/templates/colors.lua [11ms]
+2026-06-11 20:13:35.315 [warning] [GitFileSystemProvider][stat] File not found - git:/home/shiham/.config/matugen/templates/colors.lua.git?%7B%22path%22%3A%22%2Fhome%2Fshiham%2F.config%2Fmatugen%2Ftemplates%2Fcolors.lua%22%2C%22ref%22%3A%22%22%7D
+2026-06-11 20:13:37.559 [info] > git check-ignore -v -z --stdin [7ms]
+2026-06-11 20:13:37.599 [info] > git blame --root --incremental d488ce4d9e6ed11884c5621b785bc542aa399052 -- matugen/templates/colors.lua [8ms]
+2026-06-11 20:13:37.599 [info] fatal: no such path matugen/templates/colors.lua in d488ce4d9e6ed11884c5621b785bc542aa399052
+2026-06-11 20:13:38.878 [info] > git check-ignore -v -z --stdin [11ms]
+2026-06-11 20:13:41.717 [info] > git check-ignore -v -z --stdin [9ms]
+2026-06-11 20:13:41.778 [info] > git show --textconv :matugen/templates/colors.rasi [33ms]
+2026-06-11 20:13:41.779 [info] > git ls-files --stage -- matugen/templates/colors.rasi [10ms]
+2026-06-11 20:13:41.781 [warning] [GitFileSystemProvider][stat] File not found - git:/home/shiham/.config/matugen/templates/colors.rasi.git?%7B%22path%22%3A%22%2Fhome%2Fshiham%2F.config%2Fmatugen%2Ftemplates%2Fcolors.rasi%22%2C%22ref%22%3A%22%22%7D
+2026-06-11 20:13:41.783 [warning] [GitFileSystemProvider][readFile] File not found - git:/home/shiham/.config/matugen/templates/colors.rasi.git?%7B%22path%22%3A%22%2Fhome%2Fshiham%2F.config%2Fmatugen%2Ftemplates%2Fcolors.rasi%22%2C%22ref%22%3A%22%22%7D
+2026-06-11 20:13:42.694 [info] > git check-ignore -v -z --stdin [16ms]
+2026-06-11 20:13:42.763 [info] > git show --textconv :matugen/templates/colors.css [31ms]
+2026-06-11 20:13:42.764 [info] > git ls-files --stage -- matugen/templates/colors.css [9ms]
+2026-06-11 20:13:42.766 [warning] [GitFileSystemProvider][stat] File not found - git:/home/shiham/.config/matugen/templates/colors.css.git?%7B%22path%22%3A%22%2Fhome%2Fshiham%2F.config%2Fmatugen%2Ftemplates%2Fcolors.css%22%2C%22ref%22%3A%22%22%7D
+2026-06-11 20:13:42.768 [warning] [GitFileSystemProvider][readFile] File not found - git:/home/shiham/.config/matugen/templates/colors.css.git?%7B%22path%22%3A%22%2Fhome%2Fshiham%2F.config%2Fmatugen%2Ftemplates%2Fcolors.css%22%2C%22ref%22%3A%22%22%7D
+2026-06-11 20:13:43.947 [info] > git check-ignore -v -z --stdin [34ms]
+2026-06-11 20:13:44.074 [info] > git show --textconv :matugen/templates/colors.conf [56ms]
+2026-06-11 20:13:44.080 [warning] [GitFileSystemProvider][readFile] File not found - git:/home/shiham/.config/matugen/templates/colors.conf.git?%7B%22path%22%3A%22%2Fhome%2Fshiham%2F.config%2Fmatugen%2Ftemplates%2Fcolors.conf%22%2C%22ref%22%3A%22%22%7D
+2026-06-11 20:13:44.096 [info] > git ls-files --stage -- matugen/templates/colors.conf [29ms]
+2026-06-11 20:13:44.099 [warning] [GitFileSystemProvider][stat] File not found - git:/home/shiham/.config/matugen/templates/colors.conf.git?%7B%22path%22%3A%22%2Fhome%2Fshiham%2F.config%2Fmatugen%2Ftemplates%2Fcolors.conf%22%2C%22ref%22%3A%22%22%7D
+2026-06-11 20:13:52.002 [info] > git check-ignore -v -z --stdin [255ms]
+2026-06-11 20:13:52.076 [info] > git blame --root --incremental d488ce4d9e6ed11884c5621b785bc542aa399052 -- matugen/templates/colors.conf [9ms]
+2026-06-11 20:13:52.077 [info] fatal: no such path matugen/templates/colors.conf in d488ce4d9e6ed11884c5621b785bc542aa399052
+2026-06-11 20:27:37.731 [info] > git check-ignore -v -z --stdin [297ms]
+2026-06-11 20:27:37.971 [info] > git show --textconv :matugen/config.toml [55ms]
+2026-06-11 20:27:37.973 [info] > git ls-files --stage -- matugen/config.toml [27ms]
+2026-06-11 20:27:38.008 [info] > git cat-file -s e69de29bb2d1d6434b8b29ae775ad8c2e48c5391 [12ms]
+2026-06-11 20:37:10.981 [info] > git ls-files --stage -- matugen/config.toml [13ms]
+2026-06-11 20:37:11.165 [info] > git cat-file -s e69de29bb2d1d6434b8b29ae775ad8c2e48c5391 [18ms]
+2026-06-11 20:37:11.205 [info] > git show --textconv :matugen/config.toml [9ms]
+2026-06-11 20:37:12.721 [info] > git check-ignore -v -z --stdin [18ms]
+2026-06-11 20:37:14.136 [info] > git check-ignore -v -z --stdin [26ms]
+2026-06-11 20:43:28.765 [info] > git ls-files --stage -- matugen/config.toml [119ms]
+2026-06-11 20:43:28.934 [info] > git cat-file -s e69de29bb2d1d6434b8b29ae775ad8c2e48c5391 [90ms]
+2026-06-11 20:43:28.968 [info] > git show --textconv :matugen/config.toml [11ms]
+2026-06-11 20:44:21.368 [info] > git ls-files --stage -- matugen/config.toml [871ms]
+2026-06-11 20:44:21.448 [info] > git cat-file -s e69de29bb2d1d6434b8b29ae775ad8c2e48c5391 [7ms]
+2026-06-11 20:44:22.178 [info] > git show --textconv :matugen/config.toml [18ms]

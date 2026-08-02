@@ -1,0 +1,31 @@
+{
+  "layer": "top",
+  "position": "top",
+  
+  "include": ["~/.config/waybar/modules/*.jsonc"],
+
+  "modules-left": [
+    "group/menu",
+    "custom/phone",
+    "custom/media"
+  ],
+
+  "modules-center": [
+    "clock",
+    "hyprland/workspaces"
+  ],
+
+  "modules-right": [
+    "pulseaudio",
+    "network",
+    "custom/notification"
+  ],
+
+"group/menu": {
+    "orientation": "inherit",
+    "modules": [
+      "custom/appdrawer", 
+      "custom/powermenu"
+    ]
+  }
+}

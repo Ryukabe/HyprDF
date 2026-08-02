@@ -1,0 +1,53 @@
+@import 'colors/one-dark-pro.css';
+
+* {
+    border: none;
+    border-radius: 0;
+
+    font-family: "Adwaile Sans","JetBrainMono Nerd Font Propo";
+    font-weight: bold;
+    font-size: 13px;
+
+    min-height: 0px;
+    padding: 0px;
+    margin: 0px;
+
+}
+
+window#waybar {
+ background: transparent;
+
+}
+
+tooltip { 
+   background: #282c34;
+   border: 1px solid #3e4451;
+   border-radius: 12px;
+}
+
+tooltip label {
+    color:  #abb2bf;
+    padding: 6px;
+
+}
+
+
+#workspaces {
+    background-color: #282c34;
+    padding: 5px 3px;
+    margin: 0 0 0 12px;
+    border-radius: 18px;
+    border: 1px solid #3e4451;
+    color: #abb2bf;
+
+}
+
+#workspaces button {
+    padding: 0px 6px;
+    margin: 0px 3px;
+    border-radius: 0px;
+    color: transparent;
+    background-color: #3e4451;
+    transition: all 0.3s ease-in-out;wa
+}
+

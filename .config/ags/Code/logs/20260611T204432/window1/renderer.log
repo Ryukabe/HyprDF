@@ -1,0 +1,17 @@
+2026-06-11 20:44:39.767 [warning] Creation of workbench contribution 'workbench.contrib.preferencesActions' took 21ms.
+2026-06-11 20:44:40.069 [warning] Creation of workbench contribution 'workbench.contrib.configurationDefaultOverridesContribution' took 34ms.
+2026-06-11 20:44:44.420 [info] Started local extension host with pid 72341.
+2026-06-11 20:44:47.600 [info] [AccountPolicyGate] apply: state=inactive, reason=undefined, isRestricted=false
+2026-06-11 20:44:53.901 [info] [AccountPolicyGate] apply: state=inactive, reason=undefined, isRestricted=false
+2026-06-11 20:44:58.125 [warning] Creation of workbench contribution 'terminal.chatAgentTools' took 140ms.
+2026-06-11 20:44:58.632 [info] Extension host (LocalProcess pid: 72341) is unresponsive.
+2026-06-11 20:45:07.370 [error] [Extension Host] (node:72341) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `exe --trace-deprecation ...` to show where the warning was created)
+2026-06-11 20:45:07.398 [error] [Extension Host] (node:72341) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+2026-06-11 20:45:08.025 [info] Extension host (LocalProcess pid: 72341) is responsive.
+2026-06-11 20:45:08.171 [info] [perf] Render performance baseline is 577ms
+2026-06-11 20:45:09.807 [info] Settings Sync: Account status changed from uninitialized to available
+2026-06-11 20:45:38.474 [warning] Attempted to report in-progress status for unknown chat session type 'copilot-cloud-agent'
+2026-06-11 20:45:38.514 [warning] Attempted to report in-progress status for unknown chat session type 'copilotcli'
+2026-06-11 20:45:38.516 [warning] Attempted to report in-progress status for unknown chat session type 'claude-code'
+2026-06-11 20:45:39.124 [warning] [lifecycle] onWillShutdown is taking a long time, pending operations: join.chatEditingSession
