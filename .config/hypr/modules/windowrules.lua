@@ -19,6 +19,14 @@ hl.window_rule({
     no_focus = true,
 })
 
+-- Polkit authentication agent
+hl.window_rule({
+    name   = "polkit-gnome",
+    match  = { class = "^(polkit-gnome-authentication-agent-1|Polkit-gnome-authentication-agent-1)$" },
+    float  = true,
+    center = true,
+})
+
 -- hyprland-run popup
 hl.window_rule({
     name  = "move-hyprland-run",

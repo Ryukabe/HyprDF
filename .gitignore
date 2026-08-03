@@ -10,6 +10,11 @@
 .cache/
 .local/
 Pictures/
+Downloads/
+Documents/
+1.Project/
+2.Area/
+3.Resources/
 
 # Tool configurations & installed plugins
 .copilot/
@@ -28,4 +33,6 @@ zsh-syntax-highlighting/
 .config/yay
 .config/mimeapps.list
 .config/gh/
-
+.config/user-dirs.dirs
+.config/user-dirs.locale
+.config/dconf
