@@ -12,9 +12,12 @@
 Pictures/
 Downloads/
 Documents/
-1.Project/
-2.Area/
-3.Resources/
+Music/
+Videos/
+Public/
+01.Project/
+02.Area/
+03.Resource/
 
 # Tool configurations & installed plugins
 .copilot/
@@ -36,3 +39,5 @@ zsh-syntax-highlighting/
 .config/user-dirs.dirs
 .config/user-dirs.locale
 .config/dconf
+ .dotnet/
+

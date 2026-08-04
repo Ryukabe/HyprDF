@@ -57,20 +57,20 @@ DESKTOP_PKGS=(
     file-roller
     gvfs
     gvfs-smb
-    nwg-look            # GTK theme switcher
+    nwg-look            
 
     # Screenshots, Clipboard & Utilities
     hyprshot
     wl-clipboard
     wl-clip-persist
     cliphist
-    #snappy-switcher     # Alt-Tab switcher
+    #snappy-switcher    # Alt-Tab switcher
 
     # Bar, Wallpaper, Notifications
     waybar
-    awww                # Rust wallpaper daemon
+    awww                
     hypridle
-    swaync              # Sway Notification Center
+    swaync              
 
     # Audio & Media Controls
     pipewire
@@ -85,8 +85,10 @@ DESKTOP_PKGS=(
     network-manager-applet
     kitty
 
-    # Cursors & Themes
-    apple-cursor        # macOS cursor theme for hyprctl setcursor
+    # Cursors ,Iocn & Themes 
+    apple-cursor        
+    papirus-icon-theme
+    papirus-folders
 
     # Fonts (JetBrains Mono, Geist Mono, Rubik, Roboto, Apple SF Pro)
     ttf-jetbrains-mono-nerd

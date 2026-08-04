@@ -1,0 +1,4 @@
+module styles
+singleton Colors 1.0 Colors.qml
+singleton Dimens 1.0 Dimens.qml
+singleton Wallpaper 1.0 Wallpaper.qml
