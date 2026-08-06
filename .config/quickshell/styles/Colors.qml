@@ -5,6 +5,12 @@ QtObject {
     // Base Colors
     readonly property color bg: "#0f1419"
     readonly property color fg: "#e6e1cf"
+    readonly property color fgMuted: "#5c6773"
+    readonly property color bgSurface: "#131721"
+    readonly property color surface: "#131721"
+    readonly property color subtext: "#5c6773"
+    readonly property color border: "#2d3640"
+    readonly property color accent: "#73d0ff"
 
     // Normal Colors
     readonly property color black: "#131721"

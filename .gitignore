@@ -5,6 +5,8 @@
 .bashrc
 .zsh_history
 .zsh_hisotry
+.pcloud/
+.pki/
 
 # Large cache & system directories
 .cache/
@@ -18,6 +20,7 @@ Public/
 01.Project/
 02.Area/
 03.Resource/
+pCloudDrive
 
 # Tool configurations & installed plugins
 .copilot/
@@ -36,8 +39,17 @@ zsh-syntax-highlighting/
 .config/yay
 .config/mimeapps.list
 .config/gh/
+.config/kdeconnect/
+.config/nwg-look/
+.config/autostart/
 .config/user-dirs.dirs
 .config/user-dirs.locale
 .config/dconf
- .dotnet/
+.dotnet/
 .config/spotify/
+.config/spicetify/
+.config/htop/
+.config/mozilla/
+.config/pcloud/
+.config/nautilus
+

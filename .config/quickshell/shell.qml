@@ -1,7 +1,11 @@
+pragma ComponentBehavior: Bound
+
 import Quickshell
 import QtQuick
-import "./modules/bar"
+import "modules"
 
-Scope {
-    Bar{}
+ShellRoot {
+    id: root
+
+    Bar {}
 }
