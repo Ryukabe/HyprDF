@@ -1,5 +1,7 @@
 local mainMod = "SUPER"
 
+--- System ---
+
 -- Window management
 hl.bind(mainMod .. " + SHIFT + F",     hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + SHIFT + P",     hl.dsp.window.pseudo())
@@ -51,7 +53,28 @@ hl.bind("XF86AudioPrev",   hl.dsp.exec_cmd("playerctl previous"),   { locked = t
 hl.bind("CTRL + ALT + DELETE",         hl.dsp.exec_cmd("hyprctl kill"))
 hl.bind("ALT + F4",                    hl.dsp.window.close())
 
--- Apps
+
+--- QuickShell ---
+
+-- App Launcher
+hl.bind(mainMod .. " + ALT + Space",         hl.dsp.exec_cmd("qs ipc call applauncher toggle"))
+
+-- Control Panel / Quick Settings
+hl.bind(mainMod .. " + ALT + A",             hl.dsp.exec_cmd("qs ipc call controlpanel toggle"))
+
+-- Power Menu
+hl.bind(mainMod .. " + ALT + F4",        hl.dsp.exec_cmd("qs ipc call powermenu toggle"))
+
+-- Lockscreen
+hl.bind(mainMod .. " + ALT + L",             hl.dsp.exec_cmd("hyprlock -c $HOME/.config/hypr/hyprlock/hyprlock.conf"))
+
+-- Theme Switcher
+hl.bind(mainMod .. " + ALT + SHIFT + T",     hl.dsp.exec_cmd("$HOME/.config/themes/theme-switcher.sh"))
+
+-- Wallpaper Switcher
+hl.bind(mainMod .. " + ALT + W", hl.dsp.exec_cmd("qs ipc call wallpaper toggle"))
+
+--- Apps ---
 
 --Terminal
 hl.bind(mainMod .. " + RETURN",        hl.dsp.exec_cmd("kitty"))
@@ -111,7 +134,3 @@ hl.bind(mainMod .. " + P",             hl.dsp.exec_cmd("hyprpicker -a -f hex"))
 -- Alt + Tab
 --hl.bind("ALT + TAB",                   hl.dsp.exec_cmd("snappy-switcher next"))
 
-
---- QuickShell ---
-hl.bind(mainMod .. " + CTRL + Q",     hl.dsp.exec_cmd("$HOME/.config/quickshell/quickshell.sh"))
-hl.bind(mainMod .. " + ESCAPE",            hl.dsp.exec_cmd("qs ipc call powermenu toggle")) --Quickshell powermenu
