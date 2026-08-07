@@ -61,7 +61,7 @@ QtObject {
     readonly property color brightWhite: darkMode ? "#ffffff" : "#131721"
 
     // ---- Mica effect — see below ----
-    readonly property real micaAlpha: 0.7
+    readonly property real micaAlpha: 0.9
     readonly property color bgMica: Qt.rgba(bg.r, bg.g, bg.b, micaAlpha)
     readonly property color bgSurfaceMica: Qt.rgba(bgSurface.r, bgSurface.g, bgSurface.b, micaAlpha)
 }

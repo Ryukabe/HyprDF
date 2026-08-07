@@ -1,2 +1,2 @@
-local theme = require("colors.custom.everforest")
+local theme = require("colors.custom.gruvbox")
 return theme

@@ -7,8 +7,8 @@ import "../../services"
 
 Rectangle {
     id: root
-    implicitWidth: 360
-    implicitHeight: 56
+    implicitWidth: 480
+    implicitHeight: 64
     color: "transparent"
 
     SystemClock {
@@ -18,13 +18,13 @@ Rectangle {
 
     RowLayout {
         anchors.fill: parent
-        anchors.margins: Dimens.paddingSm
-        spacing: 12
+        anchors.margins: Dimens.paddingMd
+        spacing: 16
 
         // --- Album art ---
         Rectangle {
-            Layout.preferredWidth: 36
-            Layout.preferredHeight: 36
+            Layout.preferredWidth: 40
+            Layout.preferredHeight: 40
             Layout.alignment: Qt.AlignVCenter
             radius: Dimens.radiusSmall
             color: Colors.surface
@@ -35,12 +35,13 @@ Rectangle {
                 source: AudioService.artUrl
                 fillMode: Image.PreserveAspectCrop
                 visible: AudioService.artUrl !== ""
+                asynchronous: true
             }
             Text {
                 anchors.centerIn: parent
                 text: "󰎈"
                 font.family: "JetBrains Mono Nerd Font Propo"
-                font.pixelSize: 16
+                font.pixelSize: 18
                 color: Colors.subtext
                 visible: AudioService.artUrl === ""
             }
@@ -49,7 +50,8 @@ Rectangle {
         // --- Track info + transport controls ---
         ColumnLayout {
             Layout.alignment: Qt.AlignVCenter
-            spacing: 2
+            spacing: 3
+            Layout.preferredWidth: 140
 
             Text {
                 text: AudioService.trackTitle
@@ -57,19 +59,19 @@ Rectangle {
                 font.pixelSize: Dimens.fontSizeSm
                 font.bold: true
                 elide: Text.ElideRight
-                Layout.maximumWidth: 120
+                Layout.maximumWidth: 140
             }
             Text {
                 text: AudioService.trackArtist
                 color: Colors.fgMuted
                 font.pixelSize: 10
                 elide: Text.ElideRight
-                Layout.maximumWidth: 120
+                Layout.maximumWidth: 140
             }
 
             RowLayout {
-                spacing: 10
-                Layout.topMargin: 2
+                spacing: 12
+                Layout.topMargin: 3
 
                 Text {
                     text: "󰒮"
@@ -101,46 +103,46 @@ Rectangle {
         Text {
             text: Qt.formatDateTime(clock.date, "hh:mm")
             color: Colors.fg
-            font.pixelSize: 22
+            font.pixelSize: 26
             font.weight: Font.DemiBold
             Layout.alignment: Qt.AlignVCenter
+            Layout.rightMargin: 14
         }
 
-        // --- Mini week strip: S M T W T F S with dates, today highlighted ---
+        // --- Week strip ---
         RowLayout {
             Layout.alignment: Qt.AlignVCenter
-            spacing: 4
+            spacing: 8
 
             Repeater {
                 model: 7
 
                 ColumnLayout {
-                    // Center this column on "today" — offsets -3..+3 from now
                     readonly property date dayDate: {
                         var d = new Date(clock.date)
                         d.setDate(d.getDate() + (index - 3))
                         return d
                     }
                     readonly property bool isToday: index === 3
-                    spacing: 2
+                    spacing: 4
 
                     Text {
                         text: Qt.formatDateTime(dayDate, "ddd")[0]
                         color: isToday ? Colors.accent : Colors.fgMuted
-                        font.pixelSize: 9
+                        font.pixelSize: 10
                         Layout.alignment: Qt.AlignHCenter
                     }
                     Rectangle {
-                        Layout.preferredWidth: 18
-                        Layout.preferredHeight: 18
-                        radius: 9
+                        Layout.preferredWidth: 22
+                        Layout.preferredHeight: 22
+                        radius: 11
                         color: isToday ? Colors.accent : "transparent"
 
                         Text {
                             anchors.centerIn: parent
                             text: Qt.formatDateTime(dayDate, "d")
                             color: isToday ? Colors.bg : Colors.fg
-                            font.pixelSize: 10
+                            font.pixelSize: 11
                             font.bold: isToday
                         }
                     }
@@ -148,13 +150,14 @@ Rectangle {
             }
         }
 
-        // --- Wifi / battery (unchanged behavior, opens control center) ---
+        // --- Wifi / battery ---
         Text {
             text: "󰤨"
             color: Colors.fg
             font.family: "JetBrains Mono Nerd Font Propo"
-            font.pixelSize: 14
+            font.pixelSize: 15
             Layout.alignment: Qt.AlignVCenter
+            Layout.leftMargin: 10
             TapHandler { onTapped: ShellState.showPage("control") }
         }
         Text {
@@ -164,9 +167,8 @@ Rectangle {
             }
             color: Colors.fg
             font.family: "JetBrains Mono Nerd Font Propo"
-            font.pixelSize: 14
+            font.pixelSize: 15
             Layout.alignment: Qt.AlignVCenter
-            TapHandler { onTapped: ShellState.showPage("control") }
         }
     }
 }

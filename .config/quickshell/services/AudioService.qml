@@ -12,7 +12,7 @@ Singleton {
 
     readonly property string trackTitle: activePlayer?.trackTitle ?? "No Media Playing"
     readonly property string trackArtist: activePlayer?.trackArtist ?? "Unknown Artist"
-    readonly property string artUrl: activePlayer?.trackUrl ?? ""
+    readonly property string artUrl: activePlayer?.trackArtUrl ?? ""
     readonly property bool isPlaying: activePlayer?.playbackState === MprisPlaybackState.Playing
 
     function togglePlayPause() {

@@ -125,7 +125,7 @@ echo ""
 echo -e "${CYAN}→ Applying Waybar CSS...${NC}"
 cp "$THEME_DIR/waybar/colors.css" "$HOME/.config/waybar/colors/colors.css" > /dev/null 2>&1
 echo -e "${CYAN}→ Restarting Waybar...${NC}"
-pkill waybar > /dev/null 2>&1 && ~/.config/waybar/scripts/relaunch.sh > /dev/null 2>&1 & disown
+pkill waybar > /dev/null 2>&1 && ~/.config/waybar/scripts/reload.sh > /dev/null 2>&1 & disown
 echo ""
 
 # Rofi theme
@@ -136,7 +136,7 @@ echo ""
 # Terminal theme (Kitty)
 echo -e "${CYAN}→ Applying Kitty terminal theme...${NC}"
 case "$THEME" in
-    ayu|everforest|gruvbox|catppuccin|tokyonight|monochrome|kanagawa|dragon|nord|noir|nightfox|carbonfox|rosepine|vesper|rxyhn|vira-palenight|horizon|material-you|anime)
+    ayu|everforest|gruvbox|catppuccin|tokyonight|monochrome|kanagawa|dragon|nightfox|carbonfox|rosepine|vesper|rxyhn|horizon|material-you|anime)
         cp "$THEME_DIR/kitty/colors.conf" "$HOME/.config/kitty/colors/colors.conf" > /dev/null 2>&1
         ;;
     *)
