@@ -1,3 +1,4 @@
 module components.bar
 Clock 1.0 Clock.qml
 MediaExpanded 1.0 MediaExpanded.qml
+StatusBar 1.0 StatusBar.qml

@@ -1,2 +1,4 @@
 module services
 singleton AudioService 1.0 AudioService.qml
+singleton ShellState 1.0 ShellState.qml
+

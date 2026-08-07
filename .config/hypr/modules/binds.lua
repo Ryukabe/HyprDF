@@ -110,3 +110,8 @@ hl.bind(mainMod .. " + P",             hl.dsp.exec_cmd("hyprpicker -a -f hex"))
 
 -- Alt + Tab
 --hl.bind("ALT + TAB",                   hl.dsp.exec_cmd("snappy-switcher next"))
+
+
+--- QuickShell ---
+hl.bind(mainMod .. " + CTRL + Q",     hl.dsp.exec_cmd("$HOME/.config/quickshell/quickshell.sh"))
+hl.bind(mainMod .. " + ESCAPE",            hl.dsp.exec_cmd("qs ipc call powermenu toggle")) --Quickshell powermenu

@@ -1,2 +1,4 @@
 module modules
 Bar 1.0 Bar.qml
+OSD 1.0 OSD.qml
+PowerMenu 1.0 PowerMenu.qml

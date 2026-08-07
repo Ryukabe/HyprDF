@@ -1,3 +1,6 @@
+--layerrule = blur, quickshell:island
+--layerrule = ignore_alpha 0.2, quickshell:island
+
 -- Waybar
 hl.layer_rule({
     match        = { namespace = "waybar" },
