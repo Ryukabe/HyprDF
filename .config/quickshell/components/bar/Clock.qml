@@ -24,8 +24,8 @@ Item {
             color: Colors.fg
             font {
                 family: Fonts.display
-                pixelSize: Dimens.fontSizeSm
-                weight: Font.DemiBold
+                pixelSize: 13
+                weight: 600
             }
         }
 

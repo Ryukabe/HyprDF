@@ -1,4 +1,6 @@
 module services
 singleton AudioService 1.0 AudioService.qml
 singleton ShellState 1.0 ShellState.qml
+singleton VolumeService 1.0 VolumeService.qml
+singleton BrightnessService 1.0 BrightnessService.qml
 

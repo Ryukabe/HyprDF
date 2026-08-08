@@ -28,8 +28,8 @@ hl.bind(mainMod .. " + mouse:272",     hl.dsp.window.drag(),   { mouse = true })
 hl.bind(mainMod .. " + mouse:273",     hl.dsp.window.resize(), { mouse = true })
 
 -- Laptop Brightness & Volume (With Fn keys)
-hl.bind("XF86MonBrightnessUp",    hl.dsp.exec_cmd("$HOME/.config/hypr/scripts/brightness.sh --inc"), { locked = true, repeating = true })
-hl.bind("XF86MonBrightnessDown",  hl.dsp.exec_cmd("$HOME/.config/hypr/scripts/brightness.sh --dec"), { locked = true, repeating = true })
+--hl.bind("XF86MonBrightnessUp",    hl.dsp.exec_cmd("$HOME/.config/hypr/scripts/brightness.sh --inc"), { locked = true, repeating = true })
+--hl.bind("XF86MonBrightnessDown",  hl.dsp.exec_cmd("$HOME/.config/hypr/scripts/brightness.sh --dec"), { locked = true, repeating = true })
 hl.bind("XF86AudioRaiseVolume",   hl.dsp.exec_cmd("$HOME/.config/hypr/scripts/volume_wpctl.sh --inc"), { locked = true, repeating = true })
 hl.bind("XF86AudioLowerVolume",   hl.dsp.exec_cmd("$HOME/.config/hypr/scripts/volume_wpctl.sh --dec"),      { locked = true, repeating = true })
 hl.bind("XF86AudioMute",          hl.dsp.exec_cmd("$HOME/.config/hypr/scripts/volume_wpctl.sh --toggle"),     { locked = true, repeating = true })
@@ -73,6 +73,10 @@ hl.bind(mainMod .. " + ALT + SHIFT + T",     hl.dsp.exec_cmd("$HOME/.config/them
 
 -- Wallpaper Switcher
 hl.bind(mainMod .. " + ALT + W", hl.dsp.exec_cmd("qs ipc call wallpaper toggle"))
+
+-- Brightness Control
+hl.bind("XF86MonBrightnessUp",    hl.dsp.exec_cmd("qs ipc call brightness increase"), { locked = true, repeating = true })
+hl.bind("XF86MonBrightnessDown",  hl.dsp.exec_cmd("qs ipc call brightness decrease"), { locked = true, repeating = true })
 
 --- Apps ---
 

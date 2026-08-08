@@ -20,12 +20,14 @@ QtObject {
 
     readonly property int spacingSmall: 6
     readonly property int spacingMedium: 12
+    readonly property int spacingLarge: 18
     readonly property int spacingSm: spacingSmall
     readonly property int spacingMd: spacingMedium
+    readonly property int spacingLg: spacingLarge
 
     readonly property int marginSmall: 6
     readonly property int marginMedium: 12
-    readonly property int marginSm: marginSmall
+    readonly property int marginLg: marginMedium
 
     // Font Sizes
     readonly property int fontSizeSm: 12

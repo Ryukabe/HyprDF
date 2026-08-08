@@ -1,2 +1,2 @@
-local theme = require("colors.custom.gruvbox")
+local theme = require("colors.custom.tokyonight")
 return theme

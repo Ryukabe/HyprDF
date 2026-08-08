@@ -52,7 +52,7 @@ inc_volume() {
     if is_muted; then
         toggle_mute
     else
-        wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+ --limit 1.5
+        wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+ --limit 1.0
         notify_user
     fi
 }
