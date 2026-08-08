@@ -23,7 +23,7 @@ Item {
             text: Qt.formatDateTime(clock.date, "hh:mm AP")
             color: Colors.fg
             font {
-                family: "JetBrains Mono Nerd Font Propo"
+                family: Fonts.display
                 pixelSize: Dimens.fontSizeSm
                 weight: Font.DemiBold
             }
@@ -32,8 +32,8 @@ Item {
         Text {
             text: "󰎈"
             color: Colors.accent
-            font.family: "JetBrains Mono Nerd Font Propo"
-            font.pixelSize: 14
+            font.family: Fonts.nerdFont
+            font.pixelSize: Dimens.fontSizeSm
             visible: AudioService.isPlaying
         }
     }

@@ -1,174 +1,162 @@
 import QtQuick
-import QtQuick.Layouts
 import Quickshell
-import Quickshell.Services.UPower
 import "../../styles"
 import "../../services"
 
 Rectangle {
     id: root
-    implicitWidth: 480
-    implicitHeight: 64
-    color: "transparent"
+    implicitWidth: 400
+    implicitHeight: 74
+    color: Colors.bg
+    radius: 16
 
     SystemClock {
         id: clock
         precision: SystemClock.Minutes
     }
 
-    RowLayout {
-        anchors.fill: parent
-        anchors.margins: Dimens.paddingMd
-        spacing: 16
+    Rectangle {
+        id: art
+        anchors.left: parent.left
+        anchors.top: parent.top
+        anchors.margins: 12
+        width: 50
+        height: 50
+        radius: 10
+        color: Colors.surface
+        clip: true
 
-        // --- Album art ---
-        Rectangle {
-            Layout.preferredWidth: 40
-            Layout.preferredHeight: 40
-            Layout.alignment: Qt.AlignVCenter
-            radius: Dimens.radiusSmall
-            color: Colors.surface
-            clip: true
-
-            Image {
-                anchors.fill: parent
-                source: AudioService.artUrl
-                fillMode: Image.PreserveAspectCrop
-                visible: AudioService.artUrl !== ""
-                asynchronous: true
-            }
-            Text {
-                anchors.centerIn: parent
-                text: "󰎈"
-                font.family: "JetBrains Mono Nerd Font Propo"
-                font.pixelSize: 18
-                color: Colors.subtext
-                visible: AudioService.artUrl === ""
-            }
+        Image {
+            anchors.fill: parent
+            source: AudioService.artUrl
+            fillMode: Image.PreserveAspectCrop
+            visible: AudioService.artUrl !== ""
+            asynchronous: true
         }
-
-        // --- Track info + transport controls ---
-        ColumnLayout {
-            Layout.alignment: Qt.AlignVCenter
-            spacing: 3
-            Layout.preferredWidth: 140
-
-            Text {
-                text: AudioService.trackTitle
-                color: Colors.fg
-                font.pixelSize: Dimens.fontSizeSm
-                font.bold: true
-                elide: Text.ElideRight
-                Layout.maximumWidth: 140
-            }
-            Text {
-                text: AudioService.trackArtist
-                color: Colors.fgMuted
-                font.pixelSize: 10
-                elide: Text.ElideRight
-                Layout.maximumWidth: 140
-            }
-
-            RowLayout {
-                spacing: 12
-                Layout.topMargin: 3
-
-                Text {
-                    text: "󰒮"
-                    color: Colors.fg
-                    font.family: "JetBrains Mono Nerd Font Propo"
-                    font.pixelSize: 13
-                    TapHandler { onTapped: AudioService.previousTrack() }
-                }
-                Text {
-                    text: AudioService.isPlaying ? "󰏤" : "󰐊"
-                    color: Colors.accent
-                    font.family: "JetBrains Mono Nerd Font Propo"
-                    font.pixelSize: 14
-                    TapHandler { onTapped: AudioService.togglePlayPause() }
-                }
-                Text {
-                    text: "󰒭"
-                    color: Colors.fg
-                    font.family: "JetBrains Mono Nerd Font Propo"
-                    font.pixelSize: 13
-                    TapHandler { onTapped: AudioService.nextTrack() }
-                }
-            }
-        }
-
-        Item { Layout.fillWidth: true }
-
-        // --- Time ---
         Text {
-            text: Qt.formatDateTime(clock.date, "hh:mm")
-            color: Colors.fg
-            font.pixelSize: 26
-            font.weight: Font.DemiBold
-            Layout.alignment: Qt.AlignVCenter
-            Layout.rightMargin: 14
+            anchors.centerIn: parent
+            text: "󰎈"
+            font.family: "JetBrains Mono Nerd Font Propo"
+            font.pixelSize: 18
+            color: Colors.subtext
+            visible: AudioService.artUrl === ""
         }
+    }
 
-        // --- Week strip ---
-        RowLayout {
-            Layout.alignment: Qt.AlignVCenter
-            spacing: 8
+    Column {
+        anchors.left: art.right
+        anchors.top: parent.top
+        anchors.topMargin: 12
+        anchors.leftMargin: 10
+        spacing: 1
 
-            Repeater {
-                model: 7
+        Text {
+            text: AudioService.trackTitle
+            color: Colors.fg
+            font.pixelSize: 12
+            font.bold: true
+            elide: Text.ElideRight
+            width: 110
+        }
+        Text {
+            text: AudioService.trackArtist
+            color: Colors.fgMuted
+            font.pixelSize: 10
+            elide: Text.ElideRight
+            width: 110
+        }
+        Text {
+            text: AudioService.trackAlbum.toUpperCase()
+            color: Colors.fgMuted
+            font.pixelSize: 9
+            elide: Text.ElideRight
+            width: 110
+            visible: AudioService.trackAlbum !== ""
+        }
+    }
 
-                ColumnLayout {
-                    readonly property date dayDate: {
-                        var d = new Date(clock.date)
-                        d.setDate(d.getDate() + (index - 3))
-                        return d
-                    }
-                    readonly property bool isToday: index === 3
-                    spacing: 4
+    Row {
+        anchors.left: art.left
+        anchors.top: art.bottom
+        anchors.topMargin: 6
+        spacing: 10
+
+        Text {
+            text: "󰒮"
+            color: Colors.fg
+            font.family: "JetBrains Mono Nerd Font Propo"
+            font.pixelSize: 12
+            TapHandler { onTapped: AudioService.previousTrack() }
+        }
+        Text {
+            text: AudioService.isPlaying ? "󰏤" : "󰐊"
+            color: Colors.fg
+            font.family: "JetBrains Mono Nerd Font Propo"
+            font.pixelSize: 13
+            TapHandler { onTapped: AudioService.togglePlayPause() }
+        }
+        Text {
+            text: "󰒭"
+            color: Colors.fg
+            font.family: "JetBrains Mono Nerd Font Propo"
+            font.pixelSize: 12
+            TapHandler { onTapped: AudioService.nextTrack() }
+        }
+    }
+
+    Text {
+        id: timeText
+        anchors.right: weekStrip.left
+        anchors.rightMargin: 14
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.verticalCenterOffset: -14
+        text: Qt.formatDateTime(clock.date, "hh:mm")
+        color: Colors.fg
+        font.pixelSize: 18
+        font.weight: Font.DemiBold
+    }
+
+    Row {
+        id: weekStrip
+        anchors.right: parent.right
+        anchors.rightMargin: 14
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.verticalCenterOffset: -8
+        spacing: 4
+
+        Repeater {
+            model: 7
+
+            Column {
+                readonly property date dayDate: {
+                    var d = new Date(clock.date)
+                    d.setDate(d.getDate() + (index - 3))
+                    return d
+                }
+                readonly property bool isToday: index === 3
+                spacing: 2
+
+                Text {
+                    text: Qt.formatDateTime(dayDate, "ddd")[0]
+                    color: isToday ? Colors.accent : Colors.fgMuted
+                    font.pixelSize: 9
+                    anchors.horizontalCenter: parent.horizontalCenter
+                }
+                Rectangle {
+                    width: 18
+                    height: 18
+                    radius: 9
+                    color: isToday ? Colors.accent : "transparent"
 
                     Text {
-                        text: Qt.formatDateTime(dayDate, "ddd")[0]
-                        color: isToday ? Colors.accent : Colors.fgMuted
+                        anchors.centerIn: parent
+                        text: Qt.formatDateTime(dayDate, "d")
+                        color: isToday ? Colors.bg : Colors.fg
                         font.pixelSize: 10
-                        Layout.alignment: Qt.AlignHCenter
-                    }
-                    Rectangle {
-                        Layout.preferredWidth: 22
-                        Layout.preferredHeight: 22
-                        radius: 11
-                        color: isToday ? Colors.accent : "transparent"
-
-                        Text {
-                            anchors.centerIn: parent
-                            text: Qt.formatDateTime(dayDate, "d")
-                            color: isToday ? Colors.bg : Colors.fg
-                            font.pixelSize: 11
-                            font.bold: isToday
-                        }
+                        font.bold: isToday
                     }
                 }
             }
-        }
-
-        // --- Wifi / battery ---
-        Text {
-            text: "󰤨"
-            color: Colors.fg
-            font.family: "JetBrains Mono Nerd Font Propo"
-            font.pixelSize: 15
-            Layout.alignment: Qt.AlignVCenter
-            Layout.leftMargin: 10
-            TapHandler { onTapped: ShellState.showPage("control") }
-        }
-        Text {
-            text: {
-                const pct = Math.round((UPower.displayDevice?.percentage ?? 0) * 100)
-                return "󰁹 " + pct + "%"
-            }
-            color: Colors.fg
-            font.family: "JetBrains Mono Nerd Font Propo"
-            font.pixelSize: 15
-            Layout.alignment: Qt.AlignVCenter
         }
     }
 }

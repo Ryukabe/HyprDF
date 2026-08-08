@@ -28,8 +28,9 @@ QtObject {
     readonly property int marginSm: marginSmall
 
     // Font Sizes
-    readonly property int fontSizeSm: 11
+    readonly property int fontSizeSm: 12
     readonly property int fontSizeMd: 14
+    readonly property int fontSizeLg: 16
 
     // Component Sizes
     readonly property int barHeight: 40

@@ -70,7 +70,7 @@ PanelWindow {
         }
 
 Component { id: clockPage; Clock {} }
-        Component { id: statusPage; StatusBar {} }
+        Component { id: statusPage; StatusPanel {} }
         Component { id: mediaPage; MediaExpanded { color: "transparent" } }
 
         Component {
