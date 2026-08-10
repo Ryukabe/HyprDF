@@ -89,21 +89,21 @@ Rectangle {
                 text: "󰒮"
                 color: Colors.fg
                 font.family: "JetBrains Mono Nerd Font Propo"
-                font.pixelSize: 14
+                font.pixelSize: 20
                 TapHandler { onTapped: AudioService.previousTrack() }
             }
             Text {
                 text: AudioService.isPlaying ? "󰏤" : "󰐊"
                 color: Colors.accent
                 font.family: "JetBrains Mono Nerd Font Propo"
-                font.pixelSize: 15
+                font.pixelSize: 20
                 TapHandler { onTapped: AudioService.togglePlayPause() }
             }
             Text {
                 text: "󰒭"
                 color: Colors.fg
                 font.family: "JetBrains Mono Nerd Font Propo"
-                font.pixelSize: 14
+                font.pixelSize: 20
                 TapHandler { onTapped: AudioService.nextTrack() }
             }
         }

@@ -1,3 +1,5 @@
 module modules
 Bar 1.0 Bar.qml
 PowerMenu 1.0 PowerMenu.qml
+AppLauncher 1.0 AppLauncher.qml
+

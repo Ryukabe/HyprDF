@@ -6,7 +6,7 @@ import "modules"
 
 ShellRoot {
     id: root
-
+    
     Bar {}
     
 }

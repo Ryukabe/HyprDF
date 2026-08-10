@@ -6,8 +6,8 @@ hl.on("hyprland.start", function()
     -- System tools
     hl.exec_cmd("awww-daemon")
     hl.exec_cmd("hyprctl setcursor macOS 24")
-    hl.exec_cmd("$HOME/.config/waybar/scripts/reload.sh")
-    hl.exec_cmd("quickshell")
+    --hl.exec_cmd("$HOME/.config/waybar/scripts/reload.sh")
+    hl.exec_cmd("qs")
     hl.exec_cmd("swaync")
     hl.exec_cmd("hypridle")
     

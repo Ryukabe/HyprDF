@@ -10,7 +10,7 @@ Rectangle {
 
     implicitWidth: 160
     implicitHeight: 36
-    color: Colors.bg
+    color: "transparent"
     radius: height / 2
 
     Text {

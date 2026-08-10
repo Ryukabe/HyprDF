@@ -57,13 +57,13 @@ hl.bind("ALT + F4",                    hl.dsp.window.close())
 --- QuickShell ---
 
 -- App Launcher
-hl.bind(mainMod .. " + ALT + Space",         hl.dsp.exec_cmd("qs ipc call applauncher toggle"))
+hl.bind(mainMod .. " + Space ",              hl.dsp.exec_cmd("qs ipc call launcher toggle"), { locked = true })
 
 -- Control Panel / Quick Settings
 hl.bind(mainMod .. " + ALT + A",             hl.dsp.exec_cmd("qs ipc call controlpanel toggle"))
 
 -- Power Menu
-hl.bind(mainMod .. " + ALT + F4",        hl.dsp.exec_cmd("qs ipc call powermenu toggle"))
+hl.bind(mainMod .. " + ALT + F4",            hl.dsp.exec_cmd("qs ipc call powermenu toggle"))
 
 -- Lockscreen
 hl.bind(mainMod .. " + ALT + L",             hl.dsp.exec_cmd("hyprlock -c $HOME/.config/hypr/hyprlock/hyprlock.conf"))
@@ -131,6 +131,8 @@ hl.bind(mainMod .. " + SHIFT + V",     hl.dsp.exec_cmd("cliphist wipe")) -- to c
 -- Screenshots
 hl.bind(mainMod .. " + Print",         hl.dsp.exec_cmd("hyprshot -m output -m eDP-1 -o $HOME/Pictures/Screenshot"))
 hl.bind(mainMod .. " + SHIFT + Print", hl.dsp.exec_cmd("hyprshot -m region -o $HOME/Pictures/Screenshot"))
+
+
 
 -- Color Picker
 hl.bind(mainMod .. " + P",             hl.dsp.exec_cmd("hyprpicker -a -f hex"))
