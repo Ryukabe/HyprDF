@@ -1,12 +1,14 @@
-pragma ComponentBehavior: Bound
-
-import Quickshell
+// shell.qml
 import QtQuick
+import Quickshell
 import "modules"
 
 ShellRoot {
-    id: root
-    
+    Component.onCompleted: {
+        Qt.application.name = "quickshell"
+        Qt.application.organization = "quickshell"
+    }
+
+    // Main island bar
     Bar {}
-    
 }

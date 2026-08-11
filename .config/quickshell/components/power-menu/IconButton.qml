@@ -1,4 +1,3 @@
-// components/power-menu/IconButton.qml
 import QtQuick
 import "../../styles"
 
@@ -17,7 +16,9 @@ Rectangle {
 
     Image {
         anchors.centerIn: parent
-        source: (mouseArea.containsMouse || root.selected) && root.iconHoverSource !== "" ? root.iconHoverSource : root.iconSource
+        source: (mouseArea.containsMouse || root.selected) && root.iconHoverSource !== "" 
+            ? root.iconHoverSource 
+            : root.iconSource
         width: 22
         height: 22
         fillMode: Image.PreserveAspectFit
@@ -31,6 +32,10 @@ Rectangle {
         id: mouseArea
         anchors.fill: parent
         hoverEnabled: true
+        cursorShape: Qt.PointingHandCursor
         onClicked: root.clicked()
     }
+
+    scale: mouseArea.pressed ? 0.95 : 1.0
+    Behavior on scale { NumberAnimation { duration: 100; easing.type: Easing.OutCubic } }
 }

@@ -1,118 +1,121 @@
-// modules/PowerMenu.qml
+// components/power-menu/PowerExpanded.qml
 import QtQuick
 import QtQuick.Layouts
-import Quickshell
 import Quickshell.Io
-import Quickshell.Wayland
+import "../components/power-menu"
+import "../services"
 import "../styles"
 
-PanelWindow {
+Item {
     id: root
+    implicitWidth: row.implicitWidth + 32
+    implicitHeight: 64
+    focus: true
 
-    // Hidden by default
-    visible: false
+    readonly property var actions: [
+    {
+        icon: "../../assets/icons/lock.png",
+        iconHover: "../../assets/icons/lock-hover.png",
+        cmd: "hyprlock -c $HOME/.config/hypr/hyprlock/hyprlock.conf "
+    },
+{
+    icon: "../../assets/icons/sleep.png",
+    iconHover: "../../assets/icons/sleep-hover.png",
+    cmd: "systemctl suspend"
+},
+{
+icon: "../../assets/icons/restart.png",
+iconHover: "../../assets/icons/restart-hover.png",
+cmd: "systemctl reboot"
+},
+{
+icon: "../../assets/icons/logout.png",
+iconHover: "../../assets/icons/logout-hover.png",
+cmd: "hyprctl dispatch exit"
+},
+{
+icon: "../../assets/icons/power.png",
+iconHover: "../../assets/icons/power-hover.png",
+cmd: "systemctl poweroff"
+}
+]
 
-    // Cover the full screen on the overlay layer
-    WlrLayershell.layer: WlrLayer.Overlay
-    WlrLayershell.keyboardFocus: root.visible ? WlrKeyboardFocus.Exclusive : WlrKeyboardFocus.None
+property int selectedIndex: 0
 
-    anchors {
-        top: true
-        bottom: true
-        left: true
-        right: true
+    Process { id: proc }
+
+    function runCmd(cmd)
+    {
+        if (!cmd) return
+        proc.command = ["sh", "-c", cmd]
+        proc.running = true
     }
 
-    color: "transparent"
-
-    // Close when pressing ESC
-    Keys.onPressed: (event) => {
-        if (event.key === Qt.Key_Escape) {
-            root.visible = false;
+    function triggerSelected()
+    {
+        if (selectedIndex >= 0 && selectedIndex < actions.length)
+        {
+            runCmd(actions[selectedIndex].cmd)
         }
     }
 
-    // Dismiss when clicking anywhere outside the card
-    MouseArea {
-        anchors.fill: parent
-        onClicked: root.visible = false
+    Timer {
+        id: focusTimer
+        interval: 50
+        onTriggered: root.forceActiveFocus()
     }
 
-    // Styled Dark Card Container
-    Rectangle {
-        anchors.centerIn: parent
-        width: 320
-        height: 100
-        radius: Dimens.radiusM
-        
-        // FIX 1: Explicit dark color so it stops being a white box!
-        color: Colors.surface ? Colors.surface : "#1e1e2e" 
-        border.color: Colors.border ? Colors.border : "#313244"
-        border.width: 1
-
-        // Prevent clicking inside the menu card from closing it
-        MouseArea {
-            anchors.fill: parent
-            onClicked: (mouse) => mouse.accepted = true
-        }
-
-        RowLayout {
-            anchors.centerIn: parent
-            spacing: 28
-
-            // Lock Button
-            Text {
-                text: "🔒"
-                font.pixelSize: 24
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        root.visible = false;
-                        // add lock command here if needed
-                    }
-                }
-            }
-
-            // Reboot Button
-            Text {
-                text: "🔄"
-                font.pixelSize: 24
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        root.visible = false;
-                        // add reboot command here if needed
-                    }
-                }
-            }
-
-            // Shutdown Button
-            Text {
-                text: "⚡"
-                font.pixelSize: 24
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        root.visible = false;
-                        // add shutdown command here if needed
-                    }
-                }
+    Connections {
+        target: ShellState
+        function onActivePageChanged()
+        {
+            if (ShellState.activePage === "power")
+            {
+                root.selectedIndex = 0
+                focusTimer.restart()
             }
         }
     }
 
-    // Listen for IPC commands
-    IpcHandler {
-        target: "powermenu"
+    Component.onCompleted: {
+        if (ShellState.activePage === "power") focusTimer.restart()
+            }
 
-        function toggle() {
-            root.visible = !root.visible
-        }
-        function show() {
-            root.visible = true
-        }
-        function hide() {
-            root.visible = false
+        // Key Navigation
+        Keys.onPressed: (event) => {
+        if (event.key === Qt.Key_Left)
+        {
+            root.selectedIndex = Math.max(root.selectedIndex - 1, 0)
+            event.accepted = true
+        } else if (event.key === Qt.Key_Right) {
+        root.selectedIndex = Math.min(root.selectedIndex + 1, root.actions.length - 1)
+        event.accepted = true
+    } else if (event.key === Qt.Key_Escape) {
+    ShellState.showPage("clock")
+    event.accepted = true
+} else if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
+root.triggerSelected()
+event.accepted = true
+}
+}
+
+RowLayout {
+    id: row
+    anchors.centerIn: parent
+    spacing: 18
+
+    Repeater {
+        model: root.actions
+
+        IconButton {
+            iconSource: modelData.icon
+            iconHoverSource: modelData.iconHover
+            selected: index === root.selectedIndex
+            onClicked: {
+                root.selectedIndex = index
+                root.runCmd(model.modelData.cmd)
+            }
         }
     }
+}
 }

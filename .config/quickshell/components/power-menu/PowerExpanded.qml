@@ -12,11 +12,31 @@ Item {
     focus: true
 
     readonly property var actions: [
-        { icon: "../../assets/icons/lock.png", iconHover: "../../assets/icons/lock-hover.png", cmd: "hyprlock || loginctl lock-session" },
-        { icon: "../../assets/icons/sleep.png", iconHover: "../../assets/icons/sleep-hover.png", cmd: "systemctl suspend" },
-        { icon: "../../assets/icons/restart.png", iconHover: "../../assets/icons/restart-hover.png", cmd: "systemctl reboot" },
-        { icon: "../../assets/icons/logout.png", iconHover: "../../assets/icons/logout-hover.png", cmd: "hyprctl dispatch exit" },
-        { icon: "../../assets/icons/power.png", iconHover: "../../assets/icons/power-hover.png", cmd: "systemctl poweroff" }
+        { 
+            icon: "../../assets/icons/lock.png", 
+            iconHover: "../../assets/icons/lock-hover.png", 
+            cmd: "hyprctl dispatch exec \"hyprlock -c $HOME/.config/hypr/hyprlock/hyprlock.conf\"" 
+        },
+        { 
+            icon: "../../assets/icons/sleep.png", 
+            iconHover: "../../assets/icons/sleep-hover.png", 
+            cmd: "systemctl suspend" 
+        },
+        { 
+            icon: "../../assets/icons/restart.png", 
+            iconHover: "../../assets/icons/restart-hover.png", 
+            cmd: "systemctl reboot" 
+        },
+        { 
+            icon: "../../assets/icons/logout.png", 
+            iconHover: "../../assets/icons/logout-hover.png", 
+            cmd: "hyprctl dispatch exit" 
+        },
+        { 
+            icon: "../../assets/icons/power.png", 
+            iconHover: "../../assets/icons/power-hover.png", 
+            cmd: "systemctl poweroff" 
+        }
     ]
 
     property int selectedIndex: 0
@@ -24,20 +44,20 @@ Item {
     Process { id: proc }
 
     function runCmd(cmd) {
+        if (!cmd) return
         proc.command = ["sh", "-c", cmd]
         proc.running = true
-        ShellState.showPage("clock")
     }
 
     function triggerSelected() {
-        root.runCmd(root.actions[root.selectedIndex].cmd)
+        if (selectedIndex >= 0 && selectedIndex < actions.length) {
+            runCmd(actions[selectedIndex].cmd)
+        }
     }
 
-    // Gives Wayland time to focus the panel surface before claiming input focus
     Timer {
         id: focusTimer
         interval: 50
-        repeat: false
         onTriggered: root.forceActiveFocus()
     }
 
@@ -51,6 +71,11 @@ Item {
         }
     }
 
+    Component.onCompleted: {
+        if (ShellState.activePage === "power") focusTimer.restart()
+    }
+
+    // Key Navigation
     Keys.onPressed: (event) => {
         if (event.key === Qt.Key_Left) {
             root.selectedIndex = Math.max(root.selectedIndex - 1, 0)

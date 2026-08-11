@@ -62,8 +62,11 @@ hl.bind(mainMod .. " + Space ",              hl.dsp.exec_cmd("qs ipc call launch
 -- Control Panel / Quick Settings
 hl.bind(mainMod .. " + ALT + A",             hl.dsp.exec_cmd("qs ipc call controlpanel toggle"))
 
--- Power Menu
-hl.bind(mainMod .. " + Escape",            hl.dsp.exec_cmd("qs ipc call powermenu toggle"))
+-- Toggle Power Menu with Super + Escape
+hl.bind(mainMod .. " + Escape", hl.dsp.exec_cmd("qs ipc call power toggle"))
+
+-- In binds.lua:
+hl.bind( "ALT + L", hl.dsp.exec_cmd("quickshell -e 'ShellState.showPage(\"lock\")'"))
 
 -- Lockscreen
 hl.bind(mainMod .. " + ALT + L",             hl.dsp.exec_cmd("hyprlock -c $HOME/.config/hypr/hyprlock/hyprlock.conf"))

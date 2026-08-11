@@ -15,9 +15,10 @@ PanelWindow {
 
     WlrLayershell.namespace: "quickshell:island"
 
-   WlrLayershell.keyboardFocus: (ShellState.activePage === "launcher" || ShellState.activePage === "power")
-    ? WlrKeyboardFocus.Exclusive
-    : WlrKeyboardFocus.None
+    // Enable keyboard focus only when using text inputs or keyboard-driven menus
+    WlrLayershell.keyboardFocus: (ShellState.activePage === "launcher" || ShellState.activePage === "power")
+        ? WlrKeyboardFocus.Exclusive
+        : WlrKeyboardFocus.None
 
     anchors { top: true; left: true; right: true }
     color: "transparent"
@@ -32,48 +33,40 @@ PanelWindow {
         VolumeService.percent
     }
 
-    function brightnessTier(percent)
-    {
+    function brightnessTier(percent) {
         var tier = Math.round(percent / 20) * 20
         return Math.max(20, Math.min(100, tier))
     }
 
     IpcHandler {
         target: "launcher"
-        function toggle() {
-            ShellState.activePage = ShellState.activePage === "launcher" ? "clock" : "launcher"
-        }
-        function open() {
-            ShellState.showPage("launcher")
-        }
-        function close() {
-            ShellState.showPage("clock")
-        }
+        function toggle() { ShellState.activePage = ShellState.activePage === "launcher" ? "clock" : "launcher" }
+        function open() { ShellState.showPage("launcher") }
+        function close() { ShellState.showPage("clock") }
     }
 
     IpcHandler {
-        target: "powermenu"
-        function toggle() {
-            ShellState.activePage = ShellState.activePage === "power" ? "clock" : "power"
-        }
-        function open() {
-            ShellState.showPage("power")
-        }
-        function close() {
-            ShellState.showPage("clock")
-        }
+        target: "power"
+        function toggle() { ShellState.activePage = ShellState.activePage === "power" ? "clock" : "power" }
+        function open() { ShellState.showPage("power") }
+        function close() { ShellState.showPage("clock") }
     }
 
-    mask: Region { item: island.expanded ? clickCatcher : island }
+    // Mask the window surface so clicks outside the active island pass through to desktop windows
+    mask: Region { 
+        item: island.expanded ? clickCatcher : island 
+    }
 
+    // Fullscreen catch-area when expanded so clicking anywhere outside closes the expanded page
     Rectangle {
         id: clickCatcher
         anchors.fill: parent
         color: "transparent"
         visible: island.expanded
 
-        TapHandler {
-            onTapped: ShellState.showPage("clock")
+        MouseArea {
+            anchors.fill: parent
+            onClicked: ShellState.showPage("clock")
         }
     }
 
@@ -94,34 +87,25 @@ PanelWindow {
         border.color: Colors.border
         border.width: 0
 
-        // Smooth cubic expansion without vertical overshoot/bouncing glitches
-        Behavior on implicitWidth {
-            NumberAnimation { duration: 300; easing.type: Easing.OutCubic }
-        }
-        Behavior on implicitHeight {
-            NumberAnimation { duration: 300; easing.type: Easing.OutCubic }
-        }
+        Behavior on implicitWidth { NumberAnimation { duration: 300; easing.type: Easing.OutCubic } }
+        Behavior on implicitHeight { NumberAnimation { duration: 300; easing.type: Easing.OutCubic } }
 
-        TapHandler {
+        // Click handler to open Status panel when resting at clock
+        MouseArea {
+            anchors.fill: parent
             enabled: ShellState.activePage === "clock"
-            onTapped: ShellState.showPage("status")
+            onClicked: ShellState.showPage("status")
         }
 
         Loader {
             id: pageLoader
-            // Anchors to top-center instead of centerIn so top elements stay fixed as island expands downward
             anchors.top: parent.top
             anchors.horizontalCenter: parent.horizontalCenter
 
-            // Content used to pop in at full opacity the instant sourceComponent
-            // swapped — only the container was animating. This fades the new
-            // page's content in on top of the container resize instead.
             opacity: 0
             onSourceComponentChanged: opacity = 0
             onLoaded: opacity = 1
-            Behavior on opacity {
-                NumberAnimation { duration: 200; easing.type: Easing.OutQuad }
-            }
+            Behavior on opacity { NumberAnimation { duration: 200; easing.type: Easing.OutQuad } }
 
             sourceComponent: {
                 switch (ShellState.activePage) {
@@ -142,6 +126,7 @@ PanelWindow {
         Component { id: statusPage; StatusPanel {} }
         Component { id: mediaPage; MediaExpanded { color: "transparent" } }
         Component { id: launcherPage; AppLauncher {} }
+        Component { id: powerPage; PowerMenu {} }
 
         Component {
             id: brightnessPage
@@ -150,7 +135,6 @@ PanelWindow {
                 percent: BrightnessService.percent
             }
         }
-
         Component {
             id: volumePage
             LevelIndicator {
@@ -161,20 +145,10 @@ PanelWindow {
                 percent: VolumeService.percent
             }
         }
-
-        Component {
-            id: powerPage
-            PowerExpanded {}
-        }
-
         Component {
             id: controlPage
-            Rectangle {
-                implicitWidth: 380
-                implicitHeight: 320
-                color: "transparent"
-                Text { anchors.centerIn: parent; text: "Control center"; color: Colors.fg }
-            }
+            Rectangle { implicitWidth: 380; implicitHeight: 320; color: "transparent"
+                Text { anchors.centerIn: parent; text: "Control center"; color: Colors.fg } }
         }
     }
 }
