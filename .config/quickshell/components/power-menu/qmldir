@@ -1,0 +1,3 @@
+module PowerMenu
+IconButton 1.0 IconButton.qml
+PowerExpanded 1.0 PowerExpanded.qml

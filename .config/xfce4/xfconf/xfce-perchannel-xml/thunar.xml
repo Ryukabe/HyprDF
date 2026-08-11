@@ -19,7 +19,7 @@
     <value type="string" value="computer:///"/>
   </property>
   <property name="last-details-view-zoom-level" type="string" value="THUNAR_ZOOM_LEVEL_38_PERCENT"/>
-  <property name="last-details-view-column-widths" type="string" value="50,50,119,118,50,92,50,50,609,50,50,70,50,137"/>
+  <property name="last-details-view-column-widths" type="string" value="50,50,119,114,50,92,50,50,839,50,50,70,50,157"/>
   <property name="misc-single-click" type="bool" value="false"/>
   <property name="misc-use-csd" type="bool" value="true"/>
   <property name="shortcuts-icon-size" type="string" value="THUNAR_ICON_SIZE_16"/>

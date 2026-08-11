@@ -8,15 +8,16 @@ import "../modules"
 import "../styles"
 import "../services"
 import "../components/bar"
+import "../components/power-menu"
 
 PanelWindow {
     id: window
 
     WlrLayershell.namespace: "quickshell:island"
 
-    WlrLayershell.keyboardFocus: ShellState.activePage === "launcher"
-        ? WlrKeyboardFocus.Exclusive
-        : WlrKeyboardFocus.None
+   WlrLayershell.keyboardFocus: (ShellState.activePage === "launcher" || ShellState.activePage === "power")
+    ? WlrKeyboardFocus.Exclusive
+    : WlrKeyboardFocus.None
 
     anchors { top: true; left: true; right: true }
     color: "transparent"
@@ -44,6 +45,19 @@ PanelWindow {
         }
         function open() {
             ShellState.showPage("launcher")
+        }
+        function close() {
+            ShellState.showPage("clock")
+        }
+    }
+
+    IpcHandler {
+        target: "powermenu"
+        function toggle() {
+            ShellState.activePage = ShellState.activePage === "power" ? "clock" : "power"
+        }
+        function open() {
+            ShellState.showPage("power")
         }
         function close() {
             ShellState.showPage("clock")
@@ -150,12 +164,7 @@ PanelWindow {
 
         Component {
             id: powerPage
-            Rectangle {
-                implicitWidth: 420
-                implicitHeight: 60
-                color: "transparent"
-                Text { anchors.centerIn: parent; text: "Power menu"; color: Colors.fg }
-            }
+            PowerExpanded {}
         }
 
         Component {

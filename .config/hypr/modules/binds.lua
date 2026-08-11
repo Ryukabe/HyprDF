@@ -63,7 +63,7 @@ hl.bind(mainMod .. " + Space ",              hl.dsp.exec_cmd("qs ipc call launch
 hl.bind(mainMod .. " + ALT + A",             hl.dsp.exec_cmd("qs ipc call controlpanel toggle"))
 
 -- Power Menu
-hl.bind(mainMod .. " + ALT + F4",            hl.dsp.exec_cmd("qs ipc call powermenu toggle"))
+hl.bind(mainMod .. " + Escape",            hl.dsp.exec_cmd("qs ipc call powermenu toggle"))
 
 -- Lockscreen
 hl.bind(mainMod .. " + ALT + L",             hl.dsp.exec_cmd("hyprlock -c $HOME/.config/hypr/hyprlock/hyprlock.conf"))
