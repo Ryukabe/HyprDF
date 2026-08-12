@@ -1,8 +1,8 @@
 #!/bin/bash
 
-CURRENT_THEME_FILE="$HOME/.config/themes/.current-theme"
-THEME_DIR="$HOME/.config/themes"
-WALLPAPER_STATE="$HOME/.config/themes/.wallpaper-state"
+CURRENT_THEME_FILE="$HOME/.config/HyprDF/themes/.current-theme"
+THEME_DIR="$HOME/.config/HyprDF/themes"
+WALLPAPER_STATE="$HOME/.config/HyprDF/themes/.wallpaper-state"
 THUMB_DIR="$HOME/.cache/wallpaper-thumbs"
 
 if [ ! -f "$CURRENT_THEME_FILE" ]; then

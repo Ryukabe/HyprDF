@@ -7,8 +7,8 @@ YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
 THEME="$1"
-THEME_DIR="$HOME/.config/themes/$THEME"
-WALLPAPER_STATE="$HOME/.config/themes/.wallpaper-state"
+THEME_DIR="$HOME/.config/HyprDF/themes/$THEME"
+WALLPAPER_STATE="$HOME/.config/HyprDF/themes/.wallpaper-state"
 
 if [ -z "$THEME" ]; then
     echo -e "${YELLOW}Usage: $0 <theme-name>${NC}"
@@ -22,7 +22,7 @@ if [ ! -d "$THEME_DIR" ]; then
 fi
 
 # Track current theme
-CURRENT_THEME_FILE="$HOME/.config/themes/.current-theme"
+CURRENT_THEME_FILE="$HOME/.config/HyprDF/themes/.current-theme"
 echo "$THEME" > "$CURRENT_THEME_FILE"
 
 echo -e "${GREEN}Applying theme: $THEME${NC}\n"

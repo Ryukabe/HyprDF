@@ -1,8 +1,8 @@
 #!/bin/bash
 
-THEME_DIR="$HOME/.config/themes"
-APPLY_SCRIPT="$HOME/.config/themes/apply-theme.sh"
-CURRENT_THEME_FILE="$HOME/.config/themes/.current-theme"
+THEME_DIR="$HOME/.config/HyprDF/themes"
+APPLY_SCRIPT="$HOME/.config/HyprDF/scripts/apply-theme.sh"
+CURRENT_THEME_FILE="$HOME/.config/HyprDF/themes/.current-theme"
 
 # Read current theme
 CURRENT=$(cat "$CURRENT_THEME_FILE" 2>/dev/null)

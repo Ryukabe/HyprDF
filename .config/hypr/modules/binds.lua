@@ -62,20 +62,14 @@ hl.bind(mainMod .. " + Space ",              hl.dsp.exec_cmd("qs ipc call launch
 -- Control Panel / Quick Settings
 hl.bind(mainMod .. " + ALT + A",             hl.dsp.exec_cmd("qs ipc call controlpanel toggle"))
 
--- Toggle Power Menu with Super + Escape
-hl.bind(mainMod .. " + Escape", hl.dsp.exec_cmd("qs ipc call power toggle"))
-
--- In binds.lua:
-hl.bind( "ALT + L", hl.dsp.exec_cmd("quickshell -e 'ShellState.showPage(\"lock\")'"))
-
--- Lockscreen
-hl.bind(mainMod .. " + ALT + L",             hl.dsp.exec_cmd("hyprlock -c $HOME/.config/hypr/hyprlock/hyprlock.conf"))
+-- Power Menu
+hl.bind(mainMod .. " + Escape",              hl.dsp.exec_cmd("qs ipc call power toggle"))
 
 -- Theme Switcher
-hl.bind(mainMod .. " + ALT + SHIFT + T",     hl.dsp.exec_cmd("$HOME/.config/themes/theme-switcher.sh"))
+hl.bind(mainMod .. " + T",                   hl.dsp.exec_cmd("qs ipc call themeswitcher toggle"))
 
 -- Wallpaper Switcher
-hl.bind(mainMod .. " + ALT + W", hl.dsp.exec_cmd("qs ipc call wallpaper toggle"))
+hl.bind(mainMod .. " + ALT + W",             hl.dsp.exec_cmd("qs ipc call wallpaper toggle"))
 
 -- Brightness Control
 hl.bind("XF86MonBrightnessUp",    hl.dsp.exec_cmd("qs ipc call brightness increase"), { locked = true, repeating = true })
@@ -115,10 +109,10 @@ hl.bind(mainMod .. " + A",             hl.dsp.exec_cmd("swaync-client -t"))
 
 -- Rofi applaunch & meun
 hl.bind("ALT + SPACE",                 hl.dsp.exec_cmd("pkill rofi || rofi -show drun -theme $HOME/.config/rofi/applauncher.rasi"))
-hl.bind(mainMod .. " + CTRL + SPACE",   hl.dsp.exec_cmd("pkill rofi || $HOME/.config/rofi/scripts/menu.sh"))
+hl.bind(mainMod .. " + CTRL + SPACE",   hl.dsp.exec_cmd("pkill rofi || $HOME/.config/HyprDF/scripts/menu.sh"))
 
 -- Theme Switcher
-hl.bind(mainMod .. " + SHIFT + T",     hl.dsp.exec_cmd("$HOME/.config/themes/theme-switcher.sh"))
+hl.bind(mainMod .. " + SHIFT + T",     hl.dsp.exec_cmd("$HOME/.config/HyprDF/scripts/theme-switcher.sh"))
 
 -- Look & Powermenu
 hl.bind(mainMod .. " + F4",            hl.dsp.exec_cmd("$HOME/.config/wlogout/scripts/wlogout.sh")) --For powermenu
@@ -134,8 +128,6 @@ hl.bind(mainMod .. " + SHIFT + V",     hl.dsp.exec_cmd("cliphist wipe")) -- to c
 -- Screenshots
 hl.bind(mainMod .. " + Print",         hl.dsp.exec_cmd("hyprshot -m output -m eDP-1 -o $HOME/Pictures/Screenshot"))
 hl.bind(mainMod .. " + SHIFT + Print", hl.dsp.exec_cmd("hyprshot -m region -o $HOME/Pictures/Screenshot"))
-
-
 
 -- Color Picker
 hl.bind(mainMod .. " + P",             hl.dsp.exec_cmd("hyprpicker -a -f hex"))

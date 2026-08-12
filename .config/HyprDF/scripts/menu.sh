@@ -6,11 +6,11 @@ chosen=$(echo -e "$options" | rofi -dmenu -i -p "Appearance" -config "$HOME/.con
 
 case "$chosen" in
     "󰸉 Wallpaper Switcher")
-        bash "$HOME/.config/themes/wallpaper-switcher.sh" ;;
+        bash "$HOME/.config/HyprDF/scripts/wallpaper-switcher.sh" ;;
     "󰏘 Theme Switcher")
-        bash "$HOME/.config/themes/theme-switcher.sh" ;;
+        bash "$HOME/.config/HyprDF/scripts/theme-switcher.sh" ;;
     "󱂩 Waybar Switcher")
-        bash "$HOME/.config/waybar/scripts/switcher.sh" ;;
+        bash "$HOME/.config/HyprDF/scripts/waybar-look-switcher.sh" ;;
     "󰬶 Font Switcher")
-        bash "$HOME/.config/rofi/scripts/font_switch.sh" ;;
+        bash "$HOME/.config/HyprDF/scripts/font-switch.sh" ;;
 esac

@@ -1,51 +1,77 @@
+// services/ThemeService.qml
 pragma Singleton
 import QtQuick
 import Quickshell
 import Quickshell.Io
+import Qt.labs.folderlistmodel
 
-Singleton {
+Item {
     id: root
 
-    readonly property string colorsPath: Quickshell.env("HOME") + "/.config/quickshell/colors/colors.json"
+    property string currentTheme: "ariadne"
+    property bool isOpen: false
+    property var themesList: []
 
-    property color bg: "#0f1419"
-    property color fg: "#e6e1cf"
-    property color fgMuted: "#5c6773"
-    property color bgSurface: "#131721"
-    property color bgSurfaceMica: "#131721"
-    property color surface: "#131721"
-    property color subtext: "#5c6773"
-    property color border: "#2d3640"
-    property color accent: "#73d0ff"
+    // Using shellDir to remove deprecation warning
+    readonly property string themesPath: Quickshell.shellDir + "/../HyprDF/themes"
+    readonly property string currentThemeFile: Quickshell.shellDir + "/../HyprDF/themes/.current-theme"
 
-    // Watches the colors file on disk and reloads whenever apply-theme.sh
-    // writes a new one — this is what makes switching "live"
-    FileView {
-        id: colorsFile
-        path: root.colorsPath
-        watchChanges: true
-        onFileChanged: reload()
-        onLoaded: root.applyJson(JSON.parse(colorsFile.text()))
-    }
-
-    function applyJson(json) {
-        root.bg = json.bg ?? root.bg
-        root.fg = json.fg ?? root.fg
-        root.fgMuted = json.fgMuted ?? root.fgMuted
-        root.bgSurface = json.bgSurface ?? root.bgSurface
-        root.surface = json.surface ?? root.surface
-        root.subtext = json.subtext ?? root.subtext
-        root.border = json.border ?? root.border
-        root.accent = json.accent ?? root.accent
-    }
-
-    // Called by the theme switcher page when the user taps a swatch
-    function applyTheme(themeName) {
-        applyThemeProcess.command = ["bash", Quickshell.env("HOME") + "/apply-theme.sh", themeName]
-        applyThemeProcess.running = true
+    Component.onCompleted: {
+        loadCurrentTheme();
     }
 
     Process {
-        id: applyThemeProcess
+        id: readCurrentThemeProc
+        command: ["cat", root.currentThemeFile]
+        stdout: SplitParser {
+            onRead: data => {
+                if (data.trim().length > 0) {
+                    root.currentTheme = data.trim();
+                }
+            }
+        }
+    }
+
+    function loadCurrentTheme() {
+        readCurrentThemeProc.running = true;
+    }
+
+    FolderListModel {
+        id: folderModel
+        folder: "file://" + root.themesPath
+        showDirs: true
+        showFiles: false
+        showDotAndDotDot: false
+
+        onCountChanged: updateThemes()
+    }
+
+    function updateThemes() {
+        var list = [];
+        for (var i = 0; i < folderModel.count; i++) {
+            var folderName = folderModel.get(i, "fileName");
+            
+            if (folderName.startsWith(".")) continue;
+
+            var accent = "#00e6a8";
+            var isLight = folderName === "e-ink";
+
+            list.push({
+                name: folderName,
+                accent: accent,
+                isLight: isLight
+            });
+        }
+        themesList = list;
+    }
+
+    function applyTheme(themeName) {
+        currentTheme = themeName;
+        applyProcess.command = ["bash", "-c", root.themesPath + "/../apply-theme.sh " + themeName];
+        applyProcess.running = true;
+    }
+
+    Process {
+        id: applyProcess
     }
 }

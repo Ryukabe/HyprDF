@@ -11,7 +11,7 @@ QtObject {
         onTriggered: root.activePage = "clock"
     }
 
-    // permanent open (status, media, power, control, launcher) — stays until dismissed
+    // permanent open (status, media, power, control, launcher, theme) — stays until dismissed
     function showPage(page) {
         flashTimer.stop()
         root.activePage = page
@@ -21,5 +21,14 @@ QtObject {
     function flashPage(page) {
         root.activePage = page
         flashTimer.restart()
+    }
+
+    // helper to toggle between active page and clock
+    function togglePage(page) {
+        if (root.activePage === page) {
+            showPage("clock")
+        } else {
+            showPage(page)
+        }
     }
 }
