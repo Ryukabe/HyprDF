@@ -11,7 +11,6 @@ FocusScope {
     implicitHeight: contentColumn.implicitHeight + 48
     focus: true
 
-    property bool isOpen: false
     property int selectedIndex: 0
     readonly property int columnsCount: 6
 

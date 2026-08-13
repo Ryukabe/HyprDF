@@ -40,17 +40,6 @@ PanelWindow {
         return Math.max(20, Math.min(100, tier))
     }
 
-    IpcHandler {
-        target: "wallpaper"
-        function toggle(): void {
-            WallpaperService.isOpen = !WallpaperService.isOpen;
-            if (WallpaperService.isOpen) {
-                ShellState.showPage("wallpaper");
-            } else {
-                ShellState.showPage("clock");
-            }
-        }
-    }
 
     IpcHandler {
         target: "launcher"
@@ -73,6 +62,19 @@ PanelWindow {
         function open() { ShellState.showPage("theme") }
         function close() { ShellState.showPage("clock") }
     }
+
+    IpcHandler {
+    target: "wallpaper"
+    function toggle(): void {
+        WallpaperService.isOpen = !WallpaperService.isOpen;
+        console.log("[wallpaper toggle] isOpen:", WallpaperService.isOpen, "-> activePage will be:", WallpaperService.isOpen ? "wallpaper" : "clock");
+        if (WallpaperService.isOpen) {
+            ShellState.showPage("wallpaper");
+        } else {
+            ShellState.showPage("clock");
+        }
+    }
+}
 
     mask: Region {
         item: island.expanded ? clickCatcher : island

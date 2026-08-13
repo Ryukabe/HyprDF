@@ -8,8 +8,9 @@ import Qt.labs.folderlistmodel
 Item {
     id: root
 
-    property var wallpapersList: []
-    property string currentWallpaper: ""
+  property var wallpapersList: []
+property string currentWallpaper: ""
+property bool isOpen: false
 
     readonly property string applyScript: ThemeService.projectRoot + "/scripts/apply-wallpaper.sh"
     readonly property string wallpaperStateFile: ThemeService.themesPath + "/.wallpaper-state"
