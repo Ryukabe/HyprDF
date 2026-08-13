@@ -1,3 +1,4 @@
+// styles/Fonts.qml
 pragma Singleton
 import QtQuick
 

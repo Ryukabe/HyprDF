@@ -56,7 +56,7 @@ Item {
             anchors.right: parent.right
             anchors.margins: 12
             height: 44
-            radius: 12
+            radius: Dimens.borderRadiusLarge
             color: Colors.bgSurface
 
             MouseArea {
@@ -68,7 +68,7 @@ Item {
                 anchors.fill: parent
                 anchors.leftMargin: 12
                 anchors.rightMargin: 12
-                spacing: 8
+                spacing: Dimens.spacingLg
 
                 Image {
                     anchors.verticalCenter: parent.verticalCenter
@@ -87,7 +87,7 @@ Item {
                         text: "Search..."
                         color: Colors.fgMuted
                         font.family: Fonts.text
-                        font.pixelSize: 16
+                        font.pixelSize: Dimens.fontSizeMd
                         anchors.verticalCenter: parent.verticalCenter
                         visible: searchInput.text.length === 0
                     }
@@ -96,7 +96,7 @@ Item {
                         id: searchInput
                         width: parent.width
                         font.family: Fonts.text
-                        font.pixelSize: 16
+                        font.pixelSize: Dimens.fontSizeLg
                         color: Colors.fg
                         clip: true
                         focus: true
@@ -162,19 +162,19 @@ Item {
                 id: delegateRoot
                 width: appList.width
                 height: root.rowHeight - appList.spacing
-                radius: 10
+                radius: Dimens.borderRadiusLarge
                 color: index === root.selectedIndex ? Colors.bgSurface : "transparent"
 
                 Row {
                     anchors.fill: parent
                     anchors.leftMargin: 10
                     anchors.rightMargin: 10
-                    spacing: 12
+                    spacing: Dimens.spacingMd
 
                     Rectangle {
                         width: 32
                         height: 32
-                        radius: 8
+                        radius: Dimens.borderRadiusMedium
                         color: index === root.selectedIndex ? Colors.bg : Colors.bgSurface
                         anchors.verticalCenter: parent.verticalCenter
 
@@ -182,7 +182,7 @@ Item {
                             anchors.centerIn: parent
                             text: modelData.name ? modelData.name.charAt(0).toUpperCase() : "?"
                             font.family: Fonts.text
-                            font.pixelSize: 14
+                            font.pixelSize: Dimens.fontSizeMd
                             font.weight: Font.Bold
                             color: Colors.fg
                         }
@@ -197,7 +197,7 @@ Item {
                             text: modelData.name
                             color: Colors.fg
                             font.family: Fonts.text
-                            font.pixelSize: 14
+                            font.pixelSize: Dimens.fontSizeMd
                             font.weight: Font.DemiBold
                             elide: Text.ElideRight
                             width: parent.width
@@ -207,7 +207,7 @@ Item {
                             text: modelData.comment || ""
                             color: Colors.fgMuted
                             font.family: Fonts.text
-                            font.pixelSize: 11
+                            font.pixelSize: Dimens.fontSizeSm
                             visible: text.length > 0
                             elide: Text.ElideRight
                             width: parent.width
@@ -234,7 +234,7 @@ Item {
             text: "No apps found"
             color: Colors.fgMuted
             font.family: Fonts.text
-            font.pixelSize: 13
+            font.pixelSize: Dimens.fontSizeMd
             visible: root.results.length === 0
         }
     }

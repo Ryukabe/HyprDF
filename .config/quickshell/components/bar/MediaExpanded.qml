@@ -11,7 +11,7 @@ Rectangle {
     // Smooth transition dimensions for expanding the island
     implicitWidth: 640
     implicitHeight: 110
-    color: Colors.bg // Ayu Dark background
+    color: Colors.bg 
     radius: Dimens.borderRadiusLarge // Sizing from Dimens
 
     Behavior on implicitWidth { NumberAnimation { duration: 250; easing.type: Easing.OutCubic } }

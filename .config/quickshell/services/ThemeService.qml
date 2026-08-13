@@ -8,13 +8,22 @@ import Qt.labs.folderlistmodel
 Item {
     id: root
 
-    property string currentTheme: "ariadne"
+    property string currentTheme: "dragon"
     property bool isOpen: false
     property var themesList: []
 
-    // Using shellDir to remove deprecation warning
-    readonly property string themesPath: Quickshell.shellDir + "/../HyprDF/themes"
-    readonly property string currentThemeFile: Quickshell.shellDir + "/../HyprDF/themes/.current-theme"
+    readonly property string projectRoot: Quickshell.shellDir + "/../HyprDF"
+    readonly property string themesPath: root.projectRoot + "/themes"
+    readonly property string applyScript: root.projectRoot + "/scripts/apply-theme.sh"
+    readonly property string currentThemeFile: root.themesPath + "/.current-theme"
+
+    // Path to the *currently active* theme's color file — Colors.qml binds to this.
+    readonly property string currentThemeJsonPath: root.themeJsonPath(root.currentTheme)
+
+    // Path to *any* theme's color file, by name — ThemeCard uses this for previews.
+    function themeJsonPath(themeName) {
+        return root.themesPath + "/" + themeName + "/quickshell/quickshell.json";
+    }
 
     Component.onCompleted: {
         loadCurrentTheme();
@@ -50,28 +59,30 @@ Item {
         var list = [];
         for (var i = 0; i < folderModel.count; i++) {
             var folderName = folderModel.get(i, "fileName");
-            
             if (folderName.startsWith(".")) continue;
-
-            var accent = "#00e6a8";
-            var isLight = folderName === "e-ink";
-
-            list.push({
-                name: folderName,
-                accent: accent,
-                isLight: isLight
-            });
+            list.push({ name: folderName });
         }
         themesList = list;
     }
 
     function applyTheme(themeName) {
+        if (!themeName) return;
         currentTheme = themeName;
-        applyProcess.command = ["bash", "-c", root.themesPath + "/../apply-theme.sh " + themeName];
+        applyProcess.command = ["bash", root.applyScript, themeName];
+        applyProcess.workingDirectory = root.projectRoot;
         applyProcess.running = true;
     }
 
     Process {
         id: applyProcess
+        stdout: SplitParser {
+            onRead: data => console.log("[ThemeService] stdout:", data)
+        }
+        stderr: SplitParser {
+            onRead: data => console.log("[ThemeService] stderr:", data)
+        }
+        onExited: (exitCode, exitStatus) => {
+            console.log("[ThemeService] apply-theme.sh exited with code", exitCode);
+        }
     }
 }

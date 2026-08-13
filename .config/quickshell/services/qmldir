@@ -5,3 +5,4 @@ singleton VolumeService 1.0 VolumeService.qml
 singleton BrightnessService 1.0 BrightnessService.qml
 singleton AppLauncherService 1.0 AppLauncherService.qml
 singleton ThemeService 1.0 ThemeService.qml
+singleton WallpaperService 1.0 WallpaperService.qml

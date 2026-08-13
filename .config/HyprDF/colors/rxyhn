@@ -1,0 +1,15 @@
+{
+  "isLight": false,
+  "background": "#061115",
+  "surface": "#131e22",
+  "foreground": "#D9D7D6",
+  "fgMuted": "#3b464a",
+  "border": "#1c272b",
+  "accent": "#6791C9",
+  "red": "#DF5B61",
+  "green": "#78B892",
+  "yellow": "#ecd28b",
+  "blue": "#6791C9",
+  "purple": "#C488EC",
+  "cyan": "#67AFC1"
+}

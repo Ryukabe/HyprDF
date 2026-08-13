@@ -1,3 +1,4 @@
+// styles/Dimens.qml
 pragma Singleton
 import QtQuick
 
@@ -5,9 +6,10 @@ QtObject {
     // Border Radii
     readonly property int radiusSmall: 4
     readonly property int radiusMedium: 8
-    readonly property int radiusLarge: 16
+    readonly property int radiusLarge: 12
     readonly property int radiusFull: 9999
     readonly property int borderRadiusSmall: radiusSmall
+    readonly property int borderRadiusMedium: radiusMedium
     readonly property int borderRadiusLarge: radiusLarge
 
     // Padding & Spacing

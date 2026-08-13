@@ -94,7 +94,7 @@ Rectangle {
             }
             Text {
                 text: AudioService.isPlaying ? "󰏤" : "󰐊"
-                color: Colors.accent
+                color: Colors.fg
                 font.family: "JetBrains Mono Nerd Font Propo"
                 font.pixelSize: 20
                 TapHandler { onTapped: AudioService.togglePlayPause() }
@@ -119,7 +119,8 @@ Rectangle {
 Text {
     anchors.horizontalCenter: parent.horizontalCenter
     text: Qt.formatDateTime(clock.date, "hh:mm AP")
-    color: Colors.accent
+    color: Colors.fg
+    font.family: Fonts.primary
     font.pixelSize: 22
     font.weight: 800
 }

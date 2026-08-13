@@ -1,4 +1,4 @@
-// modules/ThemeSwitcher.qml
+// modules/WallpaperSwitcher.qml
 import QtQuick
 import QtQuick.Layouts
 import "../services"
@@ -11,15 +11,16 @@ FocusScope {
     implicitHeight: contentColumn.implicitHeight + 48
     focus: true
 
+    property bool isOpen: false
     property int selectedIndex: 0
-    readonly property int columnsCount: 3
+    readonly property int columnsCount: 6
 
     Component.onCompleted: {
         switcherRoot.forceActiveFocus()
     }
 
     Keys.onPressed: event => {
-        var count = ThemeService.themesList.length;
+        var count = WallpaperService.wallpapersList.length;
         if (count === 0) return;
 
         if (event.key === Qt.Key_Right) {
@@ -39,8 +40,8 @@ FocusScope {
             }
             event.accepted = true;
         } else if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter || event.key === Qt.Key_Space) {
-            if (ThemeService.themesList[selectedIndex]) {
-                ThemeService.applyTheme(ThemeService.themesList[selectedIndex].name);
+            if (WallpaperService.wallpapersList[selectedIndex]) {
+                WallpaperService.applyWallpaper(WallpaperService.wallpapersList[selectedIndex].path);
             }
             event.accepted = true;
         } else if (event.key === Qt.Key_Escape) {
@@ -54,37 +55,49 @@ FocusScope {
         anchors.centerIn: parent
         spacing: 16
 
-        Text {
-            text: "Theme Selector"
-            color: Colors.fg
-            font.pixelSize: Dimens.fontSizeLg
-            font.bold: true
-            Layout.alignment: Qt.AlignLeft
+        RowLayout {
+            Layout.fillWidth: true
+
+            Text {
+                text: "Wallpaper"
+                color: Colors.fg
+                font.pixelSize: Dimens.fontSizeLg + 2
+                font.bold: true
+            }
+
+            Item { Layout.fillWidth: true }
+
+            Text {
+                text: ThemeService.currentTheme
+                color: Colors.fgMuted
+                font.pixelSize: Dimens.fontSizeSm
+            }
         }
 
         GridLayout {
             id: grid
             columns: switcherRoot.columnsCount
-            rowSpacing: 8
-            columnSpacing: 8
+            rowSpacing: 12
+            columnSpacing: 12
 
             Repeater {
-                model: ThemeService.themesList
+                model: WallpaperService.wallpapersList
 
-                ThemeCard {
+                WallpaperCard {
                     required property var modelData
                     required property int index
 
-                    themeName: modelData.name
-                    isApplied: ThemeService.currentTheme === modelData.name
+                    wallpaperPath: modelData.path
+                    wallpaperName: modelData.name
+                    isApplied: WallpaperService.currentWallpaper === modelData.path
                     isSelected: switcherRoot.selectedIndex === index
 
-                    Layout.preferredWidth: 170
-                    Layout.preferredHeight: 48
+                    Layout.preferredWidth: 160
+                    Layout.preferredHeight: 90
 
                     onClicked: {
                         switcherRoot.selectedIndex = index;
-                        ThemeService.applyTheme(modelData.name);
+                        WallpaperService.applyWallpaper(modelData.path);
                     }
                 }
             }

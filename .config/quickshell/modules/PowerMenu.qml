@@ -18,27 +18,27 @@ Item {
         iconHover: "../../assets/icons/lock-hover.png",
         cmd: "hyprlock -c $HOME/.config/hypr/hyprlock/hyprlock.conf "
     },
-{
-    icon: "../../assets/icons/sleep.png",
-    iconHover: "../../assets/icons/sleep-hover.png",
-    cmd: "systemctl suspend"
-},
-{
-icon: "../../assets/icons/restart.png",
-iconHover: "../../assets/icons/restart-hover.png",
-cmd: "systemctl reboot"
-},
-{
-icon: "../../assets/icons/logout.png",
-iconHover: "../../assets/icons/logout-hover.png",
-cmd: "hyprctl dispatch exit"
-},
-{
-icon: "../../assets/icons/power.png",
-iconHover: "../../assets/icons/power-hover.png",
-cmd: "systemctl poweroff"
-}
-]
+    {
+        icon: "../../assets/icons/sleep.png",
+        iconHover: "../../assets/icons/sleep-hover.png",
+        cmd: "systemctl suspend"
+    },
+    {
+        icon: "../../assets/icons/restart.png",
+        iconHover: "../../assets/icons/restart-hover.png",
+        cmd: "systemctl reboot"
+    },
+    {
+        icon: "../../assets/icons/logout.png",
+        iconHover: "../../assets/icons/logout-hover.png",
+        cmd: "hyprctl dispatch exit"
+    },
+    {
+        icon: "../../assets/icons/power.png",
+        iconHover: "../../assets/icons/power-hover.png",
+        cmd: "systemctl poweroff"
+    }
+    ]
 
 property int selectedIndex: 0
 
