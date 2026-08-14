@@ -8,14 +8,19 @@ import "../../services"
 Rectangle {
     id: root
     
-    // Smooth transition dimensions for expanding the island
     implicitWidth: 640
     implicitHeight: 110
-    color: Colors.bg 
-    radius: Dimens.borderRadiusLarge // Sizing from Dimens
+    color: Colors.bg
+    radius: Dimens.borderRadiusLarge
+    clip: true // Prevents album art & track info overflow during island expansion
 
-    Behavior on implicitWidth { NumberAnimation { duration: 250; easing.type: Easing.OutCubic } }
-    Behavior on implicitHeight { NumberAnimation { duration: 250; easing.type: Easing.OutCubic } }
+    // Synchronized opacity behavior
+    Behavior on opacity {
+        NumberAnimation {
+            duration: 200
+            easing.type: Easing.OutCubic
+        }
+    }
 
     RowLayout {
         anchors.fill: parent
@@ -38,10 +43,9 @@ Rectangle {
                 visible: AudioService.artUrl !== ""
             }
 
-            // Fallback icon if no album art
             Text {
                 anchors.centerIn: parent
-                text: "󰎈" // Nerd font music note icon
+                text: "󰎈"
                 font.family: "JetBrains Mono Nerd Font Propo"
                 font.pixelSize: 28
                 color: Colors.subtext
@@ -49,53 +53,48 @@ Rectangle {
             }
         }
 
-        // Track Info & Controls
+        // Track Details
         ColumnLayout {
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignVCenter
-            spacing: 2 // Tighter spacing between title, artist, and controls
+            spacing: 2
 
-            // Track Title
             Text {
-                text: AudioService.trackTitle
-                font.family: "SF Pro Text"
-                font.pixelSize: 13
+                text: AudioService.trackTitle || "No Media Playing"
+                font.family: Fonts.text
+                font.pixelSize: Dimens.fontSizeMd
                 font.bold: true
                 color: Colors.fg
                 elide: Text.ElideRight
                 Layout.fillWidth: true
             }
 
-            // Artist Name
             Text {
-                text: AudioService.trackArtist
-                font.family: "SF Pro Text"
-                font.pixelSize: 11
-                color: Colors.subtext
+                text: AudioService.artistName || "Unknown Artist"
+                font.family: Fonts.text
+                font.pixelSize: Dimens.fontSizeSm
+                color: Colors.fgMuted
                 elide: Text.ElideRight
                 Layout.fillWidth: true
             }
 
-            // Playback Controls Row
             RowLayout {
                 Layout.alignment: Qt.AlignHLeft
-                Layout.topMargin: 4 // Small gap above controls
+                Layout.topMargin: 4
                 spacing: 16
 
-                // Previous
                 Text {
                     text: "󰒮"
                     font.family: "JetBrains Mono Nerd Font Propo"
                     font.pixelSize: 20
                     color: Colors.fg
-                    
+
                     MouseArea {
                         anchors.fill: parent
                         onClicked: AudioService.previousTrack()
                     }
                 }
 
-                // Play / Pause
                 Text {
                     text: AudioService.isPlaying ? "󰏤" : "󰐊"
                     font.family: "JetBrains Mono Nerd Font Propo"
@@ -108,7 +107,6 @@ Rectangle {
                     }
                 }
 
-                // Next
                 Text {
                     text: "󰒭"
                     font.family: "JetBrains Mono Nerd Font Propo"

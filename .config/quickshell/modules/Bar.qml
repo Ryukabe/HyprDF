@@ -25,7 +25,13 @@ PanelWindow {
     anchors { top: true; left: true; right: true }
     color: "transparent"
 
-    implicitHeight: Math.max(160, island.implicitHeight + island.anchors.topMargin + 10)
+    // =========================================================================
+    // CRITICAL PERFORMANCE FIX:
+    // Keep window boundaries FIXED so Hyprland does NOT destroy and re-allocate 
+    // Wayland layer shell surface framebuffers 60-144 times per second!
+    // =========================================================================
+    implicitHeight: 600
+    implicitWidth: 1200
 
     exclusionMode: ExclusionMode.Normal
     exclusiveZone: island.compactHeight + island.anchors.topMargin
@@ -39,7 +45,6 @@ PanelWindow {
         var tier = Math.round(percent / 20) * 20
         return Math.max(20, Math.min(100, tier))
     }
-
 
     IpcHandler {
         target: "launcher"
@@ -55,7 +60,6 @@ PanelWindow {
         function close() { ShellState.showPage("clock") }
     }
 
-    // Direct IPC handler for theme switcher integrated into the island!
     IpcHandler {
         target: "themeswitcher"
         function toggle() { ShellState.activePage = ShellState.activePage === "theme" ? "clock" : "theme" }
@@ -64,17 +68,16 @@ PanelWindow {
     }
 
     IpcHandler {
-    target: "wallpaper"
-    function toggle(): void {
-        WallpaperService.isOpen = !WallpaperService.isOpen;
-        console.log("[wallpaper toggle] isOpen:", WallpaperService.isOpen, "-> activePage will be:", WallpaperService.isOpen ? "wallpaper" : "clock");
-        if (WallpaperService.isOpen) {
-            ShellState.showPage("wallpaper");
-        } else {
-            ShellState.showPage("clock");
+        target: "wallpaper"
+        function toggle(): void {
+            WallpaperService.isOpen = !WallpaperService.isOpen;
+            if (WallpaperService.isOpen) {
+                ShellState.showPage("wallpaper");
+            } else {
+                ShellState.showPage("clock");
+            }
         }
     }
-}
 
     mask: Region {
         item: island.expanded ? clickCatcher : island
@@ -97,20 +100,39 @@ PanelWindow {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: parent.top
         anchors.topMargin: 5
+
         clip: true
 
         readonly property bool expanded: ShellState.activePage !== "clock"
         readonly property int compactHeight: 36
+        readonly property int compactWidth: 160
 
-        implicitWidth: pageLoader.item ? pageLoader.item.implicitWidth : 160
-        implicitHeight: pageLoader.item ? pageLoader.item.implicitHeight : compactHeight
+        // Explicit discrete dimensions to avoid QML layout re-binding thrashing
+        width: targetWidth
+        height: targetHeight
+
+        property int targetWidth: pageLoader.item ? pageLoader.item.implicitWidth : compactWidth
+        property int targetHeight: pageLoader.item ? pageLoader.item.implicitHeight : compactHeight
+
         radius: Math.min(height / 2, Dimens.islandRadius)
-        color: Colors.bg
+        color: Colors.bgMica
         border.color: Colors.border
         border.width: 0
 
-        Behavior on implicitWidth { NumberAnimation { duration: 300; easing.type: Easing.OutCubic } }
-        Behavior on implicitHeight { NumberAnimation { duration: 300; easing.type: Easing.OutCubic } }
+        // GPU-Accelerated Explicit Width & Height Animations
+        Behavior on width {
+            NumberAnimation {
+                duration: 320
+                easing.type: Easing.OutCubic
+            }
+        }
+
+        Behavior on height {
+            NumberAnimation {
+                duration: 320
+                easing.type: Easing.OutCubic
+            }
+        }
 
         MouseArea {
             anchors.fill: parent
@@ -122,11 +144,6 @@ PanelWindow {
             id: pageLoader
             anchors.top: parent.top
             anchors.horizontalCenter: parent.horizontalCenter
-
-            opacity: 0
-            onSourceComponentChanged: opacity = 0
-            onLoaded: opacity = 1
-            Behavior on opacity { NumberAnimation { duration: 200; easing.type: Easing.OutQuad } }
 
             sourceComponent: {
                 switch (ShellState.activePage) {
@@ -160,6 +177,7 @@ PanelWindow {
                 percent: BrightnessService.percent
             }
         }
+        
         Component {
             id: volumePage
             LevelIndicator {
@@ -170,6 +188,7 @@ PanelWindow {
                 percent: VolumeService.percent
             }
         }
+        
         Component {
             id: controlPage
             Rectangle {

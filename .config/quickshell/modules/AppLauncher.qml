@@ -18,7 +18,6 @@ Item {
     property int selectedIndex: 0
 
     implicitWidth: maxWidth
-
     implicitHeight: Math.min(
         chromeHeight + Math.max(results.length, 1) * rowHeight,
         chromeHeight + maxVisibleRows * rowHeight
@@ -26,8 +25,6 @@ Item {
 
     onQueryChanged: selectedIndex = 0
 
-    // ── FOCUS TIMER ──────────────────────────────────────────────────────────
-    // Gives Wayland time to focus the panel surface before claiming input focus
     Timer {
         id: focusTimer
         interval: 50
@@ -40,202 +37,219 @@ Item {
             focusTimer.restart()
         }
     }
-    // ─────────────────────────────────────────────────────────────────────────
 
-    Rectangle {
-        id: panel
+    Component.onCompleted: revealTimer.restart()
+
+    Timer {
+        id: revealTimer
+        interval: 30
+        onTriggered: {
+            contentWrapper.opacity = 1.0
+            contentWrapper.scale = 1.0
+        }
+    }
+
+    Item {
+        id: contentWrapper
         anchors.fill: parent
-        color: Colors.bg
-        radius: 18
-        clip: true
+        opacity: 0.0
+        scale: 0.97
+
+        Behavior on opacity {
+            NumberAnimation { duration: 180; easing.type: Easing.OutCubic }
+        }
+        Behavior on scale {
+            NumberAnimation { duration: 180; easing.type: Easing.OutCubic }
+        }
 
         Rectangle {
-            id: searchBar
-            anchors.top: parent.top
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.margins: 12
-            height: 44
-            radius: Dimens.borderRadiusLarge
-            color: Colors.bgSurface
+            id: panel
+            anchors.fill: parent
+            color: Colors.bg
+            radius: 18
+            clip: true
 
-            MouseArea {
-                anchors.fill: parent
-                onClicked: searchInput.forceActiveFocus()
-            }
+            Rectangle {
+                id: searchBar
+                anchors.top: parent.top
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.margins: 12
+                height: 44
+                radius: Dimens.borderRadiusLarge
+                color: Colors.bgSurface
 
-            Row {
-                anchors.fill: parent
-                anchors.leftMargin: 12
-                anchors.rightMargin: 12
-                spacing: Dimens.spacingLg
-
-                Image {
-                    anchors.verticalCenter: parent.verticalCenter
-                    source: "../assets/icons/search.png"
-                    width: 16
-                    height: 16
-                    fillMode: Image.PreserveAspectFit
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: searchInput.forceActiveFocus()
                 }
 
-                Item {
-                    anchors.verticalCenter: parent.verticalCenter
-                    width: parent.width - 24
-                    height: searchInput.height
+                Row {
+                    anchors.fill: parent
+                    anchors.leftMargin: 12
+                    anchors.rightMargin: 12
+                    spacing: Dimens.spacingLg
 
-                    Text {
-                        text: "Search..."
-                        color: Colors.fgMuted
-                        font.family: Fonts.text
-                        font.pixelSize: Dimens.fontSizeMd
+                    Image {
                         anchors.verticalCenter: parent.verticalCenter
-                        visible: searchInput.text.length === 0
+                        source: "../assets/icons/search.png"
+                        width: 16
+                        height: 16
+                        fillMode: Image.PreserveAspectFit
                     }
 
-                    TextInput {
-                        id: searchInput
-                        width: parent.width
-                        font.family: Fonts.text
-                        font.pixelSize: Dimens.fontSizeLg
-                        color: Colors.fg
-                        clip: true
-                        focus: true
-                        onTextChanged: root.query = text
+                    Item {
+                        anchors.verticalCenter: parent.verticalCenter
+                        width: parent.width - 24
+                        height: searchInput.height
 
-                        Keys.onPressed: (event) => {
-                            if (event.key === Qt.Key_Down) {
-                                root.selectedIndex = Math.min(root.selectedIndex + 1, root.results.length - 1)
-                                appList.positionViewAtIndex(root.selectedIndex, ListView.Contain)
-                                event.accepted = true
-                            } else if (event.key === Qt.Key_Up) {
-                                root.selectedIndex = Math.max(root.selectedIndex - 1, 0)
-                                appList.positionViewAtIndex(root.selectedIndex, ListView.Contain)
-                                event.accepted = true
-                            } else if (event.key === Qt.Key_Escape) {
-                                ShellState.showPage("clock")
-                                event.accepted = true
-                            } else if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
-                                if (root.results.length > 0) {
-                                    AppLauncherService.launch(root.results[root.selectedIndex])
+                        Text {
+                            text: "Search..."
+                            color: Colors.fgMuted
+                            font.family: Fonts.text
+                            font.pixelSize: Dimens.fontSizeMd
+                            anchors.verticalCenter: parent.verticalCenter
+                            visible: searchInput.text.length === 0
+                        }
+
+                        TextInput {
+                            id: searchInput
+                            width: parent.width
+                            font.family: Fonts.text
+                            font.pixelSize: Dimens.fontSizeLg
+                            color: Colors.fg
+                            clip: true
+                            focus: true
+                            onTextChanged: root.query = text
+
+                            Keys.onPressed: (event) => {
+                                if (event.key === Qt.Key_Down) {
+                                    root.selectedIndex = Math.min(root.selectedIndex + 1, root.results.length - 1)
+                                    appList.positionViewAtIndex(root.selectedIndex, ListView.Contain)
+                                    event.accepted = true
+                                } else if (event.key === Qt.Key_Up) {
+                                    root.selectedIndex = Math.max(root.selectedIndex - 1, 0)
+                                    appList.positionViewAtIndex(root.selectedIndex, ListView.Contain)
+                                    event.accepted = true
+                                } else if (event.key === Qt.Key_Escape) {
                                     ShellState.showPage("clock")
+                                    event.accepted = true
+                                } else if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
+                                    if (root.results.length > 0) {
+                                        AppLauncherService.launch(root.results[root.selectedIndex])
+                                        ShellState.showPage("clock")
+                                    }
+                                    event.accepted = true
                                 }
-                                event.accepted = true
                             }
                         }
                     }
                 }
             }
-        }
 
-        ListView {
-            id: appList
-            anchors.top: searchBar.bottom
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.bottom: parent.bottom
-            anchors.topMargin: 8
-            anchors.margins: 12
-            clip: true
-            spacing: 2
-            model: root.results
-            currentIndex: root.selectedIndex
+            ListView {
+                id: appList
+                anchors.top: searchBar.bottom
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.bottom: parent.bottom
+                anchors.topMargin: 8
+                anchors.margins: 12
+                clip: true
+                spacing: 2
+                model: root.results
+                currentIndex: root.selectedIndex
 
-            opacity: ShellState.activePage === "launcher" ? 1 : 0
-            Behavior on opacity {
-                NumberAnimation { duration: 150 }
-            }
+                ScrollBar.vertical: ScrollBar { policy: ScrollBar.AsNeeded }
 
-            ScrollBar.vertical: ScrollBar {
-                policy: ScrollBar.AsNeeded
-            }
-
-            WheelHandler {
-                onWheel: (event) => {
-                    appList.contentY = Math.max(
-                        0,
-                        Math.min(appList.contentY - event.angleDelta.y, Math.max(0, appList.contentHeight - appList.height))
-                    )
-                }
-            }
-
-            delegate: Rectangle {
-                id: delegateRoot
-                width: appList.width
-                height: root.rowHeight - appList.spacing
-                radius: Dimens.borderRadiusLarge
-                color: index === root.selectedIndex ? Colors.bgSurface : "transparent"
-
-                Row {
-                    anchors.fill: parent
-                    anchors.leftMargin: 10
-                    anchors.rightMargin: 10
-                    spacing: Dimens.spacingMd
-
-                    Rectangle {
-                        width: 32
-                        height: 32
-                        radius: Dimens.borderRadiusMedium
-                        color: index === root.selectedIndex ? Colors.bg : Colors.bgSurface
-                        anchors.verticalCenter: parent.verticalCenter
-
-                        Text {
-                            anchors.centerIn: parent
-                            text: modelData.name ? modelData.name.charAt(0).toUpperCase() : "?"
-                            font.family: Fonts.text
-                            font.pixelSize: Dimens.fontSizeMd
-                            font.weight: Font.Bold
-                            color: Colors.fg
-                        }
-                    }
-
-                    Column {
-                        anchors.verticalCenter: parent.verticalCenter
-                        spacing: 1
-                        width: parent.width - 44
-
-                        Text {
-                            text: modelData.name
-                            color: Colors.fg
-                            font.family: Fonts.text
-                            font.pixelSize: Dimens.fontSizeMd
-                            font.weight: Font.DemiBold
-                            elide: Text.ElideRight
-                            width: parent.width
-                        }
-
-                        Text {
-                            text: modelData.comment || ""
-                            color: Colors.fgMuted
-                            font.family: Fonts.text
-                            font.pixelSize: Dimens.fontSizeSm
-                            visible: text.length > 0
-                            elide: Text.ElideRight
-                            width: parent.width
-                        }
+                WheelHandler {
+                    onWheel: (event) => {
+                        appList.contentY = Math.max(
+                            0,
+                            Math.min(appList.contentY - event.angleDelta.y, Math.max(0, appList.contentHeight - appList.height))
+                        )
                     }
                 }
 
-                MouseArea {
-                    anchors.fill: parent
-                    hoverEnabled: true
-                    onEntered: root.selectedIndex = index
-                    onClicked: {
-                        AppLauncherService.launch(modelData)
-                        ShellState.showPage("clock")
+                delegate: Rectangle {
+                    id: delegateRoot
+                    width: appList.width
+                    height: root.rowHeight - appList.spacing
+                    radius: Dimens.borderRadiusLarge
+                    color: index === root.selectedIndex ? Colors.bgSurface : "transparent"
+
+                    Row {
+                        anchors.fill: parent
+                        anchors.leftMargin: 10
+                        anchors.rightMargin: 10
+                        spacing: Dimens.spacingMd
+
+                        Rectangle {
+                            width: 32
+                            height: 32
+                            radius: Dimens.borderRadiusMedium
+                            color: index === root.selectedIndex ? Colors.bg : Colors.bgSurface
+                            anchors.verticalCenter: parent.verticalCenter
+
+                            Text {
+                                anchors.centerIn: parent
+                                text: modelData.name ? modelData.name.charAt(0).toUpperCase() : "?"
+                                font.family: Fonts.text
+                                font.pixelSize: Dimens.fontSizeMd
+                                font.weight: Font.Bold
+                                color: Colors.fg
+                            }
+                        }
+
+                        Column {
+                            anchors.verticalCenter: parent.verticalCenter
+                            spacing: 1
+                            width: parent.width - 44
+
+                            Text {
+                                text: modelData.name
+                                color: Colors.fg
+                                font.family: Fonts.text
+                                font.pixelSize: Dimens.fontSizeMd
+                                font.weight: Font.DemiBold
+                                elide: Text.ElideRight
+                                width: parent.width
+                            }
+
+                            Text {
+                                text: modelData.comment || ""
+                                color: Colors.fgMuted
+                                font.family: Fonts.text
+                                font.pixelSize: Dimens.fontSizeSm
+                                visible: text.length > 0
+                                elide: Text.ElideRight
+                                width: parent.width
+                            }
+                        }
+                    }
+
+                    MouseArea {
+                        anchors.fill: parent
+                        hoverEnabled: true
+                        onEntered: root.selectedIndex = index
+                        onClicked: {
+                            AppLauncherService.launch(modelData)
+                            ShellState.showPage("clock")
+                        }
                     }
                 }
             }
-        }
 
-        Text {
-            anchors.top: searchBar.bottom
-            anchors.topMargin: 24
-            anchors.horizontalCenter: parent.horizontalCenter
-            text: "No apps found"
-            color: Colors.fgMuted
-            font.family: Fonts.text
-            font.pixelSize: Dimens.fontSizeMd
-            visible: root.results.length === 0
+            Text {
+                anchors.top: searchBar.bottom
+                anchors.topMargin: 24
+                anchors.horizontalCenter: parent.horizontalCenter
+                text: "No apps found"
+                color: Colors.fgMuted
+                font.family: Fonts.text
+                font.pixelSize: Dimens.fontSizeMd
+                visible: root.results.length === 0
+            }
         }
     }
 

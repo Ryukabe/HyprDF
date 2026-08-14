@@ -7,8 +7,8 @@ import "../styles"
 
 FocusScope {
     id: switcherRoot
-    implicitWidth: contentColumn.implicitWidth + 48
-    implicitHeight: contentColumn.implicitHeight + 48
+    implicitWidth: contentColumn.implicitWidth + 40
+    implicitHeight: contentColumn.implicitHeight + 40
     focus: true
 
     property int selectedIndex: 0
@@ -60,13 +60,14 @@ FocusScope {
             font.pixelSize: Dimens.fontSizeLg
             font.bold: true
             Layout.alignment: Qt.AlignLeft
+            Layout.leftMargin: 4
         }
 
         GridLayout {
             id: grid
             columns: switcherRoot.columnsCount
-            rowSpacing: 8
-            columnSpacing: 8
+            rowSpacing: 10
+            columnSpacing: 10
 
             Repeater {
                 model: ThemeService.themesList
@@ -79,8 +80,8 @@ FocusScope {
                     isApplied: ThemeService.currentTheme === modelData.name
                     isSelected: switcherRoot.selectedIndex === index
 
-                    Layout.preferredWidth: 170
-                    Layout.preferredHeight: 48
+                    Layout.preferredWidth: 160
+                    Layout.preferredHeight: 46
 
                     onClicked: {
                         switcherRoot.selectedIndex = index;
