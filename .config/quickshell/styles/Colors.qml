@@ -82,7 +82,7 @@ Item {
     readonly property color brightCyan: cyan
     readonly property color brightWhite: white
 
-    readonly property real micaAlpha: 0.85
+    readonly property real micaAlpha: 0.65
     readonly property color bgMica: Qt.rgba(bg.r, bg.g, bg.b, micaAlpha)
     readonly property color bgSurfaceMica: Qt.rgba(bgSurface.r, bgSurface.g, bgSurface.b, micaAlpha)
 }

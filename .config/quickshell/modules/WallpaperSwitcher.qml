@@ -9,12 +9,12 @@ FocusScope {
     id: switcherRoot
     
     // Hardcoded implicit limits so the Island knows exact target size immediately
-    implicitWidth: 1024
-    implicitHeight: 480
+    implicitWidth: contentColumn.implicitWidth + 40
+    implicitHeight: contentColumn.implicitHeight + 40
     focus: true
 
     property int selectedIndex: 0
-    readonly property int columnsCount: 6
+    readonly property int columnsCount: 7
 
     Component.onCompleted: {
         switcherRoot.forceActiveFocus()

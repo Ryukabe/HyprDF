@@ -43,12 +43,24 @@ Item {
 
     property int selectedIndex: 0
 
-    Process { id: proc }
+    Process {
+        id: proc
+        running: false
+
+        onExited: {
+            running = false
+        }
+    }
 
     function runCmd(cmd) {
-        if (!cmd) return;
+        if (!cmd || proc.running)
+            return
+
         proc.command = ["sh", "-c", cmd]
         proc.running = true
+
+        // Close the power menu only after the command has been handed
+        // to the process, so a click is not lost during page switching.
         ShellState.showPage("clock")
     }
 
@@ -109,7 +121,7 @@ Item {
                 selected: index === root.selectedIndex
                 onClicked: {
                     root.selectedIndex = index
-                    root.triggerSelected()
+                    root.runCmd(modelData.cmd)
                 }
             }
         }

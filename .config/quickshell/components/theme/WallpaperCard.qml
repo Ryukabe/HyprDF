@@ -1,6 +1,7 @@
 // components/theme/WallpaperCard.qml
 import QtQuick
 import QtQuick.Layouts
+import Qt5Compat.GraphicalEffects
 import "../../styles"
 
 Rectangle {
@@ -16,15 +17,15 @@ Rectangle {
 
     implicitWidth: 160
     implicitHeight: 90
-    radius: Dimens.radiusMedium
+    radius: Dimens.radiusSmall
     color: Colors.bgSurface
-    clip: true
+    // Note: clip: true is no longer needed here since OpacityMask handles the corner clipping
 
     border.width: card.isApplied ? 2 : 0
     border.color: Colors.accent
 
-    scale: card.isRaised ? 1.05 : 1.0
-    z: card.isRaised ? 1 : 0
+    scale: card.isRaised ? 1.1 : 1.0
+    z: card.isRaised ? 2 : 0
     transformOrigin: Item.Center
 
     transform: Translate {
@@ -39,13 +40,31 @@ Rectangle {
         NumberAnimation { duration: 140; easing.type: Easing.OutCubic }
     }
 
+    // Hidden source image for the mask
     Image {
+        id: wallpaperImage
         anchors.fill: parent
         source: "file://" + card.wallpaperPath
         fillMode: Image.PreserveAspectCrop
         asynchronous: true
         sourceSize.width: 320
         sourceSize.height: 180
+        visible: false
+    }
+
+    // Invisible mask shape matching the card's rounded corners
+    Rectangle {
+        id: maskRect
+        anchors.fill: parent
+        radius: card.radius
+        visible: false
+    }
+
+    // Applies the rounded corner mask to the image
+    OpacityMask {
+        anchors.fill: wallpaperImage
+        source: wallpaperImage
+        maskSource: maskRect
     }
 
     MouseArea {

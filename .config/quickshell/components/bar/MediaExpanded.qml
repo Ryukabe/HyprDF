@@ -14,13 +14,13 @@ Rectangle {
     radius: Dimens.borderRadiusLarge
     clip: true // Prevents album art & track info overflow during island expansion
 
-    // Synchronized opacity behavior
+  /*  // Synchronized opacity behavior
     Behavior on opacity {
         NumberAnimation {
             duration: 200
             easing.type: Easing.OutCubic
         }
-    }
+    }*/
 
     RowLayout {
         anchors.fill: parent

@@ -55,7 +55,7 @@ Rectangle {
                 border.color: card.previewAccent
 
                 scale: card.isRaised ? 1.15 : 1.0
-                z: card.isRaised ? 1 : 0
+                z: card.isRaised ? 2 : 0
                 transformOrigin: Item.Center
 
                 transform: Translate {
@@ -90,7 +90,7 @@ Rectangle {
         Rectangle {
             width: 26
             height: 4
-            radius: 2
+            radius: Dimens.radiusSmall
             color: card.previewAccent
             Layout.alignment: Qt.AlignHCenter
         }

@@ -52,12 +52,12 @@ FocusScope {
     ColumnLayout {
         id: contentColumn
         anchors.centerIn: parent
-        spacing: 16
+        spacing: 12
 
         Text {
             text: "Theme Selector"
             color: Colors.fg
-            font.pixelSize: Dimens.fontSizeLg
+            font.pixelSize: Dimens.fontSizeLg + 2
             font.bold: true
             Layout.alignment: Qt.AlignLeft
             Layout.leftMargin: 4
@@ -66,8 +66,8 @@ FocusScope {
         GridLayout {
             id: grid
             columns: switcherRoot.columnsCount
-            rowSpacing: 10
-            columnSpacing: 10
+            rowSpacing: 12
+            columnSpacing: 14
 
             Repeater {
                 model: ThemeService.themesList
@@ -80,8 +80,8 @@ FocusScope {
                     isApplied: ThemeService.currentTheme === modelData.name
                     isSelected: switcherRoot.selectedIndex === index
 
-                    Layout.preferredWidth: 160
-                    Layout.preferredHeight: 46
+                    Layout.preferredWidth: 130
+                    Layout.preferredHeight: 70
 
                     onClicked: {
                         switcherRoot.selectedIndex = index;
