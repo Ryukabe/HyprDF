@@ -1,0 +1,12 @@
+{
+  "accentColor": "#a4d8ff",
+  "interfaceFontFamily": "Futura Md BT,iA Writer Quattro S,Stratford,Times",
+  "textFontFamily": "Futura Md BT,iA Writer Quattro S,Stratford,Times",
+  "monospaceFontFamily": "SF Mono",
+  "showRibbon": true,
+  "showViewHeader": false,
+  "cssTheme": "Baseline",
+  "enabledCssSnippets": [
+    "my callout"
+  ]
+}
