@@ -120,7 +120,7 @@ Text {
     anchors.horizontalCenter: parent.horizontalCenter
     text: Qt.formatDateTime(clock.date, "hh:mm AP")
     color: Colors.fg
-    font.family: Fonts.primary
+    font.family: Fonts.display
     font.pixelSize: 22
     font.weight: 800
 }

@@ -38,7 +38,10 @@ Item {
         }
     }
 
-    Component.onCompleted: revealTimer.restart()
+    Component.onCompleted: {
+        revealTimer.restart()
+        focusTimer.restart()
+    }
 
     Timer {
         id: revealTimer
