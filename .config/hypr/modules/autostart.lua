@@ -10,7 +10,7 @@ hl.on("hyprland.start", function()
     -- Launch Quickshell once cleanly with OpenGL backend
     hl.exec_cmd("quickshell")
 
-    hl.exec_cmd("swaync")
+    --hl.exec_cmd("swaync")
     hl.exec_cmd("hypridle")
     
     -- Applications

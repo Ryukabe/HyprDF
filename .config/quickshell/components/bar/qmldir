@@ -3,3 +3,4 @@ Clock 1.0 Clock.qml
 MediaExpanded 1.0 MediaExpanded.qml
 StatusPanel 1.0 StatusPanel.qml
 LevelIndicator 1.0 LevelIndicator.qml
+NotificationToast 1.0 NotificationToast.qml

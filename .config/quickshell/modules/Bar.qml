@@ -39,6 +39,7 @@ PanelWindow {
     Component.onCompleted: {
         BrightnessService.percent
         VolumeService.percent
+        NotificationService.trackedNotifications
     }
 
     function brightnessTier(percent) {
@@ -162,6 +163,7 @@ PanelWindow {
                     case "launcher": return launcherPage
                     case "volume": return volumePage
                     case "brightness": return brightnessPage
+                    case "notification": return notificationPage
                     case "theme": return themePage
                     case "wallpaper": return wallpaperSwitcherPage
                     default: return clockPage
@@ -177,6 +179,7 @@ PanelWindow {
         Component { id: themePage; ThemeSwitcher {} }
         Component { id: wallpaperSwitcherPage; WallpaperSwitcher {} }
         Component { id: controlPage; ControlCenter {} }
+        Component { id: notificationPage; NotificationToast {} }
 
         Component {
             id: brightnessPage

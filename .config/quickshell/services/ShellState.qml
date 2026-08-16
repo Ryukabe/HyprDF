@@ -5,30 +5,41 @@ QtObject {
     id: root
 
     property string activePage: "clock"
+    property bool focusModeEnabled: false
 
     property Timer flashTimer: Timer {
         interval: 1500
         onTriggered: root.activePage = "clock"
     }
 
-    // permanent open (status, media, power, control, launcher, theme) — stays until dismissed
     function showPage(page) {
         flashTimer.stop()
         root.activePage = page
     }
 
-    // temporary open (volume, brightness) — auto-reverts to clock after interval
     function flashPage(page) {
         root.activePage = page
+        flashTimer.interval = 1500
         flashTimer.restart()
     }
 
-    // helper to toggle between active page and clock
+    // like flashPage, but with a caller-specified duration —
+    // used by notifications, since toast length varies
+    function flashPageFor(page, durationMs) {
+        root.activePage = page
+        flashTimer.interval = durationMs
+        flashTimer.restart()
+    }
+
     function togglePage(page) {
         if (root.activePage === page) {
             showPage("clock")
         } else {
             showPage(page)
         }
+    }
+
+    function toggleFocusMode() {
+        root.focusModeEnabled = !root.focusModeEnabled
     }
 }
