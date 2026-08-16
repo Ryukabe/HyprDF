@@ -60,7 +60,7 @@ hl.bind("ALT + F4",                    hl.dsp.window.close())
 hl.bind(mainMod .. " + Space ",              hl.dsp.exec_cmd("qs ipc call launcher toggle"), { locked = true })
 
 -- Control Panel / Quick Settings
-hl.bind("ALT + A",             hl.dsp.exec_cmd("qs ipc call controlpanel toggle"))
+hl.bind( mainMod .. " + A ",                 hl.dsp.exec_cmd("qs ipc call controlcenter toggle"))
 
 -- Power Menu
 hl.bind(mainMod .. " + Escape",              hl.dsp.exec_cmd("qs ipc call power toggle"))
@@ -69,11 +69,11 @@ hl.bind(mainMod .. " + Escape",              hl.dsp.exec_cmd("qs ipc call power 
 hl.bind(mainMod .. " + T",                   hl.dsp.exec_cmd("qs ipc call themeswitcher toggle"))
 
 -- Wallpaper Switcher
-hl.bind(mainMod .. " + W",             hl.dsp.exec_cmd("qs ipc call wallpaper toggle"))
+hl.bind(mainMod .. " + W",                   hl.dsp.exec_cmd("qs ipc call wallpaper toggle"))
 
 -- Brightness Control
-hl.bind("XF86MonBrightnessUp",    hl.dsp.exec_cmd("qs ipc call brightness increase"), { locked = true, repeating = true })
-hl.bind("XF86MonBrightnessDown",  hl.dsp.exec_cmd("qs ipc call brightness decrease"), { locked = true, repeating = true })
+hl.bind("XF86MonBrightnessUp",               hl.dsp.exec_cmd("qs ipc call brightness increase"), { locked = true, repeating = true })
+hl.bind("XF86MonBrightnessDown",             hl.dsp.exec_cmd("qs ipc call brightness decrease"), { locked = true, repeating = true })
 
 --- Apps ---
 

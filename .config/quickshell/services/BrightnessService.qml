@@ -1,3 +1,5 @@
+// services/BrightnessService.qml
+
 pragma Singleton
 import QtQuick
 import Quickshell
@@ -36,6 +38,7 @@ Singleton {
 
     function increase() { _set(root.step + "%+"); ShellState.flashPage("brightness") }
     function decrease() { _set(root.step + "%-"); ShellState.flashPage("brightness") }
+    function setPercent(pct) { _set(pct + "%") }
 
     IpcHandler {
         target: "brightness"

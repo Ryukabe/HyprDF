@@ -14,12 +14,12 @@ PanelWindow {
     id: window
 
     WlrLayershell.namespace: "quickshell:island"
-
     WlrLayershell.keyboardFocus: (
         ShellState.activePage === "launcher" ||
         ShellState.activePage === "power" ||
         ShellState.activePage === "theme" ||
-        ShellState.activePage === "wallpaper"
+        ShellState.activePage === "wallpaper" ||
+        ShellState.activePage === "control"
     ) ? WlrKeyboardFocus.Exclusive : WlrKeyboardFocus.None
 
     anchors { top: true; left: true; right: true }
@@ -27,7 +27,7 @@ PanelWindow {
 
     // =========================================================================
     // CRITICAL PERFORMANCE FIX:
-    // Keep window boundaries FIXED so Hyprland does NOT destroy and re-allocate 
+    // Keep window boundaries FIXED so Hyprland does NOT destroy and re-allocate
     // Wayland layer shell surface framebuffers 60-144 times per second!
     // =========================================================================
     implicitHeight: 600
@@ -58,6 +58,13 @@ PanelWindow {
         function toggle() { ShellState.activePage = ShellState.activePage === "power" ? "clock" : "power" }
         function open() { ShellState.showPage("power") }
         function close() { ShellState.showPage("clock") }
+    }
+
+    IpcHandler {
+        target: "controlcenter"
+        function toggle(): void { ShellState.activePage === "control" ? ShellState.showPage("clock") : ShellState.showPage("control") }
+        function open(): void { ShellState.showPage("control") }
+        function close(): void { ShellState.showPage("clock") }
     }
 
     IpcHandler {
@@ -169,6 +176,7 @@ PanelWindow {
         Component { id: powerPage; PowerMenu {} }
         Component { id: themePage; ThemeSwitcher {} }
         Component { id: wallpaperSwitcherPage; WallpaperSwitcher {} }
+        Component { id: controlPage; ControlCenter {} }
 
         Component {
             id: brightnessPage
@@ -177,7 +185,7 @@ PanelWindow {
                 percent: BrightnessService.percent
             }
         }
-        
+
         Component {
             id: volumePage
             LevelIndicator {
@@ -186,16 +194,6 @@ PanelWindow {
                     : VolumeService.percent <= 65 ? "../../assets/icons/volume-mid.png"
                     : "../../assets/icons/volume-high.png"
                 percent: VolumeService.percent
-            }
-        }
-        
-        Component {
-            id: controlPage
-            Rectangle {
-                implicitWidth: 380
-                implicitHeight: 320
-                color: "transparent"
-                Text { anchors.centerIn: parent; text: "Control center"; color: Colors.fg }
             }
         }
     }
