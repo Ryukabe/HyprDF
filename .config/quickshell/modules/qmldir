@@ -4,5 +4,6 @@ PowerMenu 1.0 PowerMenu.qml
 AppLauncher 1.0 AppLauncher.qml
 LockScreen 1.0 LockScreen.qml
 ControlCenter 1.0 ControlCenter.qml
+NotificationCenter 1.0 NotificationCenter.qml
 ThemeSwitcher 1.0 ThemeSwitcher.qml
 WallpaperSwitcher 1.0 WallpaperSwitcher.qml

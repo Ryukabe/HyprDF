@@ -58,26 +58,31 @@ hl.bind("ALT + F4",                    hl.dsp.window.close())
 --- QuickShell ---
 
 -- App Launcher
-hl.bind(mainMod .. " + Space ",              hl.dsp.exec_cmd("qs ipc call launcher toggle"), { locked = true })
+hl.bind(mainMod .. " + Space ",             hl.dsp.exec_cmd("qs ipc call launcher toggle"), { locked = true })
 
 -- Control Panel / Quick Settings
-hl.bind( mainMod .. " + A ",                 hl.dsp.exec_cmd("qs ipc call controlcenter toggle"))
+hl.bind( mainMod .. " + A ",                hl.dsp.exec_cmd("qs ipc call controlcenter toggle"))
+
+-- Notification Center
+hl.bind(mainMod .. " + N",                  hl.dsp.exec_cmd("qs ipc call notificationcenter toggle"))
 
 -- Power Menu
-hl.bind(mainMod .. " + Escape",              hl.dsp.exec_cmd("qs ipc call power toggle"))
+hl.bind(mainMod .. " + Escape",             hl.dsp.exec_cmd("qs ipc call power toggle"))
 
 -- Theme Switcher
-hl.bind(mainMod .. " + T",                   hl.dsp.exec_cmd("qs ipc call themeswitcher toggle"))
+hl.bind(mainMod .. " + T",                  hl.dsp.exec_cmd("qs ipc call themeswitcher toggle"))
 
 -- Wallpaper Switcher
-hl.bind(mainMod .. " + W",                   hl.dsp.exec_cmd("qs ipc call wallpaper toggle"))
+hl.bind(mainMod .. " + W",                  hl.dsp.exec_cmd("qs ipc call wallpaper toggle"))
 
 -- Brightness Control
-hl.bind("XF86MonBrightnessUp",               hl.dsp.exec_cmd("qs ipc call brightness increase"), { locked = true, repeating = true })
-hl.bind("XF86MonBrightnessDown",             hl.dsp.exec_cmd("qs ipc call brightness decrease"), { locked = true, repeating = true })
+hl.bind("XF86MonBrightnessUp",              hl.dsp.exec_cmd("qs ipc call brightness increase"), { locked = true, repeating = true })
+hl.bind("XF86MonBrightnessDown",            hl.dsp.exec_cmd("qs ipc call brightness decrease"), { locked = true, repeating = true })
 
 -- Volume Control
-
+hl.bind("XF86AudioRaiseVolume",             hl.dsp.exec_cmd("qs ipc call volume increase"), { locked = true, repeating = true })
+hl.bind("XF86AudioLowerVolume",             hl.dsp.exec_cmd("qs ipc call volume decrease"), { locked = true, repeating = true })
+hl.bind("XF86AudioMute",                    hl.dsp.exec_cmd("qs ipc call volume toggle"),   { locked = true, repeating = true })
 
 
 --- Apps ---
