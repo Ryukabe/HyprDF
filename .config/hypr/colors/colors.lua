@@ -1,2 +1,2 @@
-local theme = require("colors.custom.everforest")
+local theme = require("colors.custom.monochrome")
 return theme

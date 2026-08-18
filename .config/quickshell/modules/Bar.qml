@@ -34,7 +34,8 @@ PanelWindow {
         ShellState.activePage === "theme" ||
         ShellState.activePage === "wallpaper" ||
         ShellState.activePage === "control" ||
-        ShellState.activePage === "notificationcenter"
+        ShellState.activePage === "notificationcenter" ||
+        ShellState.activePage === "workspaces"
     ) ? WlrKeyboardFocus.Exclusive : WlrKeyboardFocus.None
 
     anchors { top: true; left: true; right: true }
@@ -124,6 +125,13 @@ PanelWindow {
                 ShellState.showPage("clock");
             }
         }
+    }
+
+    IpcHandler {
+        target: "workspaces"
+        function toggle() { ShellState.activePage = ShellState.activePage === "workspaces" ? "clock" : "workspaces" }
+        function open() { ShellState.showPage("workspaces") }
+        function close() { ShellState.showPage("clock") }
     }
 
     // ---- Pointer masking ------------------------------------------------
@@ -251,6 +259,7 @@ PanelWindow {
                     case "notificationcenter": return notificationCenterPage
                     case "theme": return themePage
                     case "wallpaper": return wallpaperSwitcherPage
+                    case "workspaces": return workspacesPage
                     default: return clockPage
                 }
             }
@@ -267,6 +276,7 @@ PanelWindow {
         Component { id: controlPage; ControlCenter {} }                   // Wi-Fi/BT/Focus/Night Light + sliders + media
         Component { id: notificationPage; NotificationToast {} }          // single-line incoming notification pill
         Component { id: notificationCenterPage; NotificationCenter {} }   // full notification list + clear all
+        Component { id: workspacesPage; WorkspaceOverview {} }            // workspace grid, arrow-key nav + switch
 
         // Brightness OSD — icon tier picked by brightnessTier(), level
         // driven live by BrightnessService.percent.

@@ -6,6 +6,7 @@ QtObject {
 
     property string activePage: "clock"
     property bool focusModeEnabled: false
+    
 
     property Timer flashTimer: Timer {
         interval: 1500

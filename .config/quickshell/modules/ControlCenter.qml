@@ -89,9 +89,11 @@ Column {
             id: btTile
             width: (toggleGrid.width - toggleGrid.columnSpacing) / 2
             title: "Bluetooth"
-            subtitle: active ? "On" : "Off"
+            active: BluetoothService.enabled
+            subtitle: BluetoothService.statusText
             iconGlyph: "\uf294"
-            onToggled: console.log("Bluetooth toggled:", active)
+            external: true
+            onToggled: BluetoothService.toggle()
         }
 
         ToggleTile {

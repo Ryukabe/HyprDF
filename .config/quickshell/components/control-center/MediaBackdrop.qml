@@ -26,14 +26,17 @@ Rectangle {
     Text {
         anchors.centerIn: parent
         text: "󰎈"
-        font.family: "JetBrains Mono Nerd Font Propo"
+        font.family: Fonts.nerdFont
         font.pixelSize: 32
         color: Colors.subtext
         visible: AudioService.artUrl === ""
     }
 
     // Dark gradient overlay for text legibility over the art — corners
-    // darkest (where title and controls sit), center lightest
+    // darkest (where title and controls sit), center lightest.
+    // Kept as raw black/alpha rather than a themed color, since this
+    // overlay's job is contrast against unpredictable album art, not
+    // matching the active theme palette.
     Rectangle {
         anchors.fill: parent
         visible: AudioService.artUrl !== ""
@@ -50,18 +53,16 @@ Rectangle {
         id: trackInfo
         anchors.left: parent.left
         anchors.top: parent.top
-        anchors.margins: 12
-        // leave room on the right so long titles don't run under the
-        // fallback note icon when there's no art
-        width: parent.width - 24
-        spacing: 2
+        anchors.margins: Dimens.paddingMedium
+        width: parent.width - (Dimens.paddingMedium * 2)
+        spacing: Dimens.spacingSmall / 2
 
         Text {
             text: AudioService.trackTitle || "No Media Playing"
             font.family: Fonts.text
-            font.pixelSize: 15
+            font.pixelSize: Dimens.fontSizeLg
             font.bold: true
-            color: "#ffffff"
+            color: Colors.white
             elide: Text.ElideRight
             width: parent.width
         }
@@ -69,7 +70,7 @@ Rectangle {
         Text {
             text: AudioService.artistName || "Unknown Artist"
             font.family: Fonts.text
-            font.pixelSize: 12
+            font.pixelSize: Dimens.fontSizeSm
             color: Qt.rgba(1, 1, 1, 0.75)
             elide: Text.ElideRight
             width: parent.width
@@ -80,14 +81,14 @@ Rectangle {
     Row {
         anchors.right: parent.right
         anchors.bottom: parent.bottom
-        anchors.margins: 12
-        spacing: 18
+        anchors.margins: Dimens.paddingMedium
+        spacing: Dimens.spacingLarge
 
         Text {
             text: "󰒮"
-            font.family: "JetBrains Mono Nerd Font Propo"
-            font.pixelSize: 18
-            color: "#ffffff"
+            font.family: Fonts.nerdFont
+            font.pixelSize: Dimens.fontSizeLg
+            color: Colors.white
 
             MouseArea {
                 anchors.fill: parent
@@ -98,9 +99,9 @@ Rectangle {
 
         Text {
             text: AudioService.isPlaying ? "󰏤" : "󰐊"
-            font.family: "JetBrains Mono Nerd Font Propo"
-            font.pixelSize: 20
-            color: "#ffffff"
+            font.family: Fonts.nerdFont
+            font.pixelSize: Dimens.fontSizeLg + 2
+            color: Colors.accent
 
             MouseArea {
                 anchors.fill: parent
@@ -111,9 +112,9 @@ Rectangle {
 
         Text {
             text: "󰒭"
-            font.family: "JetBrains Mono Nerd Font Propo"
-            font.pixelSize: 18
-            color: "#ffffff"
+            font.family: Fonts.nerdFont
+            font.pixelSize: Dimens.fontSizeLg
+            color: Colors.white
 
             MouseArea {
                 anchors.fill: parent
