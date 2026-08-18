@@ -1,2 +1,2 @@
-local theme = require("colors.custom.monochrome")
+local theme = require("colors.custom.dragon")
 return theme
