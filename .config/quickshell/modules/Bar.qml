@@ -1,10 +1,4 @@
 // modules/Bar.qml
-//
-// The Dynamic Island — a single morphing floating pill anchored to the top
-// of the screen. Every "page" (clock, status, media, power menu, control
-// center, launcher, OSDs, notifications, etc.) is a Loader-swapped QML
-// component rendered inside this one Rectangle. ShellState.activePage
-// decides which page is currently showing.
 
 import QtQuick
 import QtQuick.Layouts
@@ -16,18 +10,13 @@ import "../styles"
 import "../services"
 import "../components/bar"
 import "../components/power-menu"
+import "../components/overview"
 
 PanelWindow {
     id: window
 
-    // Wayland layer-shell surface name — used by Hyprland layer rules
-    // (e.g. no_anim, ignore_zero) to target this specific surface.
     WlrLayershell.namespace: "quickshell:island"
 
-    // Only grab exclusive keyboard focus (steal input from every other
-    // window) while a page that actually needs typing/arrow-key nav is
-    // open. Everything else (clock, status, OSDs, toasts) stays
-    // non-exclusive so it doesn't interrupt whatever you're doing elsewhere.
     WlrLayershell.keyboardFocus: (
         ShellState.activePage === "launcher" ||
         ShellState.activePage === "power" ||
@@ -41,44 +30,22 @@ PanelWindow {
     anchors { top: true; left: true; right: true }
     color: "transparent"
 
-    // =========================================================================
-    // CRITICAL PERFORMANCE FIX:
-    // Keep window boundaries FIXED so Hyprland does NOT destroy and re-allocate
-    // Wayland layer shell surface framebuffers 60-144 times per second!
-    // The island itself animates its own width/height internally — the
-    // PanelWindow surface behind it never resizes.
-    // =========================================================================
     implicitHeight: 600
     implicitWidth: 1200
 
-    // Reserve just enough screen space (top strip) for the compact pill —
-    // the rest of implicitHeight/Width above is just canvas room for the
-    // island to expand into without the surface itself resizing.
     exclusionMode: ExclusionMode.Normal
     exclusiveZone: island.compactHeight + island.anchors.topMargin
 
-    // Force these singletons to instantiate immediately at shell startup
-    // rather than lazily on first reference — without this, e.g. the
-    // NotificationServer inside NotificationService might not start
-    // listening on DBus until something else happens to touch it first.
     Component.onCompleted: {
         BrightnessService.percent
         VolumeService.percent
         NotificationService.trackedNotifications
     }
 
-    // Snaps a raw brightness percent to the nearest 20% icon tier
-    // (20/40/60/80/100) for the brightness OSD icon lookup.
     function brightnessTier(percent) {
         var tier = Math.round(percent / 20) * 20
         return Math.max(20, Math.min(100, tier))
     }
-
-    // ---- IPC handlers -------------------------------------------------
-    // Each of these lives here (not inside the lazily-loaded page itself)
-    // because Loader-created components don't exist yet when a keybind
-    // fires — the handler needs to exist up front to receive the call
-    // and only then tell ShellState to load the page.
 
     IpcHandler {
         target: "launcher"
@@ -134,15 +101,8 @@ PanelWindow {
         function close() { ShellState.showPage("clock") }
     }
 
-    // ---- Pointer masking ------------------------------------------------
-    // PanelWindow's mask defines the ONLY region that receives pointer
-    // events at the compositor level — anything outside it passes straight
-    // through to whatever's behind the shell. While collapsed, only the
-    // small island itself is clickable. While expanded, the mask widens to
-    // clickCatcher (full surface) so clicking anywhere outside the island
-    // closes it back to clock.
     mask: Region {
-        item: island.expanded ? clickCatcher : island
+        item: (island.expanded && ShellState.activePage !== "notification") ? clickCatcher : island
     }
 
     Rectangle {
@@ -157,27 +117,21 @@ PanelWindow {
         }
     }
 
-    // ---- The island itself -----------------------------------------------
     Rectangle {
         id: island
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: parent.top
         anchors.topMargin: 5
 
-        // Clips child page content to the pill's rounded shape as it morphs.
         clip: true
 
         readonly property bool expanded: ShellState.activePage !== "clock"
         readonly property int compactHeight: 36
         readonly property int compactWidth: 160
 
-        // Explicit discrete width/height (not layout-computed) to avoid
-        // QML re-binding thrashing during the morph animation.
         width: targetWidth
         height: targetHeight
 
-        // Target size comes from whatever page is currently loaded; falls
-        // back to the compact pill size when nothing's loaded yet.
         property int targetWidth: pageLoader.item ? pageLoader.item.implicitWidth : compactWidth
         property int targetHeight: pageLoader.item ? pageLoader.item.implicitHeight : compactHeight
 
@@ -186,10 +140,6 @@ PanelWindow {
         border.color: Colors.border
         border.width: 0
 
-        // GPU-accelerated morph animation — width and height animate
-        // together on the same fixed duration so the pill never distorts
-        // (mismatched durations would make width/height finish at
-        // different times and visibly warp the shape).
         Behavior on width {
             NumberAnimation {
                 duration: 320
@@ -204,15 +154,30 @@ PanelWindow {
             }
         }
 
-        // Hover-driven status panel: hovering the compact island opens the
-        // status page; moving the cursor away closes it back to clock.
-        // Scoped to only fire while on clock/status so it never interferes
-        // with pages opened deliberately via keybind (launcher, power,
-        // control center, etc.) — those close on their own Escape/click-
-        // outside logic instead, not on incidental mouse-leave.
+        property bool canHoverOpen: true
+        property string previousPage: "clock"
+
+        Connections {
+            target: ShellState
+            function onActivePageChanged() {
+                // Check if we are transitioning FROM an expanded module TO clock/status
+                var wasModule = island.previousPage !== "clock" && island.previousPage !== "status"
+                var nowClock = ShellState.activePage === "clock" || ShellState.activePage === "status"
+
+                if (wasModule && nowClock) {
+                    // Lock hover opening until the cursor physically exits the island
+                    island.canHoverOpen = false
+                }
+
+                // Update previous state
+                island.previousPage = ShellState.activePage
+            }
+        }
+
         HoverHandler {
             id: statusHover
-            enabled: ShellState.activePage === "clock" || ShellState.activePage === "status"
+            enabled: island.canHoverOpen && (ShellState.activePage === "clock" || ShellState.activePage === "status")
+
             onHoveredChanged: {
                 if (hovered) {
                     if (ShellState.activePage === "clock") {
@@ -226,20 +191,21 @@ PanelWindow {
             }
         }
 
-        // Consumes clicks landing on blank space inside the expanded
-        // island (gaps between widgets, padding, empty list states) so
-        // they don't fall through the transparent island background to
-        // clickCatcher underneath and accidentally close the panel.
+        HoverHandler {
+            id: exitTracker
+            onHoveredChanged: {
+                if (!hovered) {
+                    island.canHoverOpen = true
+                }
+            }
+        }
+
         MouseArea {
             anchors.fill: parent
             enabled: island.expanded
             onClicked: {}
         }
 
-        // ---- Page loader ---------------------------------------------------
-        // Swaps in whichever Component matches ShellState.activePage.
-        // Island width/height (above) reactively track whatever this
-        // Loader ends up displaying.
         Loader {
             id: pageLoader
             anchors.top: parent.top
@@ -265,21 +231,18 @@ PanelWindow {
             }
         }
 
-        // ---- Page components -------------------------------------------
-        Component { id: clockPage; Clock {} }                              // resting state — clock + audio visualizer
-        Component { id: statusPage; StatusPanel {} }                       // hover-revealed quick status view
-        Component { id: mediaPage; MediaExpanded { color: "transparent" } } // now-playing media controls
-        Component { id: launcherPage; AppLauncher {} }                     // keyboard-driven app launcher
-        Component { id: powerPage; PowerMenu {} }                          // shutdown/restart/lock/logout
-        Component { id: themePage; ThemeSwitcher {} }                      // theme picker grid
-        Component { id: wallpaperSwitcherPage; WallpaperSwitcher {} }      // wallpaper picker grid
-        Component { id: controlPage; ControlCenter {} }                   // Wi-Fi/BT/Focus/Night Light + sliders + media
-        Component { id: notificationPage; NotificationToast {} }          // single-line incoming notification pill
-        Component { id: notificationCenterPage; NotificationCenter {} }   // full notification list + clear all
-        Component { id: workspacesPage; WorkspaceOverview {} }            // workspace grid, arrow-key nav + switch
+        Component { id: clockPage; Clock {} }
+        Component { id: statusPage; StatusPanel {} }
+        Component { id: mediaPage; MediaExpanded { color: "transparent" } }
+        Component { id: launcherPage; AppLauncher {} }
+        Component { id: powerPage; PowerMenu {} }
+        Component { id: themePage; ThemeSwitcher {} }
+        Component { id: wallpaperSwitcherPage; WallpaperSwitcher {} }
+        Component { id: controlPage; ControlCenter {} }
+        Component { id: notificationPage; NotificationToast {} }
+        Component { id: notificationCenterPage; NotificationCenter {} }
+        Component { id: workspacesPage; WorkspaceOverview {} }
 
-        // Brightness OSD — icon tier picked by brightnessTier(), level
-        // driven live by BrightnessService.percent.
         Component {
             id: brightnessPage
             LevelIndicator {
@@ -288,8 +251,6 @@ PanelWindow {
             }
         }
 
-        // Volume OSD — icon picked by mute state and volume tier,
-        // level driven live by VolumeService.percent.
         Component {
             id: volumePage
             LevelIndicator {

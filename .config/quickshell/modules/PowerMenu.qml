@@ -59,8 +59,6 @@ Item {
         proc.command = ["sh", "-c", cmd]
         proc.running = true
 
-        // Close the power menu only after the command has been handed
-        // to the process, so a click is not lost during page switching.
         ShellState.showPage("clock")
     }
 

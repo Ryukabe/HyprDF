@@ -6,7 +6,13 @@ QtObject {
 
     property string activePage: "clock"
     property bool focusModeEnabled: false
-    
+    property bool ignoreHover: false
+
+    property Timer hoverResetTimer: Timer {
+        interval: 300
+        repeat: false
+        onTriggered: root.ignoreHover = false
+    }
 
     property Timer flashTimer: Timer {
         interval: 1500
@@ -15,6 +21,10 @@ QtObject {
 
     function showPage(page) {
         flashTimer.stop()
+        if (page === "clock") {
+            root.ignoreHover = true
+            hoverResetTimer.restart()
+        }
         root.activePage = page
     }
 
@@ -24,8 +34,6 @@ QtObject {
         flashTimer.restart()
     }
 
-    // like flashPage, but with a caller-specified duration —
-    // used by notifications, since toast length varies
     function flashPageFor(page, durationMs) {
         root.activePage = page
         flashTimer.interval = durationMs

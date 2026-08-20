@@ -1,3 +1,5 @@
+pragma ComponentBehavior: Bound
+
 import QtQuick
 import "../services"
 import "../styles"
@@ -103,7 +105,9 @@ Item {
                 Repeater {
                     model: NotificationService.trackedNotifications
 
-                    NotificationRow {
+                    delegate: NotificationRow {
+                        required property var modelData
+
                         width: listColumn.width
                         notification: modelData
                     }

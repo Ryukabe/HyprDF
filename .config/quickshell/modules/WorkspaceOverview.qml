@@ -1,42 +1,49 @@
-// modules/WorkspaceOverview.qml
-//
-// Pass 1 (skeleton): a workspace grid inside the island. Shows every
-// Hyprland workspace as a tile, lets you navigate with arrow keys or
-// mouse, and switches on Enter/click. No live window content yet —
-// that's layered in once this routing/data plumbing is confirmed
-// working (Pass 2 hooks into WorkspaceTile with per-window
-// ScreencopyView captures, positioned via HyprlandToplevel geometry).
+// modules/WorkspaceOverview
 
 import QtQuick
-import QtQuick.Layouts
+import Quickshell
 import Quickshell.Hyprland
-import "../styles"
+import "../components/overview"
 import "../services"
+import "../styles"
 
 Item {
     id: root
 
-    // ---- layout constants -------------------------------------------
-    readonly property int columns: 5
-    readonly property int tileWidth: 140
-    readonly property int tileHeight: Math.round(tileWidth * 9 / 16)
-    readonly property int gridSpacing: Dimens.spacingSmall
-
-    // Hyprland.workspaces is already sorted by id; we just drop
-    // named/scratchpad workspaces (negative ids) for this grid.
-    property var workspaceList: Hyprland.workspaces.values.filter(function(ws) {
-        return ws.id > 0
-    })
-    property int selectedIndex: 0
-
-    implicitWidth: grid.implicitWidth + Dimens.paddingLarge * 2
-    implicitHeight: header.implicitHeight + grid.implicitHeight + Dimens.paddingLarge * 2 + Dimens.spacingSmall
-
+    // Ported from the standalone Overview.qml's keyHandler Item — same
+    // Hyprland.usingLua dispatch fix, just closing via ShellState instead
+    // of GlobalStates directly.
     focus: true
 
-    // Loader-created components don't have focus yet the instant they're
-    // swapped in — same race as everywhere else in this shell. Force it
-    // shortly after completion rather than relying on signal timing.
+    implicitWidth: overviewLoader.item ? overviewLoader.item.implicitWidth : 0
+    implicitHeight: overviewLoader.item ? overviewLoader.item.implicitHeight : 0
+
+    Loader {
+        id: overviewLoader
+        anchors.fill: parent
+        sourceComponent: OverviewWidget {
+            // OverviewWidget only ever reads panelWindow.screen
+            panelWindow: Window.window
+        }
+    }
+
+    // Bridge: opening this page marks the widget's own state open;
+    // if the widget closes itself internally (window click, workspace
+    // click, etc.) we close the island page in step.
+    Component.onCompleted: {
+        GlobalStates.overviewOpen = true;
+        focusTimer.restart();
+    }
+
+    Connections {
+        target: GlobalStates
+        function onOverviewOpenChanged() {
+            if (!GlobalStates.overviewOpen && ShellState.activePage === "workspaces") {
+                ShellState.showPage("clock");
+            }
+        }
+    }
+
     Timer {
         id: focusTimer
         interval: 50
@@ -44,109 +51,75 @@ Item {
         onTriggered: root.forceActiveFocus()
     }
 
-    Component.onCompleted: {
-        // Land the keyboard cursor on whichever workspace is currently
-        // focused, so arrow nav starts from "where you are" not tile 0.
-        for (var i = 0; i < workspaceList.length; i++) {
-            if (workspaceList[i].active) {
-                selectedIndex = i
-                break
+    Keys.onPressed: event => {
+        if (event.key === Qt.Key_Escape || event.key === Qt.Key_Return) {
+            ShellState.showPage("clock");
+            event.accepted = true;
+            return;
+        }
+
+        const workspacesPerGroup = overviewLoader.item.overviewConfig.rows * overviewLoader.item.overviewConfig.columns;
+        const currentId = Hyprland.focusedMonitor?.activeWorkspace?.id ?? 1;
+        const useWorkspaceMap = overviewLoader.item.overviewConfig.useWorkspaceMap;
+        const workspaceMap = overviewLoader.item.overviewConfig.workspaceMap ?? [];
+        const focusedMonitorId = Hyprland.focusedMonitor?.id ?? 0;
+        const workspaceOffset = useWorkspaceMap ? Number(workspaceMap[focusedMonitorId] ?? 0) : 0;
+        const currentGroup = Math.floor((currentId - workspaceOffset - 1) / workspacesPerGroup);
+        const minWorkspaceId = currentGroup * workspacesPerGroup + 1 + workspaceOffset;
+        const maxWorkspaceId = minWorkspaceId + workspacesPerGroup - 1;
+
+        const rows = overviewLoader.item.overviewConfig.rows;
+        const columns = overviewLoader.item.overviewConfig.columns;
+        const reverseColumns = overviewLoader.item.overviewConfig.orderRightLeft;
+        const reverseRows = overviewLoader.item.overviewConfig.orderBottomUp;
+
+        const clampedIndex = Math.max(0, Math.min(workspacesPerGroup - 1, currentId - minWorkspaceId));
+        const currentNormalRow = Math.floor(clampedIndex / columns);
+        const currentNormalColumn = clampedIndex % columns;
+
+        function toVisualRow(normalRow) { return reverseRows ? (rows - normalRow - 1) : normalRow; }
+        function toVisualColumn(normalColumn) { return reverseColumns ? (columns - normalColumn - 1) : normalColumn; }
+        function toNormalRow(visualRow) { return reverseRows ? (rows - visualRow - 1) : visualRow; }
+        function toNormalColumn(visualColumn) { return reverseColumns ? (columns - visualColumn - 1) : visualColumn; }
+
+        let targetVisualRow = toVisualRow(currentNormalRow);
+        let targetVisualColumn = toVisualColumn(currentNormalColumn);
+        let targetId = null;
+
+        if (event.key === Qt.Key_Left || event.key === Qt.Key_H) {
+            targetVisualColumn = (targetVisualColumn - 1 + columns) % columns;
+        } else if (event.key === Qt.Key_Right || event.key === Qt.Key_L) {
+            targetVisualColumn = (targetVisualColumn + 1) % columns;
+        } else if (event.key === Qt.Key_Up || event.key === Qt.Key_K) {
+            targetVisualRow = (targetVisualRow - 1 + rows) % rows;
+        } else if (event.key === Qt.Key_Down || event.key === Qt.Key_J) {
+            targetVisualRow = (targetVisualRow + 1) % rows;
+        } else if (event.key >= Qt.Key_1 && event.key <= Qt.Key_9) {
+            const position = event.key - Qt.Key_0;
+            if (position <= workspacesPerGroup) targetId = minWorkspaceId + position - 1;
+        } else if (event.key === Qt.Key_0) {
+            if (workspacesPerGroup >= 10) targetId = minWorkspaceId + 9;
+        }
+
+        if (targetId === null && (
+            event.key === Qt.Key_Left || event.key === Qt.Key_H ||
+            event.key === Qt.Key_Right || event.key === Qt.Key_L ||
+            event.key === Qt.Key_Up || event.key === Qt.Key_K ||
+            event.key === Qt.Key_Down || event.key === Qt.Key_J
+        )) {
+            const targetNormalRow = toNormalRow(targetVisualRow);
+            const targetNormalColumn = toNormalColumn(targetVisualColumn);
+            targetId = minWorkspaceId + targetNormalRow * columns + targetNormalColumn;
+        }
+
+        if (targetId !== null) {
+            const clampedTarget = Math.max(minWorkspaceId, Math.min(maxWorkspaceId, targetId));
+            if (Hyprland.usingLua) {
+                Hyprland.dispatch(`hl.dsp.focus({workspace = '${clampedTarget}'})`);
+            } else {
+                Hyprland.dispatch("workspace " + clampedTarget);
             }
-        }
-        focusTimer.restart()
-    }
-
-    function switchTo(index) {
-        if (index < 0 || index >= workspaceList.length) return
-        Hyprland.dispatch("workspace " + workspaceList[index].id)
-        ShellState.showPage("clock")
-    }
-
-    Keys.onPressed: (event) => {
-        switch (event.key) {
-            case Qt.Key_Left:
-                selectedIndex = Math.max(0, selectedIndex - 1)
-                event.accepted = true
-                break
-            case Qt.Key_Right:
-                selectedIndex = Math.min(workspaceList.length - 1, selectedIndex + 1)
-                event.accepted = true
-                break
-            case Qt.Key_Up:
-                selectedIndex = Math.max(0, selectedIndex - columns)
-                event.accepted = true
-                break
-            case Qt.Key_Down:
-                selectedIndex = Math.min(workspaceList.length - 1, selectedIndex + columns)
-                event.accepted = true
-                break
-            case Qt.Key_Return:
-            case Qt.Key_Enter:
-                switchTo(selectedIndex)
-                event.accepted = true
-                break
-            case Qt.Key_Escape:
-                ShellState.showPage("clock")
-                event.accepted = true
-                break
-        }
-    }
-
-    ColumnLayout {
-        anchors.fill: parent
-        anchors.margins: Dimens.paddingLarge
-        spacing: Dimens.spacingSmall
-
-        Text {
-            id: header
-            text: "Workspaces"
-            color: Colors.fgMuted
-            font.family: Fonts.text
-            font.pixelSize: Dimens.fontSizeSm
-        }
-
-        GridLayout {
-            id: grid
-            columns: root.columns
-            rowSpacing: root.gridSpacing
-            columnSpacing: root.gridSpacing
-
-            Repeater {
-                model: root.workspaceList
-
-                delegate: Rectangle {
-                    id: tile
-
-                    Layout.preferredWidth: root.tileWidth
-                    Layout.preferredHeight: root.tileHeight
-
-                    radius: Dimens.borderRadiusSmall
-                    color: Colors.surface
-                    border.width: index === root.selectedIndex ? 2 : 1
-                    border.color: modelData.active ? Colors.accent
-                        : (index === root.selectedIndex ? Colors.fgMuted : Colors.border)
-
-                    Behavior on border.color { ColorAnimation { duration: 120 } }
-
-                    Text {
-                        anchors.top: parent.top
-                        anchors.left: parent.left
-                        anchors.margins: 6
-                        text: modelData.id
-                        color: modelData.active ? Colors.accent : Colors.fgMuted
-                        font.family: Fonts.mono
-                        font.pixelSize: Dimens.fontSizeSm
-                    }
-
-                    MouseArea {
-                        anchors.fill: parent
-                        onClicked: {
-                            root.selectedIndex = index
-                            root.switchTo(index)
-                        }
-                    }
-                }
-            }
+            event.accepted = true;
         }
     }
 }

@@ -8,19 +8,26 @@ Singleton {
     readonly property string device: "wlan0"
     property bool enabled: false
     property string ssid: ""
+    property bool hasInternet: false
 
     Process {
         id: deviceProc
-        command: ["iwctl", "device", "show", root.device]
-        running: true
+        command: ["iwctl", "device", root.device, "show"]
         stdout: SplitParser { onRead: data => root._parseDeviceLine(data) }
     }
 
     Process {
         id: stationProc
         command: ["iwctl", "station", root.device, "show"]
-        running: true
         stdout: SplitParser { onRead: data => root._parseStationLine(data) }
+    }
+
+    Process {
+        id: pingProc
+        command: ["ping", "-c", "1", "-W", "1", "1.1.1.1"]
+        onExited: (code, status) => {
+            root.hasInternet = (code === 0)
+        }
     }
 
     Process {
@@ -29,7 +36,7 @@ Singleton {
 
     Timer {
         id: pollTimer
-        interval: 5000
+        interval: 3000
         running: true
         repeat: true
         onTriggered: root.refresh()
@@ -42,25 +49,34 @@ Singleton {
         onTriggered: root.refresh()
     }
 
+    Component.onCompleted: {
+        root.refresh()
+    }
+
     function refresh() {
-        deviceProc.running = true
-        stationProc.running = true
+        if (!deviceProc.running) deviceProc.running = true
+        if (!stationProc.running) stationProc.running = true
+        if (root.enabled && !pingProc.running) pingProc.running = true
     }
 
     function _parseDeviceLine(line) {
         const m = line.match(/Powered\s+(on|off)/i)
-        if (m) root.enabled = m[1].toLowerCase() === "on"
+        if (m) {
+            root.enabled = m[1].toLowerCase() === "on"
+        }
     }
 
     function _parseStationLine(line) {
         const netMatch = line.match(/^\s*Connected network\s+(.+)/i)
         if (netMatch) {
             root.ssid = netMatch[1].trim()
+            if (!pingProc.running) pingProc.running = true
             return
         }
         const stateMatch = line.match(/^\s*State\s+(\S+)/i)
         if (stateMatch && stateMatch[1].toLowerCase() !== "connected") {
             root.ssid = ""
+            root.hasInternet = false
         }
     }
 
@@ -69,10 +85,11 @@ Singleton {
         toggleProc.command = ["iwctl", "device", root.device, "set-property", "Powered", newState]
         toggleProc.running = true
 
-        // optimistic flip so the tile feels instant; verifyTimer corrects it
-        // shortly after in case the command actually failed
         root.enabled = !root.enabled
-        if (!root.enabled) root.ssid = ""
+        if (!root.enabled) {
+            root.ssid = ""
+            root.hasInternet = false
+        }
         verifyTimer.restart()
     }
 }

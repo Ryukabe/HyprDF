@@ -1,0 +1,5 @@
+modules WorkspaceOverview
+
+singleton ColorUtils 1.0 ColorUtils.qml
+OverviewWidget 1.0 OverviewWidget.qml
+OverviewWindow 1.0 OverviewWindow.qml

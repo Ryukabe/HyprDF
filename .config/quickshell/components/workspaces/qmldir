@@ -1,0 +1,2 @@
+module WorkspaceOverview
+WorkspaceTile 1.0 WorkspaceTile.qml

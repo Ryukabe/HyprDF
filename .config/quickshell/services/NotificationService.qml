@@ -21,11 +21,11 @@ Singleton {
             notification.tracked = true
             root.latestNotification = notification
 
-            // expireTimeout is in seconds per spec; fall back to 4s if the
-            // sender didn't specify one (-1/0 means "server decides")
+            // expireTimeout is already provided in milliseconds by Quickshell.
+            // If expireTimeout <= 0 (-1 means server decides), fall back to 4000ms.
             var timeoutMs = notification.expireTimeout > 0
-                ? notification.expireTimeout * 1000
-                : 4000
+                ? notification.expireTimeout
+                : 2500
 
             ShellState.flashPageFor("notification", timeoutMs)
 

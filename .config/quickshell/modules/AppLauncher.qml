@@ -187,20 +187,46 @@ Item {
                         anchors.rightMargin: 10
                         spacing: Dimens.spacingMd
 
-                        Rectangle {
+                        Item {
                             width: 32
                             height: 32
-                            radius: Dimens.borderRadiusMedium
-                            color: index === root.selectedIndex ? Colors.bg : Colors.bgSurface
                             anchors.verticalCenter: parent.verticalCenter
 
-                            Text {
-                                anchors.centerIn: parent
-                                text: modelData.name ? modelData.name.charAt(0).toUpperCase() : "?"
-                                font.family: Fonts.text
-                                font.pixelSize: Dimens.fontSizeMd
-                                font.weight: Font.Bold
-                                color: Colors.fg
+                            // Resolve system theme icons cleanly via image://icon/ provider or direct icon path
+                            Image {
+                                id: appIcon
+                                anchors.fill: parent
+                                fillMode: Image.PreserveAspectFit
+                                source: {
+                                    if (!modelData.icon) return ""
+                                    
+                                    // Handle direct absolute file paths (e.g. /usr/share/pixmaps/app.png)
+                                    if (modelData.icon.startsWith("/")) {
+                                        return "file://" + modelData.icon
+                                    }
+                                    
+                                    // Try Quickshell icon path lookup or fallback to system icon provider
+                                    var resolved = Quickshell.iconPath(modelData.icon, "Papirus-Dark")
+                                    return resolved !== "" ? resolved : "image://icon/" + modelData.icon
+                                }
+                                visible: status === Image.Ready
+                            }
+
+                            // Fallback Monogram if system icon is not found
+                            Rectangle {
+                                anchors.fill: parent
+                                radius: Dimens.borderRadiusMedium
+                                color: index === root.selectedIndex ? Colors.bg : Colors.bgSurface
+                                visible: appIcon.status !== Image.Ready
+
+                                Text {
+                                    anchors.centerIn: parent
+                                    text: modelData.name ? modelData.name.charAt(0).toUpperCase() : "?"
+                                    font.family: Fonts.text
+                                    font.pixelSize: Dimens.fontSizeMd
+                                    font.weight: Font.Bold
+                                    color: Colors.fg
+                                }
                             }
                         }
 
