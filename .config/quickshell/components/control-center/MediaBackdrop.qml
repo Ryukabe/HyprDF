@@ -27,7 +27,7 @@ Rectangle {
         anchors.centerIn: parent
         text: "󰎈"
         font.family: Fonts.nerdFont
-        font.pixelSize: 32
+        font.pixelSize: Dimens.fontSizeMassive
         color: Colors.subtext
         visible: AudioService.artUrl === ""
     }

@@ -7,7 +7,7 @@ Rectangle {
 
     width: parent ? parent.width : 340
     implicitHeight: contentColumn.implicitHeight + 20
-    radius: 12
+    radius: Dimens.radiusLarge
     color: Colors.surface
     border.width: 1
     border.color: Colors.border
@@ -27,7 +27,7 @@ Rectangle {
             Text {
                 text: row.notification ? row.notification.appName : ""
                 font.family: Fonts.text
-                font.pixelSize: 11
+                font.pixelSize: Dimens.fontSizeXSm
                 color: Colors.fgMuted
                 elide: Text.ElideRight
                 anchors.left: parent.left
@@ -40,7 +40,7 @@ Rectangle {
                 id: dismissIcon
                 text: "\uf00d"
                 font.family: Fonts.mono
-                font.pixelSize: 11
+                font.pixelSize: Dimens.fontSizeXSm
                 color: Colors.fgMuted
                 anchors.right: parent.right
                 anchors.verticalCenter: parent.verticalCenter
@@ -56,7 +56,7 @@ Rectangle {
         Text {
             text: row.notification ? row.notification.summary : ""
             font.family: Fonts.text
-            font.pixelSize: 13
+            font.pixelSize: Dimens.fontSizeBase
             font.bold: true
             color: Colors.fg
             width: parent.width
@@ -67,7 +67,7 @@ Rectangle {
 
         Text {
             text: row.notification ? row.notification.body : ""
-            font.pixelSize: 12
+            font.pixelSize: Dimens.fontSizeSm
             color: Colors.fgMuted
             width: parent.width
             wrapMode: Text.WordWrap

@@ -7,4 +7,5 @@ ControlCenter 1.0 ControlCenter.qml
 NotificationCenter 1.0 NotificationCenter.qml
 ThemeSwitcher 1.0 ThemeSwitcher.qml
 WallpaperSwitcher 1.0 WallpaperSwitcher.qml
-WorkspaceOverview 1.0 WorkspaceOverview.qml
+PolkitAgent 1.0 PolkitAgent.qml
+

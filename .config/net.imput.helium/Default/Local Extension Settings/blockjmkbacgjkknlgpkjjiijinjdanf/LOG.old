@@ -1,0 +1,27 @@
+2026/08/22-20:13:49.823 6e45 Reusing MANIFEST /home/shiham/.config/net.imput.helium/Default/Local Extension Settings/blockjmkbacgjkknlgpkjjiijinjdanf/MANIFEST-000001
+2026/08/22-20:13:49.825 6e45 Recovering log #36
+2026/08/22-20:13:49.912 6e45 Reusing old log /home/shiham/.config/net.imput.helium/Default/Local Extension Settings/blockjmkbacgjkknlgpkjjiijinjdanf/000036.log 
+2026/08/22-20:14:13.422 6e47 Level-0 table #40: started
+2026/08/22-20:14:13.622 6e47 Level-0 table #40: 4813421 bytes OK
+2026/08/22-20:14:13.659 6e47 Delete type=0 #36
+2026/08/22-20:14:25.666 6e46 Level-0 table #42: started
+2026/08/22-20:14:25.904 6e46 Level-0 table #42: 4347426 bytes OK
+2026/08/22-20:14:25.962 6e46 Delete type=0 #39
+2026/08/22-20:14:25.963 6e46 Compacting 4@0 + 0@1 files
+2026/08/22-20:14:26.105 6e46 Generated table #43@0: 6 keys, 2797134 bytes
+2026/08/22-20:14:26.328 6e46 Generated table #44@0: 6 keys, 2674529 bytes
+2026/08/22-20:14:26.539 6e46 Generated table #45@0: 2 keys, 2332049 bytes
+2026/08/22-20:14:26.717 6e46 Generated table #46@0: 2 keys, 577 bytes
+2026/08/22-20:14:27.262 6e46 Generated table #47@0: 11 keys, 2004307 bytes
+2026/08/22-20:14:27.262 6e46 Compacted 4@0 + 0@1 files => 9808596 bytes
+2026/08/22-20:14:27.581 6e46 compacted to: files[ 0 5 9 0 0 0 0 ]
+2026/08/22-20:14:27.581 6e46 Delete type=2 #35
+2026/08/22-20:14:27.582 6e46 Delete type=2 #37
+2026/08/22-20:14:27.582 6e46 Delete type=2 #42
+2026/08/22-20:14:27.582 6e46 Delete type=2 #40
+2026/08/22-20:15:26.996 6e47 Level-0 table #49: started
+2026/08/22-20:15:27.305 6e47 Level-0 table #49: 6282263 bytes OK
+2026/08/22-20:15:27.364 6e47 Delete type=0 #41
+2026/08/22-20:15:30.268 6e46 Level-0 table #51: started
+2026/08/22-20:15:30.558 6e46 Level-0 table #51: 9987281 bytes OK
+2026/08/22-20:15:30.681 6e46 Delete type=0 #48

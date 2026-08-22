@@ -24,7 +24,7 @@ Item {
             id: iconText
             text: "\uf0f3"
             font.family: Fonts.mono
-            font.pixelSize: 14
+            font.pixelSize: Dimens.fontSizeMd
             color: Colors.accent
             anchors.verticalCenter: parent.verticalCenter
         }
@@ -33,7 +33,7 @@ Item {
             id: summaryText
             text: toast.notif ? toast.notif.summary : ""
             font.family: Fonts.text
-            font.pixelSize: 13
+            font.pixelSize: Dimens.fontSizeBase
             font.bold: true
             color: Colors.fg
             elide: Text.ElideRight

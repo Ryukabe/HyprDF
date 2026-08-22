@@ -1,12 +1,25 @@
-# --- YOUR EXACT ALIASES ---
+# General Shortcuts
 alias c='clear'
-alias i='yay -S'
-alias s='yay -Ss'
-alias u='yay -Rsn'
 alias e='nvim'
 alias ..='cd ..'
 
-# --- YOUR EXACT GIT ALIASES ---
+# Privilege Escalation (Polkit / Quickshell)
+alias sudo='pkexec'
+
+# Package Manager Shortcuts
+alias i='yay --sudo pkexec -S'
+alias s='yay -Ss'
+alias u='yay --sudo pkexec -Rsn'
+
+# Privilege Escalation (Polkit / Quickshell)
+#alias sudo='pkexec'
+
+# Package Manager (yay)
+#alias i='yay -S'
+#alias s='yay -Ss'
+#alias u='yay -Rsn'
+
+# Git Aliases
 alias gs="git status"
 alias ga="git add"
 alias gc="git commit -m"
@@ -20,8 +33,8 @@ alias gfo="git fetch origin"
 alias gcheck="git checkout"
 alias gcredential="git config credential.helper store"
 
-# --- EZA OVERRIDES ---
-#alias ls='eza --icons'
-#alias ll='eza -lh --icons --git'
-#alias la='eza -lah --icons --git'
-#alias tree='eza --tree --icons'
+# Eza Overrides (Uncomment to enable)
+# alias ls='eza --icons'
+# alias ll='eza -lh --icons --git'
+# alias la='eza -lah --icons --git'
+# alias tree='eza --tree --icons'

@@ -45,7 +45,7 @@ WlSessionLock {
                         anchors.horizontalCenter: parent.horizontalCenter
                         text: Qt.formatDateTime(new Date(), "hh:mm A")
                         font.family: Fonts.text
-                        font.pixelSize: 64
+                        font.pixelSize: Dimens.fontSizeDisplay
                         font.weight: Font.Bold
                         color: Colors.fg
                     }
@@ -53,7 +53,7 @@ WlSessionLock {
                     Rectangle {
                         width: 280
                         height: 44
-                        radius: 12
+                        radius: Dimens.radiusLarge
                         color: Colors.bgSurface
                         border.color: errorMessage.visible ? "#ff5555" : "transparent"
                         border.width: errorMessage.visible ? 1 : 0
@@ -66,7 +66,7 @@ WlSessionLock {
                             verticalAlignment: TextInput.AlignVCenter
                             echoMode: TextInput.Password
                             font.family: Fonts.text
-                            font.pixelSize: 16
+                            font.pixelSize: Dimens.fontSizeLg
                             color: Colors.fg
                             focus: true
 
@@ -87,7 +87,7 @@ WlSessionLock {
                         anchors.horizontalCenter: parent.horizontalCenter
                         text: "Incorrect password"
                         font.family: Fonts.text
-                        font.pixelSize: 13
+                        font.pixelSize: Dimens.fontSizeBase
                         color: "#ff5555"
                         visible: false
                     }
@@ -96,7 +96,7 @@ WlSessionLock {
                         anchors.horizontalCenter: parent.horizontalCenter
                         text: pam.authenticating ? "Authenticating..." : "Enter password to unlock"
                         font.family: Fonts.text
-                        font.pixelSize: 12
+                        font.pixelSize: Dimens.fontSizeLg
                         color: Colors.fgMuted
                     }
                 }

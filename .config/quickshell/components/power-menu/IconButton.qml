@@ -10,7 +10,7 @@ Rectangle {
 
     width: 44
     height: 44
-    radius: 12
+    radius: Dimens.radiusLarge
     color: (mouseArea.containsMouse || root.selected) ? Colors.bgSurface : "transparent"
     Behavior on color { ColorAnimation { duration: 120 } }
 

@@ -1,7 +1,8 @@
 -- Autostart services hook
 hl.on("hyprland.start", function()
     -- Polkit Authentication Agent
-    hl.exec_cmd("/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1")
+    --hl.exec_cmd("/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1")
+    --hl.exec_cmd("hyprpolkitagent")
     
     -- System tools
     hl.exec_cmd("awww-daemon")

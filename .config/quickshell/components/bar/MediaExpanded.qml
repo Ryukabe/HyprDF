@@ -47,7 +47,7 @@ Rectangle {
                 anchors.centerIn: parent
                 text: "󰎈"
                 font.family: "JetBrains Mono Nerd Font Propo"
-                font.pixelSize: 28
+                font.pixelSize: Dimens.fontSizeHuge
                 color: Colors.subtext
                 visible: AudioService.artUrl === ""
             }
@@ -86,7 +86,7 @@ Rectangle {
                 Text {
                     text: "󰒮"
                     font.family: "JetBrains Mono Nerd Font Propo"
-                    font.pixelSize: 20
+                    font.pixelSize: Dimens.fontSizeXl
                     color: Colors.fg
 
                     MouseArea {
@@ -98,7 +98,7 @@ Rectangle {
                 Text {
                     text: AudioService.isPlaying ? "󰏤" : "󰐊"
                     font.family: "JetBrains Mono Nerd Font Propo"
-                    font.pixelSize: 22
+                    font.pixelSize: Dimens.fontSizeXxl
                     color: Colors.accent
 
                     MouseArea {
@@ -110,7 +110,7 @@ Rectangle {
                 Text {
                     text: "󰒭"
                     font.family: "JetBrains Mono Nerd Font Propo"
-                    font.pixelSize: 20
+                    font.pixelSize: Dimens.fontSizeXl
                     color: Colors.fg
 
                     MouseArea {

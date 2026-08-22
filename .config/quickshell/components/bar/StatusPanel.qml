@@ -8,7 +8,7 @@ Rectangle {
     implicitWidth: 520
     implicitHeight: 100
     color: Colors.bg
-    radius: 18
+    radius: Dimens.radiusXLarge
 
     SystemClock {
         id: clock
@@ -29,7 +29,7 @@ Rectangle {
         anchors.margins: 16
         width: 72
         height: 72
-        radius: 14
+        radius: Dimens.radiusMediumLarge
         color: Colors.surface
         clip: true
 
@@ -44,7 +44,7 @@ Rectangle {
             anchors.centerIn: parent
             text: "󰎈"
             font.family: "JetBrains Mono Nerd Font Propo"
-            font.pixelSize: 24
+            font.pixelSize: Dimens.fontSizeXxxl
             color: Colors.subtext
             visible: AudioService.artUrl === ""
         }
@@ -60,7 +60,7 @@ Rectangle {
         Text {
             text: AudioService.trackTitle
             color: Colors.fg
-            font.pixelSize: 13
+            font.pixelSize: Dimens.fontSizeBase
             font.bold: true
             elide: Text.ElideRight
             width: 140
@@ -68,14 +68,14 @@ Rectangle {
         Text {
             text: AudioService.trackArtist
             color: Colors.fgMuted
-            font.pixelSize: 11
+            font.pixelSize: Dimens.fontSizeXSm
             elide: Text.ElideRight
             width: 140
         }
         Text {
             text: AudioService.trackAlbum.toUpperCase()
             color: Colors.fgMuted
-            font.pixelSize: 9
+            font.pixelSize: Dimens.fontSizeXs
             elide: Text.ElideRight
             width: 140
             visible: AudioService.trackAlbum !== ""
@@ -89,21 +89,21 @@ Rectangle {
                 text: "󰒮"
                 color: Colors.fg
                 font.family: "JetBrains Mono Nerd Font Propo"
-                font.pixelSize: 20
+                font.pixelSize: Dimens.fontSizeXl
                 TapHandler { onTapped: AudioService.previousTrack() }
             }
             Text {
                 text: AudioService.isPlaying ? "󰏤" : "󰐊"
                 color: Colors.fg
                 font.family: "JetBrains Mono Nerd Font Propo"
-                font.pixelSize: 20
+                font.pixelSize: Dimens.fontSizeXl
                 TapHandler { onTapped: AudioService.togglePlayPause() }
             }
             Text {
                 text: "󰒭"
                 color: Colors.fg
                 font.family: "JetBrains Mono Nerd Font Propo"
-                font.pixelSize: 20
+                font.pixelSize: Dimens.fontSizeXl
                 TapHandler { onTapped: AudioService.nextTrack() }
             }
         }
@@ -121,7 +121,7 @@ Text {
     text: Qt.formatDateTime(clock.date, "hh:mm AP")
     color: Colors.fg
     font.family: Fonts.display
-    font.pixelSize: 22
+    font.pixelSize: Dimens.fontSizeXxl
     font.weight: 800
 }
 
@@ -159,7 +159,7 @@ Text {
                     Text {
                         text: Qt.formatDateTime(dayDate, "ddd")
                         color: isFriday ? Colors.red : (isToday ? Colors.accent : Colors.fgMuted)
-                        font.pixelSize: 9
+                        font.pixelSize: Dimens.fontSizeXs
                         font.bold: isToday || isFriday
                         anchors.horizontalCenter: parent.horizontalCenter
                     }

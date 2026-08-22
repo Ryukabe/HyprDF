@@ -18,7 +18,7 @@ Rectangle {
                         visible: root.iconSource === ""
                         text: root.icon
                         font.family: Fonts.mono
-                        font.pixelSize: 14
+                        font.pixelSize: Dimens.fontSizeMd
                         color: Colors.fg
                         anchors.left: parent.left
                         anchors.leftMargin: 12
@@ -45,7 +45,7 @@ Rectangle {
                         id: percentText
                         text: root.percent + "%"
                         font.family: Fonts.mono
-                        font.pixelSize: 12
+                        font.pixelSize: Dimens.fontSizeSm
                         font.weight: Font.DemiBold
                         color: Colors.fg
                         anchors.right: parent.right
@@ -56,7 +56,7 @@ Rectangle {
                     Rectangle {
                         id: track
                         height: 4
-                        radius: 2
+                        radius: Dimens.radiusXSmall
                         color: Colors.bgSurface
                         anchors.left: root.iconSource === "" ? iconText.right : iconImage.right
                         anchors.leftMargin: 10

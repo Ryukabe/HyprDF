@@ -8,6 +8,9 @@ function user_plugin() {
     if [ ! -d "$dir" ]; then
         echo "Downloading plugin: $name..."
         git clone --depth 1 "$repo" "$dir"
+        
+        # Remove the nested .git folder to avoid git tracking conflicts
+        rm -rf "$dir/.git"
     fi
 
     # Source the plugin code
@@ -18,11 +21,10 @@ function user_plugin() {
     fi
 }
 
-# --- FETCHING YOUR ORIGINAL PLUGIN STACK ---
+# --- PLUGIN STACK ---
 user_plugin "zsh-completions" "https://github.com/zsh-users/zsh-completions"
 user_plugin "zsh-autosuggestions" "https://github.com/zsh-users/zsh-autosuggestions"
 user_plugin "zsh-syntax-highlighting" "https://github.com/zsh-users/zsh-syntax-highlighting"
-#user_plugin "fast-syntax-highlighting" "https://github.com/zdharma-continuum/fast-syntax-highlighting"
 
-# Enable native git completions (replaces the old OMZ git helper)
+# Enable native git completions
 autoload -Uz vcs_info

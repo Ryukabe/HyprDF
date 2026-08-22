@@ -1,102 +1,57 @@
-// components/overview/OverviewWidget
-
 import QtQuick
 import QtQuick.Effects
 import QtQuick.Layouts
 import Quickshell
 import Quickshell.Wayland
 import Quickshell.Hyprland
-import QtQuick.Controls
-import "../../styles"
-import "../../services"
-import "."
+import "widgets"
+import "functions"
 
 Item {
     id: root
-
-    // Local, directly-tunable settings (no JSON/Config indirection).
-    // Defaults match the upstream repo's config.example.json.
-    property QtObject overviewConfig: QtObject {
-        property int rows: 2
-        property int columns: 5
-        property real scale: 0.16
-        property bool hideEmptyRows: true
-        property bool useWorkspaceMap: false
-        property var workspaceMap: [0, 10]
-        property bool orderRightLeft: false
-        property bool orderBottomUp: false
-        property bool previewsEnabled: true
-        property string previewMode: "live"
-        property bool includeInactiveMonitorPreviews: true
-        property int previewRecaptureDelayMs: 60
-        property bool showSpecialWorkspaces: true
-        property var specialWorkspaces: []
-        property int specialWorkspaceColumns: 5
-        property string emptyWorkspaceWallpaper: ""
-        property string specialEmptyWorkspaceWallpaper: ""
-        property int workspaceSpacing: 5
-        property int backgroundPadding: 10
-        property int workspaceNumberBaseSize: 250
-        property QtObject effects: QtObject {
-            property bool enableBackdrop: false
-            property real backdropOpacity: 0.28
-            property real panelOpacity: 0.92
-            property real workspaceOpacity: 0.86
-            property real emptyWorkspaceWallpaperOverlayOpacity: 0.18
-            property real windowOverlayOpacity: 0.22
-            property bool enableBlur: false
-            property bool glassMode: false
-            property real glassTintStrength: 0.35
-            property real glassBorderOpacity: 0.72
-            property real glassShineOpacity: 0.14
-        }
-    }
-    property QtObject hacksConfig: QtObject {
-        property int arbitraryRaceConditionDelay: 150
-    }
     required property var panelWindow
-    readonly property HyprlandMonitor monitor: Hyprland.monitorFor(panelWindow.screen)
+    readonly property HyprlandMonitor monitor: Hyprland.monitorFor(panelWindow.screen) ?? Hyprland.focusedMonitor ?? (Hyprland.monitors.values.length ? Hyprland.monitors.values[0] : null)
     readonly property var toplevels: ToplevelManager.toplevels
     readonly property int effectiveActiveWorkspaceId: Math.max(1, Math.min(100, monitor?.activeWorkspace?.id ?? 1))
-    readonly property int workspacesShown: root.overviewConfig.rows * root.overviewConfig.columns
-    readonly property bool useWorkspaceMap: root.overviewConfig.useWorkspaceMap
-    readonly property var workspaceMap: root.overviewConfig.workspaceMap
+    readonly property int workspacesShown: Config.options.overview.rows * Config.options.overview.columns
+    readonly property bool useWorkspaceMap: Config.options.overview.useWorkspaceMap
+    readonly property var workspaceMap: Config.options.overview.workspaceMap
     readonly property int workspaceOffset: useWorkspaceMap ? Number(workspaceMap[root.monitor?.id] ?? 0) : 0
     readonly property int workspaceGroup: Math.floor((effectiveActiveWorkspaceId - workspaceOffset - 1) / workspacesShown)
-    property bool monitorIsFocused: (Hyprland.focusedMonitor?.name == monitor.name)
+    property bool monitorIsFocused: (Hyprland.focusedMonitor?.name === root.monitor?.name)
     property var windows: HyprlandData.windowList
     property var windowByAddress: HyprlandData.windowByAddress
     property var windowAddresses: HyprlandData.addresses
     property var workspaceIds: HyprlandData.workspaceIds
     property var monitorData: HyprlandData.monitors.find(m => m.id === root.monitor?.id)
-    property real scale: root.overviewConfig.scale
-    property color activeBorderColor: Colors.accent
+    property real scale: Config.options.overview.scale
+    property color activeBorderColor: Appearance.colors.colSecondary
 
     property real workspaceImplicitWidth: Math.round((monitorData?.transform % 2 === 1) ?
-        ((monitor.height / monitor.scale - (monitorData?.reserved?.[0] ?? 0) - (monitorData?.reserved?.[2] ?? 0)) * root.scale) :
-        ((monitor.width / monitor.scale - (monitorData?.reserved?.[0] ?? 0) - (monitorData?.reserved?.[2] ?? 0)) * root.scale))
+        (((monitor?.height ?? 1080) / (monitor?.scale ?? 1) - (monitorData?.reserved?.[0] ?? 0) - (monitorData?.reserved?.[2] ?? 0)) * root.scale) :
+        (((monitor?.width ?? 1920) / (monitor?.scale ?? 1) - (monitorData?.reserved?.[0] ?? 0) - (monitorData?.reserved?.[2] ?? 0)) * root.scale))
     property real workspaceImplicitHeight: Math.round((monitorData?.transform % 2 === 1) ?
-        ((monitor.width / monitor.scale - (monitorData?.reserved?.[1] ?? 0) - (monitorData?.reserved?.[3] ?? 0)) * root.scale) :
-        ((monitor.height / monitor.scale - (monitorData?.reserved?.[1] ?? 0) - (monitorData?.reserved?.[3] ?? 0)) * root.scale))
+        (((monitor?.width ?? 1920) / (monitor?.scale ?? 1) - (monitorData?.reserved?.[1] ?? 0) - (monitorData?.reserved?.[3] ?? 0)) * root.scale) :
+        (((monitor?.height ?? 1080) / (monitor?.scale ?? 1) - (monitorData?.reserved?.[1] ?? 0) - (monitorData?.reserved?.[3] ?? 0)) * root.scale))
 
     property real workspaceNumberMargin: 80
-    property real workspaceNumberSize: root.overviewConfig.workspaceNumberBaseSize * monitor.scale
+    property real workspaceNumberSize: Config.options.overview.workspaceNumberBaseSize * (monitor?.scale ?? 1)
     property int workspaceZ: 0
     property int windowZ: 1
     property int windowDraggingZ: 99999
-    property real workspaceSpacing: root.overviewConfig.workspaceSpacing
-    property string emptyWorkspaceWallpaperPath: root.overviewConfig.emptyWorkspaceWallpaper
-    property string specialEmptyWorkspaceWallpaperPath: root.overviewConfig.specialEmptyWorkspaceWallpaper
-    property bool showSpecialWorkspaces: root.overviewConfig.showSpecialWorkspaces
-    property var configuredSpecialWorkspaces: root.overviewConfig.specialWorkspaces ?? []
-    property int specialWorkspaceColumns: Math.max(1, root.overviewConfig.specialWorkspaceColumns)
-    property real panelOpacity: Math.max(0, Math.min(1, root.overviewConfig.effects.panelOpacity))
-    property real workspaceOpacity: Math.max(0, Math.min(1, root.overviewConfig.effects.workspaceOpacity))
-    property real emptyWorkspaceWallpaperOverlayOpacity: Math.max(0, Math.min(1, root.overviewConfig.effects.emptyWorkspaceWallpaperOverlayOpacity))
-    property bool glassMode: root.overviewConfig.effects.glassMode
-    property real glassTintStrength: Math.max(0, Math.min(1, root.overviewConfig.effects.glassTintStrength))
-    property real glassBorderOpacity: Math.max(0, Math.min(1, root.overviewConfig.effects.glassBorderOpacity))
-    property real glassShineOpacity: Math.max(0, Math.min(1, root.overviewConfig.effects.glassShineOpacity))
+    property real workspaceSpacing: Config.options.overview.workspaceSpacing
+    property string emptyWorkspaceWallpaperPath: Config.options.overview.emptyWorkspaceWallpaper
+    property string specialEmptyWorkspaceWallpaperPath: Config.options.overview.specialEmptyWorkspaceWallpaper
+    property bool showSpecialWorkspaces: Config.options.overview.showSpecialWorkspaces
+    property var configuredSpecialWorkspaces: Config.options.overview.specialWorkspaces ?? []
+    property int specialWorkspaceColumns: Math.max(1, Config.options.overview.specialWorkspaceColumns)
+    property real panelOpacity: Math.max(0, Math.min(1, Config.options.overview.effects.panelOpacity))
+    property real workspaceOpacity: Math.max(0, Math.min(1, Config.options.overview.effects.workspaceOpacity))
+    property real emptyWorkspaceWallpaperOverlayOpacity: Math.max(0, Math.min(1, Config.options.overview.effects.emptyWorkspaceWallpaperOverlayOpacity))
+    property bool glassMode: Config.options.overview.effects.glassMode
+    property real glassTintStrength: Math.max(0, Math.min(1, Config.options.overview.effects.glassTintStrength))
+    property real glassBorderOpacity: Math.max(0, Math.min(1, Config.options.overview.effects.glassBorderOpacity))
+    property real glassShineOpacity: Math.max(0, Math.min(1, Config.options.overview.effects.glassShineOpacity))
     property real effectivePanelOpacity: glassMode ? Math.min(panelOpacity, 0.72) : panelOpacity
     property real effectiveWorkspaceOpacity: glassMode ? Math.min(workspaceOpacity, 0.62) : workspaceOpacity
 
@@ -105,8 +60,8 @@ Item {
     property string draggingTargetSpecialWorkspace: ""
     property int previewRecaptureToken: 0
     property var allWorkspaces: HyprlandData.allWorkspaces
-    property bool previewsEnabled: root.overviewConfig.previewsEnabled
-    property string previewModeRaw: root.overviewConfig.previewMode
+    property bool previewsEnabled: Config.options.overview.previewsEnabled
+    property string previewModeRaw: Config.options.overview.previewMode
     property string previewMode: {
         const mode = `${previewModeRaw ?? "live"}`.trim().toLowerCase();
         return (mode === "event" || mode === "snapshot") ? "event" : "live";
@@ -169,7 +124,7 @@ Item {
     readonly property real specialWorkspaceTileHeight: root.workspaceImplicitHeight
     readonly property real specialStripGap: workspaceSpacing * 1.8
     readonly property real specialStripPadding: Math.max(8, 12 * root.scale)
-    readonly property real specialStripTitleHeight: Math.max(14, Dimens.fontSizeSm * root.scale)
+    readonly property real specialStripTitleHeight: Math.max(14, Appearance.font.pixelSize.small * root.scale)
     readonly property real specialStripTitleGap: Math.max(6, 8 * root.scale)
     readonly property int totalSpecialTiles: visibleSpecialWorkspaces.length + 1
     readonly property real specialSectionWidth: workspaceColumnLayout.implicitWidth
@@ -206,28 +161,28 @@ Item {
         if (!Number.isFinite(workspaceId))
             return 0;
         const adjusted = workspaceId - workspaceOffset;
-        const normalRow = Math.floor((adjusted - 1) / root.overviewConfig.columns) % root.overviewConfig.rows;
-        return root.overviewConfig.orderBottomUp ? (root.overviewConfig.rows - normalRow - 1) : normalRow;
+        const normalRow = Math.floor((adjusted - 1) / Config.options.overview.columns) % Config.options.overview.rows;
+        return Config.options.overview.orderBottomUp ? (Config.options.overview.rows - normalRow - 1) : normalRow;
     }
 
     function getWorkspaceColumn(workspaceId) {
         if (!Number.isFinite(workspaceId))
             return 0;
         const adjusted = workspaceId - workspaceOffset;
-        const normalCol = (adjusted - 1) % root.overviewConfig.columns;
-        return root.overviewConfig.orderRightLeft ? (root.overviewConfig.columns - normalCol - 1) : normalCol;
+        const normalCol = (adjusted - 1) % Config.options.overview.columns;
+        return Config.options.overview.orderRightLeft ? (Config.options.overview.columns - normalCol - 1) : normalCol;
     }
 
     function getWorkspaceInCell(rowIndex, colIndex) {
-        const mappedRow = root.overviewConfig.orderBottomUp ? (root.overviewConfig.rows - rowIndex - 1) : rowIndex;
-        const mappedCol = root.overviewConfig.orderRightLeft ? (root.overviewConfig.columns - colIndex - 1) : colIndex;
-        return (workspaceGroup * workspacesShown) + (mappedRow * root.overviewConfig.columns) + mappedCol + 1 + workspaceOffset;
+        const mappedRow = Config.options.overview.orderBottomUp ? (Config.options.overview.rows - rowIndex - 1) : rowIndex;
+        const mappedCol = Config.options.overview.orderRightLeft ? (Config.options.overview.columns - colIndex - 1) : colIndex;
+        return (workspaceGroup * workspacesShown) + (mappedRow * Config.options.overview.columns) + mappedCol + 1 + workspaceOffset;
     }
 
     function getVisibleRowPosition(rowIndex) {
         if (!Number.isFinite(rowIndex) || rowIndex < 0)
             return 0;
-        if (!root.overviewConfig.hideEmptyRows || !(rowsWithContent instanceof Set))
+        if (!Config.options.overview.hideEmptyRows || !(rowsWithContent instanceof Set))
             return rowIndex;
 
         let visibleRow = 0;
@@ -374,7 +329,7 @@ Item {
 
     // Calculate which rows have windows or current workspace
     property var rowsWithContent: {
-        if (!root.overviewConfig.hideEmptyRows) return null;
+        if (!Config.options.overview.hideEmptyRows) return null;
 
         let rows = new Set();
         const firstWorkspace = root.workspaceGroup * root.workspacesShown + 1 + workspaceOffset;
@@ -399,8 +354,8 @@ Item {
         return rows;
     }
 
-    implicitWidth: overviewBackground.implicitWidth + 6 * 2
-    implicitHeight: overviewBackground.implicitHeight + 6 * 2
+    implicitWidth: overviewBackground.implicitWidth + Appearance.sizes.elevationMargin * 2
+    implicitHeight: overviewBackground.implicitHeight + Appearance.sizes.elevationMargin * 2
 
     property Component windowComponent: OverviewWindow {}
     property list<OverviewWindow> windowWidgets: []
@@ -418,36 +373,30 @@ Item {
         }
     }
 
-    RectangularShadow {
-        anchors.fill: overviewBackground
-        radius: overviewBackground.radius
-        blur: 24
-        offset: Qt.vector2d(0.0, 2.0)
-        spread: 1
-        color: ColorUtils.applyAlpha("#000000", 0.35)
-        cached: true
+    StyledRectangularShadow {
+        target: overviewBackground
     }
     Rectangle { // Background
         id: overviewBackground
-        property real padding: root.overviewConfig.backgroundPadding
+        property real padding: Config.options.overview.backgroundPadding
         anchors.fill: parent
-        anchors.margins: 6
+        anchors.margins: Appearance.sizes.elevationMargin
 
         implicitWidth: contentLayout.implicitWidth + padding * 2
         implicitHeight: contentLayout.implicitHeight + padding * 2
-        radius: Dimens.borderRadiusLarge * root.scale + (Dimens.borderRadiusLarge !== 0 ? padding : 0)
+        radius: Appearance.rounding.screenRounding * root.scale + (Appearance.rounding.screenRounding !== 0 ? padding : 0)
         clip: true
         color: ColorUtils.applyAlpha(
             root.glassMode
-                ? ColorUtils.mix(Colors.bg, Colors.surface, 0.78 - root.glassTintStrength * 0.35)
-                : Colors.bg,
+                ? ColorUtils.mix(Appearance.colors.colLayer0, Appearance.colors.colLayer1, 0.78 - root.glassTintStrength * 0.35)
+                : Appearance.colors.colLayer0,
             root.effectivePanelOpacity
         )
         border.width: 1
         border.color: ColorUtils.applyAlpha(
             root.glassMode
-                ? ColorUtils.mix(Colors.border, Colors.border, 0.52)
-                : Colors.border,
+                ? ColorUtils.mix(Appearance.colors.colLayer0Border, Appearance.m3colors.m3outline, 0.52)
+                : Appearance.colors.colLayer0Border,
             root.glassMode ? root.glassBorderOpacity : root.effectivePanelOpacity
         )
 
@@ -490,36 +439,36 @@ Item {
                 spacing: workspaceSpacing
 
                 Repeater {
-                    model: root.overviewConfig.rows
+                    model: Config.options.overview.rows
                     delegate: RowLayout {
                     id: row
                     property int rowIndex: index
                     spacing: workspaceSpacing
-                    visible: !root.overviewConfig.hideEmptyRows ||
+                    visible: !Config.options.overview.hideEmptyRows ||
                              (root.rowsWithContent && root.rowsWithContent.has(rowIndex))
                     height: visible ? implicitHeight : 0
 
                     Repeater { // Workspace repeater
-                        model: root.overviewConfig.columns
+                        model: Config.options.overview.columns
                         Rectangle { // Workspace
                             id: workspace
                             property int colIndex: index
                             property int workspaceValue: root.getWorkspaceInCell(rowIndex, colIndex)
                             property bool showWallpaper: root.hasEmptyWorkspaceWallpaper
-                            property color defaultWorkspaceColor: Colors.surface
-                            property color hoveredWorkspaceColor: ColorUtils.mix(defaultWorkspaceColor, ColorUtils.mix(Colors.surface, Colors.accent, 0.10), 0.1)
-                            property color hoveredBorderColor: ColorUtils.mix(Colors.bgSurface, Colors.accent, 0.12)
+                            property color defaultWorkspaceColor: Appearance.colors.colLayer1
+                            property color hoveredWorkspaceColor: ColorUtils.mix(defaultWorkspaceColor, Appearance.colors.colLayer1Hover, 0.1)
+                            property color hoveredBorderColor: Appearance.colors.colLayer2Hover
                             property bool hoveredWhileDragging: false
 
                             implicitWidth: root.workspaceImplicitWidth
                             implicitHeight: root.workspaceImplicitHeight
                             color: showWallpaper ? "transparent" : ColorUtils.applyAlpha(
                                 root.glassMode
-                                    ? ColorUtils.mix(hoveredWhileDragging ? hoveredWorkspaceColor : defaultWorkspaceColor, Colors.bg, 0.46)
+                                    ? ColorUtils.mix(hoveredWhileDragging ? hoveredWorkspaceColor : defaultWorkspaceColor, Appearance.colors.colLayer0, 0.46)
                                     : (hoveredWhileDragging ? hoveredWorkspaceColor : defaultWorkspaceColor),
                                 root.effectiveWorkspaceOpacity
                             )
-                            radius: Dimens.borderRadiusLarge * root.scale
+                            radius: Appearance.rounding.screenRounding * root.scale
                             border.width: 2
                             border.color: hoveredWhileDragging
                                 ? ColorUtils.applyAlpha(hoveredBorderColor, root.glassMode ? root.glassBorderOpacity : 1)
@@ -563,7 +512,7 @@ Item {
                                 radius: parent.radius
                                 color: ColorUtils.applyAlpha(
                                     root.glassMode
-                                        ? ColorUtils.mix(workspace.hoveredWhileDragging ? workspace.hoveredWorkspaceColor : workspace.defaultWorkspaceColor, Colors.bg, 0.40)
+                                        ? ColorUtils.mix(workspace.hoveredWhileDragging ? workspace.hoveredWorkspaceColor : workspace.defaultWorkspaceColor, Appearance.colors.colLayer0, 0.40)
                                         : (workspace.hoveredWhileDragging ? workspace.hoveredWorkspaceColor : workspace.defaultWorkspaceColor),
                                     workspace.hoveredWhileDragging
                                         ? Math.min(0.28, root.emptyWorkspaceWallpaperOverlayOpacity + 0.08)
@@ -593,16 +542,16 @@ Item {
                                 border.color: ColorUtils.applyAlpha("#FFFFFF", root.glassBorderOpacity * 0.16)
                             }
 
-                            Text {
+                            StyledText {
                                 anchors.centerIn: parent
                                 visible: !workspace.showWallpaper
                                 text: workspaceValue
                                 font {
                                     pixelSize: root.workspaceNumberSize * root.scale
                                     weight: Font.DemiBold
-                                    family: Fonts.display
+                                    family: Appearance.font.family.expressive
                                 }
-                                color: ColorUtils.transparentize(Colors.fg, 0.8)
+                                color: ColorUtils.transparentize(Appearance.colors.colOnLayer1, 0.8)
                                 horizontalAlignment: Text.AlignHCenter
                                 verticalAlignment: Text.AlignVCenter
                             }
@@ -657,15 +606,15 @@ Item {
 
                 Rectangle {
                     anchors.fill: parent
-                    radius: Dimens.borderRadiusMedium * root.scale
+                    radius: Appearance.rounding.normal * root.scale
                     color: ColorUtils.applyAlpha(
                         root.glassMode
-                            ? ColorUtils.mix(Colors.bg, Colors.surface, 0.70)
-                            : Colors.surface,
+                            ? ColorUtils.mix(Appearance.colors.colLayer0, Appearance.colors.colLayer1, 0.70)
+                            : Appearance.colors.colLayer1,
                         root.glassMode ? Math.min(0.74, root.effectivePanelOpacity) : root.effectiveWorkspaceOpacity
                     )
                     border.width: 1
-                    border.color: ColorUtils.applyAlpha(Colors.border, root.glassMode ? root.glassBorderOpacity : 0.65)
+                    border.color: ColorUtils.applyAlpha(Appearance.colors.colLayer2Border, root.glassMode ? root.glassBorderOpacity : 0.65)
 
                     Rectangle {
                         anchors.left: parent.left
@@ -673,19 +622,19 @@ Item {
                         anchors.top: parent.top
                         height: Math.max(18 * root.scale, root.specialStripPadding + root.specialStripTitleHeight * 0.8)
                         radius: parent.radius
-                        color: ColorUtils.applyAlpha(Colors.accent, root.glassMode ? 0.12 : 0.08)
+                        color: ColorUtils.applyAlpha(Appearance.colors.colSecondary, root.glassMode ? 0.12 : 0.08)
                     }
 
-                    Text {
+                    StyledText {
                         anchors.left: parent.left
                         anchors.top: parent.top
                         anchors.leftMargin: root.specialStripPadding
                         anchors.topMargin: root.specialStripPadding
                         text: "Special Workspaces"
-                        font.family: Fonts.display
+                        font.family: Appearance.font.family.title
                         font.pixelSize: root.specialStripTitleHeight
                         font.weight: Font.DemiBold
-                        color: ColorUtils.applyAlpha(Colors.fg, 0.84)
+                        color: ColorUtils.applyAlpha(Appearance.colors.colOnLayer1, 0.84)
                     }
 
                     Grid {
@@ -704,7 +653,7 @@ Item {
                                 required property string modelData
                                 property string specialName: modelData
                                 property var specialGeometry: root.specialWorkspaceGeometry(specialName, root.monitor?.id)
-                                property color baseColor: ColorUtils.mix(Colors.surface, Colors.bg, 0.52)
+                                property color baseColor: ColorUtils.mix(Appearance.colors.colLayer1, Appearance.colors.colLayer0, 0.52)
                                 property bool hasRenderableGeometry: Number.isFinite(specialGeometry?.width)
                                     && Number.isFinite(specialGeometry?.height)
                                     && specialGeometry.width > 0
@@ -719,16 +668,16 @@ Item {
                                 property real contentOffsetY: Math.max(0, (height - contentHeight) / 2)
                                 implicitWidth: root.specialWorkspaceTileWidth
                                 implicitHeight: root.specialWorkspaceTileHeight
-                                radius: Dimens.borderRadiusLarge * root.scale
+                                radius: Appearance.rounding.screenRounding * root.scale
                                 clip: true
                                 color: showWallpaper ? "transparent" : ColorUtils.applyAlpha(
                                     root.glassMode
-                                        ? ColorUtils.mix(baseColor, Colors.bg, 0.44)
+                                        ? ColorUtils.mix(baseColor, Appearance.colors.colLayer0, 0.44)
                                         : baseColor,
                                     root.effectiveWorkspaceOpacity
                                 )
                                 border.width: 1
-                                border.color: ColorUtils.applyAlpha(Colors.border, root.glassMode ? root.glassBorderOpacity : 0.75)
+                                border.color: ColorUtils.applyAlpha(Appearance.colors.colLayer2Border, root.glassMode ? root.glassBorderOpacity : 0.75)
 
                                 Image {
                                     visible: specialWorkspaceTile.showWallpaper
@@ -747,7 +696,7 @@ Item {
                                     radius: parent.radius
                                     color: ColorUtils.applyAlpha(
                                         root.glassMode
-                                            ? ColorUtils.mix(specialWorkspaceTile.baseColor, Colors.bg, 0.40)
+                                            ? ColorUtils.mix(specialWorkspaceTile.baseColor, Appearance.colors.colLayer0, 0.40)
                                             : specialWorkspaceTile.baseColor,
                                         root.emptyWorkspaceWallpaperOverlayOpacity
                                     )
@@ -827,7 +776,7 @@ Item {
                                             geometryScaleY: specialWorkspaceTile.fitScale / root.scale
                                             xOffset: 0
                                             yOffset: 0
-                                            widgetMonitorId: root.monitor.id
+                                            widgetMonitorId: root.monitor?.id ?? -1
                                             recaptureToken: root.previewRecaptureToken
                                             restrictToWorkspace: false
                                             animateSize: false
@@ -939,8 +888,9 @@ Item {
                                                     }
                                                 }
 
-                                                ToolTip {
-                                                    visible: specialDragArea.containsMouse && !specialWindow.Drag.active
+                                                StyledToolTip {
+                                                    extraVisibleCondition: false
+                                                    alternativeVisibleCondition: specialDragArea.containsMouse && !specialWindow.Drag.active
                                                     text: `${windowData?.title ?? "Unknown"}\n[${windowData?.class ?? "unknown"}] ${windowData?.xwayland ? "[XWayland] " : ""}`
                                                 }
                                             }
@@ -954,17 +904,17 @@ Item {
                             property bool showWallpaper: root.hasSpecialEmptyWorkspaceWallpaper
                             implicitWidth: root.specialWorkspaceTileWidth
                             implicitHeight: root.specialWorkspaceTileHeight
-                            radius: Dimens.borderRadiusLarge * root.scale
+                            radius: Appearance.rounding.screenRounding * root.scale
                             color: showWallpaper ? "transparent" : ColorUtils.applyAlpha(
                                 root.glassMode
-                                    ? ColorUtils.mix(ColorUtils.mix(Colors.accent, Colors.surface, 0.65), Colors.surface, 0.58)
-                                    : ColorUtils.mix(Colors.bgSurface, Colors.surface, 0.55),
+                                    ? ColorUtils.mix(Appearance.colors.colSecondaryContainer, Appearance.colors.colLayer1, 0.58)
+                                    : ColorUtils.mix(Appearance.colors.colLayer2, Appearance.colors.colLayer1, 0.55),
                                 root.draggingTargetSpecialWorkspace === root.createSpecialWorkspaceTarget ? 0.90 : root.effectiveWorkspaceOpacity
                             )
                             border.width: 1
                             border.color: root.draggingTargetSpecialWorkspace === root.createSpecialWorkspaceTarget
                                 ? ColorUtils.applyAlpha(root.activeBorderColor, 0.96)
-                                : ColorUtils.applyAlpha(Colors.accent, 0.46)
+                                : ColorUtils.applyAlpha(Appearance.colors.colSecondary, 0.46)
 
                             Image {
                                 visible: createSpecialWorkspaceTile.showWallpaper
@@ -983,8 +933,8 @@ Item {
                                 radius: parent.radius
                                 color: ColorUtils.applyAlpha(
                                     root.glassMode
-                                        ? ColorUtils.mix(ColorUtils.mix(Colors.accent, Colors.surface, 0.65), Colors.bg, 0.40)
-                                        : ColorUtils.mix(Colors.bgSurface, Colors.surface, 0.55),
+                                        ? ColorUtils.mix(Appearance.colors.colSecondaryContainer, Appearance.colors.colLayer0, 0.40)
+                                        : ColorUtils.mix(Appearance.colors.colLayer2, Appearance.colors.colLayer1, 0.55),
                                     root.draggingTargetSpecialWorkspace === root.createSpecialWorkspaceTarget
                                         ? Math.min(0.28, root.emptyWorkspaceWallpaperOverlayOpacity + 0.08)
                                         : root.emptyWorkspaceWallpaperOverlayOpacity
@@ -1004,16 +954,16 @@ Item {
                                 anchors.centerIn: parent
                                 spacing: 0
 
-                                Text {
+                                StyledText {
                                     anchors.horizontalCenter: parent.horizontalCenter
                                     visible: !createSpecialWorkspaceTile.showWallpaper
                                     text: root.draggingTargetSpecialWorkspace === root.createSpecialWorkspaceTarget ? "Release" : "+"
-                                    font.family: Fonts.display
+                                    font.family: Appearance.font.family.expressive
                                     font.pixelSize: root.draggingTargetSpecialWorkspace === root.createSpecialWorkspaceTarget
-                                        ? Dimens.fontSizeMd * root.scale
-                                        : Dimens.fontSizeLg * 1.25 * root.scale
+                                        ? Appearance.font.pixelSize.larger * root.scale
+                                        : Appearance.font.pixelSize.huge * 1.25 * root.scale
                                     font.weight: Font.DemiBold
-                                    color: ColorUtils.applyAlpha(Colors.fg, 0.92)
+                                    color: ColorUtils.applyAlpha(Appearance.colors.colOnLayer1, 0.92)
                                     horizontalAlignment: Text.AlignHCenter
                                 }
                             }
@@ -1116,7 +1066,7 @@ Item {
                     scale: root.scale
                     availableWorkspaceWidth: root.workspaceImplicitWidth
                     availableWorkspaceHeight: root.workspaceImplicitHeight
-                    widgetMonitorId: root.monitor.id
+                    widgetMonitorId: root.monitor?.id ?? -1
                     recaptureToken: root.previewRecaptureToken
 
                     property bool atInitPosition: (initX == x && initY == y)
@@ -1129,7 +1079,7 @@ Item {
 
                     Timer {
                         id: updateWindowPosition
-                        interval: root.hacksConfig.arbitraryRaceConditionDelay
+                        interval: Config.options.hacks.arbitraryRaceConditionDelay
                         repeat: false
                         running: false
                         onTriggered: {
@@ -1220,8 +1170,9 @@ Item {
                             }
                         }
 
-                        ToolTip {
-                            visible: dragArea.containsMouse && !window.Drag.active
+                        StyledToolTip {
+                            extraVisibleCondition: false
+                            alternativeVisibleCondition: dragArea.containsMouse && !window.Drag.active
                             text: `${windowData?.title ?? "Unknown"}\n[${windowData?.class ?? "unknown"}] ${windowData?.xwayland ? "[XWayland] " : ""}`
                         }
                     }
@@ -1239,14 +1190,14 @@ Item {
                 width: root.workspaceImplicitWidth
                 height: root.workspaceImplicitHeight
                 color: "transparent"
-                radius: Dimens.borderRadiusLarge * root.scale
+                radius: Appearance.rounding.screenRounding * root.scale
                 border.width: 2
                 border.color: root.activeBorderColor
                 Behavior on x {
-                    animation: NumberAnimation { duration: 200; easing.type: Easing.OutCubic }
+                    animation: Appearance.animation.elementMoveFast.numberAnimation.createObject(this)
                 }
                 Behavior on y {
-                    animation: NumberAnimation { duration: 200; easing.type: Easing.OutCubic }
+                    animation: Appearance.animation.elementMoveFast.numberAnimation.createObject(this)
                 }
             }
         }

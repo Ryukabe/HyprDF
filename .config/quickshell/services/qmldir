@@ -10,6 +10,5 @@ singleton WifiService 1.0 WifiService.qml
 singleton NightLightService 1.0 NightLightService.qml
 singleton NotificationService 1.0 NotificationService.qml
 singleton BluetoothService 1.0 BluetoothService.qml
-singleton WorkspaceService 1.0 WorkspaceService.qml
-singleton GlobalStates 1.0 GlobalStates.qml
-singleton HyprlandData 1.0 HyprlandData.qml
+singleton FocusService 1.0 FocusService.qml
+singleton PolkitService 1.0 PolkitService.qml

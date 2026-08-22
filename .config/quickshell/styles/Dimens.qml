@@ -40,4 +40,21 @@ QtObject {
     readonly property int barHeight: 40
     readonly property int islandHeight: 40
     readonly property int islandRadius: 10
+    readonly property int radiusXSmall: 2
+    readonly property int radiusTiny: 6
+    readonly property int radiusMediumLarge: 14
+    readonly property int radiusXLarge: 18
+    readonly property int radiusXXLarge: 20
+
+    // Additional font sizes
+    readonly property int fontSizeXs: 9
+    readonly property int fontSizeXSm: 10
+    readonly property int fontSizeBase: 13
+    readonly property int fontSize15: 15
+    readonly property int fontSizeXl: 20
+    readonly property int fontSizeXxl: 22
+    readonly property int fontSizeXxxl: 24
+    readonly property int fontSizeHuge: 28
+    readonly property int fontSizeMassive: 32
+    readonly property int fontSizeDisplay: 64
 }

@@ -14,7 +14,7 @@ Rectangle {
 
     implicitWidth: 160
     implicitHeight: 64
-    radius: 14
+    radius: Dimens.radiusMediumLarge
     color: active
         ? Qt.rgba(Colors.accent.r, Colors.accent.g, Colors.accent.b, 0.22)
         : Colors.surface
@@ -28,7 +28,7 @@ Rectangle {
         id: iconText
         text: tile.iconGlyph
         font.family: Fonts.mono
-        font.pixelSize: 16
+        font.pixelSize: Dimens.fontSizeLg
         color: tile.active ? Colors.accent : Colors.fg
         anchors.left: parent.left
         anchors.top: parent.top
@@ -40,7 +40,7 @@ Rectangle {
         id: titleText
         text: tile.title
         font.family: Fonts.text
-        font.pixelSize: 13
+        font.pixelSize: Dimens.fontSizeBase
         font.bold: true
         color: Colors.fg
         anchors.left: parent.left
@@ -52,7 +52,7 @@ Rectangle {
     Text {
         id: subtitleText
         text: tile.subtitle
-        font.pixelSize: 10
+        font.pixelSize: Dimens.fontSizeXSm
         color: tile.active ? Colors.accent : Colors.fgMuted
         anchors.right: parent.right
         anchors.bottom: parent.bottom

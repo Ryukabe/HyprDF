@@ -1,13 +1,10 @@
-// components/overview/OverviewWindows
-
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Effects
 import Quickshell
 import Quickshell.Wayland
-import "../../styles"
-import "../../services"
-import "."
+import Quickshell.Hyprland
+import "functions"
 
 Item { // Window
     id: root
@@ -55,19 +52,19 @@ Item { // Window
     property bool hovered: false
     property bool pressed: false
 
-    property bool showIcons: true
-    property var iconToWindowRatio: 0.25
-    property var xwaylandIndicatorToIconRatio: 0.35
-    property var iconToWindowRatioCompact: 0.25
-    property bool cropToFill: false
-    property bool previewsEnabled: true
-    property bool includeInactiveMonitorPreviews: true
-    property int previewRecaptureDelayMs: 60
-    property real windowOverlayOpacity: Math.max(0, Math.min(1, 0.22))
-    property bool glassMode: false
-    property real glassShineOpacity: Math.max(0, Math.min(1, 0.14))
+    property bool showIcons: Config.options.windowPreview.showIcons
+    property var iconToWindowRatio: Config.options.windowPreview.iconToWindowRatio
+    property var xwaylandIndicatorToIconRatio: Config.options.windowPreview.xwaylandIndicatorToIconRatio
+    property var iconToWindowRatioCompact: Config.options.windowPreview.iconToWindowRatioCompact
+    property bool cropToFill: Config.options.windowPreview.cropToFill
+    property bool previewsEnabled: Config.options.overview.previewsEnabled
+    property bool includeInactiveMonitorPreviews: Config.options.overview.includeInactiveMonitorPreviews
+    property int previewRecaptureDelayMs: Config.options.overview.previewRecaptureDelayMs
+    property real windowOverlayOpacity: Math.max(0, Math.min(1, Config.options.overview.effects.windowOverlayOpacity))
+    property bool glassMode: Config.options.overview.effects.glassMode
+    property real glassShineOpacity: Math.max(0, Math.min(1, Config.options.overview.effects.glassShineOpacity))
     property real effectiveWindowOverlayOpacity: glassMode ? Math.min(windowOverlayOpacity, 0.10) : windowOverlayOpacity
-    property string previewModeRaw: "live"
+    property string previewModeRaw: Config.options.overview.previewMode
     property string previewMode: {
         const mode = `${previewModeRaw ?? "live"}`.trim().toLowerCase();
         return (mode === "event" || mode === "snapshot") ? "event" : "live";
@@ -91,7 +88,7 @@ Item { // Window
         return withoutQuery.length > 0 ? withoutQuery : "application-x-executable";
     }
     property var iconPath: Quickshell.iconPath(iconName, "image-missing")
-    property bool compactMode: Dimens.fontSizeSm * 4 > targetWindowHeight || Dimens.fontSizeSm * 4 > targetWindowWidth
+    property bool compactMode: Appearance.font.pixelSize.smaller * 4 > targetWindowHeight || Appearance.font.pixelSize.smaller * 4 > targetWindowWidth
 
     property bool indicateXWayland: windowData?.xwayland ?? false
     property bool previewCaptureEnabled: true
@@ -104,7 +101,7 @@ Item { // Window
     y: initY
     width: Math.min(targetWindowWidth, availableWorkspaceWidth)
     height: Math.min(targetWindowHeight, availableWorkspaceHeight)
-    opacity: (windowData?.monitor ?? -1) == widgetMonitorId ? 1 : 0.4
+    opacity: (windowData?.monitor ?? -1) == widgetMonitorId ? 1 : Config.options.windowPreview.inactiveMonitorOpacity
     visible: {
         const thisWsId = windowData?.workspace?.id;
         const isFullscreen = (windowData?.fullscreen ?? 0) > 0;
@@ -117,19 +114,19 @@ Item { // Window
 
     Behavior on x {
         enabled: root.initialized && !root.dragInProgress && !root.suspendPositionAnimation
-        animation: NumberAnimation { duration: 400; easing.type: Easing.OutCubic }
+        animation: Appearance.animation.elementMoveEnter.numberAnimation.createObject(this)
     }
     Behavior on y {
         enabled: root.initialized && !root.dragInProgress && !root.suspendPositionAnimation
-        animation: NumberAnimation { duration: 400; easing.type: Easing.OutCubic }
+        animation: Appearance.animation.elementMoveEnter.numberAnimation.createObject(this)
     }
     Behavior on width {
         enabled: root.initialized && root.animateSize && !root.dragInProgress && !root.suspendPositionAnimation
-        animation: NumberAnimation { duration: 400; easing.type: Easing.OutCubic }
+        animation: Appearance.animation.elementMoveEnter.numberAnimation.createObject(this)
     }
     Behavior on height {
         enabled: root.initialized && root.animateSize && !root.dragInProgress && !root.suspendPositionAnimation
-        animation: NumberAnimation { duration: 400; easing.type: Easing.OutCubic }
+        animation: Appearance.animation.elementMoveEnter.numberAnimation.createObject(this)
     }
 
     // Opaque background for windows on the active monitor.
@@ -138,10 +135,10 @@ Item { // Window
     Rectangle {
         visible: (root.windowData?.monitor ?? -1) === root.widgetMonitorId
         anchors.fill: parent
-        radius: Dimens.borderRadiusSmall * root.scale
+        radius: Appearance.rounding.windowRounding * root.scale
         color: root.glassMode
-            ? ColorUtils.mix(Colors.bgSurface, Colors.bg, 0.38)
-            : Colors.bgSurface
+            ? ColorUtils.mix(Appearance.colors.colLayer2, Appearance.colors.colLayer0, 0.38)
+            : Appearance.colors.colLayer2
     }
 
     ScreencopyView {
@@ -172,16 +169,16 @@ Item { // Window
 
     Rectangle {
         anchors.fill: parent
-        radius: Dimens.borderRadiusSmall * root.scale
-        color: pressed ? ColorUtils.applyAlpha(ColorUtils.mix(Colors.bgSurface, Colors.accent, 0.22), Math.min(1, root.effectiveWindowOverlayOpacity + 0.30)) :
-            hovered ? ColorUtils.applyAlpha(ColorUtils.mix(Colors.bgSurface, Colors.accent, 0.12), Math.min(1, root.effectiveWindowOverlayOpacity + 0.20)) :
+        radius: Appearance.rounding.windowRounding * root.scale
+        color: pressed ? ColorUtils.applyAlpha(Appearance.colors.colLayer2Active, Math.min(1, root.effectiveWindowOverlayOpacity + 0.30)) :
+            hovered ? ColorUtils.applyAlpha(Appearance.colors.colLayer2Hover, Math.min(1, root.effectiveWindowOverlayOpacity + 0.20)) :
             ColorUtils.applyAlpha(
-                root.glassMode ? ColorUtils.mix(Colors.bgSurface, Colors.bg, 0.38) : Colors.bgSurface,
+                root.glassMode ? ColorUtils.mix(Appearance.colors.colLayer2, Appearance.colors.colLayer0, 0.38) : Appearance.colors.colLayer2,
                 root.effectiveWindowOverlayOpacity
             )
         border.color: root.glassMode
-            ? ColorUtils.applyAlpha(Colors.border, 0.62)
-            : ColorUtils.transparentize(Colors.border, 0.7)
+            ? ColorUtils.applyAlpha(Appearance.m3colors.m3outline, 0.62)
+            : ColorUtils.transparentize(Appearance.m3colors.m3outline, 0.7)
         border.width: 1
 
         Rectangle {
@@ -210,7 +207,7 @@ Item { // Window
             anchors.verticalCenter: parent.verticalCenter
             anchors.left: parent.left
             anchors.right: parent.right
-            spacing: Dimens.fontSizeSm * 0.5
+            spacing: Appearance.font.pixelSize.smaller * 0.5
 
             Image {
                 id: windowIcon
@@ -240,7 +237,7 @@ Item { // Window
             anchors.centerIn: parent
             width: root.width
             height: root.height
-            radius: Dimens.borderRadiusSmall * root.scale
+            radius: Appearance.rounding.windowRounding * root.scale
         }
     }
 

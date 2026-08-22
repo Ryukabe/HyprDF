@@ -51,7 +51,7 @@ Item {
                 id: backArrow
                 text: "\uf060"
                 font.family: Fonts.mono
-                font.pixelSize: 16
+                font.pixelSize: Dimens.fontSizeLg
                 color: Colors.fg
                 anchors.left: parent.left
                 anchors.verticalCenter: parent.verticalCenter
@@ -66,7 +66,7 @@ Item {
             Text {
                 text: "Notifications"
                 font.family: Fonts.text
-                font.pixelSize: 15
+                font.pixelSize: Dimens.fontSize15
                 font.bold: true
                 color: Colors.fg
                 anchors.centerIn: parent
@@ -74,7 +74,7 @@ Item {
 
             Text {
                 text: "Clear all"
-                font.pixelSize: 12
+                font.pixelSize: Dimens.fontSizeSm
                 color: Colors.accent
                 visible: NotificationService.trackedNotifications.values.length > 0
                 anchors.right: parent.right
@@ -115,7 +115,7 @@ Item {
 
                 Text {
                     text: "No notifications"
-                    font.pixelSize: 12
+                    font.pixelSize: Dimens.fontSizeSm
                     color: Colors.fgMuted
                     visible: NotificationService.trackedNotifications.values.length === 0
                     anchors.horizontalCenter: parent.horizontalCenter

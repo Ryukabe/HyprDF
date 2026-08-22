@@ -1,5 +1,6 @@
 pragma Singleton
 import QtQuick
+import Quickshell.Io
 
 QtObject {
     id: root
@@ -49,6 +50,16 @@ QtObject {
     }
 
     function toggleFocusMode() {
-        root.focusModeEnabled = !root.focusModeEnabled
+        focusModeEnabled = !focusModeEnabled
+        if (focusModeEnabled) {
+            dndProcess.command = ["makoctl", "mode", "-a", "do-not-disturb"]
+        } else {
+            dndProcess.command = ["makoctl", "mode", "-r", "do-not-disturb"]
+        }
+        dndProcess.running = true
+    }
+
+    property Process dndProcess: Process {
+        id: dndProcess
     }
 }

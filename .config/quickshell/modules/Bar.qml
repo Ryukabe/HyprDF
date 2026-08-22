@@ -24,7 +24,7 @@ PanelWindow {
         ShellState.activePage === "wallpaper" ||
         ShellState.activePage === "control" ||
         ShellState.activePage === "notificationcenter" ||
-        ShellState.activePage === "workspaces"
+        ShellState.activePage === "polkit"
     ) ? WlrKeyboardFocus.Exclusive : WlrKeyboardFocus.None
 
     anchors { top: true; left: true; right: true }
@@ -40,6 +40,7 @@ PanelWindow {
         BrightnessService.percent
         VolumeService.percent
         NotificationService.trackedNotifications
+        PolkitService.isActive
     }
 
     function brightnessTier(percent) {
@@ -160,16 +161,13 @@ PanelWindow {
         Connections {
             target: ShellState
             function onActivePageChanged() {
-                // Check if we are transitioning FROM an expanded module TO clock/status
                 var wasModule = island.previousPage !== "clock" && island.previousPage !== "status"
                 var nowClock = ShellState.activePage === "clock" || ShellState.activePage === "status"
 
                 if (wasModule && nowClock) {
-                    // Lock hover opening until the cursor physically exits the island
                     island.canHoverOpen = false
                 }
 
-                // Update previous state
                 island.previousPage = ShellState.activePage
             }
         }
@@ -225,7 +223,7 @@ PanelWindow {
                     case "notificationcenter": return notificationCenterPage
                     case "theme": return themePage
                     case "wallpaper": return wallpaperSwitcherPage
-                    case "workspaces": return workspacesPage
+                    case "polkit": return polkitPage
                     default: return clockPage
                 }
             }
@@ -241,7 +239,7 @@ PanelWindow {
         Component { id: controlPage; ControlCenter {} }
         Component { id: notificationPage; NotificationToast {} }
         Component { id: notificationCenterPage; NotificationCenter {} }
-        Component { id: workspacesPage; WorkspaceOverview {} }
+        Component { id: polkitPage; PolkitAgent {} }
 
         Component {
             id: brightnessPage

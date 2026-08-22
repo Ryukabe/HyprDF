@@ -100,7 +100,7 @@ hl.bind(mainMod .. " + ALT + F",            hl.dsp.exec_cmd("thunar"))
 
 --Browser
 hl.bind(mainMod .. " + B",                  hl.dsp.exec_cmd("zen-browser"))
---hl.bind(mainMod .. " + ALT + B",          hl.dsp.exec_cmd("helium-browser"))
+hl.bind(mainMod .. " + ALT + B",          hl.dsp.exec_cmd("helium-browser"))
 --hl.bind(mainMod .. " + ALT + SHIFT + B",  hl.dsp.exec_cmd("brave"))
 
 --Editor
@@ -121,8 +121,8 @@ hl.bind(mainMod .. " + S",                  hl.dsp.exec_cmd("spotify"))
 --hl.bind(mainMod .. " + A",                hl.dsp.exec_cmd("swaync-client -t"))
 
 -- Rofi applaunch & meun
---hl.bind("ALT + SPACE",                    hl.dsp.exec_cmd("pkill rofi || rofi -show drun -theme $HOME/.config/rofi/applauncher.rasi"))
---hl.bind(mainMod .. " + CTRL + SPACE",     hl.dsp.exec_cmd("pkill rofi || $HOME/.config/HyprDF/scripts/menu.sh"))
+hl.bind("ALT + SPACE",                      hl.dsp.exec_cmd("pkill rofi || rofi -show drun -theme $HOME/.config/rofi/applauncher.rasi"))
+hl.bind(mainMod .. " + CTRL + SPACE",       hl.dsp.exec_cmd("pkill rofi || $HOME/.config/HyprDF/scripts/menu.sh"))
 
 -- Theme Switcher
 --hl.bind(mainMod .. " + SHIFT + T",        hl.dsp.exec_cmd("$HOME/.config/HyprDF/scripts/theme-switcher.sh"))

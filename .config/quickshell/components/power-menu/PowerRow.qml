@@ -12,7 +12,7 @@ Rectangle {
 
     Layout.fillWidth: true
     height: 44
-    radius: 10
+    radius: Dimens.islandRadius
     color: (ma.containsMouse || root.selected) ? Colors.bgSurface : "transparent"
     Behavior on color { ColorAnimation { duration: 140 } }
 
@@ -22,7 +22,7 @@ Rectangle {
         anchors.verticalCenter: parent.verticalCenter
         width: (ma.containsMouse || root.selected) ? 3 : 0
         height: 22
-        radius: 2
+        radius: Dimens.radiusXSmall
         color: Colors.fg
         Behavior on width { NumberAnimation { duration: 140; easing.type: Easing.OutCubic } }
     }
@@ -51,7 +51,7 @@ Rectangle {
             text: root.label
             color: Colors.fg
             font.family: Fonts.text
-            font.pixelSize: 14
+            font.pixelSize: Dimens.fontSizeMd
             font.weight: Font.Medium
             anchors.verticalCenter: parent.verticalCenter
         }

@@ -21,8 +21,14 @@ Singleton {
             notification.tracked = true
             root.latestNotification = notification
 
-            // expireTimeout is already provided in milliseconds by Quickshell.
-            // If expireTimeout <= 0 (-1 means server decides), fall back to 4000ms.
+            // Skip island toast popups when Focus Mode is active
+            if (ShellState.focusModeEnabled) {
+                console.log("[NotificationService] Focus mode active — suppressed popup for:", notification.appName)
+                return
+            }
+
+            // expireTimeout is provided in milliseconds by Quickshell.
+            // Fall back to 2500ms if <= 0 (-1 means server decides).
             var timeoutMs = notification.expireTimeout > 0
                 ? notification.expireTimeout
                 : 2500

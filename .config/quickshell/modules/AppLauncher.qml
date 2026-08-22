@@ -69,7 +69,7 @@ Item {
             id: panel
             anchors.fill: parent
             color: Colors.bg
-            radius: 18
+            radius: Dimens.radiusXLarge
             clip: true
 
             Rectangle {
