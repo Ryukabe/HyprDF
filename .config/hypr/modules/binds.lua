@@ -72,6 +72,9 @@ hl.bind(mainMod .. " + N",                  hl.dsp.exec_cmd("qs ipc call notific
 -- Power Menu
 hl.bind(mainMod .. " + Escape",             hl.dsp.exec_cmd("qs ipc call power toggle"))
 
+-- Lock
+hl.bind(mainMod .. " + ALT + L",             hl.dsp.exec_cmd("quickshell ipc call lock open"))
+
 -- Theme Switcher
 hl.bind(mainMod .. " + T",                  hl.dsp.exec_cmd("qs ipc call themeswitcher toggle"))
 

@@ -6,7 +6,7 @@
   <property name="last-window-maximized" type="bool" value="true"/>
   <property name="last-separator-position" type="int" value="164"/>
   <property name="last-menubar-visible" type="bool" value="false"/>
-  <property name="last-toolbar-items" type="string" value="menu:1,open-parent:0,back:1,forward:1,open-home:0,new-tab:0,new-window:0,toggle-split-view:0,undo:0,redo:0,zoom-out:0,zoom-in:0,zoom-reset:0,view-as-icons:0,view-as-compact-list:0,location-bar:1,reload:0,search:1,view-as-detailed-list:0,view-switcher:1,uca-action-1775630478065807-1:0"/>
+  <property name="last-toolbar-items" type="string" value="open-parent:0,back:1,forward:1,open-home:0,new-tab:0,new-window:0,toggle-split-view:0,undo:0,redo:0,zoom-out:0,zoom-in:0,zoom-reset:0,view-as-icons:0,view-as-compact-list:0,location-bar:1,reload:0,search:0,view-as-detailed-list:0,view-switcher:0,uca-action-1785487214890756-1:0,uca-action-pcloud-upload-action:0,uca-action-pcloud-share-link-action:0,menu:1"/>
   <property name="misc-highlighting-enabled" type="bool" value="false"/>
   <property name="last-show-hidden" type="bool" value="true"/>
   <property name="last-location-bar" type="string" value="ThunarLocationEntry"/>
@@ -19,7 +19,7 @@
     <value type="string" value="computer:///"/>
   </property>
   <property name="last-details-view-zoom-level" type="string" value="THUNAR_ZOOM_LEVEL_38_PERCENT"/>
-  <property name="last-details-view-column-widths" type="string" value="50,50,124,116,50,92,50,50,318,50,50,76,50,667"/>
+  <property name="last-details-view-column-widths" type="string" value="50,50,119,116,50,92,50,50,859,50,50,70,50,137"/>
   <property name="misc-single-click" type="bool" value="false"/>
   <property name="misc-use-csd" type="bool" value="true"/>
   <property name="shortcuts-icon-size" type="string" value="THUNAR_ICON_SIZE_16"/>
@@ -29,15 +29,16 @@
   <property name="last-statusbar-visible" type="bool" value="false"/>
   <property name="misc-text-beside-icons" type="bool" value="false"/>
   <property name="misc-directory-specific-settings" type="bool" value="true"/>
-  <property name="misc-symbolic-icons-in-sidepane" type="bool" value="true"/>
-  <property name="misc-image-preview-mode" type="string" value="THUNAR_IMAGE_PREVIEW_MODE_STANDALONE"/>
+  <property name="misc-symbolic-icons-in-sidepane" type="bool" value="false"/>
+  <property name="misc-image-preview-mode" type="string" value="THUNAR_IMAGE_PREVIEW_MODE_EMBEDDED"/>
   <property name="misc-middle-click-in-tab" type="bool" value="true"/>
   <property name="last-restore-tabs" type="bool" value="false"/>
-  <property name="misc-show-delete-action" type="bool" value="false"/>
+  <property name="misc-show-delete-action" type="bool" value="true"/>
   <property name="tree-icon-emblems" type="bool" value="true"/>
   <property name="shortcuts-icon-emblems" type="bool" value="true"/>
   <property name="misc-exec-shell-scripts-by-default" type="string" value="THUNAR_EXECUTE_SHELL_SCRIPT_ASK"/>
   <property name="last-window-width" type="int" value="228"/>
   <property name="last-window-height" type="int" value="68"/>
   <property name="misc-confirm-close-multiple-tabs" type="bool" value="false"/>
+  <property name="misc-thumbnail-draw-frames" type="bool" value="false"/>
 </channel>

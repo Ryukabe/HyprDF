@@ -1,2 +1,3 @@
-2026/08/08-19:45:21.436 5e35 Creating DB /home/shiham/.config/net.imput.helium/Default/Extension Scripts since it was missing.
-2026/08/08-19:45:23.189 5e35 Reusing MANIFEST /home/shiham/.config/net.imput.helium/Default/Extension Scripts/MANIFEST-000001
+2026/08/22-22:21:59.420 1c167 Reusing MANIFEST /home/shiham/.config/net.imput.helium/Default/Extension Scripts/MANIFEST-000001
+2026/08/22-22:21:59.420 1c167 Recovering log #3
+2026/08/22-22:21:59.422 1c167 Reusing old log /home/shiham/.config/net.imput.helium/Default/Extension Scripts/000003.log 

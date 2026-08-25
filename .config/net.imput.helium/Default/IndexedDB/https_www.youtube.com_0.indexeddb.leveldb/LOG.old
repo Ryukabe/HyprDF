@@ -1,2 +1,7 @@
-2026/08/21-21:56:16.808 78ae Creating DB /home/shiham/.config/net.imput.helium/Default/IndexedDB/https_www.youtube.com_0.indexeddb.leveldb since it was missing.
-2026/08/21-21:56:17.036 78ae Reusing MANIFEST /home/shiham/.config/net.imput.helium/Default/IndexedDB/https_www.youtube.com_0.indexeddb.leveldb/MANIFEST-000001
+2026/08/22-22:06:29.267 1c16a Reusing MANIFEST /home/shiham/.config/net.imput.helium/Default/IndexedDB/https_www.youtube.com_0.indexeddb.leveldb/MANIFEST-000001
+2026/08/22-22:06:29.268 1c16a Recovering log #18
+2026/08/22-22:06:29.273 1c16a Reusing old log /home/shiham/.config/net.imput.helium/Default/IndexedDB/https_www.youtube.com_0.indexeddb.leveldb/000018.log 
+2026/08/22-22:06:29.274 1c16a Delete type=2 #17
+2026/08/22-22:07:41.589 1c168 Level-0 table #23: started
+2026/08/22-22:07:41.686 1c168 Level-0 table #23: 1500225 bytes OK
+2026/08/22-22:07:41.722 1c168 Delete type=0 #18
