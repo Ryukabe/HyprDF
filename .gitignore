@@ -10,6 +10,8 @@
 
 # Large cache & system directories
 .cache/
+.cargo
+.dotnet/corefx/cryptography/crls
 .local/
 Pictures/
 Downloads/
@@ -52,4 +54,12 @@ zsh-syntax-highlighting/
 .config/mozilla/
 .config/pcloud/
 .config/nautilus
+.config/mozilla/firefox
+.config/systemd/user
+.config/Unknown Organization
+.config/go/telemetry/local
+.config/net.imput.helium
+.config/pulse
+.config/session
+
 
