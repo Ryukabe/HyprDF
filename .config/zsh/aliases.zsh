@@ -24,7 +24,7 @@ alias gs="git status"
 alias ga="git add"
 alias gc="git commit -m"
 alias gp="git push"
-alias gl="git log --all"
+alias gl="git log --all --graph"
 alias gcl="git clone"
 alias gpl="git pull"
 alias gst="git stash"
@@ -34,7 +34,7 @@ alias gcheck="git checkout"
 alias gcredential="git config credential.helper store"
 
 # Eza Overrides (Uncomment to enable)
-# alias ls='eza --icons'
-# alias ll='eza -lh --icons --git'
-# alias la='eza -lah --icons --git'
-# alias tree='eza --tree --icons'
+alias ls='eza --icons'
+#alias ll='eza -lh --icons --git'
+alias la='eza -lah --icons --git'
+#alias tree='eza --tree --icons'
