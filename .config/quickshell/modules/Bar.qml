@@ -9,8 +9,9 @@ import "../modules"
 import "../styles"
 import "../services"
 import "../components/bar"
+import "../components/common"
 import "../components/power-menu"
-import "../components/overview"
+//import "../components/overview"
 
 PanelWindow {
     id: window

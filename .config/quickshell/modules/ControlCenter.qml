@@ -6,6 +6,7 @@ import "../services"
 import "../components/control-center"
 import "../components/notification-center"
 import "../components/bar"
+import "../components/control-center/tiles"
 
 Item {
     id: root
@@ -73,57 +74,13 @@ Column {
         id: toggleGrid
         width: parent.width
         columns: 2
-        rowSpacing: 10
-        columnSpacing: 10
-
-        ToggleTile {
-            id: wifiTile
-            width: (toggleGrid.width - toggleGrid.columnSpacing) / 2
-            title: "Wi-Fi"
-            active: WifiService.enabled
-            subtitle: {
-                if (!WifiService.enabled) return "Off"
-                if (WifiService.ssid === "") return "On"
-                if (!WifiService.hasInternet) return "No Internet"
-                return WifiService.ssid
-            }
-            iconGlyph: "\uf1eb"
-            external: true
-            onToggled: WifiService.toggle()
-        }
-
-        ToggleTile {
-            id: btTile
-            width: (toggleGrid.width - toggleGrid.columnSpacing) / 2
-            title: "Bluetooth"
-            active: BluetoothService.enabled
-            subtitle: BluetoothService.statusText
-            iconGlyph: "\uf294"
-            external: true
-            onToggled: BluetoothService.toggle()
-        }
-
-        ToggleTile {
-    id: focusTile
-    width: (toggleGrid.width - toggleGrid.columnSpacing) / 2
-    title: "Focus"
-    active: ShellState.focusModeEnabled
-    subtitle: ShellState.focusModeEnabled ? "On" : "Off"
-    iconGlyph: "\uf186"
-    external: false
-    onToggled: ShellState.toggleFocusMode()
-}
-
-        ToggleTile {
-            id: nightLightTile
-            width: (toggleGrid.width - toggleGrid.columnSpacing) / 2
-            title: "Night Light"
-            active: NightLightService.enabled
-            subtitle: NightLightService.enabled ? "On" : "Off"
-            iconGlyph: "\uf185"
-            external: true
-            onToggled: NightLightService.toggle()
-        }
+        rowSpacing: 12
+        columnSpacing: 12
+    
+        WifiToggleTile      { width: (toggleGrid.width - toggleGrid.columnSpacing) / 2 }
+        BluetoothToggleTile { width: (toggleGrid.width - toggleGrid.columnSpacing) / 2 }
+        FocusToggleTile      { width: (toggleGrid.width - toggleGrid.columnSpacing) / 2 }
+        NightLightToggleTile { width: (toggleGrid.width - toggleGrid.columnSpacing) / 2 }
     }
 
     Rectangle {
