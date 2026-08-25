@@ -1,9 +1,0 @@
-2026/08/22-22:22:36.535 2586b Reusing MANIFEST /home/shiham/.config/net.imput.helium/Default/IndexedDB/https_www.youtube.com_0.indexeddb.leveldb/MANIFEST-000001
-2026/08/22-22:22:36.535 2586b Recovering log #22
-2026/08/22-22:22:36.714 2586b Reusing old log /home/shiham/.config/net.imput.helium/Default/IndexedDB/https_www.youtube.com_0.indexeddb.leveldb/000022.log 
-2026/08/22-22:22:38.926 2586d Compacting 1@1 + 1@2 files
-2026/08/22-22:22:39.153 2586d Generated table #25@1: 338 keys, 101027 bytes
-2026/08/22-22:22:39.153 2586d Compacted 1@1 + 1@2 files => 101027 bytes
-2026/08/22-22:22:39.275 2586d compacted to: files[ 0 0 1 0 0 0 0 ]
-2026/08/22-22:22:39.276 2586d Delete type=2 #20
-2026/08/22-22:22:39.276 2586d Delete type=2 #23
