@@ -1,0 +1,6 @@
+module components.controlcenter.subviews
+
+AudioSinkSubView 1.0 AudioSinkSubView.qml
+BluetoothSubView 1.0 BluetoothSubView.qml
+FocusSubView 1.0 FocusSubView.qml
+WifiSubView 1.0 WifiSubView.qml

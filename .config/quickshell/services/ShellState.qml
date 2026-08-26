@@ -9,6 +9,10 @@ QtObject {
     property bool focusModeEnabled: false
     property bool ignoreHover: false
 
+    // ---- Focus mode ----
+    property string activeFocusMode: "Do Not Disturb"
+    readonly property bool isWorkMode: focusModeEnabled && activeFocusMode === "Work"
+
     property Timer hoverResetTimer: Timer {
         interval: 300
         repeat: false
@@ -49,14 +53,37 @@ QtObject {
         }
     }
 
+    // Only Do Not Disturb has a confirmed real backend (mako) right now.
+    // Work/Personal/Sleep/Gaming intentionally do nothing here until their
+    // actual backends (animation toggles, bar style, etc.) are built and confirmed.
+    function _applyBackendForMode(mode, enabled) {
+        if (mode === "Do Not Disturb") {
+            dndProcess.command = enabled
+                ? ["makoctl", "mode", "-a", "do-not-disturb"]
+                : ["makoctl", "mode", "-r", "do-not-disturb"]
+            dndProcess.running = true
+        }
+    }
+
+    // Quick on/off — flips whatever mode is currently selected.
     function toggleFocusMode() {
         focusModeEnabled = !focusModeEnabled
-        if (focusModeEnabled) {
-            dndProcess.command = ["makoctl", "mode", "-a", "do-not-disturb"]
-        } else {
-            dndProcess.command = ["makoctl", "mode", "-r", "do-not-disturb"]
+        _applyBackendForMode(activeFocusMode, focusModeEnabled)
+    }
+
+    // Selects a specific preset by name. Tapping the already-active preset
+    // again turns Focus off (same preset stays remembered for next time).
+    function setFocusMode(name) {
+        if (root.focusModeEnabled && root.activeFocusMode === name) {
+            toggleFocusMode()
+            return
         }
-        dndProcess.running = true
+        if (root.focusModeEnabled) {
+            _applyBackendForMode(root.activeFocusMode, false)
+        }
+        root.activeFocusMode = name
+        root.focusModeEnabled = true
+        _applyBackendForMode(name, true)
     }
 
     property Process dndProcess: Process {

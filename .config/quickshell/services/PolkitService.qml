@@ -1,4 +1,3 @@
-// services/PolkitService.qml
 pragma Singleton
 import QtQuick
 import Quickshell
@@ -16,7 +15,6 @@ Singleton {
     PolkitAgent {
         id: polkitAgent
 
-        // Automatically switches back to "clock" when isActive becomes false
         onIsActiveChanged: {
             if (polkitAgent.isActive) {
                 root.errorMessage = ""
@@ -54,7 +52,7 @@ Singleton {
 
     function cancel() {
         if (polkitAgent.flow) {
-            polkitAgent.flow.submit("")
+            polkitAgent.flow.cancelAuthenticationRequest()
         }
         root.errorMessage = ""
         ShellState.showPage("clock")

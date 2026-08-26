@@ -1,14 +1,15 @@
 import QtQuick
 import "../"
-import "../../../services"
 import "../../../styles"
+import "../../../services"
 
 ToggleTile {
     title: "Focus"
     active: ShellState.focusModeEnabled
     subtitle: ShellState.focusModeEnabled ? "On" : "Off"
+    displayName: ShellState.focusModeEnabled ? ShellState.activeFocusMode : "Focus"
     iconGlyph: "\uf186"
-    iconColor: "#FFB74D"
     external: false
+    hasSubview: true
     onToggled: ShellState.toggleFocusMode()
 }

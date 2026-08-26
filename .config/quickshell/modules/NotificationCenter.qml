@@ -42,35 +42,23 @@ Item {
         anchors.margins: 16
         spacing: 12
 
+// ---- Header ----
         Item {
             id: headerRow
             width: parent.width
             height: 28
 
-            Text {
-                id: backArrow
-                text: "\uf060"
-                font.family: Fonts.mono
-                font.pixelSize: Dimens.fontSizeLg
-                color: Colors.fg
-                anchors.left: parent.left
-                anchors.verticalCenter: parent.verticalCenter
-
-                MouseArea {
-                    anchors.fill: parent
-                    anchors.margins: -8
-                    onClicked: ShellState.showPage("clock")
-                }
-            }
+       
 
             Text {
-                text: "Notifications"
+                text: "Notification Center"
                 font.family: Fonts.text
                 font.pixelSize: Dimens.fontSize15
                 font.bold: true
                 color: Colors.fg
                 anchors.centerIn: parent
             }
+        
 
             Text {
                 text: "Clear all"

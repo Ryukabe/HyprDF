@@ -155,7 +155,10 @@ Item {
                 MouseArea {
                     anchors.fill: parent
                     cursorShape: Qt.PointingHandCursor
-                    onClicked: PolkitService.cancel()
+                    onClicked: {
+                        passInput.text = ""
+                        PolkitService.cancel()
+                    }
                 }
             }
 

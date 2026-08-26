@@ -7,7 +7,7 @@ Rectangle {
 
     implicitWidth: 340
     implicitHeight: 140
-    radius: Dimens.borderRadiusLarge
+    radius: 28 // Updated for rounder corners
     color: Colors.surface
     clip: true // keeps the art from spilling past the rounded corners
 
@@ -32,11 +32,7 @@ Rectangle {
         visible: AudioService.artUrl === ""
     }
 
-    // Dark gradient overlay for text legibility over the art — corners
-    // darkest (where title and controls sit), center lightest.
-    // Kept as raw black/alpha rather than a themed color, since this
-    // overlay's job is contrast against unpredictable album art, not
-    // matching the active theme palette.
+    // Dark gradient overlay for text legibility over the art
     Rectangle {
         anchors.fill: parent
         visible: AudioService.artUrl !== ""
