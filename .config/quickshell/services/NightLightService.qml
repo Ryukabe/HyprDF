@@ -5,21 +5,48 @@ import Quickshell.Io
 
 Singleton {
     id: root
-    readonly property string scriptPath: "~/.config/hypr/scripts/nightlight.sh"
+
+    // Color temperature in Kelvin when night light is on.
+    // 4000K is a fairly standard warm value — tell me if you want this
+    // different, or a temperature slider added instead of a fixed value.
+    property int temperature: 4000
+
     property bool enabled: false
 
     Process {
-        id: pgrepProc
-        command: ["pgrep", "-x", "hyprsunset"]
-        running: true
-        onExited: (exitCode) => {
-            root.enabled = (exitCode === 0)
+        id: sunsetProc
+        command: ["hyprsunset", "-t", String(root.temperature)]
+
+        onRunningChanged: {
+            root.enabled = running
+        }
+
+        onExited: (exitCode, exitStatus) => {
+            // Process ended (crashed, killed externally, or we stopped it) —
+            // reflect that honestly rather than assuming it's still "on".
+            root.enabled = false
         }
     }
 
+    // Safety-net poll — catches cases where hyprsunset dies outside our
+    // control (e.g. `pkill hyprsunset` run manually) and Process.running
+    // doesn't update on its own for an already-dead child.
     Process {
-        id: toggleProc
-        command: ["bash", "-c", root.scriptPath]
+        id: pgrepProc
+        command: ["pgrep", "-x", "hyprsunset"]
+        stdout: SplitParser {
+            onRead: data => {
+                // any output means it's alive
+                if (!sunsetProc.running && data.trim() !== "") {
+                    root.enabled = true
+                }
+            }
+        }
+        onExited: (exitCode) => {
+            if (exitCode !== 0 && !sunsetProc.running) {
+                root.enabled = false
+            }
+        }
     }
 
     Timer {
@@ -30,18 +57,11 @@ Singleton {
         onTriggered: pgrepProc.running = true
     }
 
-    Timer {
-        id: verifyTimer
-        interval: 800
-        repeat: false
-        onTriggered: pgrepProc.running = true
-    }
-
     function toggle() {
-        toggleProc.running = true
-        // optimistic flip for instant UI feedback, corrected by verifyTimer
-        // shortly after in case the script's own detection disagrees
-        root.enabled = !root.enabled
-        verifyTimer.restart()
+        if (root.enabled) {
+            sunsetProc.running = false
+        } else {
+            sunsetProc.running = true
+        }
     }
 }

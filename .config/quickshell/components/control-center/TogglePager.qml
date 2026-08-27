@@ -48,6 +48,20 @@ Item {
                     width: (grid1.width - (root.columns - 1) * root.tileSpacing) / root.columns
                     onSubviewRequested: root.openFocus()
                 }
+
+                 AirplaneModeToggleTile {
+                    compact: true
+                    width: (grid2.width - (root.columns - 1) * root.tileSpacing) / root.columns
+                }
+                CaffeineToggleTile {
+                    compact: true
+                    width: (grid2.width - (root.columns - 1) * root.tileSpacing) / root.columns
+                }
+                RecordingToggleTile {
+                    compact: true
+                    width: (grid2.width - (root.columns - 1) * root.tileSpacing) / root.columns
+                }
+
             }
         }
 

@@ -8,7 +8,6 @@ import "../styles"
 FocusScope {
     id: switcherRoot
     
-    // Hardcoded implicit limits so the Island knows exact target size immediately
     implicitWidth: contentColumn.implicitWidth + 40
     implicitHeight: contentColumn.implicitHeight + 40
     focus: true
@@ -21,10 +20,9 @@ FocusScope {
         revealTimer.restart()
     }
 
-    // --- Staged Reveal Architecture ---
     Timer {
         id: revealTimer
-        interval: 40
+        interval: 30
         onTriggered: {
             contentWrapper.opacity = 1.0
             contentWrapper.scale = 1.0
@@ -66,19 +64,19 @@ FocusScope {
         id: contentWrapper
         anchors.fill: parent
         opacity: 0.0
-        scale: 0.96
+        scale: 0.94
 
         Behavior on opacity {
             NumberAnimation { duration: 200; easing.type: Easing.OutCubic }
         }
         Behavior on scale {
-            NumberAnimation { duration: 200; easing.type: Easing.OutCubic }
+            NumberAnimation { duration: 280; easing.type: Easing.OutBack; easing.overshoot: 1.15 }
         }
 
         Rectangle {
             anchors.fill: parent
             color: "transparent"
-            clip: true // Containment fix
+            clip: true
 
             ColumnLayout {
                 id: contentColumn
@@ -124,6 +122,11 @@ FocusScope {
 
                             Layout.preferredWidth: 160
                             Layout.preferredHeight: 90
+
+                            scale: switcherRoot.selectedIndex === index ? 1.04 : 1.0
+                            Behavior on scale {
+                                NumberAnimation { duration: 180; easing.type: Easing.OutBack; easing.overshoot: 1.2 }
+                            }
 
                             onClicked: {
                                 switcherRoot.selectedIndex = index;

@@ -16,6 +16,16 @@ FocusScope {
 
     Component.onCompleted: {
         switcherRoot.forceActiveFocus()
+        revealTimer.restart()
+    }
+
+    Timer {
+        id: revealTimer
+        interval: 30
+        onTriggered: {
+            contentWrapper.opacity = 1.0
+            contentWrapper.scale = 1.0
+        }
     }
 
     Keys.onPressed: event => {
@@ -49,43 +59,62 @@ FocusScope {
         }
     }
 
-    ColumnLayout {
-        id: contentColumn
-        anchors.centerIn: parent
-        spacing: 12
+    Item {
+        id: contentWrapper
+        anchors.fill: parent
+        opacity: 0.0
+        scale: 0.94
 
-        Text {
-            text: "Theme Selector"
-            color: Colors.fg
-            font.pixelSize: Dimens.fontSizeLg + 2
-            font.bold: true
-            Layout.alignment: Qt.AlignLeft
-            Layout.leftMargin: 4
+        Behavior on opacity {
+            NumberAnimation { duration: 200; easing.type: Easing.OutCubic }
+        }
+        Behavior on scale {
+            NumberAnimation { duration: 280; easing.type: Easing.OutBack; easing.overshoot: 1.15 }
         }
 
-        GridLayout {
-            id: grid
-            columns: switcherRoot.columnsCount
-            rowSpacing: 12
-            columnSpacing: 14
+        ColumnLayout {
+            id: contentColumn
+            anchors.centerIn: parent
+            spacing: 12
 
-            Repeater {
-                model: ThemeService.themesList
+            Text {
+                text: "Theme Selector"
+                color: Colors.fg
+                font.pixelSize: Dimens.fontSizeLg + 2
+                font.bold: true
+                Layout.alignment: Qt.AlignLeft
+                Layout.leftMargin: 4
+            }
 
-                ThemeCard {
-                    required property var modelData
-                    required property int index
+            GridLayout {
+                id: grid
+                columns: switcherRoot.columnsCount
+                rowSpacing: 12
+                columnSpacing: 14
 
-                    themeName: modelData.name
-                    isApplied: ThemeService.currentTheme === modelData.name
-                    isSelected: switcherRoot.selectedIndex === index
+                Repeater {
+                    model: ThemeService.themesList
 
-                    Layout.preferredWidth: 130
-                    Layout.preferredHeight: 70
+                    ThemeCard {
+                        required property var modelData
+                        required property int index
 
-                    onClicked: {
-                        switcherRoot.selectedIndex = index;
-                        ThemeService.applyTheme(modelData.name);
+                        themeName: modelData.name
+                        isApplied: ThemeService.currentTheme === modelData.name
+                        isSelected: switcherRoot.selectedIndex === index
+
+                        Layout.preferredWidth: 130
+                        Layout.preferredHeight: 70
+
+                        scale: switcherRoot.selectedIndex === index ? 1.05 : 1.0
+                        Behavior on scale {
+                            NumberAnimation { duration: 180; easing.type: Easing.OutBack; easing.overshoot: 1.2 }
+                        }
+
+                        onClicked: {
+                            switcherRoot.selectedIndex = index;
+                            ThemeService.applyTheme(modelData.name);
+                        }
                     }
                 }
             }

@@ -56,13 +56,13 @@ Item {
         id: contentWrapper
         anchors.fill: parent
         opacity: 0.0
-        scale: 0.97
+        scale: 0.94
 
         Behavior on opacity {
-            NumberAnimation { duration: 180; easing.type: Easing.OutCubic }
+            NumberAnimation { duration: 220; easing.type: Easing.OutCubic }
         }
         Behavior on scale {
-            NumberAnimation { duration: 180; easing.type: Easing.OutCubic }
+            NumberAnimation { duration: 280; easing.type: Easing.OutBack; easing.overshoot: 1.15 }
         }
 
         Rectangle {
@@ -181,6 +181,11 @@ Item {
                     radius: Dimens.borderRadiusLarge
                     color: index === root.selectedIndex ? Colors.bgSurface : "transparent"
 
+                    scale: index === root.selectedIndex ? 1.015 : 1.0
+                    Behavior on scale {
+                        NumberAnimation { duration: 180; easing.type: Easing.OutBack; easing.overshoot: 1.2 }
+                    }
+
                     Row {
                         anchors.fill: parent
                         anchors.leftMargin: 10
@@ -192,27 +197,21 @@ Item {
                             height: 32
                             anchors.verticalCenter: parent.verticalCenter
 
-                            // Resolve system theme icons cleanly via image://icon/ provider or direct icon path
                             Image {
                                 id: appIcon
                                 anchors.fill: parent
                                 fillMode: Image.PreserveAspectFit
                                 source: {
                                     if (!modelData.icon) return ""
-                                    
-                                    // Handle direct absolute file paths (e.g. /usr/share/pixmaps/app.png)
                                     if (modelData.icon.startsWith("/")) {
                                         return "file://" + modelData.icon
                                     }
-                                    
-                                    // Try Quickshell icon path lookup or fallback to system icon provider
                                     var resolved = Quickshell.iconPath(modelData.icon, "Papirus-Dark")
                                     return resolved !== "" ? resolved : "image://icon/" + modelData.icon
                                 }
                                 visible: status === Image.Ready
                             }
 
-                            // Fallback Monogram if system icon is not found
                             Rectangle {
                                 anchors.fill: parent
                                 radius: Dimens.borderRadiusMedium

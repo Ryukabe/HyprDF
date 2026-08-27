@@ -87,6 +87,16 @@ Item {
 
     Component.onCompleted: {
         if (ShellState.activePage === "power") focusTimer.restart()
+        revealTimer.restart()
+    }
+
+    Timer {
+        id: revealTimer
+        interval: 30
+        onTriggered: {
+            contentWrapper.opacity = 1.0
+            contentWrapper.scale = 1.0
+        }
     }
 
     Keys.onPressed: (event) => {
@@ -105,21 +115,41 @@ Item {
         }
     }
 
-    RowLayout {
-        id: row
-        anchors.centerIn: parent
-        spacing: 16
+    Item {
+        id: contentWrapper
+        anchors.fill: parent
+        opacity: 0.0
+        scale: 0.94
 
-        Repeater {
-            model: root.actions
+        Behavior on opacity {
+            NumberAnimation { duration: 200; easing.type: Easing.OutCubic }
+        }
+        Behavior on scale {
+            NumberAnimation { duration: 280; easing.type: Easing.OutBack; easing.overshoot: 1.2 }
+        }
 
-            IconButton {
-                iconSource: modelData.icon
-                iconHoverSource: modelData.iconHover
-                selected: index === root.selectedIndex
-                onClicked: {
-                    root.selectedIndex = index
-                    root.runCmd(modelData.cmd)
+        RowLayout {
+            id: row
+            anchors.centerIn: parent
+            spacing: 16
+
+            Repeater {
+                model: root.actions
+
+                IconButton {
+                    iconSource: modelData.icon
+                    iconHoverSource: modelData.iconHover
+                    selected: index === root.selectedIndex
+
+                    scale: index === root.selectedIndex ? 1.15 : 1.0
+                    Behavior on scale {
+                        NumberAnimation { duration: 200; easing.type: Easing.OutBack; easing.overshoot: 1.25 }
+                    }
+
+                    onClicked: {
+                        root.selectedIndex = index
+                        root.runCmd(modelData.cmd)
+                    }
                 }
             }
         }

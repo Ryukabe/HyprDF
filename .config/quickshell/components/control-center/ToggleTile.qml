@@ -13,25 +13,22 @@ Rectangle {
     property bool external: false
     property bool compact: false
     property bool hasSubview: false
+    property int signalBars: -1 // -1 = show iconGlyph, 0-4 = show bar indicator instead
 
     signal toggled()
     signal subviewRequested()
 
     implicitWidth: compact ? 76 : 160
     implicitHeight: compact ? 78 : 64
-
-    // Updated: Increase corner radius to match sliders/cards
-    radius: compact ? 20 : 24
+    radius: compact ? Dimens.radiusMedium : Dimens.radiusMediumLarge
     color: Colors.surface
     border.width: 1
     border.color: Colors.border
 
     Behavior on color { ColorAnimation { duration: 150 } }
 
-    // Base toggle target — fills the whole tile.
     MouseArea {
         anchors.fill: parent
-        cursorShape: Qt.PointingHandCursor
         onClicked: {
             if (!tile.external) {
                 tile.active = !tile.active
@@ -40,20 +37,51 @@ Rectangle {
         }
     }
 
-    // ---- Compact layout: icon + label stacked, bottom-left ----
+    // ---- Compact layout: icon (or signal bars) + label stacked, bottom-left ----
     Column {
         id: compactContent
         visible: tile.compact
         anchors.left: parent.left
         anchors.bottom: parent.bottom
-        anchors.margins: 12
+        anchors.margins: 10
         spacing: 6
 
-        Text {
-            text: tile.iconGlyph
-            font.family: Fonts.mono
-            font.pixelSize: Dimens.fontSizeXl
-            color: tile.active ? Colors.accent : Colors.fg
+        Item {
+            width: Math.max(iconText.implicitWidth, barsRow.implicitWidth)
+            height: 22
+
+            Text {
+                id: iconText
+                visible: tile.signalBars < 0
+                text: tile.iconGlyph
+                font.family: Fonts.mono
+                font.pixelSize: Dimens.fontSizeXl
+                color: tile.active ? Colors.accent : Colors.fg
+                anchors.left: parent.left
+                anchors.bottom: parent.bottom
+            }
+
+            Row {
+                id: barsRow
+                visible: tile.signalBars >= 0
+                spacing: 2
+                anchors.left: parent.left
+                anchors.bottom: parent.bottom
+
+                Repeater {
+                    model: 4
+                    delegate: Rectangle {
+                        required property int index
+                        width: 3
+                        height: 6 + index * 4
+                        radius: 1
+                        anchors.bottom: parent.bottom
+                        color: index < tile.signalBars
+                            ? (tile.active ? Colors.accent : Colors.fg)
+                            : Colors.border
+                    }
+                }
+            }
         }
 
         Text {
@@ -62,15 +90,13 @@ Rectangle {
             font.pixelSize: Dimens.fontSizeXSm
             color: Colors.fgMuted
             elide: Text.ElideRight
-            width: tile.width - 24
+            width: tile.width - 20
         }
     }
 
-    // Hit area for compactContent — subview navigation target
     MouseArea {
         visible: tile.compact
         enabled: tile.hasSubview
-        cursorShape: enabled ? Qt.PointingHandCursor : Qt.ArrowCursor
         x: compactContent.x - 6
         y: compactContent.y - 6
         width: compactContent.width + 12
@@ -78,7 +104,7 @@ Rectangle {
         onClicked: tile.subviewRequested()
     }
 
-    // ---- Full layout: icon + title/subtitle, left-aligned ----
+    // ---- Full layout: icon + title/subtitle, left-aligned (used in wider contexts) ----
     Row {
         id: fullContent
         visible: !tile.compact
@@ -117,11 +143,9 @@ Rectangle {
         }
     }
 
-    // Hit area for fullContent — subview navigation target
     MouseArea {
         visible: !tile.compact
         enabled: tile.hasSubview
-        cursorShape: enabled ? Qt.PointingHandCursor : Qt.ArrowCursor
         x: fullContent.x - 6
         y: fullContent.y - 6
         width: fullContent.width + 12
@@ -129,7 +153,6 @@ Rectangle {
         onClicked: tile.subviewRequested()
     }
 
-    // Active indicator — accent when on, muted when off
     Rectangle {
         width: 8
         height: 8
@@ -137,7 +160,7 @@ Rectangle {
         color: tile.active ? Colors.accent : Colors.fgMuted
         anchors.top: parent.top
         anchors.right: parent.right
-        anchors.margins: 10
+        anchors.margins: 8
         Behavior on color { ColorAnimation { duration: 150 } }
     }
 }

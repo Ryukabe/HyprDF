@@ -1,3 +1,4 @@
+// modules/ControlCenter.qml
 pragma ComponentBehavior: Bound
 
 import QtQuick
@@ -43,6 +44,36 @@ Item {
             case "bluetooth": return bluetoothSubviewComp
             case "focus": return focusSubviewComp
             default: return mainViewComp
+            }
+        }
+
+        onItemChanged: {
+            if (item) {
+                subviewAnim.stop()
+                item.opacity = 0
+                item.scale = 0.95
+                subviewAnim.start()
+            }
+        }
+
+        ParallelAnimation {
+            id: subviewAnim
+            NumberAnimation {
+                target: pageLoader.item
+                property: "opacity"
+                from: 0
+                to: 1
+                duration: 220
+                easing.type: Easing.OutCubic
+            }
+            NumberAnimation {
+                target: pageLoader.item
+                property: "scale"
+                from: 0.95
+                to: 1.0
+                duration: 280
+                easing.type: Easing.OutBack
+                easing.overshoot: 1.15
             }
         }
     }

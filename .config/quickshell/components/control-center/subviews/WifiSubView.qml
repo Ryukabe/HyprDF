@@ -1,27 +1,28 @@
-// components/control-center/WifiSubView.qml
+// components/control-center/subviews/WifiSubView.qml
 import QtQuick
 import QtQuick.Layouts
 import "../../../styles"
 import "../../../services"
+
 Item {
     id: root
     implicitWidth: 580
-    implicitHeight: 340
+    implicitHeight: 460
 
     signal backRequested()
 
     property string selectedSsid: ""
     property bool showingPasswordInput: false
+    readonly property var availableNetworks: WifiService.networks.filter(function(n) { return n.ssid !== WifiService.ssid })
 
     ColumnLayout {
         anchors.fill: parent
         anchors.margins: 16
         spacing: 12
 
-        // Header Row
         Item {
             Layout.fillWidth: true
-            implicitHeight: 28
+            implicitHeight: 32
 
             Text {
                 text: "\uf060"
@@ -46,113 +47,264 @@ Item {
             }
 
             Text {
-                text: root.showingPasswordInput ? "Connect to " + root.selectedSsid : "Wi-Fi Networks"
+                text: root.showingPasswordInput ? "Connect to " + root.selectedSsid : "Wi-Fi"
                 font.family: Fonts.text
                 font.pixelSize: Dimens.fontSize15
                 font.bold: true
                 color: Colors.fg
                 anchors.centerIn: parent
                 elide: Text.ElideRight
-                width: parent.width - 80
+                width: parent.width - 140
                 horizontalAlignment: Text.AlignHCenter
             }
 
-            Text {
-                text: "\uf021"
-                font.family: Fonts.mono
-                font.pixelSize: Dimens.fontSizeLg
-                color: Colors.fg
+            Row {
                 visible: !root.showingPasswordInput
                 anchors.right: parent.right
                 anchors.verticalCenter: parent.verticalCenter
+                spacing: 8
 
-                MouseArea {
-                    anchors.fill: parent
-                    anchors.margins: -8
-                    cursorShape: Qt.PointingHandCursor
-                    onClicked: {
-                        WifiService.networks = []
-                        WifiService.refresh()
+                Rectangle {
+                    width: 28
+                    height: 28
+                    radius: 14
+                    color: Colors.surface
+                    border.width: 1
+                    border.color: Colors.border
+
+                    Text {
+                        anchors.centerIn: parent
+                        text: "\uf011"
+                        font.family: Fonts.mono
+                        font.pixelSize: Dimens.fontSizeSm
+                        color: WifiService.enabled ? Colors.accent : Colors.fgMuted
+                    }
+
+                    MouseArea {
+                        anchors.fill: parent
+                        cursorShape: Qt.PointingHandCursor
+                        onClicked: WifiService.toggle()
+                    }
+                }
+
+                Rectangle {
+                    width: 28
+                    height: 28
+                    radius: 14
+                    color: Colors.surface
+                    border.width: 1
+                    border.color: Colors.border
+                    visible: WifiService.enabled
+
+                    Text {
+                        anchors.centerIn: parent
+                        text: "\uf021"
+                        font.family: Fonts.mono
+                        font.pixelSize: Dimens.fontSizeSm
+                        color: WifiService.scanning ? Colors.accent : Colors.fg
+                    }
+
+                    MouseArea {
+                        anchors.fill: parent
+                        cursorShape: Qt.PointingHandCursor
+                        onClicked: WifiService.scanNetworks()
                     }
                 }
             }
         }
 
-        // Network List View
-        ListView {
+        Text {
+            text: "Wi-Fi is turned off"
+            font.pixelSize: Dimens.fontSizeSm
+            color: Colors.fgMuted
+            visible: !WifiService.enabled && !root.showingPasswordInput
+            anchors.horizontalCenter: parent.horizontalCenter
+            topPadding: 40
+        }
+
+        Flickable {
             Layout.fillWidth: true
             Layout.fillHeight: true
-            visible: !root.showingPasswordInput
+            visible: WifiService.enabled && !root.showingPasswordInput
+            contentWidth: width
+            contentHeight: listColumn.implicitHeight
             clip: true
-            model: WifiService.networks
-            spacing: 6
+            boundsBehavior: Flickable.StopAtBounds
 
-            delegate: Rectangle {
-                required property var modelData
-                width: ListView.view.width
-                implicitHeight: 46
-                radius: Dimens.radiusLarge
-                color: modelData.ssid === WifiService.ssid ? Colors.bgSurface : Colors.surface
-                border.width: 1
-                border.color: Colors.border
+            Column {
+                id: listColumn
+                width: parent.width
+                spacing: 10
 
-                RowLayout {
-                    anchors.fill: parent
-                    anchors.margins: 10
-                    spacing: 10
+                Column {
+                    width: parent.width
+                    spacing: 6
+                    visible: WifiService.ssid !== ""
 
                     Text {
-                        text: "\uf1eb"
-                        font.family: Fonts.mono
-                        font.pixelSize: Dimens.fontSizeMd
-                        color: modelData.ssid === WifiService.ssid ? Colors.accent : Colors.fgMuted
-                    }
-
-                    Text {
-                        Layout.fillWidth: true
-                        text: modelData.ssid || "Hidden Network"
-                        font.family: Fonts.text
-                        font.pixelSize: Dimens.fontSizeSm
-                        color: Colors.fg
-                        elide: Text.ElideRight
-                    }
-
-                    Text {
-                        text: modelData.secured ? "\uf023" : ""
-                        font.family: Fonts.mono
-                        font.pixelSize: Dimens.fontSizeSm
-                        color: Colors.fgMuted
-                        visible: modelData.ssid !== WifiService.ssid
-                    }
-
-                    Text {
-                        text: modelData.ssid === WifiService.ssid ? "Connected" : ""
+                        text: "CONNECTED"
                         font.family: Fonts.text
                         font.pixelSize: Dimens.fontSizeXSm
-                        color: Colors.accent
+                        font.bold: true
+                        color: Colors.fgMuted
                     }
-                }
 
-                MouseArea {
-                    anchors.fill: parent
-                    cursorShape: Qt.PointingHandCursor
-                    onClicked: {
-                        if (modelData.ssid === WifiService.ssid) return
+                    Rectangle {
+                        width: parent.width
+                        height: 52
+                        radius: Dimens.radiusLarge
+                        color: Colors.bgSurface
+                        border.width: 1
+                        border.color: Colors.border
 
-                        root.selectedSsid = modelData.ssid
-                        if (modelData.secured) {
-                            passwordInput.text = ""
-                            root.showingPasswordInput = true
-                            passwordInput.forceActiveFocus()
-                        } else {
-                            WifiService.connectToNetwork(modelData.ssid, "")
+                        RowLayout {
+                            anchors.fill: parent
+                            anchors.leftMargin: 14
+                            anchors.rightMargin: 14
+                            spacing: 10
+
+                            Column {
+                                Layout.fillWidth: true
+                                spacing: 2
+
+                                Text {
+                                    text: WifiService.ssid
+                                    font.family: Fonts.text
+                                    font.pixelSize: Dimens.fontSizeMd
+                                    font.weight: Font.Medium
+                                    color: Colors.fg
+                                    elide: Text.ElideRight
+                                    width: parent.width
+                                }
+
+                                Text {
+                                    text: WifiService.hasInternet ? "Connected" : "No Internet"
+                                    font.pixelSize: Dimens.fontSizeXSm
+                                    color: WifiService.hasInternet ? Colors.accent : Colors.fgMuted
+                                }
+                            }
+
+                            Text {
+                                text: "\uf1eb"
+                                font.family: Fonts.mono
+                                font.pixelSize: Dimens.fontSizeMd
+                                color: Colors.accent
+                            }
                         }
                     }
                 }
+
+                Column {
+                    width: parent.width
+                    spacing: 6
+
+                    Text {
+                        text: "AVAILABLE"
+                        font.family: Fonts.text
+                        font.pixelSize: Dimens.fontSizeXSm
+                        font.bold: true
+                        color: Colors.fgMuted
+                        visible: root.availableNetworks.length > 0
+                    }
+
+                    Repeater {
+                        model: root.availableNetworks
+
+                        delegate: Rectangle {
+                            required property var modelData
+                            width: listColumn.width
+                            height: 48
+                            radius: Dimens.radiusLarge
+                            color: Colors.surface
+                            border.width: 1
+                            border.color: Colors.border
+
+                            RowLayout {
+                                anchors.fill: parent
+                                anchors.leftMargin: 14
+                                anchors.rightMargin: 10
+                                spacing: 10
+
+                                // Signal-strength bars — 4 columns, filled up to modelData.signalBars
+                                Row {
+                                    spacing: 2
+                                    Layout.alignment: Qt.AlignVCenter
+
+                                    Repeater {
+                                        model: 4
+                                        delegate: Rectangle {
+                                            required property int index
+                                            width: 3
+                                            height: 5 + index * 3
+                                            radius: 1
+                                            anchors.bottom: parent.bottom
+                                            color: index < modelData.signalBars ? Colors.accent : Colors.border
+                                        }
+                                    }
+                                }
+
+                                Text {
+                                    text: modelData.secured ? "\uf023" : ""
+                                    font.family: Fonts.mono
+                                    font.pixelSize: Dimens.fontSizeXSm
+                                    color: Colors.fgMuted
+                                }
+
+                                Text {
+                                    Layout.fillWidth: true
+                                    text: modelData.ssid
+                                    font.family: Fonts.text
+                                    font.pixelSize: Dimens.fontSizeSm
+                                    color: Colors.fg
+                                    elide: Text.ElideRight
+                                }
+
+                                Rectangle {
+                                    width: 74
+                                    height: 28
+                                    radius: 14
+                                    color: Colors.accent
+
+                                    Text {
+                                        anchors.centerIn: parent
+                                        text: "Connect"
+                                        font.pixelSize: Dimens.fontSizeXSm
+                                        font.bold: true
+                                        color: Colors.bg
+                                    }
+
+                                    MouseArea {
+                                        anchors.fill: parent
+                                        cursorShape: Qt.PointingHandCursor
+                                        onClicked: {
+                                            root.selectedSsid = modelData.ssid
+                                            if (modelData.secured) {
+                                                passwordInput.text = ""
+                                                root.showingPasswordInput = true
+                                                passwordInput.forceActiveFocus()
+                                            } else {
+                                                WifiService.connectToNetwork(modelData.ssid, "")
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    Text {
+                        text: WifiService.scanning ? "Scanning..." : "No networks found"
+                        font.pixelSize: Dimens.fontSizeSm
+                        color: Colors.fgMuted
+                        visible: root.availableNetworks.length === 0
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        topPadding: 12
+                        bottomPadding: 12
+                    }
+                }
             }
         }
 
-        // Password Input View
         ColumnLayout {
             Layout.fillWidth: true
             Layout.fillHeight: true

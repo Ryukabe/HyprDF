@@ -8,8 +8,8 @@ ShellRoot {
         Qt.application.name = "quickshell"
         Qt.application.organization = "quickshell"
     }
-    
+
     // Main island bar
-    Bar {}
+    Island {}
 
 }

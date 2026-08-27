@@ -1,4 +1,4 @@
-// modules/Bar.qml
+// modules/Island.qml
 
 import QtQuick
 import QtQuick.Layouts
@@ -11,7 +11,6 @@ import "../services"
 import "../components/bar"
 import "../components/common"
 import "../components/power-menu"
-//import "../components/overview"
 
 PanelWindow {
     id: window
@@ -25,7 +24,7 @@ PanelWindow {
         ShellState.activePage === "wallpaper" ||
         ShellState.activePage === "control" ||
         ShellState.activePage === "notificationcenter" ||
-        ShellState.activePage === "polkit"
+        ShellState.activePage === "polkit" 
     ) ? WlrKeyboardFocus.Exclusive : WlrKeyboardFocus.None
 
     anchors { top: true; left: true; right: true }
@@ -96,12 +95,6 @@ PanelWindow {
         }
     }
 
-    IpcHandler {
-        target: "workspaces"
-        function toggle() { ShellState.activePage = ShellState.activePage === "workspaces" ? "clock" : "workspaces" }
-        function open() { ShellState.showPage("workspaces") }
-        function close() { ShellState.showPage("clock") }
-    }
 
     mask: Region {
         item: (island.expanded && ShellState.activePage !== "notification") ? clickCatcher : island
@@ -144,71 +137,82 @@ PanelWindow {
 
         Behavior on width {
             NumberAnimation {
-                duration: 320
-                easing.type: Easing.OutCubic
+                duration: 380
+                easing.type: Easing.OutExpo
             }
         }
 
         Behavior on height {
             NumberAnimation {
-                duration: 320
+                duration: 380
+                easing.type: Easing.OutExpo
+            }
+        }
+
+        Behavior on radius {
+            NumberAnimation {
+                duration: 350
                 easing.type: Easing.OutCubic
             }
         }
 
-        property bool canHoverOpen: true
-        property string previousPage: "clock"
-
-        Connections {
-            target: ShellState
-            function onActivePageChanged() {
-                var wasModule = island.previousPage !== "clock" && island.previousPage !== "status"
-                var nowClock = ShellState.activePage === "clock" || ShellState.activePage === "status"
-
-                if (wasModule && nowClock) {
-                    island.canHoverOpen = false
-                }
-
-                island.previousPage = ShellState.activePage
-            }
-        }
-
-        HoverHandler {
-            id: statusHover
-            enabled: island.canHoverOpen && (ShellState.activePage === "clock" || ShellState.activePage === "status")
-
-            onHoveredChanged: {
-                if (hovered) {
-                    if (ShellState.activePage === "clock") {
-                        ShellState.showPage("status")
-                    }
-                } else {
-                    if (ShellState.activePage === "status") {
-                        ShellState.showPage("clock")
-                    }
-                }
-            }
-        }
-
-        HoverHandler {
-            id: exitTracker
-            onHoveredChanged: {
-                if (!hovered) {
-                    island.canHoverOpen = true
-                }
-            }
-        }
-
         MouseArea {
+            id: islandTapArea
             anchors.fill: parent
-            enabled: island.expanded
-            onClicked: {}
+            enabled: ShellState.activePage === "clock" || ShellState.activePage === "status"
+            hoverEnabled: enabled
+            cursorShape: Qt.PointingHandCursor
+            
+            onClicked: {
+                ShellState.togglePage("status")
+            }
         }
 
         Loader {
             id: pageLoader
             anchors.top: parent.top
             anchors.horizontalCenter: parent.horizontalCenter
+
+            scale: islandTapArea.containsMouse ? 1.02 : 1.0
+            opacity: 1.0
+
+            Behavior on scale {
+                NumberAnimation {
+                    duration: 250
+                    easing.type: Easing.OutBack
+                    easing.overshoot: 1.2
+                }
+            }
+
+            onItemChanged: {
+                if (item) {
+                    contentAnim.stop()
+                    item.opacity = 0
+                    item.scale = 0.94
+                    contentAnim.start()
+                }
+            }
+
+            ParallelAnimation {
+                id: contentAnim
+                NumberAnimation {
+                    target: pageLoader.item
+                    property: "opacity"
+                    from: 0
+                    to: 1
+                    duration: 220
+                    easing.type: Easing.OutCubic
+                }
+                NumberAnimation {
+                    target: pageLoader.item
+                    property: "scale"
+                    from: 0.94
+                    to: 1.0
+                    duration: 280
+                    easing.type: Easing.OutBack
+                    easing.overshoot: 1.1
+                }
+            }
 
             sourceComponent: {
                 switch (ShellState.activePage) {

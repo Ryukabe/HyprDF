@@ -8,22 +8,18 @@ import "../../../services"
 Item {
     id: root
     implicitWidth: 580
-    implicitHeight: Math.min(contentColumn.implicitHeight + 32, 540)
+    implicitHeight: 200
 
     signal backRequested()
 
-    Column {
-        id: contentColumn
-        anchors.top: parent.top
-        anchors.left: parent.left
-        anchors.right: parent.right
+    ColumnLayout {
+        anchors.fill: parent
         anchors.margins: 16
-        spacing: 14
+        spacing: 12
 
-        // Header
         Item {
-            width: parent.width
-            height: 28
+            Layout.fillWidth: true
+            implicitHeight: 32
 
             Text {
                 text: "\uf060"
@@ -42,7 +38,7 @@ Item {
             }
 
             Text {
-                text: "Audio Output Sinks"
+                text: "Audio Output"
                 font.family: Fonts.text
                 font.pixelSize: Dimens.fontSize15
                 font.bold: true
@@ -51,14 +47,23 @@ Item {
             }
         }
 
-        // Sub-view item placeholder / sink list
-        Text {
-            text: "Select Active Output Device"
-            font.family: Fonts.text
-            font.pixelSize: Dimens.fontSizeSm
-            font.bold: true
-            color: Colors.fgMuted
-            topPadding: 4
+        // Honest placeholder — no PipeWire sink-listing service exists yet.
+        // AudioService.qml only handles Mpris media control, not output
+        // device switching, so nothing real can be shown here until that's built.
+        Rectangle {
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            radius: Dimens.radiusLarge
+            color: Colors.surface
+            border.width: 1
+            border.color: Colors.border
+
+            Text {
+                anchors.centerIn: parent
+                text: "Output device switching isn't wired up yet"
+                font.pixelSize: Dimens.fontSizeSm
+                color: Colors.fgMuted
+            }
         }
     }
 }

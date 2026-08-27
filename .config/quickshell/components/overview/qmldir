@@ -1,7 +1,0 @@
-singleton Config 1.0 Config.qml
-singleton Appearance 1.0 Appearance.qml
-singleton HyprlandData 1.0 HyprlandData.qml
-singleton GlobalStates 1.0 GlobalStates.qml
-OverviewWidget 1.0 OverviewWidget.qml
-OverviewWindow 1.0 OverviewWindow.qml
-WorkspaceOverview 1.0 OverviewPage.qml

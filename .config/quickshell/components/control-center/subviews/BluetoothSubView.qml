@@ -12,9 +12,9 @@ Item {
 
     signal backRequested()
 
-    // BluetoothService doesn't track a real "connected" state yet (see note),
-    // so this just lists everything discovered.
     readonly property var deviceList: BluetoothService.availableDevices.concat(BluetoothService.connectedDevices)
+    readonly property var connectedList: root.deviceList.filter(function(d) { return d.connected })
+    readonly property var availableList: root.deviceList.filter(function(d) { return !d.connected })
 
     Column {
         id: contentColumn
@@ -22,16 +22,13 @@ Item {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.margins: 16
-        spacing: 14
+        spacing: 12
 
-        // Header Row (Back Arrow & Title)
         Item {
-            id: headerRow
             width: parent.width
-            height: 28
+            height: 32
 
             Text {
-                id: backBtn
                 text: "\uf060"
                 font.family: Fonts.mono
                 font.pixelSize: Dimens.fontSizeLg
@@ -56,75 +53,25 @@ Item {
                 anchors.centerIn: parent
             }
 
-            Text {
-                text: "\uf021"
-                font.family: Fonts.mono
-                font.pixelSize: Dimens.fontSizeMd
-                color: Colors.fgMuted
+            Row {
                 anchors.right: parent.right
                 anchors.verticalCenter: parent.verticalCenter
-                visible: BluetoothService.enabled
+                spacing: 8
 
-                MouseArea {
-                    anchors.fill: parent
-                    anchors.margins: -6
-                    cursorShape: Qt.PointingHandCursor
-                    onClicked: BluetoothService.refresh()
-                }
-            }
-        }
-
-        // Bluetooth Toggle Switch Card
-        Rectangle {
-            width: parent.width
-            height: 48
-            radius: Dimens.radiusLarge
-            color: Colors.surface
-            border.width: 1
-            border.color: Colors.border
-
-            RowLayout {
-                anchors.fill: parent
-                anchors.leftMargin: 16
-                anchors.rightMargin: 16
-                spacing: 12
-
-                Text {
-                    text: "\uf294"
-                    font.family: Fonts.mono
-                    font.pixelSize: Dimens.fontSizeLg
-                    color: BluetoothService.enabled ? Colors.accent : Colors.fgMuted
-                }
-
-                Text {
-                    text: "Bluetooth"
-                    font.family: Fonts.text
-                    font.pixelSize: Dimens.fontSizeMd
-                    font.weight: Font.Medium
-                    color: Colors.fg
-                    Layout.fillWidth: true
-                }
-
-                // Switch Indicator
                 Rectangle {
-                    width: 40
-                    height: 22
-                    radius: 11
-                    color: BluetoothService.enabled ? Colors.accent : Colors.bgMica
+                    width: 28
+                    height: 28
+                    radius: 14
+                    color: Colors.surface
                     border.width: 1
                     border.color: Colors.border
 
-                    Rectangle {
-                        width: 16
-                        height: 16
-                        radius: 8
-                        color: Colors.fg
-                        anchors.verticalCenter: parent.verticalCenter
-                        x: BluetoothService.enabled ? parent.width - width - 3 : 3
-
-                        Behavior on x {
-                            NumberAnimation { duration: 150; easing.type: Easing.OutCubic }
-                        }
+                    Text {
+                        anchors.centerIn: parent
+                        text: "\uf294"
+                        font.family: Fonts.mono
+                        font.pixelSize: Dimens.fontSizeSm
+                        color: BluetoothService.enabled ? Colors.accent : Colors.fgMuted
                     }
 
                     MouseArea {
@@ -133,60 +80,84 @@ Item {
                         onClicked: BluetoothService.toggle()
                     }
                 }
+
+                Rectangle {
+                    width: 28
+                    height: 28
+                    radius: 14
+                    color: Colors.surface
+                    border.width: 1
+                    border.color: Colors.border
+                    visible: BluetoothService.enabled
+
+                    Text {
+                        anchors.centerIn: parent
+                        text: "\uf021"
+                        font.family: Fonts.mono
+                        font.pixelSize: Dimens.fontSizeSm
+                        color: Colors.fg
+                    }
+
+                    MouseArea {
+                        anchors.fill: parent
+                        cursorShape: Qt.PointingHandCursor
+                        onClicked: BluetoothService.refresh()
+                    }
+                }
             }
         }
 
-        // Devices List
-        Flickable {
+        Text {
+            text: "Bluetooth is turned off"
+            font.pixelSize: Dimens.fontSizeSm
+            color: Colors.fgMuted
+            visible: !BluetoothService.enabled
+            anchors.horizontalCenter: parent.horizontalCenter
+            topPadding: 20
+            bottomPadding: 20
+        }
+
+        Column {
             width: parent.width
-            height: Math.min(deviceListColumn.implicitHeight, 380)
-            contentWidth: width
-            contentHeight: deviceListColumn.implicitHeight
-            clip: true
-            boundsBehavior: Flickable.StopAtBounds
+            spacing: 10
             visible: BluetoothService.enabled
 
             Column {
-                id: deviceListColumn
                 width: parent.width
-                spacing: 8
+                spacing: 6
+                visible: root.connectedList.length > 0
 
                 Text {
-                    text: "Discovered Devices"
+                    text: "CONNECTED"
                     font.family: Fonts.text
-                    font.pixelSize: Dimens.fontSizeSm
+                    font.pixelSize: Dimens.fontSizeXSm
                     font.bold: true
                     color: Colors.fgMuted
-                    topPadding: 4
-                    bottomPadding: 4
                 }
 
                 Repeater {
-                    model: root.deviceList
+                    model: root.connectedList
 
                     delegate: Rectangle {
                         required property var modelData
-
-                        width: deviceListColumn.width
-                        height: 48
+                        width: parent.width
+                        height: 52
                         radius: Dimens.radiusLarge
-                        color: deviceMa.containsMouse ? Colors.bgSurface : Colors.surface
+                        color: Colors.bgSurface
                         border.width: 1
                         border.color: Colors.border
-
-                        Behavior on color { ColorAnimation { duration: 120 } }
 
                         RowLayout {
                             anchors.fill: parent
                             anchors.leftMargin: 14
                             anchors.rightMargin: 14
-                            spacing: 12
+                            spacing: 10
 
                             Text {
                                 text: "\uf294"
                                 font.family: Fonts.mono
                                 font.pixelSize: Dimens.fontSizeMd
-                                color: modelData.connected ? Colors.accent : Colors.fgMuted
+                                color: Colors.accent
                             }
 
                             Column {
@@ -204,31 +175,119 @@ Item {
                                 }
 
                                 Text {
-                                    text: modelData.connected ? "Connected" : "Available"
+                                    text: "Connected"
                                     font.pixelSize: Dimens.fontSizeXSm
-                                    color: modelData.connected ? Colors.accent : Colors.fgMuted
+                                    color: Colors.accent
                                 }
                             }
 
-                            Text {
-                                text: modelData.connected ? "\uf00c" : ""
-                                font.family: Fonts.mono
-                                font.pixelSize: Dimens.fontSizeMd
-                                color: Colors.accent
-                                visible: modelData.connected
+                            Rectangle {
+                                width: 84
+                                height: 28
+                                radius: 14
+                                color: Colors.surface
+                                border.width: 1
+                                border.color: Colors.border
+
+                                Text {
+                                    anchors.centerIn: parent
+                                    text: "Disconnect"
+                                    font.pixelSize: Dimens.fontSizeXSm
+                                    font.bold: true
+                                    color: Colors.fg
+                                }
+
+                                MouseArea {
+                                    anchors.fill: parent
+                                    cursorShape: Qt.PointingHandCursor
+                                    onClicked: BluetoothService.disconnectDevice(modelData.mac)
+                                }
                             }
                         }
+                    }
+                }
+            }
 
-                        MouseArea {
-                            id: deviceMa
-                            anchors.fill: parent
-                            hoverEnabled: true
-                            cursorShape: Qt.PointingHandCursor
-                            onClicked: {
-                                if (modelData.connected) {
-                                    BluetoothService.disconnectDevice(modelData.mac)
-                                } else {
-                                    BluetoothService.connectDevice(modelData.mac)
+            Column {
+                width: parent.width
+                spacing: 6
+
+                Text {
+                    text: "AVAILABLE"
+                    font.family: Fonts.text
+                    font.pixelSize: Dimens.fontSizeXSm
+                    font.bold: true
+                    color: Colors.fgMuted
+                    visible: root.availableList.length > 0
+                }
+
+                Flickable {
+                    width: parent.width
+                    height: Math.min(availableListColumn.implicitHeight, 260)
+                    contentWidth: width
+                    contentHeight: availableListColumn.implicitHeight
+                    clip: true
+                    boundsBehavior: Flickable.StopAtBounds
+
+                    Column {
+                        id: availableListColumn
+                        width: parent.width
+                        spacing: 8
+
+                        Repeater {
+                            model: root.availableList
+
+                            delegate: Rectangle {
+                                required property var modelData
+                                width: availableListColumn.width
+                                height: 48
+                                radius: Dimens.radiusLarge
+                                color: Colors.surface
+                                border.width: 1
+                                border.color: Colors.border
+
+                                RowLayout {
+                                    anchors.fill: parent
+                                    anchors.leftMargin: 14
+                                    anchors.rightMargin: 10
+                                    spacing: 10
+
+                                    Text {
+                                        text: "\uf294"
+                                        font.family: Fonts.mono
+                                        font.pixelSize: Dimens.fontSizeSm
+                                        color: Colors.fgMuted
+                                    }
+
+                                    Text {
+                                        Layout.fillWidth: true
+                                        text: modelData.name || "Unknown Device"
+                                        font.family: Fonts.text
+                                        font.pixelSize: Dimens.fontSizeSm
+                                        color: Colors.fg
+                                        elide: Text.ElideRight
+                                    }
+
+                                    Rectangle {
+                                        width: 74
+                                        height: 28
+                                        radius: 14
+                                        color: Colors.accent
+
+                                        Text {
+                                            anchors.centerIn: parent
+                                            text: "Connect"
+                                            font.pixelSize: Dimens.fontSizeXSm
+                                            font.bold: true
+                                            color: Colors.bg
+                                        }
+
+                                        MouseArea {
+                                            anchors.fill: parent
+                                            cursorShape: Qt.PointingHandCursor
+                                            onClicked: BluetoothService.connectDevice(modelData.mac)
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -241,21 +300,10 @@ Item {
                     color: Colors.fgMuted
                     visible: root.deviceList.length === 0
                     anchors.horizontalCenter: parent.horizontalCenter
-                    topPadding: 20
-                    bottomPadding: 20
+                    topPadding: 12
+                    bottomPadding: 12
                 }
             }
-        }
-
-        // Disabled State Message
-        Text {
-            text: "Bluetooth is turned off"
-            font.pixelSize: Dimens.fontSizeSm
-            color: Colors.fgMuted
-            visible: !BluetoothService.enabled
-            anchors.horizontalCenter: parent.horizontalCenter
-            topPadding: 30
-            bottomPadding: 30
         }
     }
 }
