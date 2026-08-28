@@ -168,6 +168,13 @@ PanelWindow {
             }
         }
 
+        MouseArea {
+            id: islandConsumeArea
+            anchors.fill: parent
+            enabled: island.expanded
+            onClicked: {}
+        }
+
         Loader {
             id: pageLoader
             anchors.top: parent.top

@@ -16,26 +16,30 @@ WlSessionLock {
         WlSessionLockSurface {
             id: lockSurface
 
+            // Instantiate PAM service for quickshell
+            Pam {
+                id: pam
+                service: "quickshell"
+
+                onAuthenticated: {
+                    errorMessage.visible = false
+                    passwordInput.text = ""
+                    sessionLock.locked = false
+                    if (typeof ShellState !== "undefined") {
+                        ShellState.showPage("clock")
+                    }
+                }
+
+                onAuthenticationFailed: {
+                    errorMessage.visible = true
+                    passwordInput.text = ""
+                    passwordInput.forceActiveFocus()
+                }
+            }
+
             Rectangle {
                 anchors.fill: parent
                 color: Colors.bg
-
-                // Instantiate PAM service object
-                Pam {
-                    id: pam
-
-                    onAuthenticated: {
-                        errorMessage.visible = false
-                        passwordInput.text = ""
-                        ShellState.showPage("clock")
-                    }
-
-                    onAuthenticationFailed: {
-                        errorMessage.visible = true
-                        passwordInput.text = ""
-                        passwordInput.forceActiveFocus()
-                    }
-                }
 
                 Column {
                     anchors.centerIn: parent
@@ -70,6 +74,8 @@ WlSessionLock {
                             color: Colors.fg
                             focus: true
 
+                            Component.onCompleted: passwordInput.forceActiveFocus()
+
                             onTextChanged: {
                                 if (errorMessage.visible) errorMessage.visible = false
                             }
@@ -88,7 +94,7 @@ WlSessionLock {
                         text: "Incorrect password"
                         font.family: Fonts.text
                         font.pixelSize: Dimens.fontSizeBase
-                        color: "#ff5555"
+                        color: Colors.red
                         visible: false
                     }
 

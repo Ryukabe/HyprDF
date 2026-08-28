@@ -9,7 +9,7 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("hyprctl setcursor macOS 24")
     
     -- Launch Quickshell once cleanly with OpenGL backend
-    hl.exec_cmd("qs")
+    hl.exec_cmd("quickshell")
 
     --hl.exec_cmd("swaync")
     --hl.exec_cmd("hypridle")

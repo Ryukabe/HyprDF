@@ -17,7 +17,7 @@
     <name>Upload to pCloud</name>
     <submenu></submenu>
     <unique-id>pcloud-upload-action</unique-id>
-    <command>"/home/shiham/.config/pcloud/pcloud-launcher.sh" --upload-files %F</command>
+    <command>"/opt/pcloud/pcloud.bin" --upload-files %F</command>
     <description>Upload selected files or folders to pCloud</description>
     <range>*</range>
     <patterns>*</patterns>
@@ -34,7 +34,7 @@
     <name>Share link</name>
     <submenu></submenu>
     <unique-id>pcloud-share-link-action</unique-id>
-    <command>"/home/shiham/.config/pcloud/pcloud-launcher.sh" --share-link %F</command>
+    <command>"/opt/pcloud/pcloud.bin" --share-link %F</command>
     <description>Create a pCloud share link for the selected files or folders</description>
     <range>*</range>
     <patterns>*</patterns>

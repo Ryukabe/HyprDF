@@ -7,8 +7,12 @@ import "../../services"
 Item {
     id: root
 
-    implicitWidth: 120
-    implicitHeight: 36
+    // Compact resting size — grows automatically when the music bar or
+    // recording indicator appear, via layout.implicitWidth below.
+    // No Behavior here — Island.qml's outer wrapper already animates
+    // width/height changes; adding one here would double-animate.
+    implicitWidth: Math.max(120, layout.implicitWidth + 24)
+    implicitHeight: Math.max(36, layout.implicitHeight + 8)
 
     SystemClock {
         id: clock
@@ -70,11 +74,11 @@ Item {
         }
 
         // 3. Recording Indicator (Right)
-        //RecordingIndicator {
-        //    active: RecordingService.isRecording // Bind your active recording state here
-        //    dotSize: 6
-        //    dotColor: Colors.red
-        //    Layout.alignment: Qt.AlignVCenter
-        //}
+        RecordingIndicator {
+            active: RecordingService.enabled
+            dotSize: 6
+            dotColor: Colors.red
+            Layout.alignment: Qt.AlignVCenter
+        }
     }
 }

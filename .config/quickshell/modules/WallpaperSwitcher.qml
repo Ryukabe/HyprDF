@@ -7,133 +7,194 @@ import "../styles"
 
 FocusScope {
     id: switcherRoot
-    
-    implicitWidth: contentColumn.implicitWidth + 40
-    implicitHeight: contentColumn.implicitHeight + 40
+
+    implicitWidth: 680
+    implicitHeight: 210
     focus: true
 
-    property int selectedIndex: 0
-    readonly property int columnsCount: 7
+    // Set default selectedIndex to -1 so nothing is auto-hovered/selected on open
+    property int selectedIndex: -1
+    property string searchQuery: ""
+    property bool searchActive: false
+
+    readonly property var filteredWallpapers: {
+        var list = WallpaperService.wallpapersList || [];
+        if (!searchQuery.trim()) return list;
+        return list.filter(function(item) {
+            return item.name.toLowerCase().includes(searchQuery.toLowerCase());
+        });
+    }
 
     Component.onCompleted: {
         switcherRoot.forceActiveFocus()
-        revealTimer.restart()
-    }
-
-    Timer {
-        id: revealTimer
-        interval: 30
-        onTriggered: {
-            contentWrapper.opacity = 1.0
-            contentWrapper.scale = 1.0
-        }
+        // Highlight index is set to -1 on open so no card is pre-selected automatically
+        listView.currentIndex = -1
     }
 
     Keys.onPressed: event => {
-        var count = WallpaperService.wallpapersList.length;
+        var count = filteredWallpapers.length;
         if (count === 0) return;
 
-        if (event.key === Qt.Key_Right) {
-            selectedIndex = (selectedIndex + 1) % count;
-            event.accepted = true;
-        } else if (event.key === Qt.Key_Left) {
-            selectedIndex = (selectedIndex - 1 + count) % count;
-            event.accepted = true;
-        } else if (event.key === Qt.Key_Down) {
-            if (selectedIndex + columnsCount < count) {
-                selectedIndex += columnsCount;
+        if (event.key === Qt.Key_Right || event.key === Qt.Key_Down) {
+            if (selectedIndex < count - 1) {
+                selectedIndex += 1;
+                listView.currentIndex = selectedIndex;
             }
             event.accepted = true;
-        } else if (event.key === Qt.Key_Up) {
-            if (selectedIndex - columnsCount >= 0) {
-                selectedIndex -= columnsCount;
+        } else if (event.key === Qt.Key_Left || event.key === Qt.Key_Up) {
+            if (selectedIndex > 0) {
+                selectedIndex -= 1;
+                listView.currentIndex = selectedIndex;
             }
             event.accepted = true;
         } else if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter || event.key === Qt.Key_Space) {
-            if (WallpaperService.wallpapersList[selectedIndex]) {
-                WallpaperService.applyWallpaper(WallpaperService.wallpapersList[selectedIndex].path);
+            if (selectedIndex >= 0 && filteredWallpapers[selectedIndex]) {
+                WallpaperService.applyWallpaper(filteredWallpapers[selectedIndex].path);
             }
             event.accepted = true;
         } else if (event.key === Qt.Key_Escape) {
-            ShellState.showPage("clock");
+            if (searchActive) {
+                searchActive = false;
+                searchQuery = "";
+            } else if (typeof ShellState !== "undefined") {
+                ShellState.showPage("clock");
+            }
             event.accepted = true;
         }
     }
 
-    Item {
-        id: contentWrapper
+    ColumnLayout {
         anchors.fill: parent
-        opacity: 0.0
-        scale: 0.94
+        anchors.margins: 16
+        spacing: 12
 
-        Behavior on opacity {
-            NumberAnimation { duration: 200; easing.type: Easing.OutCubic }
-        }
-        Behavior on scale {
-            NumberAnimation { duration: 280; easing.type: Easing.OutBack; easing.overshoot: 1.15 }
-        }
+        // Header Row
+        RowLayout {
+            Layout.fillWidth: true
+            spacing: 10
 
-        Rectangle {
-            anchors.fill: parent
-            color: "transparent"
-            clip: true
+            Text {
+                text: "Wallpapers"
+                color: Colors.fg
+                font.family: Fonts.text
+                font.pixelSize: Dimens.fontSizeLg
+                font.bold: true
+            }
 
-            ColumnLayout {
-                id: contentColumn
-                anchors.centerIn: parent
-                spacing: 16
+            Rectangle {
+                implicitWidth: countText.implicitWidth + 12
+                implicitHeight: 20
+                radius: 10
+                color: Qt.rgba(1, 1, 1, 0.08)
 
-                RowLayout {
-                    Layout.fillWidth: true
+                Text {
+                    id: countText
+                    anchors.centerIn: parent
+                    text: filteredWallpapers.length
+                    color: Colors.fgMuted
+                    font.pixelSize: Dimens.fontSizeSm - 1
+                    font.bold: true
+                }
+            }
 
-                    Text {
-                        text: "Wallpaper"
-                        color: Colors.fg
-                        font.pixelSize: Dimens.fontSizeLg + 2
-                        font.bold: true
-                    }
+            Item { Layout.fillWidth: true }
 
-                    Item { Layout.fillWidth: true }
+            Rectangle {
+                id: searchBar
+                visible: switcherRoot.searchActive
+                implicitWidth: switcherRoot.searchActive ? 180 : 0
+                implicitHeight: 30
+                radius: 15
+                color: Qt.rgba(1, 1, 1, 0.08)
+                border.width: searchInput.activeFocus ? 1 : 0
+                border.color: Colors.accent
 
-                    Text {
-                        text: ThemeService.currentTheme
-                        color: Colors.fgMuted
-                        font.pixelSize: Dimens.fontSizeSm
-                    }
+                Behavior on implicitWidth {
+                    NumberAnimation { duration: 200; easing.type: Easing.OutCubic }
                 }
 
-                GridLayout {
-                    id: grid
-                    columns: switcherRoot.columnsCount
-                    rowSpacing: 12
-                    columnSpacing: 12
+                TextInput {
+                    id: searchInput
+                    anchors.fill: parent
+                    anchors.leftMargin: 12
+                    anchors.rightMargin: 12
+                    verticalAlignment: Text.AlignVCenter
+                    color: Colors.fg
+                    font.pixelSize: Dimens.fontSizeSm
+                    clip: true
+                    onTextChanged: switcherRoot.searchQuery = text
 
-                    Repeater {
-                        model: WallpaperService.wallpapersList
+                    Text {
+                        text: "Search..."
+                        color: Colors.fgMuted
+                        font.pixelSize: Dimens.fontSizeSm
+                        visible: !searchInput.text && !searchInput.inputMethodComposing
+                        anchors.verticalCenter: parent.verticalCenter
+                    }
+                }
+            }
 
-                        WallpaperCard {
-                            required property var modelData
-                            required property int index
+            Rectangle {
+                implicitWidth: 30
+                implicitHeight: 30
+                radius: 15
+                color: switcherRoot.searchActive ? Qt.rgba(1, 1, 1, 0.15) : Qt.rgba(1, 1, 1, 0.08)
 
-                            wallpaperPath: modelData.path
-                            wallpaperName: modelData.name
-                            isApplied: WallpaperService.currentWallpaper === modelData.path
-                            isSelected: switcherRoot.selectedIndex === index
+                Text {
+                    anchors.centerIn: parent
+                    text: "search"
+                    font.family: Fonts.icon
+                    font.pixelSize: 16
+                    font.variableAxes: Fonts.iconAxes
+                    font.features: { "liga": 1 }
+                    color: switcherRoot.searchActive ? Colors.accent : Colors.fg
+                }
 
-                            Layout.preferredWidth: 160
-                            Layout.preferredHeight: 90
-
-                            scale: switcherRoot.selectedIndex === index ? 1.04 : 1.0
-                            Behavior on scale {
-                                NumberAnimation { duration: 180; easing.type: Easing.OutBack; easing.overshoot: 1.2 }
-                            }
-
-                            onClicked: {
-                                switcherRoot.selectedIndex = index;
-                                WallpaperService.applyWallpaper(modelData.path);
-                            }
+                MouseArea {
+                    anchors.fill: parent
+                    cursorShape: Qt.PointingHandCursor
+                    onClicked: {
+                        switcherRoot.searchActive = !switcherRoot.searchActive;
+                        if (switcherRoot.searchActive) {
+                            searchInput.forceActiveFocus();
+                        } else {
+                            switcherRoot.searchQuery = "";
+                            switcherRoot.forceActiveFocus();
                         }
                     }
+                }
+            }
+        }
+
+        // Horizontal Carousel
+        ListView {
+            id: listView
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            orientation: ListView.Horizontal
+            spacing: 14
+            clip: true
+            highlightMoveDuration: 250
+            currentIndex: -1
+
+            model: switcherRoot.filteredWallpapers
+
+            delegate: WallpaperCard {
+                required property var modelData
+                required property int index
+
+                wallpaperPath: modelData.path
+                wallpaperName: modelData.name
+                isApplied: WallpaperService.currentWallpaper === modelData.path
+                isSelected: switcherRoot.selectedIndex === index
+
+                implicitWidth: 145
+                implicitHeight: 125
+
+                onClicked: {
+                    switcherRoot.selectedIndex = index;
+                    listView.currentIndex = index;
+                    WallpaperService.applyWallpaper(modelData.path);
                 }
             }
         }

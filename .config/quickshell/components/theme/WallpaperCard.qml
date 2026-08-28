@@ -4,7 +4,7 @@ import QtQuick.Layouts
 import Qt5Compat.GraphicalEffects
 import "../../styles"
 
-Rectangle {
+Item {
     id: card
     required property string wallpaperPath
     required property string wallpaperName
@@ -15,56 +15,101 @@ Rectangle {
 
     readonly property bool isRaised: isSelected || isHovered
 
-    implicitWidth: 160
-    implicitHeight: 90
-    radius: Dimens.radiusSmall
-    color: Colors.bgSurface
-    // Note: clip: true is no longer needed here since OpacityMask handles the corner clipping
+    implicitWidth: 145
+    implicitHeight: 125
+    property real radius: Dimens.radiusSmall
 
-    border.width: card.isApplied ? 2 : 0
-    border.color: Colors.accent
-
-    scale: card.isRaised ? 1.1 : 1.0
-    z: card.isRaised ? 2 : 0
-    transformOrigin: Item.Center
+    z: card.isRaised ? 3 : 1
 
     transform: Translate {
-        y: card.isRaised ? -3 : 0
-
+        y: card.isRaised ? -4 : 0
         Behavior on y {
-            NumberAnimation { duration: 140; easing.type: Easing.OutCubic }
+            NumberAnimation { duration: 160; easing.type: Easing.OutCubic }
         }
     }
 
-    Behavior on scale {
-        NumberAnimation { duration: 140; easing.type: Easing.OutCubic }
-    }
-
-    // Hidden source image for the mask
-    Image {
-        id: wallpaperImage
+    ColumnLayout {
         anchors.fill: parent
-        source: "file://" + card.wallpaperPath
-        fillMode: Image.PreserveAspectCrop
-        asynchronous: true
-        sourceSize.width: 320
-        sourceSize.height: 180
-        visible: false
-    }
+        spacing: 6
 
-    // Invisible mask shape matching the card's rounded corners
-    Rectangle {
-        id: maskRect
-        anchors.fill: parent
-        radius: card.radius
-        visible: false
-    }
+        // Image Preview Container
+        Rectangle {
+            id: previewBox
+            Layout.fillWidth: true
+            Layout.preferredHeight: 90
+            radius: card.radius
+            color: Colors.bgSurface
+            border.width: card.isApplied ? 2 : (card.isSelected ? 1.5 : 0)
+            border.color: card.isApplied ? Colors.accent : Qt.rgba(1, 1, 1, 0.4)
 
-    // Applies the rounded corner mask to the image
-    OpacityMask {
-        anchors.fill: wallpaperImage
-        source: wallpaperImage
-        maskSource: maskRect
+            scale: card.isHovered ? 1.02 : 1.0
+            Behavior on scale {
+                NumberAnimation { duration: 160; easing.type: Easing.OutCubic }
+            }
+
+            // Wallpaper Image
+            Image {
+                id: wallpaperImage
+                anchors.fill: parent
+                source: "file://" + card.wallpaperPath
+                fillMode: Image.PreserveAspectCrop
+                asynchronous: true
+                sourceSize.width: 290
+                sourceSize.height: 180
+                visible: false
+            }
+
+            Rectangle {
+                id: maskRect
+                anchors.fill: parent
+                radius: card.radius
+                visible: false
+            }
+
+            OpacityMask {
+                anchors.fill: wallpaperImage
+                source: wallpaperImage
+                maskSource: maskRect
+            }
+
+            // Active Applied Indicator Badge
+            Rectangle {
+                anchors.top: parent.top
+                anchors.right: parent.right
+                anchors.margins: 6
+                width: 20
+                height: 20
+                radius: 10
+                color: Colors.accent
+                visible: card.isApplied
+
+                Text {
+                    anchors.centerIn: parent
+                    text: "check"
+                    font.family: Fonts.icon
+                    font.pixelSize: 13
+                    font.variableAxes: Fonts.iconAxes
+                    color: "#FFFFFF"
+                }
+            }
+        }
+
+        // Clean Label Below Image
+        Text {
+            Layout.fillWidth: true
+            horizontalAlignment: Text.AlignHCenter
+            text: card.wallpaperName.replace(/\.[^/.]+$/, "") // Strip extension
+            color: card.isRaised ? Colors.fg : Colors.fgMuted
+            font.family: Fonts.text
+            font.pixelSize: Dimens.fontSizeSm - 1
+            font.bold: card.isRaised
+            elide: Text.ElideRight
+            maximumLineCount: 1
+
+            Behavior on color {
+                ColorAnimation { duration: 140 }
+            }
+        }
     }
 
     MouseArea {
