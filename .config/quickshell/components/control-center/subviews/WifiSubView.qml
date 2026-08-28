@@ -25,8 +25,8 @@ Item {
             implicitHeight: 32
 
             Text {
-                text: "\uf060"
-                font.family: Fonts.mono
+                text: "arrow_back"
+                font.family: Fonts.icon
                 font.pixelSize: Dimens.fontSizeLg
                 color: Colors.fg
                 anchors.left: parent.left
@@ -74,8 +74,8 @@ Item {
 
                     Text {
                         anchors.centerIn: parent
-                        text: "\uf011"
-                        font.family: Fonts.mono
+                        text: "power_settings_new"
+                        font.family: Fonts.icon
                         font.pixelSize: Dimens.fontSizeSm
                         color: WifiService.enabled ? Colors.accent : Colors.fgMuted
                     }
@@ -98,8 +98,8 @@ Item {
 
                     Text {
                         anchors.centerIn: parent
-                        text: "\uf021"
-                        font.family: Fonts.mono
+                        text: "refresh"
+                        font.family: Fonts.icon
                         font.pixelSize: Dimens.fontSizeSm
                         color: WifiService.scanning ? Colors.accent : Colors.fg
                     }
@@ -185,8 +185,8 @@ Item {
                             }
 
                             Text {
-                                text: "\uf1eb"
-                                font.family: Fonts.mono
+                                text: "wifi"
+                                font.family: Fonts.icon
                                 font.pixelSize: Dimens.fontSizeMd
                                 color: Colors.accent
                             }
@@ -225,7 +225,6 @@ Item {
                                 anchors.rightMargin: 10
                                 spacing: 10
 
-                                // Signal-strength bars — 4 columns, filled up to modelData.signalBars
                                 Row {
                                     spacing: 2
                                     Layout.alignment: Qt.AlignVCenter
@@ -244,8 +243,8 @@ Item {
                                 }
 
                                 Text {
-                                    text: modelData.secured ? "\uf023" : ""
-                                    font.family: Fonts.mono
+                                    text: modelData.secured ? "lock" : ""
+                                    font.family: Fonts.icon
                                     font.pixelSize: Dimens.fontSizeXSm
                                     color: Colors.fgMuted
                                 }

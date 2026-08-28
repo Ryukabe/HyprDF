@@ -1,3 +1,4 @@
+// components/control-center/subviews/FocusSubView.qml
 pragma ComponentBehavior: Bound
 
 import QtQuick
@@ -14,11 +15,11 @@ Item {
 
     // Preset Focus Modes
     readonly property var focusModes: [
-        { name: "Do Not Disturb", icon: "\uf186", desc: "Silence all notifications", color: "#8E8E93" },
-        { name: "Work",           icon: "\uf0b1", desc: "Disable animations & flatten bar", color: "#0A84FF" },
-        { name: "Personal",       icon: "\uf007", desc: "For personal time",         color: "#FF9F0A" },
-        { name: "Sleep",          icon: "\uf186", desc: "Rest & relaxation",         color: "#BF5AF2" },
-        { name: "Gaming",         icon: "\uf11b", desc: "Minimize distractions",     color: "#30D158" }
+        { name: "Do Not Disturb", icon: "do_not_disturb_on", desc: "Silence all notifications", color: "#8E8E93" },
+        { name: "Work",           icon: "work",              desc: "Disable animations & flatten bar", color: "#0A84FF" },
+        { name: "Personal",       icon: "person",            desc: "For personal time",         color: "#FF9F0A" },
+        { name: "Sleep",          icon: "bedtime",           desc: "Rest & relaxation",         color: "#BF5AF2" },
+        { name: "Gaming",         icon: "sports_esports",    desc: "Minimize distractions",     color: "#30D158" }
     ]
 
     Column {
@@ -37,8 +38,8 @@ Item {
 
             Text {
                 id: backBtn
-                text: "\uf060"
-                font.family: Fonts.mono
+                text: "arrow_back"
+                font.family: Fonts.icon
                 font.pixelSize: Dimens.fontSizeLg
                 color: Colors.fg
                 anchors.left: parent.left
@@ -78,8 +79,8 @@ Item {
                 spacing: 12
 
                 Text {
-                    text: "\uf186"
-                    font.family: Fonts.mono
+                    text: "do_not_disturb_on"
+                    font.family: Fonts.icon
                     font.pixelSize: Dimens.fontSizeLg
                     color: ShellState.focusModeEnabled ? Colors.accent : Colors.fgMuted
                 }
@@ -184,7 +185,7 @@ Item {
 
                             Text {
                                 text: modelData.icon
-                                font.family: Fonts.mono
+                                font.family: Fonts.icon
                                 font.pixelSize: Dimens.fontSizeMd
                                 color: isSelected ? "#FFFFFF" : modelData.color
                                 anchors.centerIn: parent
@@ -211,8 +212,8 @@ Item {
                         }
 
                         Text {
-                            text: "\uf00c"
-                            font.family: Fonts.mono
+                            text: "check"
+                            font.family: Fonts.icon
                             font.pixelSize: Dimens.fontSizeMd
                             color: Colors.accent
                             visible: isSelected

@@ -1,3 +1,4 @@
+// components/control-center/subviews/BluetoothSubView.qml
 pragma ComponentBehavior: Bound
 
 import QtQuick
@@ -29,8 +30,8 @@ Item {
             height: 32
 
             Text {
-                text: "\uf060"
-                font.family: Fonts.mono
+                text: "arrow_back"
+                font.family: Fonts.icon
                 font.pixelSize: Dimens.fontSizeLg
                 color: Colors.fg
                 anchors.left: parent.left
@@ -68,8 +69,8 @@ Item {
 
                     Text {
                         anchors.centerIn: parent
-                        text: "\uf294"
-                        font.family: Fonts.mono
+                        text: "bluetooth"
+                        font.family: Fonts.icon
                         font.pixelSize: Dimens.fontSizeSm
                         color: BluetoothService.enabled ? Colors.accent : Colors.fgMuted
                     }
@@ -92,8 +93,8 @@ Item {
 
                     Text {
                         anchors.centerIn: parent
-                        text: "\uf021"
-                        font.family: Fonts.mono
+                        text: "refresh"
+                        font.family: Fonts.icon
                         font.pixelSize: Dimens.fontSizeSm
                         color: Colors.fg
                     }
@@ -154,8 +155,8 @@ Item {
                             spacing: 10
 
                             Text {
-                                text: "\uf294"
-                                font.family: Fonts.mono
+                                text: "bluetooth_connected"
+                                font.family: Fonts.icon
                                 font.pixelSize: Dimens.fontSizeMd
                                 color: Colors.accent
                             }
@@ -253,8 +254,8 @@ Item {
                                     spacing: 10
 
                                     Text {
-                                        text: "\uf294"
-                                        font.family: Fonts.mono
+                                        text: "bluetooth"
+                                        font.family: Fonts.icon
                                         font.pixelSize: Dimens.fontSizeSm
                                         color: Colors.fgMuted
                                     }

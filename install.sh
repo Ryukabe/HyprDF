@@ -108,8 +108,12 @@ DESKTOP_PKGS=(
     apple-cursor papirus-icon-theme papirus-folders
 
     # Fonts
-    ttf-jetbrains-mono-nerd ttf-geist-mono-nerd ttf-rubik ttf-roboto 
-    ttf-roboto-mono noto-fonts noto-fonts-emoji apple-fonts-git
+    apple-fonts-git
+    ttf-material-symbols-variable
+    ttf-jetbrains-mono-nerd 
+    ttf-geist-mono-nerd 
+    ttf-rubik ttf-roboto 
+    ttf-roboto-mono noto-fonts noto-fonts-emoji
 
     # Apps
     pcloud-drive zen-browser-bin helium-browser-bin obsidian visual-studio-code-bin neovim spotify spicetify-cli

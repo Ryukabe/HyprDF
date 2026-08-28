@@ -93,12 +93,14 @@ Item {
                     anchors.rightMargin: 12
                     spacing: Dimens.spacingLg
 
-                    Image {
+                    Text {
                         anchors.verticalCenter: parent.verticalCenter
-                        source: "../assets/icons/search.png"
-                        width: 16
-                        height: 16
-                        fillMode: Image.PreserveAspectFit
+                        text: "search"
+                        font.family: Fonts.icon
+                        font.pixelSize: Dimens.fontSizeLg
+                        font.variableAxes: Fonts.iconAxes
+                        font.features: { "liga": 1, "dlig": 1 }
+                        color: Colors.fgMuted
                     }
 
                     Item {

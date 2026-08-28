@@ -39,7 +39,6 @@ QtObject {
     // Component Sizes
     readonly property int barHeight: 40
     readonly property int islandHeight: 40
-    readonly property int islandRadius: 10
     readonly property int radiusXSmall: 2
     readonly property int radiusTiny: 6
     readonly property int radiusMediumLarge: 14
@@ -57,4 +56,7 @@ QtObject {
     readonly property int fontSizeHuge: 28
     readonly property int fontSizeMassive: 32
     readonly property int fontSizeDisplay: 64
+
+    // Island radius    
+    readonly property int islandRadius: 10
 }

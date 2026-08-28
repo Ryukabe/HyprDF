@@ -2,8 +2,8 @@
 import QtQuick
 import QtQuick.Layouts
 import Quickshell.Io
-import "../../services"
 import "../../styles"
+import "../../services"
 
 Item {
     id: root
@@ -12,41 +12,43 @@ Item {
     focus: true
 
     readonly property var actions: [
-        { 
-            icon: "../../assets/icons/lock.png", 
-            iconHover: "../../assets/icons/lock-hover.png", 
-            cmd: "hyprctl dispatch exec \"hyprlock -c $HOME/.config/hypr/hyprlock/hyprlock.conf\"" 
+        {
+            icon: "lock",
+            label: "Lock",
+            cmd: ["sh", "-c", "hyprlock -c $HOME/.config/hypr/hyprlock/hyprlock.conf"]
         },
-        { 
-            icon: "../../assets/icons/sleep.png", 
-            iconHover: "../../assets/icons/sleep-hover.png", 
-            cmd: "systemctl suspend" 
+        {
+            icon: "bedtime",
+            label: "Sleep",
+            cmd: ["systemctl", "suspend"]
         },
-        { 
-            icon: "../../assets/icons/restart.png", 
-            iconHover: "../../assets/icons/restart-hover.png", 
-            cmd: "systemctl reboot" 
+        {
+            icon: "restart_alt",
+            label: "Restart",
+            cmd: ["systemctl", "reboot"]
         },
-        { 
-            icon: "../../assets/icons/logout.png", 
-            iconHover: "../../assets/icons/logout-hover.png", 
-            cmd: "hyprctl dispatch exit" 
+        {
+            icon: "logout",
+            label: "Logout",
+            cmd: ["hyprctl", "dispatch", "exit"]
         },
-        { 
-            icon: "../../assets/icons/power.png", 
-            iconHover: "../../assets/icons/power-hover.png", 
-            cmd: "systemctl poweroff" 
+        {
+            icon: "power_settings_new",
+            label: "Power Off",
+            cmd: ["systemctl", "poweroff"]
         }
     ]
 
     property int selectedIndex: 0
 
-    Process { id: proc }
+    Process {
+        id: cmdRunner
+    }
 
     function runCmd(cmd) {
         if (!cmd) return
-        proc.command = ["sh", "-c", cmd]
-        proc.running = true
+        cmdRunner.command = cmd
+        cmdRunner.startDetached()
     }
 
     function triggerSelected() {
@@ -75,7 +77,6 @@ Item {
         if (ShellState.activePage === "power") focusTimer.restart()
     }
 
-    // Key Navigation
     Keys.onPressed: (event) => {
         if (event.key === Qt.Key_Left) {
             root.selectedIndex = Math.max(root.selectedIndex - 1, 0)
@@ -100,13 +101,38 @@ Item {
         Repeater {
             model: root.actions
 
-            IconButton {
-                iconSource: modelData.icon
-                iconHoverSource: modelData.iconHover
-                selected: index === root.selectedIndex
-                onClicked: {
-                    root.selectedIndex = index
-                    root.runCmd(modelData.cmd)
+            Rectangle {
+                required property int index
+                required property var modelData
+
+                width: 48
+                height: 48
+                radius: width / 2
+                color: index === root.selectedIndex ? Colors.accent : Colors.surface
+                border.width: 1
+                border.color: Colors.border
+
+                Behavior on color { ColorAnimation { duration: 150 } }
+
+                Text {
+                    anchors.centerIn: parent
+                    text: parent.modelData.icon
+                    font.family: Fonts.icon
+                    font.pixelSize: Dimens.fontSizeXl
+                    font.variableAxes: Fonts.iconAxes
+                    font.features: { "liga": 1, "dlig": 1 }
+                    color: parent.index === root.selectedIndex ? Colors.fg : Colors.fgMuted
+                }
+
+                MouseArea {
+                    anchors.fill: parent
+                    cursorShape: Qt.PointingHandCursor
+                    hoverEnabled: true
+                    onEntered: root.selectedIndex = parent.index
+                    onClicked: {
+                        root.selectedIndex = parent.index
+                        root.runCmd(parent.modelData.cmd)
+                    }
                 }
             }
         }

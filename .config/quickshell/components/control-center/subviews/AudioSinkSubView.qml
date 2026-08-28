@@ -1,3 +1,4 @@
+// components/control-center/subviews/AudioSinkSubView.qml
 pragma ComponentBehavior: Bound
 
 import QtQuick
@@ -22,8 +23,8 @@ Item {
             implicitHeight: 32
 
             Text {
-                text: "\uf060"
-                font.family: Fonts.mono
+                text: "arrow_back"
+                font.family: Fonts.icon
                 font.pixelSize: Dimens.fontSizeLg
                 color: Colors.fg
                 anchors.left: parent.left
@@ -47,9 +48,6 @@ Item {
             }
         }
 
-        // Honest placeholder — no PipeWire sink-listing service exists yet.
-        // AudioService.qml only handles Mpris media control, not output
-        // device switching, so nothing real can be shown here until that's built.
         Rectangle {
             Layout.fillWidth: true
             Layout.fillHeight: true
