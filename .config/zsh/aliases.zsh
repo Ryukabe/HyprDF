@@ -34,7 +34,8 @@ alias gcheck="git checkout"
 alias gcredential="git config credential.helper store"
 
 # Eza Overrides (Uncomment to enable)
-alias ls='eza --icons'
+alias ls='eza -l --icons'
+#alias ls='eza --icons'
 #alias ll='eza -lh --icons --git'
 alias la='eza -lah --icons --git'
 #alias tree='eza --tree --icons'

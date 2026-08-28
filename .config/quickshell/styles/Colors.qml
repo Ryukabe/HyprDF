@@ -7,7 +7,6 @@ import "../services"
 Item {
     id: root
 
-    // ---- Safe fallback palette — used until real theme data loads, or if it fails ----
     readonly property bool fallbackIsLight: false
     readonly property color fallbackBg: "#0f1419"
     readonly property color fallbackFg: "#e6e1cf"
@@ -24,6 +23,10 @@ Item {
 
     property var palette: ({})
     property bool loaded: false
+
+    // User's light/dark preference — only meaningful for themes that
+    // actually ship both variants (see themeHasBothVariants below).
+    property bool lightModeEnabled: false
 
     FileView {
         id: themeFile
@@ -48,8 +51,30 @@ Item {
         onFileChanged: reload()
     }
 
+    // True only if this theme's JSON has the new { "dark": {...}, "light": {...} }
+    // wrapper shape. Old flat-format themes (still most of them) report false here,
+    // and the toggle has no effect for those — there's nothing to switch to yet.
+    readonly property bool themeHasBothVariants: root.loaded
+        && root.palette.dark !== undefined
+        && root.palette.light !== undefined
+
+    readonly property var activePalette: {
+        if (!root.loaded) return ({});
+        if (root.themeHasBothVariants) {
+            return root.lightModeEnabled ? root.palette.light : root.palette.dark;
+        }
+        return root.palette; // old flat single-variant format
+    }
+
     function pick(key, fallback) {
-        return (root.loaded && root.palette[key] !== undefined) ? root.palette[key] : fallback;
+        return (root.loaded && root.activePalette[key] !== undefined) ? root.activePalette[key] : fallback;
+    }
+
+    function toggleLightMode() {
+        if (root.themeHasBothVariants) {
+            root.lightModeEnabled = !root.lightModeEnabled;
+        }
+        // else: no-op — this theme has no light variant to switch to yet
     }
 
     readonly property bool darkMode: !pick("isLight", root.fallbackIsLight)

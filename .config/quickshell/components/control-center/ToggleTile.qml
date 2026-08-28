@@ -7,7 +7,7 @@ Rectangle {
     property string title: ""
     property string subtitle: ""
     property string displayName: title
-    property string iconGlyph: "\uf013"
+    property string iconGlyph: "settings"
     property color iconColor: Colors.fg
     property bool active: false
     property bool external: false
@@ -54,8 +54,10 @@ Rectangle {
                 id: iconText
                 visible: tile.signalBars < 0
                 text: tile.iconGlyph
-                font.family: Fonts.mono
+                font.family: Fonts.icon
                 font.pixelSize: Dimens.fontSizeXl
+                font.variableAxes: Fonts.iconAxes
+                font.features: { "liga": 1, "dlig": 1 }
                 color: tile.active ? Colors.accent : Colors.fg
                 anchors.left: parent.left
                 anchors.bottom: parent.bottom
@@ -104,7 +106,7 @@ Rectangle {
         onClicked: tile.subviewRequested()
     }
 
-    // ---- Full layout: icon + title/subtitle, left-aligned (used in wider contexts) ----
+    // ---- Full layout: icon + title/subtitle, left-aligned ----
     Row {
         id: fullContent
         visible: !tile.compact
@@ -115,8 +117,10 @@ Rectangle {
 
         Text {
             text: tile.iconGlyph
-            font.family: Fonts.mono
+            font.family: Fonts.icon
             font.pixelSize: Dimens.fontSizeLg
+            font.variableAxes: Fonts.iconAxes
+            font.features: { "liga": 1, "dlig": 1 }
             color: tile.active ? Colors.accent : Colors.fg
             anchors.verticalCenter: parent.verticalCenter
         }

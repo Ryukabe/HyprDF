@@ -13,7 +13,8 @@ Item {
     signal openWifi()
     signal openBluetooth()
     signal openFocus()
-
+    signal openPowerProfile()
+    
     Column {
         id: contentColumn
         anchors.top: parent.top
@@ -68,9 +69,11 @@ Item {
             }
 
             Text {
-                text: VolumeService.muted ? "\uf026" : "\uf028"
-                font.family: Fonts.mono
+                text: VolumeService.muted ? "volume_off" : "volume_up"
+                font.family: Fonts.icon
                 font.pixelSize: Dimens.fontSizeMd
+                font.variableAxes: Fonts.iconAxes
+                font.features: { "liga": 1, "dlig": 1 }
                 color: Colors.fg
                 anchors.left: parent.left
                 anchors.leftMargin: 16
@@ -127,9 +130,11 @@ Item {
             }
 
             Text {
-                text: "\uf185"
-                font.family: Fonts.mono
+                text: "light_mode"
+                font.family: Fonts.icon
                 font.pixelSize: Dimens.fontSizeMd
+                font.variableAxes: Fonts.iconAxes
+                font.features: { "liga": 1, "dlig": 1 }
                 color: Colors.fg
                 anchors.left: parent.left
                 anchors.leftMargin: 16

@@ -12,7 +12,7 @@ ToggleTile {
         if (BluetoothService.connectedDevices.length > 0) return BluetoothService.connectedDevices[0].name
         return "No Device"
     }
-    iconGlyph: "\uf294"
+    iconGlyph: "bluetooth"
     external: true
     hasSubview: true
     onToggled: BluetoothService.toggle()

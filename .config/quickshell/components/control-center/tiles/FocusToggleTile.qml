@@ -8,7 +8,7 @@ ToggleTile {
     active: ShellState.focusModeEnabled
     subtitle: ShellState.focusModeEnabled ? "On" : "Off"
     displayName: ShellState.focusModeEnabled ? ShellState.activeFocusMode : "Focus"
-    iconGlyph: "\uf186"
+    iconGlyph: "do_not_disturb_on"
     external: false
     hasSubview: true
     onToggled: ShellState.toggleFocusMode()

@@ -15,6 +15,7 @@ Item {
     signal openWifi()
     signal openBluetooth()
     signal openFocus()
+    signal openPowerProfile()
 
     Flickable {
         id: pagesFlick
@@ -26,10 +27,8 @@ Item {
         boundsBehavior: Flickable.StopAtBounds
         clip: true
 
-        // Tuned for snappier response — lower this further for even less
-        // resistance, raise it if pages start changing on tiny accidental drags.
         property real velocityThreshold: 400
-        property real positionThreshold: 0.12 // fraction of page width
+        property real positionThreshold: 0.12
 
         onMovementEnded: {
             var pageStride = width + root.pageGap
@@ -50,6 +49,7 @@ Item {
         Row {
             spacing: root.pageGap
 
+            // ---- Page 1: 6 tiles, full grid ----
             Item {
                 width: pagesFlick.width
                 height: pagesFlick.height
@@ -80,9 +80,18 @@ Item {
                         width: (grid1.width - (root.columns - 1) * root.tileSpacing) / root.columns
                         onSubviewRequested: root.openFocus()
                     }
+                    AirplaneModeToggleTile {
+                        compact: true
+                        width: (grid1.width - (root.columns - 1) * root.tileSpacing) / root.columns
+                    }
+                    CaffeineToggleTile {
+                        compact: true
+                        width: (grid1.width - (root.columns - 1) * root.tileSpacing) / root.columns
+                    }
                 }
             }
 
+            // ---- Page 2: remaining 3 tiles, room for 3 more before a 3rd page is needed ----
             Item {
                 width: pagesFlick.width
                 height: pagesFlick.height
@@ -94,15 +103,16 @@ Item {
                     rowSpacing: root.tileSpacing
                     columnSpacing: root.tileSpacing
 
-                    AirplaneModeToggleTile {
-                        compact: true
-                        width: (grid2.width - (root.columns - 1) * root.tileSpacing) / root.columns
-                    }
-                    CaffeineToggleTile {
-                        compact: true
-                        width: (grid2.width - (root.columns - 1) * root.tileSpacing) / root.columns
-                    }
                     RecordingToggleTile {
+                        compact: true
+                        width: (grid2.width - (root.columns - 1) * root.tileSpacing) / root.columns
+                    }
+                    PowerProfileToggleTile {
+                        compact: true
+                        width: (grid2.width - (root.columns - 1) * root.tileSpacing) / root.columns
+                        onSubviewRequested: root.openPowerProfile()
+                    }
+                    LightModeToggleTile {
                         compact: true
                         width: (grid2.width - (root.columns - 1) * root.tileSpacing) / root.columns
                     }
@@ -126,7 +136,6 @@ Item {
         snapAnim.start()
     }
 
-    // ---- Prev arrow / dots / next arrow, below the pager ----
     Row {
         id: controlsRow
         anchors.top: pagesFlick.bottom

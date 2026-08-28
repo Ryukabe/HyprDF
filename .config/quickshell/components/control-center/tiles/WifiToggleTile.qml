@@ -18,7 +18,7 @@ ToggleTile {
         if (!WifiService.hasInternet) return "No Internet"
         return WifiService.ssid
     }
-    iconGlyph: "\uf1eb"
+    iconGlyph: "wifi"
     external: true
     hasSubview: true
     onToggled: WifiService.toggle()

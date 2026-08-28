@@ -7,7 +7,7 @@ ToggleTile {
     title: "Night Light"
     active: NightLightService.enabled
     subtitle: NightLightService.enabled ? "On" : "Off"
-    iconGlyph: "\uf185"
+    iconGlyph: "nightlight"
     external: true
     onToggled: NightLightService.toggle()
 }

@@ -7,7 +7,7 @@ ToggleTile {
     title: "Airplane Mode"
     active: AirplaneModeService.enabled
     subtitle: AirplaneModeService.enabled ? "On" : "Off"
-    iconGlyph: "\uf072"
+    iconGlyph: "flight"
     iconColor: Colors.cyan
     external: false
     onToggled: AirplaneModeService.toggle()

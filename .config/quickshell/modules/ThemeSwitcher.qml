@@ -7,115 +7,198 @@ import "../styles"
 
 FocusScope {
     id: switcherRoot
-    implicitWidth: contentColumn.implicitWidth + 40
-    implicitHeight: contentColumn.implicitHeight + 40
+
+    implicitWidth: 680
+    implicitHeight: 210
     focus: true
 
-    property int selectedIndex: 0
-    readonly property int columnsCount: 3
+    // Set default selectedIndex to -1 so no card is pre-selected automatically on open
+    property int selectedIndex: -1
+    property string searchQuery: ""
+    property bool searchActive: false
+
+    readonly property var filteredThemes: {
+        var list = ThemeService.themesList || [];
+        if (!searchQuery.trim()) return list;
+        return list.filter(function(item) {
+            return item.name.toLowerCase().includes(searchQuery.toLowerCase());
+        });
+    }
 
     Component.onCompleted: {
         switcherRoot.forceActiveFocus()
-        revealTimer.restart()
-    }
-
-    Timer {
-        id: revealTimer
-        interval: 30
-        onTriggered: {
-            contentWrapper.opacity = 1.0
-            contentWrapper.scale = 1.0
-        }
+        listView.currentIndex = -1
     }
 
     Keys.onPressed: event => {
-        var count = ThemeService.themesList.length;
+        var count = filteredThemes.length;
         if (count === 0) return;
 
-        if (event.key === Qt.Key_Right) {
-            selectedIndex = (selectedIndex + 1) % count;
-            event.accepted = true;
-        } else if (event.key === Qt.Key_Left) {
-            selectedIndex = (selectedIndex - 1 + count) % count;
-            event.accepted = true;
-        } else if (event.key === Qt.Key_Down) {
-            if (selectedIndex + columnsCount < count) {
-                selectedIndex += columnsCount;
+        if (event.key === Qt.Key_Right || event.key === Qt.Key_Down) {
+            // One-way movement: stop at the last index
+            if (selectedIndex < count - 1) {
+                selectedIndex += 1;
+                listView.currentIndex = selectedIndex;
             }
             event.accepted = true;
-        } else if (event.key === Qt.Key_Up) {
-            if (selectedIndex - columnsCount >= 0) {
-                selectedIndex -= columnsCount;
+        } else if (event.key === Qt.Key_Left || event.key === Qt.Key_Up) {
+            // One-way movement: stop at index 0
+            if (selectedIndex > 0) {
+                selectedIndex -= 1;
+                listView.currentIndex = selectedIndex;
             }
             event.accepted = true;
         } else if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter || event.key === Qt.Key_Space) {
-            if (ThemeService.themesList[selectedIndex]) {
-                ThemeService.applyTheme(ThemeService.themesList[selectedIndex].name);
+            if (selectedIndex >= 0 && filteredThemes[selectedIndex]) {
+                ThemeService.applyTheme(filteredThemes[selectedIndex].name);
             }
             event.accepted = true;
         } else if (event.key === Qt.Key_Escape) {
-            ShellState.showPage("clock");
+            if (searchActive) {
+                searchActive = false;
+                searchQuery = "";
+            } else if (typeof ShellState !== "undefined") {
+                ShellState.showPage("clock");
+            }
             event.accepted = true;
         }
     }
 
-    Item {
-        id: contentWrapper
+    ColumnLayout {
         anchors.fill: parent
-        opacity: 0.0
-        scale: 0.94
+        anchors.margins: 16
+        spacing: 12
 
-        Behavior on opacity {
-            NumberAnimation { duration: 200; easing.type: Easing.OutCubic }
-        }
-        Behavior on scale {
-            NumberAnimation { duration: 280; easing.type: Easing.OutBack; easing.overshoot: 1.15 }
-        }
-
-        ColumnLayout {
-            id: contentColumn
-            anchors.centerIn: parent
-            spacing: 12
+        // Header Row (Title, Active Theme Badge, Search)
+        RowLayout {
+            Layout.fillWidth: true
+            spacing: 10
 
             Text {
-                text: "Theme Selector"
+                text: "Themes"
                 color: Colors.fg
-                font.pixelSize: Dimens.fontSizeLg + 2
+                font.family: Fonts.text
+                font.pixelSize: Dimens.fontSizeLg
                 font.bold: true
-                Layout.alignment: Qt.AlignLeft
-                Layout.leftMargin: 4
             }
 
-            GridLayout {
-                id: grid
-                columns: switcherRoot.columnsCount
-                rowSpacing: 12
-                columnSpacing: 14
+            // Active Theme Badge (Replaces total count)
+            Rectangle {
+                implicitWidth: activeThemeText.implicitWidth + 14
+                implicitHeight: 20
+                radius: 10
+                color: Qt.rgba(1, 1, 1, 0.08)
 
-                Repeater {
-                    model: ThemeService.themesList
+                Text {
+                    id: activeThemeText
+                    anchors.centerIn: parent
+                    text: "Active: " + (ThemeService.currentTheme || "Default")
+                    color: Colors.accent
+                    font.family: Fonts.text
+                    font.pixelSize: Dimens.fontSizeSm - 1
+                    font.bold: true
+                }
+            }
 
-                    ThemeCard {
-                        required property var modelData
-                        required property int index
+            Item { Layout.fillWidth: true }
 
-                        themeName: modelData.name
-                        isApplied: ThemeService.currentTheme === modelData.name
-                        isSelected: switcherRoot.selectedIndex === index
+            // Search Bar Input
+            Rectangle {
+                id: searchBar
+                visible: switcherRoot.searchActive
+                implicitWidth: switcherRoot.searchActive ? 180 : 0
+                implicitHeight: 30
+                radius: 15
+                color: Qt.rgba(1, 1, 1, 0.08)
+                border.width: searchInput.activeFocus ? 1 : 0
+                border.color: Colors.accent
 
-                        Layout.preferredWidth: 130
-                        Layout.preferredHeight: 70
+                Behavior on implicitWidth {
+                    NumberAnimation { duration: 200; easing.type: Easing.OutCubic }
+                }
 
-                        scale: switcherRoot.selectedIndex === index ? 1.05 : 1.0
-                        Behavior on scale {
-                            NumberAnimation { duration: 180; easing.type: Easing.OutBack; easing.overshoot: 1.2 }
-                        }
+                TextInput {
+                    id: searchInput
+                    anchors.fill: parent
+                    anchors.leftMargin: 12
+                    anchors.rightMargin: 12
+                    verticalAlignment: Text.AlignVCenter
+                    color: Colors.fg
+                    font.pixelSize: Dimens.fontSizeSm
+                    clip: true
+                    onTextChanged: switcherRoot.searchQuery = text
 
-                        onClicked: {
-                            switcherRoot.selectedIndex = index;
-                            ThemeService.applyTheme(modelData.name);
+                    Text {
+                        text: "Search..."
+                        color: Colors.fgMuted
+                        font.pixelSize: Dimens.fontSizeSm
+                        visible: !searchInput.text && !searchInput.inputMethodComposing
+                        anchors.verticalCenter: parent.verticalCenter
+                    }
+                }
+            }
+
+            // Search Toggle Button
+            Rectangle {
+                implicitWidth: 30
+                implicitHeight: 30
+                radius: 15
+                color: switcherRoot.searchActive ? Qt.rgba(1, 1, 1, 0.15) : Qt.rgba(1, 1, 1, 0.08)
+
+                Text {
+                    anchors.centerIn: parent
+                    text: "search"
+                    font.family: Fonts.icon
+                    font.pixelSize: 16
+                    font.variableAxes: Fonts.iconAxes
+                    font.features: { "liga": 1 }
+                    color: switcherRoot.searchActive ? Colors.accent : Colors.fg
+                }
+
+                MouseArea {
+                    anchors.fill: parent
+                    cursorShape: Qt.PointingHandCursor
+                    onClicked: {
+                        switcherRoot.searchActive = !switcherRoot.searchActive;
+                        if (switcherRoot.searchActive) {
+                            searchInput.forceActiveFocus();
+                        } else {
+                            switcherRoot.searchQuery = "";
+                            switcherRoot.forceActiveFocus();
                         }
                     }
+                }
+            }
+        }
+
+        // Horizontal Theme Carousel
+        ListView {
+            id: listView
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            orientation: ListView.Horizontal
+            spacing: 14
+            clip: true
+            highlightMoveDuration: 250
+            currentIndex: -1
+
+            model: switcherRoot.filteredThemes
+
+            delegate: ThemeCard {
+                required property var modelData
+                required property int index
+
+                themeName: modelData.name
+                isApplied: ThemeService.currentTheme === modelData.name
+                isSelected: switcherRoot.selectedIndex === index
+
+                implicitWidth: 145
+                implicitHeight: 125
+
+                onClicked: {
+                    switcherRoot.selectedIndex = index;
+                    listView.currentIndex = index;
+                    ThemeService.applyTheme(modelData.name);
                 }
             }
         }
