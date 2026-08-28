@@ -12,7 +12,6 @@ FocusScope {
     implicitHeight: 210
     focus: true
 
-    // Set default selectedIndex to -1 so no card is pre-selected automatically on open
     property int selectedIndex: -1
     property string searchQuery: ""
     property bool searchActive: false
@@ -35,14 +34,12 @@ FocusScope {
         if (count === 0) return;
 
         if (event.key === Qt.Key_Right || event.key === Qt.Key_Down) {
-            // One-way movement: stop at the last index
             if (selectedIndex < count - 1) {
                 selectedIndex += 1;
                 listView.currentIndex = selectedIndex;
             }
             event.accepted = true;
         } else if (event.key === Qt.Key_Left || event.key === Qt.Key_Up) {
-            // One-way movement: stop at index 0
             if (selectedIndex > 0) {
                 selectedIndex -= 1;
                 listView.currentIndex = selectedIndex;
@@ -69,7 +66,7 @@ FocusScope {
         anchors.margins: 16
         spacing: 12
 
-        // Header Row (Title, Active Theme Badge, Search)
+        // Header Row
         RowLayout {
             Layout.fillWidth: true
             spacing: 10
@@ -82,7 +79,6 @@ FocusScope {
                 font.bold: true
             }
 
-            // Active Theme Badge (Replaces total count)
             Rectangle {
                 implicitWidth: activeThemeText.implicitWidth + 14
                 implicitHeight: 20
@@ -102,7 +98,6 @@ FocusScope {
 
             Item { Layout.fillWidth: true }
 
-            // Search Bar Input
             Rectangle {
                 id: searchBar
                 visible: switcherRoot.searchActive
@@ -114,7 +109,7 @@ FocusScope {
                 border.color: Colors.accent
 
                 Behavior on implicitWidth {
-                    NumberAnimation { duration: 200; easing.type: Easing.OutCubic }
+                    NumberAnimation { duration: 150; easing.type: Easing.OutCubic }
                 }
 
                 TextInput {
@@ -138,7 +133,6 @@ FocusScope {
                 }
             }
 
-            // Search Toggle Button
             Rectangle {
                 implicitWidth: 30
                 implicitHeight: 30
@@ -171,7 +165,7 @@ FocusScope {
             }
         }
 
-        // Horizontal Theme Carousel
+        // Fast Continuous Horizontal Scroll View
         ListView {
             id: listView
             Layout.fillWidth: true
@@ -179,10 +173,23 @@ FocusScope {
             orientation: ListView.Horizontal
             spacing: 14
             clip: true
-            highlightMoveDuration: 250
-            currentIndex: -1
+
+            // Fast continuous scrolling configurations
+            flickableDirection: Flickable.HorizontalFlick
+            boundsBehavior: Flickable.StopAtBounds
+            highlightMoveDuration: 0
+            highlightRangeMode: ListView.ApplyRange
+            preferredHighlightBegin: 0
+            preferredHighlightEnd: width
 
             model: switcherRoot.filteredThemes
+
+            // Mouse/Trackpad wheel horizontal scrolling support
+            WheelHandler {
+                orientation: Qt.Horizontal
+                property: "contentX"
+                rotationScale: 15
+            }
 
             delegate: ThemeCard {
                 required property var modelData

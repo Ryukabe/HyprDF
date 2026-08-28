@@ -23,7 +23,14 @@ Item {
         chromeHeight + maxVisibleRows * rowHeight
     )
 
-    onQueryChanged: selectedIndex = 0
+    onQueryChanged: {
+        selectedIndex = 0
+        // Morph launcher into Clipboard manager if text starts with ':'
+        if (query.startsWith(":")) {
+            ClipboardService.searchQuery = query.substring(1)
+            ShellState.showPage("clipboard")
+        }
+    }
 
     Timer {
         id: focusTimer
@@ -135,9 +142,6 @@ Item {
                                 } else if (event.key === Qt.Key_Up) {
                                     root.selectedIndex = Math.max(root.selectedIndex - 1, 0)
                                     appList.positionViewAtIndex(root.selectedIndex, ListView.Contain)
-                                    event.accepted = true
-                                } else if (event.key === Qt.Key_Escape) {
-                                    ShellState.showPage("clock")
                                     event.accepted = true
                                 } else if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
                                     if (root.results.length > 0) {

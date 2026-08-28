@@ -16,6 +16,7 @@ Item {
     signal openBluetooth()
     signal openFocus()
     signal openPowerProfile()
+    signal openCaffeine()
 
     Flickable {
         id: pagesFlick
@@ -87,6 +88,7 @@ Item {
                     CaffeineToggleTile {
                         compact: true
                         width: (grid1.width - (root.columns - 1) * root.tileSpacing) / root.columns
+                        onSubviewRequested: root.openCaffeine()
                     }
                 }
             }

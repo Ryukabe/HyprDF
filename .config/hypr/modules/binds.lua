@@ -63,6 +63,9 @@ hl.bind("SUPER + TAB",                      hl.dsp.exec_cmd("qs ipc call workspa
 -- App Launcher
 hl.bind(mainMod .. " + Space ",             hl.dsp.exec_cmd("qs ipc call launcher toggle"), { locked = true })
 
+-- Clipboard
+hl.bind( mainMod .. " + V ",                hl.dsp.exec_cmd("qs ipc call clipboard toggle"))
+
 -- Control Panel / Quick Settings
 hl.bind( mainMod .. " + A ",                hl.dsp.exec_cmd("qs ipc call controlcenter toggle"))
 
@@ -138,8 +141,8 @@ hl.bind(mainMod .. " + L",                  hl.dsp.exec_cmd("hyprlock -c $HOME/.
 --hl.bind(mainMod .. " + F5",               hl.dsp.exec_cmd("$HOME/.config/hypr/scripts/nightlight.sh"))
 
 -- Clipboard 
-hl.bind(mainMod .. " + V",                  hl.dsp.exec_cmd("$HOME/.config/hypr/scripts/clipboard-toggle.sh"))
-hl.bind(mainMod .. " + SHIFT + V",          hl.dsp.exec_cmd("cliphist wipe")) -- to clear clipboard
+--hl.bind(mainMod .. " + V",                  hl.dsp.exec_cmd("$HOME/.config/hypr/scripts/clipboard-toggle.sh"))
+--hl.bind(mainMod .. " + SHIFT + V",          hl.dsp.exec_cmd("cliphist wipe")) -- to clear clipboard
 
 -- Screenshots
 hl.bind(mainMod .. " + Print",              hl.dsp.exec_cmd("hyprshot -m output -m eDP-1 -o $HOME/Pictures/Screenshot"))

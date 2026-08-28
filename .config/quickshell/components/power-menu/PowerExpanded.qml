@@ -84,9 +84,6 @@ Item {
         } else if (event.key === Qt.Key_Right) {
             root.selectedIndex = Math.min(root.selectedIndex + 1, root.actions.length - 1)
             event.accepted = true
-        } else if (event.key === Qt.Key_Escape) {
-            ShellState.showPage("clock")
-            event.accepted = true
         } else if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
             root.triggerSelected()
             event.accepted = true

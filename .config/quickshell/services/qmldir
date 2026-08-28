@@ -17,3 +17,4 @@ singleton ThemeService 1.0 ThemeService.qml
 singleton VolumeService 1.0 VolumeService.qml
 singleton WallpaperService 1.0 WallpaperService.qml
 singleton WifiService 1.0 WifiService.qml
+singleton TimerService 1.0 TimerService.qml

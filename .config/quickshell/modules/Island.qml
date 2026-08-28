@@ -15,16 +15,26 @@ import "../components/power-menu"
 PanelWindow {
     id: window
 
+    // Global Escape key shortcut to return to clock view from any page
+    Shortcut {
+        sequence: "Escape"
+        enabled: ShellState.activePage !== "clock"
+        onActivated: ShellState.showPage("clock")
+    }
+
     WlrLayershell.namespace: "quickshell:island"
 
     WlrLayershell.keyboardFocus: (
         ShellState.activePage === "launcher" ||
+        ShellState.activePage === "clipboard" ||
         ShellState.activePage === "power" ||
         ShellState.activePage === "theme" ||
         ShellState.activePage === "wallpaper" ||
         ShellState.activePage === "control" ||
         ShellState.activePage === "notificationcenter" ||
-        ShellState.activePage === "polkit" 
+        ShellState.activePage === "polkit" ||
+        ShellState.activePage === "status" ||
+        ShellState.activePage === "timer"
     ) ? WlrKeyboardFocus.Exclusive : WlrKeyboardFocus.None
 
     anchors { top: true; left: true; right: true }
@@ -53,6 +63,20 @@ PanelWindow {
         function toggle() { ShellState.activePage = ShellState.activePage === "launcher" ? "clock" : "launcher" }
         function open() { ShellState.showPage("launcher") }
         function close() { ShellState.showPage("clock") }
+    }
+
+// --- Clipboard IPC Handler ---
+    IpcHandler {
+        target: "clipboard"
+        function toggle(): void { 
+            ShellState.activePage === "clipboard" ? ShellState.showPage("clock") : ShellState.showPage("clipboard") 
+        }
+        function open(): void { 
+            ShellState.showPage("clipboard") 
+        }
+        function close(): void { 
+            ShellState.showPage("clock") 
+        }
     }
 
     IpcHandler {
@@ -95,6 +119,12 @@ PanelWindow {
         }
     }
 
+    IpcHandler {
+        target: "timer"
+        function toggle() { ShellState.activePage = ShellState.activePage === "timer" ? "clock" : "timer" }
+        function open() { ShellState.showPage("timer") }
+        function close() { ShellState.showPage("clock") }
+    }
 
     mask: Region {
         item: (island.expanded && ShellState.activePage !== "notification") ? clickCatcher : island
@@ -229,6 +259,7 @@ PanelWindow {
                     case "power": return powerPage
                     case "control": return controlPage
                     case "launcher": return launcherPage
+                    case "clipboard": return clipboardPage
                     case "volume": return volumePage
                     case "brightness": return brightnessPage
                     case "notification": return notificationPage
@@ -236,6 +267,7 @@ PanelWindow {
                     case "theme": return themePage
                     case "wallpaper": return wallpaperSwitcherPage
                     case "polkit": return polkitPage
+                    case "timer": return timerPage
                     default: return clockPage
                 }
             }
@@ -245,6 +277,7 @@ PanelWindow {
         Component { id: statusPage; StatusPanel {} }
         Component { id: mediaPage; MediaExpanded { color: "transparent" } }
         Component { id: launcherPage; AppLauncher {} }
+        Component { id: clipboardPage; Clipboard {} }
         Component { id: powerPage; PowerMenu {} }
         Component { id: themePage; ThemeSwitcher {} }
         Component { id: wallpaperSwitcherPage; WallpaperSwitcher {} }
@@ -252,6 +285,7 @@ PanelWindow {
         Component { id: notificationPage; NotificationToast {} }
         Component { id: notificationCenterPage; NotificationCenter {} }
         Component { id: polkitPage; PolkitAgent {} }
+        Component { id: timerPage; TimerModule {} }
 
         Component {
             id: brightnessPage

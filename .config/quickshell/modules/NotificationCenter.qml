@@ -12,13 +12,6 @@ Item {
     implicitHeight: Math.min(contentWrapper.implicitHeight, 480)
 
     focus: true
-    Keys.onPressed: (event) => {
-        if (event.key === Qt.Key_Escape) {
-            ShellState.showPage("clock")
-            event.accepted = true
-        }
-    }
-
     Timer {
         id: focusTimer
         interval: 50

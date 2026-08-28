@@ -12,7 +12,6 @@ FocusScope {
     implicitHeight: 210
     focus: true
 
-    // Set default selectedIndex to -1 so nothing is auto-hovered/selected on open
     property int selectedIndex: -1
     property string searchQuery: ""
     property bool searchActive: false
@@ -27,7 +26,6 @@ FocusScope {
 
     Component.onCompleted: {
         switcherRoot.forceActiveFocus()
-        // Highlight index is set to -1 on open so no card is pre-selected automatically
         listView.currentIndex = -1
     }
 
@@ -110,7 +108,7 @@ FocusScope {
                 border.color: Colors.accent
 
                 Behavior on implicitWidth {
-                    NumberAnimation { duration: 200; easing.type: Easing.OutCubic }
+                    NumberAnimation { duration: 150; easing.type: Easing.OutCubic }
                 }
 
                 TextInput {
@@ -166,7 +164,7 @@ FocusScope {
             }
         }
 
-        // Horizontal Carousel
+        // Fast Continuous Horizontal Scroll View
         ListView {
             id: listView
             Layout.fillWidth: true
@@ -174,10 +172,23 @@ FocusScope {
             orientation: ListView.Horizontal
             spacing: 14
             clip: true
-            highlightMoveDuration: 250
-            currentIndex: -1
+
+            // Fast continuous scrolling configurations
+            flickableDirection: Flickable.HorizontalFlick
+            boundsBehavior: Flickable.StopAtBounds
+            highlightMoveDuration: 0
+            highlightRangeMode: ListView.ApplyRange
+            preferredHighlightBegin: 0
+            preferredHighlightEnd: width
 
             model: switcherRoot.filteredWallpapers
+
+            // Mouse/Trackpad wheel horizontal scrolling support
+            WheelHandler {
+                orientation: Qt.Horizontal
+                property: "contentX"
+                rotationScale: 15
+            }
 
             delegate: WallpaperCard {
                 required property var modelData

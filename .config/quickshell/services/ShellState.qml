@@ -89,4 +89,9 @@ QtObject {
     property Process dndProcess: Process {
         id: dndProcess
     }
+
+    // Add to services/ShellState.qml inside the togglePage/showPage handling
+    function toggleClipboard() {
+        togglePage("clipboard")
+    }
 }

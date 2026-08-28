@@ -44,6 +44,7 @@ Item {
             case "bluetooth": return bluetoothSubviewComp
             case "focus": return focusSubviewComp
             case "powerprofile": return powerProfileSubviewComp
+            case "caffeine": return caffeineSubviewComp
             default: return mainViewComp
             }
         }
@@ -86,6 +87,7 @@ Item {
             onOpenBluetooth: root.activeSubview = "bluetooth"
             onOpenFocus: root.activeSubview = "focus"
             onOpenPowerProfile: root.activeSubview = "powerprofile"
+            onOpenCaffeine: root.activeSubview = "caffeine"
         }
     }
 
@@ -107,5 +109,10 @@ Item {
     Component {
         id: powerProfileSubviewComp
         PowerProfileSubView { onBackRequested: root.activeSubview = "" }
+    }
+
+    Component {
+        id: caffeineSubviewComp
+        CaffeineSubview { onBackRequested: root.activeSubview = "" }
     }
 }

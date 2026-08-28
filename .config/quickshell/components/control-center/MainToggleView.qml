@@ -14,6 +14,7 @@ Item {
     signal openBluetooth()
     signal openFocus()
     signal openPowerProfile()
+    signal openCaffeine()
     
     Column {
         id: contentColumn
@@ -46,6 +47,7 @@ Item {
             onOpenWifi: root.openWifi()
             onOpenBluetooth: root.openBluetooth()
             onOpenFocus: root.openFocus()
+            onOpenCaffeine: root.openCaffeine()
         }
 
         // ---- Volume slider ----
@@ -161,12 +163,6 @@ Item {
                 onPressed: (mouse) => updatePct(mouse.x)
                 onPositionChanged: (mouse) => { if (pressed) updatePct(mouse.x) }
             }
-        }
-
-        // ---- Media card ----
-        MediaBackdrop {
-            id: mediaCard
-            width: parent.width
         }
     }
 }

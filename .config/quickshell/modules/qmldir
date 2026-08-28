@@ -1,10 +1,13 @@
 module modules
-Island 1.0 Island.qml
-PowerMenu 1.0 PowerMenu.qml
+
 AppLauncher 1.0 AppLauncher.qml
-LockScreen 1.0 LockScreen.qml
+Island 1.0 Island.qml
+Clipboard 1.0 Clipboard.qml
 ControlCenter 1.0 ControlCenter.qml
+LockScreen 1.0 LockScreen.qml
 NotificationCenter 1.0 NotificationCenter.qml
+PolkitAgent 1.0 PolkitAgent.qml
+PowerMenu 1.0 PowerMenu.qml
 ThemeSwitcher 1.0 ThemeSwitcher.qml
 WallpaperSwitcher 1.0 WallpaperSwitcher.qml
-PolkitAgent 1.0 PolkitAgent.qml
+TimerModule 1.0 TimerModule.qml
