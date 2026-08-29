@@ -282,7 +282,6 @@ PanelWindow {
 
         // Page Components
         Component { id: clockPage; Clock {} }
-        Component { id: statusPage; StatusPanel {} }
         Component { id: mediaPage; MediaExpanded { color: "transparent" } }
         Component { id: notificationPage; NotificationToast {} }
         Component { id: launcherPage; AppLauncher {} }
@@ -293,7 +292,9 @@ PanelWindow {
         Component { id: controlPage; ControlCenter {} }
         Component { id: notificationCenterPage; NotificationCenter {} }
         Component { id: polkitPage; PolkitAgent {} }
-        Component { id: timerPage; TimerModule {} }
+        Component { id: timerToastPage; TimerToast {} }
+        Component { id: timerPage; Timer {} }
+        Component { id: statusPage; StatusPanel {} }
 
         Component {
             id: brightnessPage

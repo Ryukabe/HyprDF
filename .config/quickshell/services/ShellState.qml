@@ -1,4 +1,3 @@
-// services/ShellState.qml
 pragma Singleton
 import QtQuick
 import Quickshell.Io
@@ -9,6 +8,7 @@ QtObject {
     property string activePage: "clock"
     property string previousPage: "clock"
     property bool focusModeEnabled: false
+    property string activeFocusMode: "Do Not Disturb"
     property bool ignoreHover: false
 
     property Timer hoverResetTimer: Timer {
@@ -20,22 +20,12 @@ QtObject {
     property Timer flashTimer: Timer {
         interval: 1500
         onTriggered: {
-            // If the timer page was open when the notification arrived, return to it. Otherwise, default to "clock".
             if (root.previousPage === "timer") {
                 root.activePage = "timer"
             } else {
                 root.activePage = "clock"
             }
         }
-    }
-
-    function flashPageFor(page, durationMs) {
-        if (root.activePage !== "notification") {
-            root.previousPage = root.activePage // Captures "timer" or whatever active page you are looking at
-        }
-        root.activePage = page
-        flashTimer.interval = durationMs
-        flashTimer.restart()
     }
 
     function showPage(page) {

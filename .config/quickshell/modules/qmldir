@@ -10,4 +10,4 @@ PolkitAgent 1.0 PolkitAgent.qml
 PowerMenu 1.0 PowerMenu.qml
 ThemeSwitcher 1.0 ThemeSwitcher.qml
 WallpaperSwitcher 1.0 WallpaperSwitcher.qml
-TimerModule 1.0 TimerModule.qml
+StatusPanel 1.0 StatusPanel.qml
