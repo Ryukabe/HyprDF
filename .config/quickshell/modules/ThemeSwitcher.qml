@@ -24,15 +24,49 @@ FocusScope {
         });
     }
 
+    function updateInitialSelection() {
+        if (filteredThemes.length === 0) {
+            selectedIndex = -1;
+            return;
+        }
+        var activeIndex = -1;
+        for (var i = 0; i < filteredThemes.length; i++) {
+            if (filteredThemes[i].name === ThemeService.currentTheme) {
+                activeIndex = i;
+                break;
+            }
+        }
+        selectedIndex = activeIndex !== -1 ? activeIndex : 0;
+        listView.currentIndex = selectedIndex;
+        if (selectedIndex !== -1) {
+            listView.positionViewAtIndex(selectedIndex, ListView.Center);
+        }
+    }
+
+    onFilteredThemesChanged: updateInitialSelection()
+
     Component.onCompleted: {
-        switcherRoot.forceActiveFocus()
-        listView.currentIndex = -1
+        switcherRoot.forceActiveFocus();
+        updateInitialSelection();
     }
 
     Keys.onPressed: event => {
         var count = filteredThemes.length;
+
+        // [feature: auto-open search and catch typed character on key press]
+        if (!searchActive && event.text.length > 0 && event.text >= " " && event.key !== Qt.Key_Escape && event.key !== Qt.Key_Return && event.key !== Qt.Key_Enter) {
+            searchActive = true;
+            searchInput.text = event.text;
+            searchQuery = event.text;
+            searchInput.cursorPosition = searchInput.text.length;
+            searchInput.forceActiveFocus();
+            event.accepted = true;
+            return;
+        }
+
         if (count === 0) return;
 
+        // [feature: directional navigation controls]
         if (event.key === Qt.Key_Right || event.key === Qt.Key_Down) {
             if (selectedIndex < count - 1) {
                 selectedIndex += 1;
@@ -46,14 +80,18 @@ FocusScope {
             }
             event.accepted = true;
         } else if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter || event.key === Qt.Key_Space) {
+            // [feature: apply selected theme]
             if (selectedIndex >= 0 && filteredThemes[selectedIndex]) {
                 ThemeService.applyTheme(filteredThemes[selectedIndex].name);
             }
             event.accepted = true;
         } else if (event.key === Qt.Key_Escape) {
+            // [feature: escape key handling for search or page exit]
             if (searchActive) {
                 searchActive = false;
                 searchQuery = "";
+                searchInput.text = "";
+                switcherRoot.forceActiveFocus();
             } else if (typeof ShellState !== "undefined") {
                 ShellState.showPage("clock");
             }
@@ -66,7 +104,7 @@ FocusScope {
         anchors.margins: 16
         spacing: 12
 
-        // Header Row
+        // [layout: header row containing title, active indicator, and search controls]
         RowLayout {
             Layout.fillWidth: true
             spacing: 10
@@ -121,7 +159,21 @@ FocusScope {
                     color: Colors.fg
                     font.pixelSize: Dimens.fontSizeSm
                     clip: true
-                    onTextChanged: switcherRoot.searchQuery = text
+                    onTextChanged: {
+                        if (switcherRoot.searchActive) {
+                            switcherRoot.searchQuery = text;
+                        }
+                    }
+
+                    Keys.onPressed: (event) => {
+                        if (event.key === Qt.Key_Escape) {
+                            switcherRoot.searchActive = false;
+                            switcherRoot.searchQuery = "";
+                            searchInput.text = "";
+                            switcherRoot.forceActiveFocus();
+                            event.accepted = true;
+                        }
+                    }
 
                     Text {
                         text: "Search..."
@@ -158,6 +210,7 @@ FocusScope {
                             searchInput.forceActiveFocus();
                         } else {
                             switcherRoot.searchQuery = "";
+                            searchInput.text = "";
                             switcherRoot.forceActiveFocus();
                         }
                     }
@@ -165,7 +218,7 @@ FocusScope {
             }
         }
 
-        // Fast Continuous Horizontal Scroll View
+        // [layout: center-locked horizontal list view for theme cards]
         ListView {
             id: listView
             Layout.fillWidth: true
@@ -174,17 +227,16 @@ FocusScope {
             spacing: 14
             clip: true
 
-            // Fast continuous scrolling configurations
             flickableDirection: Flickable.HorizontalFlick
             boundsBehavior: Flickable.StopAtBounds
             highlightMoveDuration: 0
-            highlightRangeMode: ListView.ApplyRange
-            preferredHighlightBegin: 0
-            preferredHighlightEnd: width
+            
+            highlightRangeMode: ListView.StrictlyEnforceRange
+            preferredHighlightBegin: width / 2 - 72
+            preferredHighlightEnd: width / 2 + 72
 
             model: switcherRoot.filteredThemes
 
-            // Mouse/Trackpad wheel horizontal scrolling support
             WheelHandler {
                 orientation: Qt.Horizontal
                 property: "contentX"

@@ -1,3 +1,4 @@
+// services/ShellState.qml
 pragma Singleton
 import QtQuick
 import Quickshell.Io
@@ -6,12 +7,9 @@ QtObject {
     id: root
 
     property string activePage: "clock"
+    property string previousPage: "clock"
     property bool focusModeEnabled: false
     property bool ignoreHover: false
-
-    // ---- Focus mode ----
-    property string activeFocusMode: "Do Not Disturb"
-    readonly property bool isWorkMode: focusModeEnabled && activeFocusMode === "Work"
 
     property Timer hoverResetTimer: Timer {
         interval: 300
@@ -21,11 +19,30 @@ QtObject {
 
     property Timer flashTimer: Timer {
         interval: 1500
-        onTriggered: root.activePage = "clock"
+        onTriggered: {
+            // If the timer page was open when the notification arrived, return to it. Otherwise, default to "clock".
+            if (root.previousPage === "timer") {
+                root.activePage = "timer"
+            } else {
+                root.activePage = "clock"
+            }
+        }
+    }
+
+    function flashPageFor(page, durationMs) {
+        if (root.activePage !== "notification") {
+            root.previousPage = root.activePage // Captures "timer" or whatever active page you are looking at
+        }
+        root.activePage = page
+        flashTimer.interval = durationMs
+        flashTimer.restart()
     }
 
     function showPage(page) {
         flashTimer.stop()
+        if (page !== "notification") {
+            root.previousPage = page
+        }
         if (page === "clock") {
             root.ignoreHover = true
             hoverResetTimer.restart()
@@ -34,12 +51,18 @@ QtObject {
     }
 
     function flashPage(page) {
+        if (root.activePage !== "notification" && root.activePage !== page) {
+            root.previousPage = root.activePage
+        }
         root.activePage = page
         flashTimer.interval = 1500
         flashTimer.restart()
     }
 
     function flashPageFor(page, durationMs) {
+        if (root.activePage !== "notification" && root.activePage !== page) {
+            root.previousPage = root.activePage
+        }
         root.activePage = page
         flashTimer.interval = durationMs
         flashTimer.restart()
@@ -53,9 +76,6 @@ QtObject {
         }
     }
 
-    // Only Do Not Disturb has a confirmed real backend (mako) right now.
-    // Work/Personal/Sleep/Gaming intentionally do nothing here until their
-    // actual backends (animation toggles, bar style, etc.) are built and confirmed.
     function _applyBackendForMode(mode, enabled) {
         if (mode === "Do Not Disturb") {
             dndProcess.command = enabled
@@ -65,14 +85,11 @@ QtObject {
         }
     }
 
-    // Quick on/off — flips whatever mode is currently selected.
     function toggleFocusMode() {
         focusModeEnabled = !focusModeEnabled
         _applyBackendForMode(activeFocusMode, focusModeEnabled)
     }
 
-    // Selects a specific preset by name. Tapping the already-active preset
-    // again turns Focus off (same preset stays remembered for next time).
     function setFocusMode(name) {
         if (root.focusModeEnabled && root.activeFocusMode === name) {
             toggleFocusMode()
@@ -90,7 +107,6 @@ QtObject {
         id: dndProcess
     }
 
-    // Add to services/ShellState.qml inside the togglePage/showPage handling
     function toggleClipboard() {
         togglePage("clipboard")
     }

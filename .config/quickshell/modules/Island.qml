@@ -7,6 +7,7 @@ import Quickshell.Wayland
 import Quickshell.Io
 import "../modules"
 import "../styles"
+import "../styles/ColorsTemps"
 import "../services"
 import "../components/bar"
 import "../components/common"
@@ -15,15 +16,8 @@ import "../components/power-menu"
 PanelWindow {
     id: window
 
-    // Global Escape key shortcut to return to clock view from any page
-    Shortcut {
-        sequence: "Escape"
-        enabled: ShellState.activePage !== "clock"
-        onActivated: ShellState.showPage("clock")
-    }
-
+    // Wayland Layer Shell Configuration
     WlrLayershell.namespace: "quickshell:island"
-
     WlrLayershell.keyboardFocus: (
         ShellState.activePage === "launcher" ||
         ShellState.activePage === "clipboard" ||
@@ -37,20 +31,31 @@ PanelWindow {
         ShellState.activePage === "timer"
     ) ? WlrKeyboardFocus.Exclusive : WlrKeyboardFocus.None
 
+    // Layout and Display
     anchors { top: true; left: true; right: true }
-    color: "transparent"
-
     implicitHeight: 600
     implicitWidth: 1200
+    color: "transparent"
 
+    // Exclusion Zone
     exclusionMode: ExclusionMode.Normal
     exclusiveZone: island.compactHeight + island.anchors.topMargin
+
+    // Keyboard Shortcuts
+    Shortcut {
+        sequence: "Escape"
+        enabled: ShellState.activePage !== "clock"
+        onActivated: ShellState.showPage("clock")
+    }
 
     Component.onCompleted: {
         BrightnessService.percent
         VolumeService.percent
         NotificationService.trackedNotifications
         PolkitService.isActive
+        HyprlandColorsTemp
+        KittyColorsTemp
+        VSCodeColorsTemp
     }
 
     function brightnessTier(percent) {
@@ -65,7 +70,7 @@ PanelWindow {
         function close() { ShellState.showPage("clock") }
     }
 
-// --- Clipboard IPC Handler ---
+    // --- Clipboard IPC Handler ---
     IpcHandler {
         target: "clipboard"
         function toggle(): void { 
@@ -90,14 +95,14 @@ PanelWindow {
         target: "controlcenter"
         function toggle(): void { ShellState.activePage === "control" ? ShellState.showPage("clock") : ShellState.showPage("control") }
         function open(): void { ShellState.showPage("control") }
-        function close(): void { ShellState.showPage("clock") }
+        function close() { ShellState.showPage("clock") }
     }
 
     IpcHandler {
         target: "notificationcenter"
         function toggle(): void { ShellState.activePage === "notificationcenter" ? ShellState.showPage("clock") : ShellState.showPage("notificationcenter") }
         function open(): void { ShellState.showPage("notificationcenter") }
-        function close(): void { ShellState.showPage("clock") }
+        function close() { ShellState.showPage("clock") }
     }
 
     IpcHandler {
@@ -144,27 +149,30 @@ PanelWindow {
 
     Rectangle {
         id: island
+        // Anchors
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: parent.top
         anchors.topMargin: 5
-
         clip: true
 
+        // Properties
         readonly property bool expanded: ShellState.activePage !== "clock"
         readonly property int compactHeight: 36
         readonly property int compactWidth: 160
-
-        width: targetWidth
-        height: targetHeight
-
         property int targetWidth: pageLoader.item ? pageLoader.item.implicitWidth : compactWidth
         property int targetHeight: pageLoader.item ? pageLoader.item.implicitHeight : compactHeight
 
+        // Size
+        width: targetWidth
+        height: targetHeight
+
+        // Styling
         radius: Math.min(height / 2, Dimens.islandRadius)
         color: Colors.bgMica
         border.color: Colors.border
         border.width: 0
 
+        // Animations
         Behavior on width {
             NumberAnimation {
                 duration: 380
@@ -186,18 +194,17 @@ PanelWindow {
             }
         }
 
+        // Interaction (Only active when collapsed on clock view)
         MouseArea {
             id: islandTapArea
             anchors.fill: parent
-            enabled: ShellState.activePage === "clock" || ShellState.activePage === "status"
+            enabled: ShellState.activePage === "clock"
             hoverEnabled: enabled
             cursorShape: Qt.PointingHandCursor
-            
-            onClicked: {
-                ShellState.togglePage("status")
-            }
+            onClicked: ShellState.togglePage("status")
         }
 
+        // Interaction (Eats clicks when expanded so it doesn't fall through)
         MouseArea {
             id: islandConsumeArea
             anchors.fill: parent
@@ -205,11 +212,11 @@ PanelWindow {
             onClicked: {}
         }
 
+        // Content Loader
         Loader {
             id: pageLoader
             anchors.top: parent.top
             anchors.horizontalCenter: parent.horizontalCenter
-
             scale: islandTapArea.containsMouse ? 1.02 : 1.0
             opacity: 1.0
 
@@ -273,16 +280,17 @@ PanelWindow {
             }
         }
 
+        // Page Components
         Component { id: clockPage; Clock {} }
         Component { id: statusPage; StatusPanel {} }
         Component { id: mediaPage; MediaExpanded { color: "transparent" } }
+        Component { id: notificationPage; NotificationToast {} }
         Component { id: launcherPage; AppLauncher {} }
         Component { id: clipboardPage; Clipboard {} }
         Component { id: powerPage; PowerMenu {} }
         Component { id: themePage; ThemeSwitcher {} }
         Component { id: wallpaperSwitcherPage; WallpaperSwitcher {} }
         Component { id: controlPage; ControlCenter {} }
-        Component { id: notificationPage; NotificationToast {} }
         Component { id: notificationCenterPage; NotificationCenter {} }
         Component { id: polkitPage; PolkitAgent {} }
         Component { id: timerPage; TimerModule {} }
