@@ -1,22 +1,21 @@
-// modules/Island.qml
-
+// Island.qml — bar window, page router, and IPC
 import QtQuick
 import QtQuick.Layouts
 import Quickshell
 import Quickshell.Wayland
 import Quickshell.Io
-import "../modules"
-import "../styles"
-import "../styles/ColorsTemps"
-import "../services"
-import "../components/bar"
-import "../components/common"
-import "../components/power-menu"
+import "modules"
+import "styles"
+import "adapters"
+import "services"
+import "components/bar"
+import "components/common"
 
 PanelWindow {
     id: window
 
-    // Wayland Layer Shell Configuration
+    readonly property string iconDir: "file://" + Quickshell.shellDir + "/assets/icons/"
+
     WlrLayershell.namespace: "quickshell:island"
     WlrLayershell.keyboardFocus: (
         ShellState.activePage === "launcher" ||
@@ -31,17 +30,14 @@ PanelWindow {
         ShellState.activePage === "timer"
     ) ? WlrKeyboardFocus.Exclusive : WlrKeyboardFocus.None
 
-    // Layout and Display
     anchors { top: true; left: true; right: true }
     implicitHeight: 600
     implicitWidth: 1200
     color: "transparent"
 
-    // Exclusion Zone
     exclusionMode: ExclusionMode.Normal
     exclusiveZone: island.compactHeight + island.anchors.topMargin
 
-    // Keyboard Shortcuts
     Shortcut {
         sequence: "Escape"
         enabled: ShellState.activePage !== "clock"
@@ -70,18 +66,13 @@ PanelWindow {
         function close() { ShellState.showPage("clock") }
     }
 
-    // --- Clipboard IPC Handler ---
     IpcHandler {
         target: "clipboard"
-        function toggle(): void { 
-            ShellState.activePage === "clipboard" ? ShellState.showPage("clock") : ShellState.showPage("clipboard") 
+        function toggle(): void {
+            ShellState.activePage === "clipboard" ? ShellState.showPage("clock") : ShellState.showPage("clipboard")
         }
-        function open(): void { 
-            ShellState.showPage("clipboard") 
-        }
-        function close(): void { 
-            ShellState.showPage("clock") 
-        }
+        function open(): void { ShellState.showPage("clipboard") }
+        function close(): void { ShellState.showPage("clock") }
     }
 
     IpcHandler {
@@ -115,11 +106,11 @@ PanelWindow {
     IpcHandler {
         target: "wallpaper"
         function toggle(): void {
-            WallpaperService.isOpen = !WallpaperService.isOpen;
+            WallpaperService.isOpen = !WallpaperService.isOpen
             if (WallpaperService.isOpen) {
-                ShellState.showPage("wallpaper");
+                ShellState.showPage("wallpaper")
             } else {
-                ShellState.showPage("clock");
+                ShellState.showPage("clock")
             }
         }
     }
@@ -149,30 +140,25 @@ PanelWindow {
 
     Rectangle {
         id: island
-        // Anchors
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: parent.top
         anchors.topMargin: 5
         clip: true
 
-        // Properties
         readonly property bool expanded: ShellState.activePage !== "clock"
         readonly property int compactHeight: 36
         readonly property int compactWidth: 160
         property int targetWidth: pageLoader.item ? pageLoader.item.implicitWidth : compactWidth
         property int targetHeight: pageLoader.item ? pageLoader.item.implicitHeight : compactHeight
 
-        // Size
         width: targetWidth
         height: targetHeight
 
-        // Styling
         radius: Math.min(height / 2, Dimens.islandRadius)
         color: Colors.bgMica
         border.color: Colors.border
         border.width: 0
 
-        // Animations
         Behavior on width {
             NumberAnimation {
                 duration: 380
@@ -194,7 +180,6 @@ PanelWindow {
             }
         }
 
-        // Interaction (Only active when collapsed on clock view)
         MouseArea {
             id: islandTapArea
             anchors.fill: parent
@@ -204,7 +189,6 @@ PanelWindow {
             onClicked: ShellState.togglePage("status")
         }
 
-        // Interaction (Eats clicks when expanded so it doesn't fall through)
         MouseArea {
             id: islandConsumeArea
             anchors.fill: parent
@@ -212,7 +196,6 @@ PanelWindow {
             onClicked: {}
         }
 
-        // Content Loader
         Loader {
             id: pageLoader
             anchors.top: parent.top
@@ -275,12 +258,12 @@ PanelWindow {
                     case "wallpaper": return wallpaperSwitcherPage
                     case "polkit": return polkitPage
                     case "timer": return timerPage
+                    case "timertoast": return timerToastPage
                     default: return clockPage
                 }
             }
         }
 
-        // Page Components
         Component { id: clockPage; Clock {} }
         Component { id: mediaPage; MediaExpanded { color: "transparent" } }
         Component { id: notificationPage; NotificationToast {} }
@@ -293,13 +276,13 @@ PanelWindow {
         Component { id: notificationCenterPage; NotificationCenter {} }
         Component { id: polkitPage; PolkitAgent {} }
         Component { id: timerToastPage; TimerToast {} }
-        Component { id: timerPage; Timer {} }
+        Component { id: timerPage; TimerModule {} }
         Component { id: statusPage; StatusPanel {} }
 
         Component {
             id: brightnessPage
             LevelIndicator {
-                iconSource: "../../assets/icons/brightness-" + brightnessTier(BrightnessService.percent) + ".png"
+                iconSource: window.iconDir + "brightness-" + brightnessTier(BrightnessService.percent) + ".png"
                 percent: BrightnessService.percent
             }
         }
@@ -307,10 +290,10 @@ PanelWindow {
         Component {
             id: volumePage
             LevelIndicator {
-                iconSource: VolumeService.muted || VolumeService.percent === 0 ? "../../assets/icons/volume-mute.png"
-                    : VolumeService.percent <= 35 ? "../../assets/icons/volume-low.png"
-                    : VolumeService.percent <= 65 ? "../../assets/icons/volume-mid.png"
-                    : "../../assets/icons/volume-high.png"
+                iconSource: VolumeService.muted || VolumeService.percent === 0 ? window.iconDir + "volume-mute.png"
+                    : VolumeService.percent <= 35 ? window.iconDir + "volume-low.png"
+                    : VolumeService.percent <= 65 ? window.iconDir + "volume-mid.png"
+                    : window.iconDir + "volume-high.png"
                 percent: VolumeService.percent
             }
         }

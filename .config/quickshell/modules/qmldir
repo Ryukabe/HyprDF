@@ -1,7 +1,6 @@
 module modules
 
 AppLauncher 1.0 AppLauncher.qml
-Island 1.0 Island.qml
 Clipboard 1.0 Clipboard.qml
 ControlCenter 1.0 ControlCenter.qml
 LockScreen 1.0 LockScreen.qml

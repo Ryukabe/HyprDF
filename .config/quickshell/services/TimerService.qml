@@ -17,7 +17,7 @@ QtObject {
                 root.secondsRemaining--
             } else {
                 root.running = false
-                ShellState.flashPageFor("timer", 3000)
+                ShellState.flashPageFor("timertoast", 3000)
             }
         }
     }

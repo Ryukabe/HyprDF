@@ -1,7 +1,6 @@
 // shell.qml
 import QtQuick
 import Quickshell
-import "modules"
 
 ShellRoot {
     Component.onCompleted: {
@@ -9,7 +8,5 @@ ShellRoot {
         Qt.application.organization = "quickshell"
     }
 
-    // Main island bar
     Island {}
-
 }

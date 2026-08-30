@@ -47,6 +47,7 @@ Item {
             onOpenWifi: root.openWifi()
             onOpenBluetooth: root.openBluetooth()
             onOpenFocus: root.openFocus()
+            onOpenPowerProfile: root.openPowerProfile()
             onOpenCaffeine: root.openCaffeine()
         }
 

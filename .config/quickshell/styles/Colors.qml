@@ -111,7 +111,7 @@ Item {
     readonly property color bgMica: Qt.rgba(bg.r, bg.g, bg.b, micaAlpha)
     readonly property color bgSurfaceMica: Qt.rgba(bgSurface.r, bgSurface.g, bgSurface.b, micaAlpha)
 
-    // Shared by styles/ColorsTemps/* — kept public since color→hex is generic.
+    // Shared by adapters/* — kept public since color→hex is generic.
     function toHex(c) {
         function h(v) { var s = Math.round(v * 255).toString(16); return s.length < 2 ? "0" + s : s; }
         return "#" + h(c.r) + h(c.g) + h(c.b);
